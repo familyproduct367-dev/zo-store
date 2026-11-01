@@ -3,128 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V3</title>
+<title>ZO STORE V4 - CEO Edition</title>
+<meta name="theme-color" content="#01875f">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
-body{background:#f8f9fa;color:#202124}
-.hdr{padding:12px 16px;background:#fff;border-bottom:1px solid #e8eaed;display:flex;gap:12px;align-items:center;position:sticky;top:0;z-index:30}
-.logo{width:40px;height:40px;background:#01875f;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:22px}
-.hdr b{color:#01875f;font-size:22px}
-.search{flex:1;background:#f1f3f4;border-radius:24px;padding:10px 16px;display:flex;gap:10px}
+body{background:#fff;color:#202124;padding-bottom:70px}
+.hdr{padding:12px 16px;background:#fff;display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid #eee}
+.logo{width:40px;height:40px;background:#01875f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.search{flex:1;background:#f1f3f4;border-radius:24px;padding:10px 14px;display:flex;gap:8px}
 .search input{border:none;background:transparent;outline:none;width:100%;font-size:14px}
-.nav{display:flex;gap:24px;padding:0 16px;background:#fff;border-bottom:1px solid #e8eaed;overflow:auto;position:sticky;top:64px;z-index:29}
-.nav div{padding:14px 0;font-size:13px;font-weight:500;color:#5f6368;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
-.nav div.active{color:#01875f;border-color:#01875f}
-.hero{padding:20px 16px;background:linear-gradient(135deg,#01875f,#00c896);color:#fff}
-.wrap{max-width:1100px;margin:0 auto;padding:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-.card{background:#fff;border-radius:12px;padding:14px;border:1px solid #e8eaed;cursor:pointer}
-.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;margin-bottom:10px}
-.card h3{font-size:13px;font-weight:500}
-.card .dev{font-size:11px;color:#5f6368}
-.meta{font-size:11px;color:#5f6368;margin-top:4px}
-.meta b{color:#01875f;background:#e6f4ea;padding:2px 6px;border-radius:10px;font-size:10px}
-/* DETAIL PAGE */
+.nav{padding:0 16px;display:flex;gap:20px;overflow:auto;border-bottom:1px solid #eee;position:sticky;top:64px;background:#fff;z-index:29}
+.nav div{padding:12px 0;font-size:13px;color:#5f6368;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.nav div.active{color:#01875f;border-color:#01875f;font-weight:500}
+.banner{margin:16px;background:linear-gradient(135deg,#01875f,#00d4a0);border-radius:16px;padding:18px;color:#fff;display:flex;justify-content:space-between;align-items:center}
+.banner b{font-size:18px}
+.grid{padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{border:1px solid #f0f0f0;border-radius:12px;padding:12px;cursor:pointer}
+.card:hover{box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff}
+.card h3{font-size:13px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dev{font-size:11px;color:#5f6368}
+.meta{font-size:11px;color:#5f6368;margin-top:2px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0;z-index:40}
+.bnav div{font-size:11px;text-align:center;color:#5f6368;cursor:pointer}
+.bnav div.active{color:#01875f}
+.bnav span{font-size:20px;display:block}
+/* DETAIL */
 .detail{position:fixed;inset:0;background:#fff;z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
-.detail-top{padding:12px 16px;display:flex;align-items:center;gap:16px;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff}
-.back{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.back:hover{background:#f1f3f4}
-.detail-head{padding:20px 16px;display:flex;gap:16px}
-.detail-icon{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;flex-shrink:0}
-.detail-info h1{font-size:22px;font-weight:500}
-.detail-info .dev{color:#01875f;font-size:14px;margin:4px 0}
-.detail-info .meta{font-size:12px}
-.install-bar{padding:0 16px 16px;display:flex;gap:12px;align-items:center}
-.btn-install{background:#01875f;color:#fff;border:none;padding:10px 24px;border-radius:20px;font-weight:500;font-size:14px;cursor:pointer;min-width:90px}
-.btn-install.installed{background:#e8eaed;color:#5f6368}
-.detail-body{padding:16px}
-.screens{display:flex;gap:12px;overflow:auto;padding:10px 0}
-.screen{width:180px;height:320px;background:#f1f3f4;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:48px}
-.about{margin-top:20px;font-size:14px;line-height:1.6;color:#4d4d4d}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;display:none;z-index:200}
+.detail-top{padding:12px 16px;display:flex;gap:14px;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff}
+.detail-head{padding:16px;display:flex;gap:14px}
+.detail-icon{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff}
+.install{display:flex;gap:10px;padding:0 16px 16px;align-items:center}
+.btn{background:#01875f;color:#fff;border:none;padding:8px 22px;border-radius:18px;font-weight:500;cursor:pointer}
+.btn.done{background:#e8eaed;color:#5f6368}
+.screen{padding:16px}
+.mini-app{margin-top:16px;background:#f8f9fa;border-radius:12px;padding:12px}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.calc-grid button{padding:14px;border:none;background:#fff;border-radius:8px;font-size:16px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.calc-grid button.op{background:#01875f;color:#fff}
+.calc-display{background:#fff;padding:12px;border-radius:8px;text-align:right;font-size:24px;min-height:44px;border:1px solid #eee}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.gallery-grid div{aspect-ratio:1;background:#e8eaed;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.drive-item{display:flex;gap:10px;padding:10px;background:#fff;border-radius:8px;margin-top:8px;border:1px solid #eee;align-items:center}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:10px 18px;border-radius:18px;font-size:12px;display:none;z-index:200}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="logo">Z</div><b>ZO Store</b><div class="search"><span>🔍</span><input id="s" placeholder="Search apps, Calculator, Gallery..."></div></div>
-<div class="nav" id="nav"><div class="active" data-f="all">For you</div><div data-f="essential">Essential</div><div data-f="media">Media</div><div data-f="tools">Tools</div></div>
-<div class="hero"><h2 style="font-weight:400">ZO STORE V3 • Global Platform</h2><p style="font-size:13px;opacity:.9;margin-top:4px">Tap any app to see details • Install dey work!</p></div>
-<div class="wrap"><div class="grid" id="grid"></div></div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search ZO Store - Calculator, Gallery..."></div></div>
+<div class="nav" id="nav"><div class="active" data-f="all">For you</div><div data-f="essential">Essential</div><div data-f="media">Media</div><div data-f="tools">Tools</div><div data-f="system">System</div></div>
+<div class="banner"><div><b>ZO STORE V4</b><div style="font-size:12px;opacity:.9">CEO Edition • Apps dey work for inside</div></div><div style="font-size:28px">🚀</div></div>
+<div class="grid" id="grid"></div>
+
+<div class="bnav"><div class="active"><span>🎮</span>Apps</div><div><span>🎬</span>Games</div><div><span>📚</span>Books</div><div><span>👤</span>You</div></div>
 
 <div class="detail" id="detail">
-<div class="detail-top"><div class="back" id="back">←</div><div style="font-weight:500">App details</div></div>
-<div class="detail-head"><div class="detail-icon" id="dIcon"></div><div class="detail-info"><h1 id="dName"></h1><div class="dev" id="dDev"></div><div class="meta" id="dMeta"></div></div></div>
-<div class="install-bar"><button class="btn-install" id="installBtn">Install</button><div style="font-size:12px;color:#5f6368">Contains ads • In-app purchases</div></div>
-<div class="detail-body"><div class="screens"><div class="screen" id="s1"></div><div class="screen" id="s2"></div><div class="screen" id="s3"></div></div><div class="about" id="dAbout"></div></div>
+<div class="detail-top"><div onclick="detail.classList.remove('active')" style="cursor:pointer">←</div><div id="dTitle" style="font-weight:500"></div></div>
+<div class="detail-head"><div class="detail-icon" id="dIcon"></div><div><h2 id="dName" style="font-size:18px"></h2><div id="dDev" style="font-size:12px;color:#01875f"></div><div id="dMeta" style="font-size:11px;color:#5f6368;margin-top:2px"></div></div></div>
+<div class="install"><button class="btn" id="installBtn">Install</button><div style="font-size:11px;color:#5f6368">Free • No GB • No MB</div></div>
+<div class="screen" id="screen"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 const apps=[
-{n:"Calculator",d:"ZO Labs",c:"tools",r:"4.8",col:"#4285f4",e:"🧮",desc:"Powerful calculator with scientific mode, history, and themes. No ads in calculation. Fast and offline."},
-{n:"Gallery",d:"ZO Media",c:"media",r:"4.9",col:"#34a853",e:"🖼️",desc:"Beautiful gallery to organize photos, videos, hidden folder, and cloud backup. Fast scroll for 100k+ photos."},
-{n:"Drive",d:"ZO Cloud",c:"essential",r:"4.7",col:"#fbbc04",e:"📁",desc:"Your files anywhere. 15GB free, secure, share with family. No GB issue, instant sync."},
-{n:"Files",d:"ZO System",c:"essential",r:"4.8",col:"#0f9d58",e:"📂",desc:"Clean your phone, find files fast, share offline. No MB wahala."},
-{n:"Camera",d:"ZO Media",c:"media",r:"4.8",col:"#ea4335",e:"📷",desc:"HD camera with night mode, portrait, and pro controls."},
-{n:"Music",d:"ZO Audio",c:"media",r:"4.6",col:"#7c4dff",e:"🎵",desc:"Offline music player with equalizer and lyrics."},
-{n:"Clock",d:"ZO Tools",c:"tools",r:"4.6",col:"#ff6d00",e:"⏰",desc:"Alarm, timer, stopwatch, world clock — simple."},
-{n:"Calendar",d:"ZO Productivity",c:"tools",r:"4.7",col:"#4285f4",e:"📅",desc:"Plan events, reminders, sync with family."},
-{n:"Recorder",d:"ZO Tools",c:"tools",r:"4.5",col:"#ff4081",e:"🎙️",desc:"Voice recorder with noise cancel."},
-{n:"Notes",d:"ZO Labs",c:"essential",r:"4.9",col:"#ffab00",e:"📝",desc:"Take notes, checklist, sync."},
-{n:"Weather",d:"ZO Labs",c:"essential",r:"4.6",col:"#03a9f4",e:"⛅",desc:"Accurate weather for Port Harcourt and world."},
-{n:"Browser",d:"ZO Internet",c:"essential",r:"4.7",col:"#01875f",e:"🌐",desc:"Fast, private browser — No GB chopping."}
+{n:"Calculator",d:"ZO Labs",c:"tools",col:"#4285f4",e:"🧮",r:"4.8",type:"calc",desc:"Real calculator inside ZO Store"},
+{n:"Gallery",d:"ZO Media",c:"media",col:"#34a853",e:"🖼️",r:"4.9",type:"gallery",desc:"Your photos organized"},
+{n:"Drive",d:"ZO Cloud",c:"essential",col:"#fbbc04",e:"📁",r:"4.7",type:"drive",desc:"Store files — no GB wahala"},
+{n:"Files",d:"ZO System",c:"system",col:"#0f9d58",e:"📂",r:"4.8",type:"files",desc:"Manage files"},
+{n:"Camera",d:"ZO Media",c:"media",col:"#ea4335",e:"📷",r:"4.8",type:"camera",desc:"HD Camera"},
+{n:"Music",d:"ZO Audio",c:"media",col:"#7c4dff",e:"🎵",r:"4.6",type:"music",desc:"Music player"},
+{n:"Clock",d:"ZO Tools",c:"tools",col:"#ff6d00",e:"⏰",r:"4.6",type:"clock",desc:"Clock & Alarm"},
+{n:"Calendar",d:"ZO Tools",c:"tools",col:"#4285f4",e:"📅",r:"4.7",type:"calendar",desc:"Calendar"},
+{n:"Notes",d:"ZO Labs",c:"essential",col:"#ffab00",e:"📝",r:"4.9",type:"notes",desc:"Notes"},
+{n:"Weather",d:"ZO Labs",c:"essential",col:"#03a9f4",e:"⛅",r:"4.6",type:"weather",desc:"Weather"},
+{n:"Browser",d:"ZO Internet",c:"essential",col:"#01875f",e:"🌐",r:"4.7",type:"browser",desc:"Browser"},
+{n:"Recorder",d:"ZO Tools",c:"tools",col:"#ff4081",e:"🎙️",r:"4.5",type:"recorder",desc:"Recorder"},
+{n:"Scanner",d:"ZO Tools",c:"tools",col:"#795548",e:"📠",r:"4.6",type:"scanner",desc:"QR Scanner"},
+{n:"Translate",d:"ZO Labs",c:"essential",col:"#3f51b5",e:"🌍",r:"4.8",type:"translate",desc:"Translate Pidgin/English"},
+{n:"Contacts",d:"ZO System",c:"system",col:"#009688",e:"👥",r:"4.7",type:"contacts",desc:"Contacts"}
 ];
 const grid=document.getElementById('grid');
 const detail=document.getElementById('detail');
 const toast=document.getElementById('toast');
-let current=null;
+let cur=null;
 function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2000)}
 function render(list){
 grid.innerHTML='';
 list.forEach((a,i)=>{
 let el=document.createElement('div');el.className='card';
-el.innerHTML=`<div class="icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta">★ ${a.r} <b>Free</b></div>`;
-el.onclick=()=>openDetail(i);
+el.innerHTML=`<div class="icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta">★ ${a.r} • Free</div>`;
+el.onclick=()=>openApp(i);
 grid.appendChild(el);
 });
 }
-function openDetail(i){
-current=apps[i];
+function openApp(i){
+cur=apps[i];
 detail.classList.add('active');
-document.getElementById('dIcon').style.background=current.col;
-document.getElementById('dIcon').textContent=current.e;
-document.getElementById('dName').textContent=current.n;
-document.getElementById('dDev').textContent=current.d;
-document.getElementById('dMeta').textContent=`★ ${current.r} • 10M+ downloads • Rated for 3+`;
-document.getElementById('dAbout').textContent=current.desc;
-document.getElementById('s1').textContent=current.e;
-document.getElementById('s2').textContent='✨';
-document.getElementById('s3').textContent='🚀';
-document.getElementById('s1').style.background=current.col+'22';
-document.getElementById('s2').style.background=current.col+'22';
-document.getElementById('s3').style.background=current.col+'22';
-document.getElementById('installBtn').textContent=localStorage.getItem('zo_'+current.n)?'Open':'Install';
-document.getElementById('installBtn').className=localStorage.getItem('zo_'+current.n)?'btn-install installed':'btn-install';
-window.scrollTo(0,0);
+document.getElementById('dIcon').style.background=cur.col;
+document.getElementById('dIcon').textContent=cur.e;
+document.getElementById('dName').textContent=cur.n;
+document.getElementById('dTitle').textContent=cur.n;
+document.getElementById('dDev').textContent=cur.d;
+document.getElementById('dMeta').textContent=`★ ${cur.r} • 10M+ • ${cur.desc}`;
+let btn=document.getElementById('installBtn');
+let installed=localStorage.getItem('zo_'+cur.n);
+btn.textContent=installed?'Open':'Install';
+btn.className=installed?'btn done':'btn';
+buildMiniApp(cur);
 }
-document.getElementById('back').onclick=()=>detail.classList.remove('active');
-document.getElementById('installBtn').onclick=function(){
-if(!current)return;
-let key='zo_'+current.n;
-if(localStorage.getItem(key)){showToast(current.n+' Opening... 🚀');return;}
-this.textContent='Installing...';
-setTimeout(()=>{
-this.textContent='Open';
-this.className='btn-install installed';
-localStorage.setItem(key,'1');
-showToast(current.n+' Installed! ✅');
-},1200);
+function buildMiniApp(app){
+let screen=document.getElementById('screen');
+if(app.type==='calc'){
+screen.innerHTML=`<div class="mini-app"><div class="calc-display" id="calcDisplay">0</div><div class="calc-grid">
+<button onclick="calcPress('7')">7</button><button onclick="calcPress('8')">8</button><button onclick="calcPress('9')">9</button><button class="op" onclick="calcPress('/')">÷</button>
+<button onclick="calcPress('4')">4</button><button onclick="calcPress('5')">5</button><button onclick="calcPress('6')">6</button><button class="op" onclick="calcPress('*')">×</button>
+<button onclick="calcPress('1')">1</button><button onclick="calcPress('2')">2</button><button onclick="calcPress('3')">3</button><button class="op" onclick="calcPress('-')">-</button>
+<button onclick="calcPress('0')">0</button><button onclick="calcPress('.')">.</button><button onclick="calcPress('C')">C</button><button class="op" onclick="calcPress('=')">=</button>
+</div><div style="margin-top:10px;font-size:12px;color:#5f6368">Real Calculator dey work inside ZO Store! 🧮</div></div>`;
+window.calcVal=''; window.calcPress=(k)=>{
+let d=document.getElementById('calcDisplay');
+if(k==='C'){window.calcVal='';d.textContent='0';return}
+if(k==='='){try{d.textContent=eval(window.calcVal);window.calcVal=d.textContent}catch{d.textContent='Error';window.calcVal=''}return}
+window.calcVal+=k;d.textContent=window.calcVal;
 };
-document.getElementById('s').addEventListener('input',e=>{
+}else if(app.type==='gallery'){
+screen.innerHTML=`<div class="mini-app"><div style="font-weight:500">Gallery - Your Photos</div><div class="gallery-grid"><div>🌅</div><div>👨‍👩‍👧‍👦</div><div>🎂</div><div>📷</div><div>🏖️</div><div>🌃</div><div>🐶</div><div>🍲</div><div>🚗</div></div><div style="margin-top:10px;font-size:12px;color:#5f6368">9 photos • No MB, just view!</div></div>`;
+}else if(app.type==='drive'){
+let files=JSON.parse(localStorage.getItem('zo_drive')||'["My CV.pdf","Family Pic.jpg"]');
+screen.innerHTML=`<div class="mini-app"><div style="font-weight:500">Drive - Cloud Files</div><div id="driveList"></div><div style="display:flex;gap:8px;margin-top:10px"><input id="driveInput" placeholder="File name" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd"><button class="btn" onclick="addDriveFile()">Add</button></div></div>`;
+function refreshDrive(){let list=document.getElementById('driveList');list.innerHTML='';files.forEach(f=>{let div=document.createElement('div');div.className='drive-item';div.innerHTML=`<span>📄</span><div style="flex:1">${f}</div><span style="color:#01875f">✓ Synced</span>`;list.appendChild(div)});}
+setTimeout(refreshDrive,10);
+window.addDriveFile=()=>{let inp=document.getElementById('driveInput');if(!inp.value)return;files.push(inp.value);localStorage.setItem('zo_drive',JSON.stringify(files));inp.value='';refreshDrive();showToast('Saved to Drive ✅')};
+}else{
+screen.innerHTML=`<div class="mini-app"><div style="font-size:48px;text-align:center">${app.e}</div><div style="text-align:center;margin-top:10px;font-weight:500">${app.n} is ready!</div><div style="text-align:center;font-size:12px;color:#5f6368;margin-top:6px">${app.desc}<br><br>✅ No GB • No MB • Free • Global<br>Built by ZO Technology</div><div style="margin-top:16px;padding:12px;background:#fff;border-radius:8px"><div style="font-size:12px;font-weight:500">What's new</div><div style="font-size:11px;color:#5f6368;margin-top:4px">• Faster • No ads • Works offline • Port Harcourt optimized</div></div></div>`;
+}
+}
+document.getElementById('installBtn').onclick=function(){
+if(!cur)return;
+let key='zo_'+cur.n;
+if(localStorage.getItem(key)){showToast(cur.n+' Opening...');return}
+this.textContent='Installing...';
+setTimeout(()=>{this.textContent='Open';this.className='btn done';localStorage.setItem(key,'1');showToast(cur.n+' Installed ✅');},1000);
+};
+document.getElementById('search').addEventListener('input',e=>{
 let q=e.target.value.toLowerCase();
-render(apps.filter(a=>a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)));
+render(apps.filter(a=>a.n.toLowerCase().includes(q)));
 });
 document.getElementById('nav').querySelectorAll('div').forEach(t=>{
 t.addEventListener('click',()=>{
@@ -137,4 +162,4 @@ if(f==='all')render(apps);else render(apps.filter(a=>a.c===f));
 render(apps);
 </script>
 </body>
-</html>
+  </html>
