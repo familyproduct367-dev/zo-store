@@ -1,63 +1,158 @@
-<script>
-const apps=[
-{n:"ZO AI",d:"ZO Intelligence",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"AI"},
-{n:"Video Call",d:"ZO Connect",c:"social",col:"#00bcd4",e:"📹",r:"4.9",t:"videocall",badge:"REAL"},
-{n:"Calculator",d:"ZO Labs",c:"tools",col:"#4285f4",e:"🧮",r:"4.8",t:"calc",badge:"WORKING"},
-{n:"Camera",d:"ZO Media",c:"media",col:"#ea4335",e:"📷",r:"4.9",t:"camera",badge:"REAL"},
-{n:"QR Maker",d:"ZO Tools",c:"tools",col:"#000",e:"🔳",r:"4.8",t:"qr",badge:"NEW"},
-{n:"File Share",d:"ZO System",c:"system",col:"#ff9800",e:"📤",r:"4.9",t:"shareit",badge:"FAST"},
-{n:"Recorder",d:"ZO Tools",c:"tools",col:"#ff4081",e:"🎙️",r:"4.7",t:"recorder",badge:"REAL"},
-{n:"Maps",d:"ZO Maps",c:"essential",col:"#34a853",e:"📍",r:"4.8",t:"maps",badge:"GPS"},
-{n:"Gallery",d:"ZO Media",c:"media",col:"#34a853",e:"🖼️",r:"4.9",t:"gallery"},
-{n:"Notes",d:"ZO Labs",c:"essential",col:"#ffab00",e:"📝",r:"4.9",t:"notes"},
-{n:"To-Do",d:"ZO Productivity",c:"essential",col:"#e91e63",e:"✅",r:"4.8",t:"todo"},
-{n:"Music",d:"ZO Audio",c:"media",col:"#7c4dff",e:"🎵",r:"4.6",t:"music"},
-{n:"Chat",d:"ZO Social",c:"social",col:"#00bcd4",e:"💬",r:"4.9",t:"chat"},
-{n:"Market",d:"ZO Commerce",c:"social",col:"#ff9800",e:"🛒",r:"4.8",t:"market"},
-{n:"Browser",d:"ZO Internet",c:"essential",col:"#01875f",e:"🌐",r:"4.7",t:"browser"},
-{n:"Vault",d:"ZO Security",c:"system",col:"#607d8b",e:"🔒",r:"4.9",t:"vault"},
-{n:"Weather",d:"ZO Labs",c:"essential",col:"#03a9f4",e:"⛅",r:"4.6",t:"weather"},
-{n:"Translate",d:"ZO Labs",c:"essential",col:"#3f51b5",e:"🌍",r:"4.8",t:"translate"},
-{n:"System",d:"ZO OS",c:"system",col:"#212121",e:"⚙️",r:"5.0",t:"system",badge:"OS"},
-{n:"Themes",d:"ZO Design",c:"system",col:"#e040fb",e:"🎨",r:"4.8",t:"themes",badge:"COLOR"},
-{n:"Contacts",d:"ZO System",c:"system",col:"#009688",e:"👥",r:"4.7",t:"contacts"},
-{n:"Files",d:"ZO System",c:"system",col:"#0f9d58",e:"📂",r:"4.8",t:"files"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZO STORE V8 - Community</title>
+<style>
+:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed}
+.dark{--bg:#0a0a0a;--card:#1a1a1a;--text:#fff;--sub:#999;--border:#333}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
+body{background:var(--bg);color:var(--text);padding-bottom:75px}
+.hdr{padding:10px 14px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
+.logo{width:38px;height:38px;background:linear-gradient(135deg,var(--green),#00ff88);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.search{flex:1;background:var(--bg);border-radius:20px;padding:8px 12px;display:flex;gap:6px;border:1px solid var(--border)}
+.search input{border:none;background:transparent;outline:none;width:100%;font-size:13px;color:var(--text)}
+.icon-btn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--bg);font-size:14px}
+.upload-btn{background:var(--green);color:#fff;border:none;padding:7px 14px;border-radius:18px;font-size:11px;font-weight:500;cursor:pointer}
+.nav{display:flex;gap:14px;padding:0 14px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:58px;z-index:29}
+.nav div{padding:10px 0;font-size:11px;color:var(--sub);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.nav div.active{color:var(--green);border-color:var(--green);font-weight:500}
+.banner{margin:12px;background:linear-gradient(135deg,#01875f,#00ff88);border-radius:14px;padding:14px;color:#fff;display:flex;justify-content:space-between}
+.stats{display:flex;gap:6px;padding:0 14px}
+.stat{background:var(--card);border-radius:10px;padding:6px;flex:1;border:1px solid var(--border);text-align:center;font-size:10px}
+.stat b{color:var(--green);display:block;font-size:13px}
+.grid{padding:10px 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.card{background:var(--card);border-radius:12px;padding:8px;border:1px solid var(--border);cursor:pointer;position:relative}
+.badge{position:absolute;top:5px;right:5px;background:var(--green);color:#fff;font-size:7px;padding:2px 5px;border-radius:8px}
+.badge.community{background:#ff9800}
+.badge.wish{background:#7c4dff}
+.icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+.card h3{font-size:10px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dev{font-size:8px;color:var(--sub)}
+.meta{font-size:8px;color:var(--sub);display:flex;gap:4px;margin-top:2px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;z-index:40}
+.bnav div{font-size:9px;text-align:center;color:var(--sub);cursor:pointer}
+.bnav div.active{color:var(--green)}
+.bnav span{font-size:18px;display:block}
+.detail{position:fixed;inset:0;background:var(--card);z-index:100;overflow:auto;display:none}
+.detail.active{display:block}
+.detail-top{padding:10px 14px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card)}
+.dhead{padding:12px;display:flex;gap:10px}
+.dicon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff}
+.install{display:flex;gap:8px;padding:0 14px 10px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--green);color:#fff;border:none;padding:7px 16px;border-radius:16px;font-weight:500;cursor:pointer;font-size:11px}
+.btn.done{background:var(--bg);color:var(--sub)}
+.btn.outline{background:transparent;border:1px solid var(--green);color:var(--green)}
+.screen{padding:12px}
+.mini{background:var(--bg);border-radius:12px;padding:10px;margin-top:8px}
+.note-input{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:11px;margin-top:6px}
+.todo-item{display:flex;gap:6px;padding:8px;background:var(--card);border-radius:8px;margin-top:6px;align-items:center;font-size:11px}
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:8px 14px;border-radius:14px;font-size:10px;display:none;z-index:200}
+.upload-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none;align-items:center;justify-content:center;padding:14px}
+.upload-modal.active{display:flex}
+.upload-box{background:var(--card);border-radius:14px;padding:16px;width:100%;max-width:400px;max-height:90vh;overflow:auto}
+.upload-box h3{font-size:14px;margin-bottom:10px}
+.row{display:flex;gap:8px}
+.row .note-input{flex:1}
+video{width:100%;border-radius:10px;background:#000}
+canvas{display:none}
+.chat-msg{padding:6px 10px;background:var(--card);border-radius:10px;margin-top:5px;font-size:11px;max-width:85%}
+.chat-msg.me{margin-left:auto;background:var(--green);color:#fff}
+</style>
+</head>
+<body>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search 22+ community apps..."></div><div class="icon-btn" id="darkBtn">🌙</div><button class="upload-btn" onclick="openUpload()">+ Upload</button></div>
+<div class="nav" id="nav"><div class="active" data-f="all">All</div><div data-f="essential">Essential</div><div data-f="media">Media</div><div data-f="tools">Tools</div><div data-f="community">Community 👥</div><div data-f="wish">Wishes 💭</div><div data-f="ai">AI 🤖</div></div>
+<div class="banner"><div><b>ZO STORE V8</b><div style="font-size:10px">COMMUNITY EDITION • Upload Your Own App!</div><div style="font-size:8px;margin-top:2px">People feed dey upload their wish version • Igbo Ukwu Global</div></div><div style="font-size:24px">🌍</div></div>
+<div class="stats"><div class="stat"><b id="totalApps">22</b>Total Apps</div><div class="stat"><b id="communityCount">0</b>Community</div><div class="stat"><b id="installedCount">0</b>Installed</div><div class="stat"><b id="wishCount">0</b>Wishes</div></div>
+<div class="grid" id="grid"></div>
+<div class="bnav"><div class="active" onclick="filterAll()"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="filterCat('community')"><span>👥</span>Community</div><div onclick="filterCat('wish')"><span>💭</span>Wishes</div></div>
+
+<div class="upload-modal" id="uploadModal">
+<div class="upload-box">
+<h3>📤 Upload Your Own App - Wish Version</h3>
+<p style="font-size:10px;color:var(--sub)">People go see your app for ZO Store! Add wetin you wish!</p>
+<input class="note-input" id="upName" placeholder="App Name - e.g. My Market App">
+<input class="note-input" id="upDev" placeholder="Your Name / Creator - e.g. Chidi from Igbo Ukwu">
+<div class="row"><input class="note-input" id="upEmoji" placeholder="Emoji Icon - e.g. 🛒" maxlength="2"><input class="note-input" id="upColor" placeholder="Color - e.g. #ff9800" value="#ff9800"></div>
+<select class="note-input" id="upCat"><option value="community">Community App 👥</option><option value="wish">Wish Version 💭 - Idea</option><option value="essential">Essential</option><option value="media">Media</option><option value="tools">Tools</option></select>
+<textarea class="note-input" id="upDesc" placeholder="Describe your app - What it does? Why people go like am?" rows="3"></textarea>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" style="flex:1" onclick="submitApp()">🚀 Upload to Store</button><button class="btn done" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+</div>
+</div>
+
+<div class="detail" id="detail">
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">←</div><div id="dTitle" style="font-weight:500;font-size:13px"></div><div style="margin-left:auto;display:flex;gap:8px"><span id="likeBtn" style="cursor:pointer" onclick="likeApp()">❤️ <span id="likeCount">0</span></span></div></div>
+<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:15px"></h2><div id="dDev" style="font-size:10px;color:var(--green)"></div><div id="dMeta" style="font-size:9px;color:var(--sub)"></div></div></div>
+<div class="install"><button class="btn" id="installBtn">Install</button><button class="btn outline" id="voteBtn" onclick="voteWish()">🗳️ Vote Wish</button><div style="font-size:9px;color:var(--sub)" id="installInfo">Free • Community</div></div>
+<div class="screen" id="screen"></div>
+</div>
+<div class="toast" id="toast"></div>
+  <script>
+const defaultApps=[
+{n:"ZO AI",d:"ZO Intelligence",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"AI",likes:245,desc:"Ask anything! Built inside store"},
+{n:"Video Call",d:"ZO Connect",c:"social",col:"#00bcd4",e:"📹",r:"4.9",t:"videocall",badge:"REAL",likes:189,desc:"Real video call"},
+{n:"Camera",d:"ZO Media",c:"media",col:"#ea4335",e:"📷",r:"4.9",t:"camera",badge:"REAL",likes:320,desc:"Real camera with capture"},
+{n:"Calculator",d:"ZO Labs",c:"tools",col:"#4285f4",e:"🧮",r:"4.8",t:"calc",badge:"WORKING",likes:412,desc:"Working calculator"},
+{n:"QR Maker",d:"ZO Tools",c:"tools",col:"#000",e:"🔳",r:"4.8",t:"qr",badge:"NEW",likes:156,desc:"Generate QR codes"},
+{n:"File Share",d:"ZO System",c:"system",col:"#ff9800",e:"📤",r:"4.9",t:"shareit",badge:"FAST",likes:278,desc:"Fast file sharing"},
+{n:"Maps",d:"ZO Maps",c:"essential",col:"#34a853",e:"📍",r:"4.8",t:"maps",badge:"GPS",likes:201,desc:"Real GPS location"},
+{n:"Gallery",d:"ZO Media",c:"media",col:"#34a853",e:"🖼️",r:"4.9",t:"gallery",likes:334,desc:"Photo gallery"},
+{n:"Notes",d:"ZO Labs",c:"essential",col:"#ffab00",e:"📝",r:"4.9",t:"notes",likes:298,desc:"Save notes"},
+{n:"Chat",d:"ZO Social",c:"social",col:"#00bcd4",e:"💬",r:"4.9",t:"chat",likes:445,desc:"Community chat"}
 ];
+let customApps=JSON.parse(localStorage.getItem('zo_custom_apps')||'[]');
+let allApps=[...defaultApps, ...customApps];
 const grid=document.getElementById('grid');
 const detail=document.getElementById('detail');
 const toast=document.getElementById('toast');
-let cur=null, stream=null, mediaRecorder=null, audioChunks=[];
+let cur=null, stream=null;
 function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2200)}
 function closeDetail(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}detail.classList.remove('active')}
-function updateCount(){let c=0;apps.forEach(a=>{if(localStorage.getItem('zo_'+a.n))c++});document.getElementById('installedCount').textContent=c}
+function openUpload(){document.getElementById('uploadModal').classList.add('active')}
+function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
+function updateStats(){
+document.getElementById('totalApps').textContent=allApps.length;
+document.getElementById('communityCount').textContent=allApps.filter(a=>a.c==='community').length;
+document.getElementById('wishCount').textContent=allApps.filter(a=>a.c==='wish').length;
+let c=0;allApps.forEach(a=>{if(localStorage.getItem('zo_'+a.n))c++});document.getElementById('installedCount').textContent=c;
+}
 function render(list){
 grid.innerHTML='';
 list.forEach((a,i)=>{
+let idx=allApps.indexOf(a);
 let el=document.createElement('div');el.className='card';
-el.innerHTML=`${a.badge?`<div class="badge">${a.badge}</div>`:''}<div class="icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div style="font-size:8px;color:var(--sub)">★ ${a.r}</div>`;
-el.onclick=()=>openApp(i);
+let badgeClass=a.c==='community'?'community':a.c==='wish'?'wish':'';
+el.innerHTML=`${a.badge?`<div class="badge ${badgeClass}">${a.badge}</div>`:''}<div class="icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta"><span>★ ${a.r||'4.8'}</span><span>❤️ ${a.likes||0}</span></div>`;
+el.onclick=()=>openApp(idx);
 grid.appendChild(el);
 });
+updateStats();
 }
 function openApp(i){
-cur=apps[i];
+cur=allApps[i];
 detail.classList.add('active');
 document.getElementById('dIcon').style.background=cur.col;
 document.getElementById('dIcon').textContent=cur.e;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • 10M+ • ${cur.badge||'Free'}`;
+document.getElementById('dDev').textContent=cur.d+(cur.custom?' • Uploaded by Community':'');
+document.getElementById('dMeta').textContent=`★ ${cur.r||'4.8'} • ${cur.likes||0} likes • ${cur.installs||0} installs • ${cur.badge||'Community'}`;
+document.getElementById('likeCount').textContent=cur.likes||0;
+document.getElementById('likeBtn').style.opacity=localStorage.getItem('liked_'+cur.n)?'0.5':'1';
 let btn=document.getElementById('installBtn');
 let installed=localStorage.getItem('zo_'+cur.n);
 btn.textContent=installed?'Open':'Install';
 btn.className=installed?'btn done':'btn';
+document.getElementById('voteBtn').style.display=cur.c==='wish'?'block':'none';
+document.getElementById('voteBtn').textContent=`🗳️ Vote (${cur.votes||0})`;
 buildApp(cur);
 }
 function buildApp(app){
 let s=document.getElementById('screen');
 if(app.t==='ai'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🤖 ZO AI - Ask Anything</div><div id="aiBox" style="height:250px;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px"><div class="chat-msg">Hi CEO! I be ZO AI built inside your store! Ask me anything about business, coding, Igbo Ukwu! 🚀</div></div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="aiIn" placeholder="Ask AI..." style="flex:1"><button class="btn" onclick="askAI()">Ask</button></div></div>`;
+s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🤖 ZO AI</div><div id="aiBox" style="height:200px;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px"><div class="chat-msg">Hi CEO! I be ZO AI! Ask me anything! 🚀</div></div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="aiIn" placeholder="Ask AI..." style="flex:1"><button class="btn" onclick="askAI()">Ask</button></div></div><div class="mini"><b style="font-size:11px">About:</b><div style="font-size:10px;margin-top:4px">${app.desc||'AI assistant inside store'}</div><div style="margin-top:8px;font-size:10px"><b>Creator:</b> ${app.d}<br><b>Uploaded:</b> ${app.custom?'By community user':'ZO Labs'}</div></div>`;
 window.askAI=()=>{
 let inp=document.getElementById('aiIn');if(!inp.value)return;
 let box=document.getElementById('aiBox');
@@ -65,206 +160,111 @@ let q=inp.value;
 let div=document.createElement('div');div.className='chat-msg me';div.textContent=q;box.appendChild(div);
 inp.value='';
 setTimeout(()=>{
-let ans="";
-let lower=q.toLowerCase();
-if(lower.includes('business')) ans="CEO, for business for Igbo Ukwu, focus on market needs: Phone accessories, POS business, and ZO Store apps! Start small, use WhatsApp marketing.";
-else if(lower.includes('code')||lower.includes('store')) ans="You don build ZO Store V7 with 22 apps! Next level na backend + Play Store publishing. I go guide you!";
-else if(lower.includes('money')||lower.includes('naira')) ans="To make money with ZO Store: 1) Add ads 2) Market app 3) Sell premium features ₦500/month. You fit make ₦100k monthly!";
-else if(lower.includes('igbo')||lower.includes('anambra')) ans="Igbo Ukwu na historic town! Known for bronze artifacts. Your ZO Store fit promote local businesses for Anambra! Great idea CEO!";
-else ans="CEO, I be ZO AI inside your store! I fit help with ideas, coding, business plan, even write proposal! You don build OS, you be legend! What else you wan know? 🌌";
+let ans="CEO, you don build community store where people fit upload! This na big idea! You fit monetize with small fee ₦100 per upload! Keep building!";
 let div2=document.createElement('div');div2.className='chat-msg';div2.textContent=ans;box.appendChild(div2);box.scrollTop=box.scrollHeight;
 },600);
 }
-}else if(app.t==='videocall'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">📹 ZO Video Call - Real Video</div><video id="vid" autoplay playsinline></video><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" onclick="startCam()">Start Camera</button><button class="btn done" onclick="stopCam()">Stop</button></div><div style="margin-top:8px;font-size:10px;color:var(--sub)">This na real camera! You fit do video call by opening store for 2 phones!</div></div>`;
-window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});document.getElementById('vid').srcObject=stream;showToast('Video Call ON ✅')}catch{showToast('Allow camera & mic')}};
-window.stopCam=()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;showToast('Stopped')}}
-}else if(app.t==='qr'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🔳 QR Generator</div><input class="note-input" id="qrIn" placeholder="Enter text/link - e.g. your WhatsApp" style="margin-top:8px"><button class="btn" style="margin-top:6px;width:100%" onclick="genQR()">Generate QR</button><div class="qr-box" id="qrBox">QR go show here</div><div style="font-size:10px;text-align:center;color:var(--sub)">Generate QR for your business, WhatsApp, ZO Store link!</div></div>`;
-window.genQR=()=>{let txt=document.getElementById('qrIn').value||'https://familyproduct367-dev.github.io/zo-store/';let box=document.getElementById('qrBox');box.innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(txt)}" style="width:180px;height:180px">`;showToast('QR Generated ✅')}
-}else if(app.t==='shareit'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">📤 ZO Share - Fast File Share</div><div style="border:2px dashed var(--green);border-radius:10px;padding:20px;text-align:center;margin-top:8px" id="dropZone">📁 Drag file here or click<br><input type="file" id="fileInput" style="display:none"><button class="btn" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">Choose File</button></div><div id="shareList"></div></div>`;
-let fileInput=document.getElementById('fileInput');
-let dropZone=document.getElementById('dropZone');
-fileInput.onchange=(e)=>{handleFiles(e.target.files)};
-dropZone.ondragover=(e)=>{e.preventDefault();dropZone.style.background='var(--bg)'};
-dropZone.ondrop=(e)=>{e.preventDefault();handleFiles(e.dataTransfer.files)};
-function handleFiles(files){let list=document.getElementById('shareList');for(let f of files){let div=document.createElement('div');div.className='todo-item';div.innerHTML=`<span>📄</span><div style="flex:1"><b style="font-size:10px">${f.name}</b><div style="font-size:8px;color:var(--sub)">${(f.size/1024).toFixed(1)} KB • Ready to share</div></div><button class="btn" style="padding:3px 8px;font-size:9px">Share</button>`;list.appendChild(div);}showToast(files.length+' file(s) ready ✅')}
-}else if(app.t==='calc'){
-s.innerHTML=`<div class="mini"><div class="calc-display" id="cd">0</div><div class="calc-grid"><button onclick="cp('7')">7</button><button onclick="cp('8')">8</button><button onclick="cp('9')">9</button><button class="op" onclick="cp('/')">÷</button><button onclick="cp('4')">4</button><button onclick="cp('5')">5</button><button onclick="cp('6')">6</button><button class="op" onclick="cp('*')">×</button><button onclick="cp('1')">1</button><button onclick="cp('2')">2</button><button onclick="cp('3')">3</button><button class="op" onclick="cp('-')">-</button><button onclick="cp('0')">0</button><button onclick="cp('.')">.</button><button onclick="cp('C')">C</button><button class="op" onclick="cp('=')">=</button></div></div>`;
-window.cv='';window.cp=(k)=>{let d=document.getElementById('cd');if(k==='C'){window.cv='';d.textContent='0';return}if(k==='='){try{d.textContent=eval(window.cv);window.cv=d.textContent}catch{d.textContent='Error';window.cv=''}return}window.cv+=k;d.textContent=window.cv;}
 }else if(app.t==='camera'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">📷 Real Camera</div><video id="vid" autoplay playsinline></video><canvas id="canvas"></canvas><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" onclick="startCam()">Start</button><button class="btn" onclick="takePhoto()">📸 Capture</button><button class="btn done" onclick="stopCam()">Stop</button></div><div id="photoResult"></div></div>`;
+s.innerHTML=`<div class="mini"><video id="vid" autoplay playsinline></video><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" onclick="startCam()">Start</button><button class="btn" onclick="takePhoto()">📸 Capture</button><button class="btn done" onclick="stopCam()">Stop</button></div><div id="photoResult"></div></div>`;
 window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:true});document.getElementById('vid').srcObject=stream;showToast('Camera ON ✅')}catch{showToast('Allow camera')}};
 window.stopCam=()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
-window.takePhoto=()=>{let v=document.getElementById('vid');let c=document.getElementById('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let img=c.toDataURL('image/png');document.getElementById('photoResult').innerHTML=`<img src="${img}" style="width:100%;border-radius:10px;margin-top:6px">`;showToast('Captured ✅')}
-}else if(app.t==='themes'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🎨 Theme Store</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px"><div onclick="setTheme('#01875f')" style="height:50px;background:#01875f;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#7c4dff')" style="height:50px;background:#7c4dff;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#ea4335')" style="height:50px;background:#ea4335;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#ff9800')" style="height:50px;background:#ff9800;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#00bcd4')" style="height:50px;background:#00bcd4;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#000')" style="height:50px;background:#000;border-radius:8px;cursor:pointer"></div></div></div>`;
-window.setTheme=(c)=>{document.documentElement.style.setProperty('--green',c);showToast('Theme changed ✅')}
+window.takePhoto=()=>{let v=document.getElementById('vid');let c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let img=c.toDataURL('image/png');document.getElementById('photoResult').innerHTML=`<img src="${img}" style="width:100%;border-radius:10px;margin-top:6px">`;showToast('Captured ✅')}
 }else{
-s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:32px">${app.e}</div><div style="text-align:center;font-weight:500;margin-top:4px">${app.n}</div><div style="text-align:center;font-size:10px;color:var(--sub)">${app.d} • Free • V7 Ultimate</div><div style="margin-top:10px;font-size:10px">✅ No GB • ✅ Real working • ✅ CEO Edition<br>Built by ZO Technology • Igbo Ukwu</div></div>`;
+s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:36px">${app.e}</div><div style="text-align:center;font-weight:500;margin-top:6px">${app.n}</div><div style="text-align:center;font-size:10px;color:var(--sub)">${app.d}</div><div style="margin-top:10px;font-size:11px;line-height:1.5"><b>Description:</b><br>${app.desc||app.d+' - Community uploaded app'}<br><br><b>Details:</b><br>✅ Category: ${app.c}<br>✅ Likes: ${app.likes||0}<br>✅ Installs: ${app.installs||0}<br>✅ Votes: ${app.votes||0}<br>✅ Free • No GB<br>${app.custom?'<br>🌍 Uploaded by Community Member from Igbo Ukwu':'<br>🏢 Built by ZO Labs'}</div></div><div class="mini"><div style="font-size:11px;font-weight:500">💬 Comments</div><div id="commentList" style="margin-top:6px"><div style="font-size:10px;color:var(--sub)">No comments yet. Be first!</div></div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="commentIn" placeholder="Add comment..." style="flex:1"><button class="btn" onclick="addComment()">Post</button></div></div>`;
+window.addComment=()=>{
+let inp=document.getElementById('commentIn');if(!inp.value)return;
+let list=document.getElementById('commentList');
+if(list.textContent.includes('No comments')) list.innerHTML='';
+let div=document.createElement('div');div.className='todo-item';div.innerHTML=`<div style="flex:1"><b style="font-size:10px">You</b><div style="font-size:10px">${inp.value}</div></div>`;
+list.appendChild(div);inp.value='';showToast('Comment posted ✅');
 }
 }
+}
+function likeApp(){
+if(!cur)return;
+if(localStorage.getItem('liked_'+cur.n)){showToast('You don like am before! ❤️');return}
+cur.likes=(cur.likes||0)+1;
+localStorage.setItem('liked_'+cur.n,'1');
+if(cur.custom){
+let idx=customApps.findIndex(a=>a.n===cur.n);
+if(idx>=0){customApps[idx].likes=cur.likes;localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));}
+}
+document.getElementById('likeCount').textContent=cur.likes;
+showToast('Liked! ❤️ '+cur.likes);
+render(allApps);
+}
+function voteWish(){
+if(!cur||cur.c!=='wish')return;
+cur.votes=(cur.votes||0)+1;
+if(cur.custom){
+let idx=customApps.findIndex(a=>a.n===cur.n);
+if(idx>=0){customApps[idx].votes=cur.votes;localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));}
+}
+document.getElementById('voteBtn').textContent=`🗳️ Vote (${cur.votes})`;
+showToast('Voted! Wish go come true! 🗳️');
+}
+function submitApp(){
+let name=document.getElementById('upName').value.trim();
+let dev=document.getElementById('upDev').value.trim()||'Anonymous';
+let emoji=document.getElementById('upEmoji').value.trim()||'📱';
+let color=document.getElementById('upColor').value.trim()||'#ff9800';
+let cat=document.getElementById('upCat').value;
+let desc=document.getElementById('upDesc').value.trim()||'Community app uploaded';
+if(!name){showToast('Put app name!');return}
+let newApp={n:name,d:dev,c:cat,col:color,e:emoji,r:'4.8',badge:cat==='wish'?'WISH':cat==='community'?'COMMUNITY':'NEW',likes:1,votes:cat==='wish'?1:0,installs:0,desc:desc,custom:true,t:'custom'};
+customApps.unshift(newApp);
+localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));
+allApps=[...defaultApps, ...customApps];
+closeUpload();
+document.getElementById('upName').value='';document.getElementById('upDev').value='';document.getElementById('upEmoji').value='';document.getElementById('upDesc').value='';
+render(allApps);
+showToast(name+' Uploaded! 🚀 People go see am!');
+filterCat(cat);
+}
+function filterCat(cat){
+document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
+let nav=document.getElementById('nav');
+let target=[...nav.children].find(d=>d.dataset.f===cat);
+if(target) target.classList.add('active');
+if(cat==='all') render(allApps);
+else render(allApps.filter(a=>a.c===cat));
+}
+function filterAll(){filterCat('all')}
 document.getElementById('installBtn').onclick=function(){
 if(!cur)return;
 let key='zo_'+cur.n;
 if(localStorage.getItem(key)){showToast(cur.n+' Opening... 🚀');return}
 this.textContent='Installing...';
-setTimeout(()=>{this.textContent='Open';this.className='btn done';localStorage.setItem(key,'1');updateCount();showToast(cur.n+' Installed ✅');},600);
-};
-document.getElementById('search').addEventListener('input',e=>{
-let q=e.target.value.toLowerCase();
-render(apps.filter(a=>a.n.toLowerCase().includes(q)));
-});
-document.getElementById('nav').querySelectorAll('div').forEach(t=>{
-t.addEventListener('click',()=>{
-document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-t.classList.add('active');
-let f=t.dataset.f;
-if(f==='all')render(apps);else render(apps.filter(a=>a.c===f));
-});
-});
-document.getElementById('darkBtn').onclick=()=>{
-document.body.classList.toggle('dark');
-document.getElementById('darkBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙';
-};
-if(navigator.getBattery){navigator.getBattery().then(b=>{document.getElementById('batt').textContent=Math.round(b.level*100)+'%'})}
-render(apps);updateCount();
-</script>
-</body>
-</html>
-<script>
-const apps=[
-{n:"ZO AI",d:"ZO Intelligence",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"AI"},
-{n:"Video Call",d:"ZO Connect",c:"social",col:"#00bcd4",e:"📹",r:"4.9",t:"videocall",badge:"REAL"},
-{n:"Calculator",d:"ZO Labs",c:"tools",col:"#4285f4",e:"🧮",r:"4.8",t:"calc",badge:"WORKING"},
-{n:"Camera",d:"ZO Media",c:"media",col:"#ea4335",e:"📷",r:"4.9",t:"camera",badge:"REAL"},
-{n:"QR Maker",d:"ZO Tools",c:"tools",col:"#000",e:"🔳",r:"4.8",t:"qr",badge:"NEW"},
-{n:"File Share",d:"ZO System",c:"system",col:"#ff9800",e:"📤",r:"4.9",t:"shareit",badge:"FAST"},
-{n:"Recorder",d:"ZO Tools",c:"tools",col:"#ff4081",e:"🎙️",r:"4.7",t:"recorder",badge:"REAL"},
-{n:"Maps",d:"ZO Maps",c:"essential",col:"#34a853",e:"📍",r:"4.8",t:"maps",badge:"GPS"},
-{n:"Gallery",d:"ZO Media",c:"media",col:"#34a853",e:"🖼️",r:"4.9",t:"gallery"},
-{n:"Notes",d:"ZO Labs",c:"essential",col:"#ffab00",e:"📝",r:"4.9",t:"notes"},
-{n:"To-Do",d:"ZO Productivity",c:"essential",col:"#e91e63",e:"✅",r:"4.8",t:"todo"},
-{n:"Music",d:"ZO Audio",c:"media",col:"#7c4dff",e:"🎵",r:"4.6",t:"music"},
-{n:"Chat",d:"ZO Social",c:"social",col:"#00bcd4",e:"💬",r:"4.9",t:"chat"},
-{n:"Market",d:"ZO Commerce",c:"social",col:"#ff9800",e:"🛒",r:"4.8",t:"market"},
-{n:"Browser",d:"ZO Internet",c:"essential",col:"#01875f",e:"🌐",r:"4.7",t:"browser"},
-{n:"Vault",d:"ZO Security",c:"system",col:"#607d8b",e:"🔒",r:"4.9",t:"vault"},
-{n:"Weather",d:"ZO Labs",c:"essential",col:"#03a9f4",e:"⛅",r:"4.6",t:"weather"},
-{n:"Translate",d:"ZO Labs",c:"essential",col:"#3f51b5",e:"🌍",r:"4.8",t:"translate"},
-{n:"System",d:"ZO OS",c:"system",col:"#212121",e:"⚙️",r:"5.0",t:"system",badge:"OS"},
-{n:"Themes",d:"ZO Design",c:"system",col:"#e040fb",e:"🎨",r:"4.8",t:"themes",badge:"COLOR"},
-{n:"Contacts",d:"ZO System",c:"system",col:"#009688",e:"👥",r:"4.7",t:"contacts"},
-{n:"Files",d:"ZO System",c:"system",col:"#0f9d58",e:"📂",r:"4.8",t:"files"}
-];
-const grid=document.getElementById('grid');
-const detail=document.getElementById('detail');
-const toast=document.getElementById('toast');
-let cur=null, stream=null, mediaRecorder=null, audioChunks=[];
-function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2200)}
-function closeDetail(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}detail.classList.remove('active')}
-function updateCount(){let c=0;apps.forEach(a=>{if(localStorage.getItem('zo_'+a.n))c++});document.getElementById('installedCount').textContent=c}
-function render(list){
-grid.innerHTML='';
-list.forEach((a,i)=>{
-let el=document.createElement('div');el.className='card';
-el.innerHTML=`${a.badge?`<div class="badge">${a.badge}</div>`:''}<div class="icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div style="font-size:8px;color:var(--sub)">★ ${a.r}</div>`;
-el.onclick=()=>openApp(i);
-grid.appendChild(el);
-});
-}
-function openApp(i){
-cur=apps[i];
-detail.classList.add('active');
-document.getElementById('dIcon').style.background=cur.col;
-document.getElementById('dIcon').textContent=cur.e;
-document.getElementById('dName').textContent=cur.n;
-document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • 10M+ • ${cur.badge||'Free'}`;
-let btn=document.getElementById('installBtn');
-let installed=localStorage.getItem('zo_'+cur.n);
-btn.textContent=installed?'Open':'Install';
-btn.className=installed?'btn done':'btn';
-buildApp(cur);
-}
-function buildApp(app){
-let s=document.getElementById('screen');
-if(app.t==='ai'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🤖 ZO AI - Ask Anything</div><div id="aiBox" style="height:250px;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px"><div class="chat-msg">Hi CEO! I be ZO AI built inside your store! Ask me anything about business, coding, Igbo Ukwu! 🚀</div></div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="aiIn" placeholder="Ask AI..." style="flex:1"><button class="btn" onclick="askAI()">Ask</button></div></div>`;
-window.askAI=()=>{
-let inp=document.getElementById('aiIn');if(!inp.value)return;
-let box=document.getElementById('aiBox');
-let q=inp.value;
-let div=document.createElement('div');div.className='chat-msg me';div.textContent=q;box.appendChild(div);
-inp.value='';
 setTimeout(()=>{
-let ans="";
-let lower=q.toLowerCase();
-if(lower.includes('business')) ans="CEO, for business for Igbo Ukwu, focus on market needs: Phone accessories, POS business, and ZO Store apps! Start small, use WhatsApp marketing.";
-else if(lower.includes('code')||lower.includes('store')) ans="You don build ZO Store V7 with 22 apps! Next level na backend + Play Store publishing. I go guide you!";
-else if(lower.includes('money')||lower.includes('naira')) ans="To make money with ZO Store: 1) Add ads 2) Market app 3) Sell premium features ₦500/month. You fit make ₦100k monthly!";
-else if(lower.includes('igbo')||lower.includes('anambra')) ans="Igbo Ukwu na historic town! Known for bronze artifacts. Your ZO Store fit promote local businesses for Anambra! Great idea CEO!";
-else ans="CEO, I be ZO AI inside your store! I fit help with ideas, coding, business plan, even write proposal! You don build OS, you be legend! What else you wan know? 🌌";
-let div2=document.createElement('div');div2.className='chat-msg';div2.textContent=ans;box.appendChild(div2);box.scrollTop=box.scrollHeight;
-},600);
+this.textContent='Open';this.className='btn done';
+localStorage.setItem(key,'1');
+cur.installs=(cur.installs||0)+1;
+if(cur.custom){
+let idx=customApps.findIndex(a=>a.n===cur.n);
+if(idx>=0){customApps[idx].installs=cur.installs;localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));}
 }
-}else if(app.t==='videocall'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">📹 ZO Video Call - Real Video</div><video id="vid" autoplay playsinline></video><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" onclick="startCam()">Start Camera</button><button class="btn done" onclick="stopCam()">Stop</button></div><div style="margin-top:8px;font-size:10px;color:var(--sub)">This na real camera! You fit do video call by opening store for 2 phones!</div></div>`;
-window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});document.getElementById('vid').srcObject=stream;showToast('Video Call ON ✅')}catch{showToast('Allow camera & mic')}};
-window.stopCam=()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;showToast('Stopped')}}
-}else if(app.t==='qr'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🔳 QR Generator</div><input class="note-input" id="qrIn" placeholder="Enter text/link - e.g. your WhatsApp" style="margin-top:8px"><button class="btn" style="margin-top:6px;width:100%" onclick="genQR()">Generate QR</button><div class="qr-box" id="qrBox">QR go show here</div><div style="font-size:10px;text-align:center;color:var(--sub)">Generate QR for your business, WhatsApp, ZO Store link!</div></div>`;
-window.genQR=()=>{let txt=document.getElementById('qrIn').value||'https://familyproduct367-dev.github.io/zo-store/';let box=document.getElementById('qrBox');box.innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(txt)}" style="width:180px;height:180px">`;showToast('QR Generated ✅')}
-}else if(app.t==='shareit'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">📤 ZO Share - Fast File Share</div><div style="border:2px dashed var(--green);border-radius:10px;padding:20px;text-align:center;margin-top:8px" id="dropZone">📁 Drag file here or click<br><input type="file" id="fileInput" style="display:none"><button class="btn" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">Choose File</button></div><div id="shareList"></div></div>`;
-let fileInput=document.getElementById('fileInput');
-let dropZone=document.getElementById('dropZone');
-fileInput.onchange=(e)=>{handleFiles(e.target.files)};
-dropZone.ondragover=(e)=>{e.preventDefault();dropZone.style.background='var(--bg)'};
-dropZone.ondrop=(e)=>{e.preventDefault();handleFiles(e.dataTransfer.files)};
-function handleFiles(files){let list=document.getElementById('shareList');for(let f of files){let div=document.createElement('div');div.className='todo-item';div.innerHTML=`<span>📄</span><div style="flex:1"><b style="font-size:10px">${f.name}</b><div style="font-size:8px;color:var(--sub)">${(f.size/1024).toFixed(1)} KB • Ready to share</div></div><button class="btn" style="padding:3px 8px;font-size:9px">Share</button>`;list.appendChild(div);}showToast(files.length+' file(s) ready ✅')}
-}else if(app.t==='calc'){
-s.innerHTML=`<div class="mini"><div class="calc-display" id="cd">0</div><div class="calc-grid"><button onclick="cp('7')">7</button><button onclick="cp('8')">8</button><button onclick="cp('9')">9</button><button class="op" onclick="cp('/')">÷</button><button onclick="cp('4')">4</button><button onclick="cp('5')">5</button><button onclick="cp('6')">6</button><button class="op" onclick="cp('*')">×</button><button onclick="cp('1')">1</button><button onclick="cp('2')">2</button><button onclick="cp('3')">3</button><button class="op" onclick="cp('-')">-</button><button onclick="cp('0')">0</button><button onclick="cp('.')">.</button><button onclick="cp('C')">C</button><button class="op" onclick="cp('=')">=</button></div></div>`;
-window.cv='';window.cp=(k)=>{let d=document.getElementById('cd');if(k==='C'){window.cv='';d.textContent='0';return}if(k==='='){try{d.textContent=eval(window.cv);window.cv=d.textContent}catch{d.textContent='Error';window.cv=''}return}window.cv+=k;d.textContent=window.cv;}
-}else if(app.t==='camera'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">📷 Real Camera</div><video id="vid" autoplay playsinline></video><canvas id="canvas"></canvas><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" onclick="startCam()">Start</button><button class="btn" onclick="takePhoto()">📸 Capture</button><button class="btn done" onclick="stopCam()">Stop</button></div><div id="photoResult"></div></div>`;
-window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:true});document.getElementById('vid').srcObject=stream;showToast('Camera ON ✅')}catch{showToast('Allow camera')}};
-window.stopCam=()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
-window.takePhoto=()=>{let v=document.getElementById('vid');let c=document.getElementById('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let img=c.toDataURL('image/png');document.getElementById('photoResult').innerHTML=`<img src="${img}" style="width:100%;border-radius:10px;margin-top:6px">`;showToast('Captured ✅')}
-}else if(app.t==='themes'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🎨 Theme Store</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px"><div onclick="setTheme('#01875f')" style="height:50px;background:#01875f;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#7c4dff')" style="height:50px;background:#7c4dff;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#ea4335')" style="height:50px;background:#ea4335;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#ff9800')" style="height:50px;background:#ff9800;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#00bcd4')" style="height:50px;background:#00bcd4;border-radius:8px;cursor:pointer"></div><div onclick="setTheme('#000')" style="height:50px;background:#000;border-radius:8px;cursor:pointer"></div></div></div>`;
-window.setTheme=(c)=>{document.documentElement.style.setProperty('--green',c);showToast('Theme changed ✅')}
-}else{
-s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:32px">${app.e}</div><div style="text-align:center;font-weight:500;margin-top:4px">${app.n}</div><div style="text-align:center;font-size:10px;color:var(--sub)">${app.d} • Free • V7 Ultimate</div><div style="margin-top:10px;font-size:10px">✅ No GB • ✅ Real working • ✅ CEO Edition<br>Built by ZO Technology • Igbo Ukwu</div></div>`;
-}
-}
-document.getElementById('installBtn').onclick=function(){
-if(!cur)return;
-let key='zo_'+cur.n;
-if(localStorage.getItem(key)){showToast(cur.n+' Opening... 🚀');return}
-this.textContent='Installing...';
-setTimeout(()=>{this.textContent='Open';this.className='btn done';localStorage.setItem(key,'1');updateCount();showToast(cur.n+' Installed ✅');},600);
+updateStats();
+showToast(cur.n+' Installed ✅');
+},700);
 };
 document.getElementById('search').addEventListener('input',e=>{
 let q=e.target.value.toLowerCase();
-render(apps.filter(a=>a.n.toLowerCase().includes(q)));
+render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)||(a.desc&&a.desc.toLowerCase().includes(q))));
 });
 document.getElementById('nav').querySelectorAll('div').forEach(t=>{
 t.addEventListener('click',()=>{
 document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
 t.classList.add('active');
 let f=t.dataset.f;
-if(f==='all')render(apps);else render(apps.filter(a=>a.c===f));
+if(f==='all')render(allApps);else render(allApps.filter(a=>a.c===f));
 });
 });
 document.getElementById('darkBtn').onclick=()=>{
 document.body.classList.toggle('dark');
 document.getElementById('darkBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙';
 };
-if(navigator.getBattery){navigator.getBattery().then(b=>{document.getElementById('batt').textContent=Math.round(b.level*100)+'%'})}
-render(apps);updateCount();
+if(navigator.getBattery){navigator.getBattery().then(b=>{let el=document.getElementById('batt');if(el) el.textContent=Math.round(b.level*100)+'%'})}
+render(allApps);
 </script>
 </body>
 </html>
