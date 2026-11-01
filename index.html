@@ -1,87 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZO STORE - Apps & Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZO STORE V2 - Global App Store</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto, -apple-system, sans-serif}
-body{background:#fff;color:#202124}
-.h{padding:14px 20px;display:flex;align-items:center;gap:16px;border-bottom:1px solid #e8eaed;position:sticky;top:0;background:#fff;z-index:10}
-.logo{display:flex;align-items:center;gap:10px;font-weight:500;font-size:22px;color:#5f6368}
-.logo b{color:#01875f;font-weight:700}
-.logo-dot{width:32px;height:32px;background:#01875f;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px}
-.srch{flex:1;max-width:700px;background:#f1f3f4;border-radius:24px;padding:10px 20px;display:flex;align-items:center;gap:12px}
-.srch input{border:none;background:transparent;outline:none;flex:1;font-size:15px}
-.nav{display:flex;gap:32px;padding:0 20px;border-bottom:1px solid #e8eaed;overflow:auto}
-.nav div{padding:16px 0;font-size:14px;font-weight:500;color:#5f6368;white-space:nowrap;border-bottom:3px solid transparent;cursor:pointer}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Google Sans,Roboto,Arial,sans-serif}
+body{background:#f8f9fa;color:#202124}
+.hdr{padding:14px 20px;display:flex;align-items:center;gap:16px;background:#fff;border-bottom:1px solid #e8eaed;position:sticky;top:0;z-index:20}
+.logo{display:flex;align-items:center;gap:8px;font-size:22px}
+.logo-icon{width:36px;height:36px;background:#01875f;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px}
+.logo b{color:#01875f}
+.search{flex:1;max-width:720px;background:#f1f3f4;border-radius:24px;padding:11px 18px;display:flex;gap:10px;align-items:center}
+.search input{border:none;background:transparent;outline:none;width:100%;font-size:15px}
+.search:focus-within{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.nav{display:flex;gap:28px;padding:0 20px;background:#fff;border-bottom:1px solid #e8eaed;overflow:auto;position:sticky;top:64px;z-index:19}
+.nav div{padding:16px 0;font-size:14px;font-weight:500;color:#5f6368;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
 .nav div.active{color:#01875f;border-color:#01875f}
-.hero{padding:24px 20px}
-.hero h1{font-size:28px;font-weight:400;margin-bottom:6px}
-.hero p{font-size:14px;color:#5f6368}
-.sec{padding:20px}
-.sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.sec-h h2{font-size:18px;font-weight:500}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
-.card{cursor:pointer}
-.card-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:24px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.card h3{font-size:14px;font-weight:400;line-height:1.3;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card p{font-size:12px;color:#5f6368;margin-bottom:4px}
-.card span{font-size:12px;color:#5f6368}
-.card b{font-size:11px;color:#01875f;background:#e6f4ea;padding:2px 6px;border-radius:4px;margin-left:4px}
-.footer{text-align:center;padding:32px;color:#5f6368;font-size:12px;border-top:1px solid #e8eaed;margin-top:20px}
+.hero{padding:28px 20px;background:linear-gradient(135deg,#01875f 0%,#00b386 100%);color:#fff}
+.hero h1{font-size:32px;font-weight:400;margin-bottom:6px}
+.hero p{font-size:15px;opacity:.9}
+.wrap{max-width:1200px;margin:0 auto;padding:20px}
+.sec{margin-bottom:32px}
+.sec-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.sec-top h2{font-size:20px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:20px}
+.card{background:#fff;border-radius:12px;padding:16px;cursor:pointer;transition:.2s;border:1px solid #e8eaed}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.12);transform:translateY(-2px)}
+.icon{width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;margin-bottom:12px}
+.card h3{font-size:14px;font-weight:500;line-height:1.3;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .dev{font-size:12px;color:#5f6368;margin-bottom:6px}
+.meta{font-size:12px;color:#5f6368;display:flex;gap:6px;align-items:center}
+.meta b{font-size:11px;color:#01875f;background:#e6f4ea;padding:3px 7px;border-radius:12px}
+.footer{text-align:center;padding:40px 20px;color:#5f6368;font-size:13px;border-top:1px solid #e8eaed;margin-top:20px;background:#fff}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:12px 24px;border-radius:24px;font-size:14px;display:none;z-index:100}
 </style>
 </head>
 <body>
-
-<div class="h">
-  <div class="logo"><div class="logo-dot">Z</div><div><b>ZO</b> Store</div></div>
-  <div class="srch"><span>🔍</span><input placeholder="Search for apps & games"></div>
+<div class="hdr">
+<div class="logo"><div class="logo-icon">Z</div><div><b>ZO</b> Store</div></div>
+<div class="search"><span>🔍</span><input id="searchInput" placeholder="Search Calculator, Drive, Gallery, Files..."></div>
 </div>
-
-<div class="nav">
-  <div class="active">For you</div>
-  <div>Top charts</div>
-  <div>Games</div>
-  <div>Apps</div>
-  <div>Categories</div>
-  <div>Editors choice</div>
+<div class="nav" id="nav">
+<div class="active" data-filter="all">For you</div>
+<div data-filter="essential">Essential</div>
+<div data-filter="media">Media</div>
+<div data-filter="tools">Tools</div>
 </div>
-
 <div class="hero">
-  <h1>Discover apps for you</h1>
-  <p>Recommended based on your interests • V1 Foundation</p>
+<h1>ZO STORE V2</h1>
+<p>Calculator • Drive • Gallery • Files • Camera • Music • Clock • Calendar — No GB, No MB, Pure Global</p>
 </div>
-
-<div class="sec">
-  <div class="sec-h"><h2>Recommended for you</h2></div>
-  <div class="grid" id="grid"></div>
+<div class="wrap">
+<div class="sec"><div class="sec-top"><h2>All Apps - 8 Live</h2></div><div class="grid" id="grid"></div></div>
 </div>
-
-<div class="footer">
-  ZO STORE V1 • Global Software Distribution Platform<br>
-  Discover. Download. Build. Connect.
-</div>
+<div class="footer">ZO STORE V2 • Built by ZO Technology<br>familyproduct367-dev • V2 Working Global Platform</div>
+<div class="toast" id="toast"></div>
 
 <script>
 const apps=[
-{n:"Wallpaper 4K HD",dev:"ZO Studio",rate:"4.8",icon:"#01875f",L:"W"},
-{n:"Music Player Pro",dev:"ZO Audio",rate:"4.7",icon:"#7c4dff",L:"M"},
-{n:"File Manager",dev:"ZO Tools",rate:"4.6",icon:"#f59e0b",L:"F"},
-{n:"Video Editor",dev:"ZO Creative",rate:"4.9",icon:"#ef4444",L:"V"},
-{n:"Calculator+",dev:"ZO Labs",rate:"4.5",icon:"#06b6d4",L:"C"},
-{n:"VPN Fast Secure",dev:"ZO Security",rate:"4.8",icon:"#10b981",L:"V"},
-{n:"Photo Editor AI",dev:"ZO AI Lab",rate:"4.9",icon:"#8b5cf6",L:"P"},
-{n:"Cloud Drive 100GB",dev:"ZO Cloud",rate:"4.7",icon:"#3b82f6",L:"D"}
+{name:"Calculator",dev:"ZO Labs",cat:"tools",rate:"4.8",color:"#4285f4",emoji:"🧮",desc:"Fast calculator"},
+{name:"Gallery",dev:"ZO Media",cat:"media",rate:"4.9",color:"#34a853",emoji:"🖼️",desc:"Photo & video gallery"},
+{name:"Drive",dev:"ZO Cloud",cat:"essential",rate:"4.7",color:"#fbbc04",emoji:"📁",desc:"Cloud storage drive"},
+{name:"Files",dev:"ZO System",cat:"essential",rate:"4.8",color:"#0f9d58",emoji:"📂",desc:"File manager"},
+{name:"Camera",dev:"ZO Media",cat:"media",rate:"4.8",color:"#ea4335",emoji:"📷",desc:"HD camera"},
+{name:"Music",dev:"ZO Audio",cat:"media",rate:"4.6",color:"#7c4dff",emoji:"🎵",desc:"Music player"},
+{name:"Clock",dev:"ZO Tools",cat:"tools",rate:"4.6",color:"#ff6d00",emoji:"⏰",desc:"Alarm & clock"},
+{name:"Calendar",dev:"ZO Productivity",cat:"tools",rate:"4.7",color:"#4285f4",emoji:"📅",desc:"Calendar & events"}
 ];
-const g=document.getElementById('grid');
-apps.forEach(a=>{
-  let d=document.createElement('div');
-  d.className='card';
-  d.innerHTML=`<div class="card-icon" style="background:${a.icon}">${a.L}</div><h3>${a.n}</h3><p>${a.dev}</p><span>★ ${a.rate} <b>Free</b></span>`;
-  d.onclick=()=>alert(a.n+" - Download will be available in V14/V15 with external links & APK uploads");
-  g.appendChild(d);
+
+const grid=document.getElementById('grid');
+const searchInput=document.getElementById('searchInput');
+const nav=document.getElementById('nav');
+const toast=document.getElementById('toast');
+
+function showToast(msg){
+toast.textContent=msg;
+toast.style.display='block';
+setTimeout(()=>toast.style.display='none',2500);
+}
+
+function render(list){
+grid.innerHTML='';
+list.forEach(app=>{
+let d=document.createElement('div');
+d.className='card';
+d.innerHTML=`<div class="icon" style="background:${app.color}">${app.emoji}</div><h3>${app.name}</h3><div class="dev">${app.dev}</div><div class="meta">★ ${app.rate} <b>Free</b></div>`;
+d.onclick=()=>showToast(app.name+' - Download coming in V3 🚀');
+grid.appendChild(d);
+});
+}
+
+render(apps);
+
+// SEARCH WORKING
+searchInput.addEventListener('input',(e)=>{
+let q=e.target.value.toLowerCase();
+let f=apps.filter(a=>a.name.toLowerCase().includes(q) || a.dev.toLowerCase().includes(q));
+render(f);
+});
+
+// TABS WORKING
+nav.querySelectorAll('div').forEach(tab=>{
+tab.addEventListener('click',()=>{
+nav.querySelectorAll('div').forEach(t=>t.classList.remove('active'));
+tab.classList.add('active');
+let filter=tab.dataset.filter;
+if(filter==='all') render(apps);
+else render(apps.filter(a=>a.cat===filter));
+});
 });
 </script>
 </body>
-  </html>
+</html>
