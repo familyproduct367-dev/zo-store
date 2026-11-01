@@ -3,128 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V8 - Community</title>
+<title>ZO STORE V10.2 - Pay to Upload $9</title>
 <style>
 :root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed}
-.dark{--bg:#0a0a0a;--card:#1a1a1a;--text:#fff;--sub:#999;--border:#333}
+.dark{--bg:#050505;--card:#141414;--text:#fff;--sub:#999;--border:#222}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
 body{background:var(--bg);color:var(--text);padding-bottom:75px}
-.hdr{padding:10px 14px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
-.logo{width:38px;height:38px;background:linear-gradient(135deg,var(--green),#00ff88);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
-.search{flex:1;background:var(--bg);border-radius:20px;padding:8px 12px;display:flex;gap:6px;border:1px solid var(--border)}
-.search input{border:none;background:transparent;outline:none;width:100%;font-size:13px;color:var(--text)}
-.icon-btn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--bg);font-size:14px}
-.upload-btn{background:var(--green);color:#fff;border:none;padding:7px 14px;border-radius:18px;font-size:11px;font-weight:500;cursor:pointer}
-.nav{display:flex;gap:14px;padding:0 14px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:58px;z-index:29}
-.nav div{padding:10px 0;font-size:11px;color:var(--sub);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
-.nav div.active{color:var(--green);border-color:var(--green);font-weight:500}
-.banner{margin:12px;background:linear-gradient(135deg,#01875f,#00ff88);border-radius:14px;padding:14px;color:#fff;display:flex;justify-content:space-between}
-.stats{display:flex;gap:6px;padding:0 14px}
-.stat{background:var(--card);border-radius:10px;padding:6px;flex:1;border:1px solid var(--border);text-align:center;font-size:10px}
-.stat b{color:var(--green);display:block;font-size:13px}
-.grid{padding:10px 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
-.card{background:var(--card);border-radius:12px;padding:8px;border:1px solid var(--border);cursor:pointer;position:relative}
-.badge{position:absolute;top:5px;right:5px;background:var(--green);color:#fff;font-size:7px;padding:2px 5px;border-radius:8px}
-.badge.community{background:#ff9800}
-.badge.wish{background:#7c4dff}
-.icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
-.card h3{font-size:10px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dev{font-size:8px;color:var(--sub)}
-.meta{font-size:8px;color:var(--sub);display:flex;gap:4px;margin-top:2px}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;z-index:40}
-.bnav div{font-size:9px;text-align:center;color:var(--sub);cursor:pointer}
+.hdr{padding:10px 14px;background:var(--card);display:flex;gap:6px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
+.logo{width:36px;height:36px;background:linear-gradient(135deg,var(--green),#00ff88);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px}
+.search{flex:1;background:var(--bg);border-radius:20px;padding:7px 10px;display:flex;gap:6px;border:1px solid var(--border)}
+.search input{border:none;background:transparent;outline:none;width:100%;font-size:12px;color:var(--text)}
+.icon-btn{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--bg);font-size:13px}
+.upload-btn{background:linear-gradient(135deg,#ff9800,gold);color:#000;border:none;padding:6px 12px;border-radius:18px;font-size:10px;font-weight:700;cursor:pointer}
+.nav{display:flex;gap:12px;padding:0 14px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:29}
+.nav div{padding:9px 0;font-size:10px;color:var(--sub);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.nav div.active{color:var(--green);border-color:var(--green);font-weight:600}
+.banner{margin:10px;background:linear-gradient(135deg,#01875f,#00ff88,#7c4dff);border-radius:14px;padding:12px;color:#fff;display:flex;justify-content:space-between}
+.stats{display:flex;gap:5px;padding:0 14px;flex-wrap:wrap}
+.stat{background:var(--card);border-radius:8px;padding:5px;flex:1;min-width:60px;border:1px solid var(--border);text-align:center;font-size:9px}
+.stat b{color:var(--green);display:block;font-size:12px}
+.grid{padding:8px 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:7px}
+.card{background:var(--card);border-radius:12px;padding:7px;border:1px solid var(--border);cursor:pointer;position:relative}
+.badge{position:absolute;top:4px;right:4px;background:var(--green);color:#fff;font-size:6px;padding:2px 4px;border-radius:8px;font-weight:600}
+.badge.paid{background:gold;color:#000}.badge.verified{background:#1d9bf0}
+.icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;position:relative}
+.verified-tick{position:absolute;bottom:-3px;right:-3px;background:#1d9bf0;color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;font-size:8px;border:2px solid var(--card)}
+.card h3{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dev{font-size:7px;color:var(--sub)}
+.meta{font-size:7px;color:var(--sub);display:flex;gap:3px;margin-top:2px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:5px 0;z-index:40}
+.bnav div{font-size:8px;text-align:center;color:var(--sub);cursor:pointer}
 .bnav div.active{color:var(--green)}
-.bnav span{font-size:18px;display:block}
+.bnav span{font-size:16px;display:block}
 .detail{position:fixed;inset:0;background:var(--card);z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
-.detail-top{padding:10px 14px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card)}
-.dhead{padding:12px;display:flex;gap:10px}
-.dicon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff}
-.install{display:flex;gap:8px;padding:0 14px 10px;align-items:center;flex-wrap:wrap}
-.btn{background:var(--green);color:#fff;border:none;padding:7px 16px;border-radius:16px;font-weight:500;cursor:pointer;font-size:11px}
+.detail-top{padding:8px 12px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card)}
+.dhead{padding:10px;display:flex;gap:10px}
+.dicon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;position:relative}
+.install{display:flex;gap:6px;padding:0 12px 10px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--green);color:#fff;border:none;padding:7px 14px;border-radius:16px;font-weight:600;cursor:pointer;font-size:10px}
 .btn.done{background:var(--bg);color:var(--sub)}
 .btn.outline{background:transparent;border:1px solid var(--green);color:var(--green)}
-.screen{padding:12px}
-.mini{background:var(--bg);border-radius:12px;padding:10px;margin-top:8px}
-.note-input{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:11px;margin-top:6px}
-.todo-item{display:flex;gap:6px;padding:8px;background:var(--card);border-radius:8px;margin-top:6px;align-items:center;font-size:11px}
-.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:8px 14px;border-radius:14px;font-size:10px;display:none;z-index:200}
-.upload-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none;align-items:center;justify-content:center;padding:14px}
+.btn.pay{background:linear-gradient(135deg,#ff9800,gold);color:#000;font-weight:800}
+.screen{padding:10px}
+.mini{background:var(--bg);border-radius:10px;padding:9px;margin-top:7px}
+.note-input{width:100%;padding:7px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:10px;margin-top:5px}
+.todo-item{display:flex;gap:6px;padding:6px;background:var(--card);border-radius:6px;margin-top:5px;align-items:center;font-size:10px}
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:8px 14px;border-radius:14px;font-size:10px;display:none;z-index:300;max-width:90%;text-align:center}
+.upload-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
 .upload-modal.active{display:flex}
-.upload-box{background:var(--card);border-radius:14px;padding:16px;width:100%;max-width:400px;max-height:90vh;overflow:auto}
-.upload-box h3{font-size:14px;margin-bottom:10px}
-.row{display:flex;gap:8px}
-.row .note-input{flex:1}
-video{width:100%;border-radius:10px;background:#000}
-canvas{display:none}
-.chat-msg{padding:6px 10px;background:var(--card);border-radius:10px;margin-top:5px;font-size:11px;max-width:85%}
+.upload-box{background:var(--card);border-radius:14px;padding:14px;width:100%;max-width:400px;max-height:92vh;overflow:auto}
+.chat-msg{padding:5px 8px;background:var(--card);border-radius:10px;margin-top:4px;font-size:10px;max-width:85%}
 .chat-msg.me{margin-left:auto;background:var(--green);color:#fff}
+.pay-wall{background:linear-gradient(135deg,#ff9800,#ff5722);color:#fff;border-radius:12px;padding:12px;text-align:center;margin:10px 0}
+.wallet{background:linear-gradient(135deg,#1d9bf0,#7c4dff);color:#fff;border-radius:10px;padding:8px;margin:8px 0;font-size:10px;display:flex;justify-content:space-between}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search 22+ community apps..."></div><div class="icon-btn" id="darkBtn">🌙</div><button class="upload-btn" onclick="openUpload()">+ Upload</button></div>
-<div class="nav" id="nav"><div class="active" data-f="all">All</div><div data-f="essential">Essential</div><div data-f="media">Media</div><div data-f="tools">Tools</div><div data-f="community">Community 👥</div><div data-f="wish">Wishes 💭</div><div data-f="ai">AI 🤖</div></div>
-<div class="banner"><div><b>ZO STORE V8</b><div style="font-size:10px">COMMUNITY EDITION • Upload Your Own App!</div><div style="font-size:8px;margin-top:2px">People feed dey upload their wish version • Igbo Ukwu Global</div></div><div style="font-size:24px">🌍</div></div>
-<div class="stats"><div class="stat"><b id="totalApps">22</b>Total Apps</div><div class="stat"><b id="communityCount">0</b>Community</div><div class="stat"><b id="installedCount">0</b>Installed</div><div class="stat"><b id="wishCount">0</b>Wishes</div></div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search 30+ apps..."></div><div class="icon-btn" id="langBtn" onclick="toggleLang()">🌐</div><div class="icon-btn" id="darkBtn">🌙</div><button class="upload-btn" onclick="openUpload()">+ Upload $9</button></div>
+<div class="nav" id="nav"><div class="active" data-f="all">All</div><div data-f="community">Community 👥</div><div data-f="wish">Wishes 💭</div><div data-f="ai">AI 🤖</div><div data-f="premium">Paid 💰</div></div>
+<div class="banner"><div><b>ZO STORE V10.2</b><div style="font-size:9px">PAY TO UPLOAD • $9 or ₦12,000 • Like Play Console</div><div style="font-size:7px;margin-top:2px">Pay once, upload unlimited • CEO: familyproduct367-dev</div></div><div style="font-size:20px">💳</div></div>
+<div class="wallet"><div><b>💰 Developer Account</b><div style="font-size:8px" id="devStatus">Not Paid • Pay to upload</div></div><div style="text-align:right"><b id="walletBal">₦0</b><div style="font-size:8px" id="uploadStatus">🔒 Locked</div></div></div>
+<div class="stats"><div class="stat"><b id="totalApps">10</b>Total</div><div class="stat"><b id="communityCount">0</b>Community</div><div class="stat"><b id="installedCount">0</b>Installed</div><div class="stat"><b>$9 / ₦12k</b>Upload Fee</div></div>
 <div class="grid" id="grid"></div>
-<div class="bnav"><div class="active" onclick="filterAll()"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="filterCat('community')"><span>👥</span>Community</div><div onclick="filterCat('wish')"><span>💭</span>Wishes</div></div>
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openPayModal()"><span>💳</span>Pay $9</div><div onclick="exportStore()"><span>💾</span>Backup</div></div>
+
+<div class="upload-modal" id="payModal">
+<div class="upload-box">
+<h3>💳 Pay to Upload — $9 / ₦12,000</h3>
+<div class="pay-wall"><div style="font-size:20px">👑</div><b>Become ZO Developer!</b><div style="font-size:10px;margin-top:4px">Pay once, upload unlimited apps forever!</div><div style="font-size:18px;margin-top:8px;font-weight:800">$9 USD or ₦12,000 NGN</div></div>
+<div style="font-size:10px;line-height:1.5">
+✅ Upload unlimited apps<br>
+✅ Your apps show for community<br>
+✅ Earn 70% if you set price<br>
+✅ Verified developer badge<br>
+✅ Like Google Play Console ($25) but cheaper!<br><br>
+<b>How to pay (Demo):</b><br>
+For now na demo — Tap Pay below, e go unlock. For real life, you fit connect Paystack / Flutterwave.
+</div>
+<div style="display:flex;gap:6px;margin-top:12px"><button class="btn pay" style="flex:1" onclick="payForUpload()">💳 Pay $9 / ₦12,000 Now</button><button class="btn done" style="flex:1" onclick="closePayModal()">Cancel</button></div>
+<div style="font-size:8px;color:var(--sub);text-align:center;margin-top:8px">Secure payment • One-time fee • No monthly</div>
+</div>
+</div>
 
 <div class="upload-modal" id="uploadModal">
 <div class="upload-box">
-<h3>📤 Upload Your Own App - Wish Version</h3>
-<p style="font-size:10px;color:var(--sub)">People go see your app for ZO Store! Add wetin you wish!</p>
-<input class="note-input" id="upName" placeholder="App Name - e.g. My Market App">
-<input class="note-input" id="upDev" placeholder="Your Name / Creator - e.g. Chidi from Igbo Ukwu">
-<div class="row"><input class="note-input" id="upEmoji" placeholder="Emoji Icon - e.g. 🛒" maxlength="2"><input class="note-input" id="upColor" placeholder="Color - e.g. #ff9800" value="#ff9800"></div>
-<select class="note-input" id="upCat"><option value="community">Community App 👥</option><option value="wish">Wish Version 💭 - Idea</option><option value="essential">Essential</option><option value="media">Media</option><option value="tools">Tools</option></select>
-<textarea class="note-input" id="upDesc" placeholder="Describe your app - What it does? Why people go like am?" rows="3"></textarea>
-<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" style="flex:1" onclick="submitApp()">🚀 Upload to Store</button><button class="btn done" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+<h3>📤 Upload Your App — Paid Developers Only</h3>
+<div id="uploadLock" style="display:none"><div class="pay-wall"><b>🔒 Upload Locked</b><div style="font-size:9px;margin-top:4px">You need to pay $9 / ₦12,000 to upload!</div><button class="btn pay" style="margin-top:8px;width:100%" onclick="closeUpload();openPayModal()">💳 Pay $9 to Unlock Upload</button></div></div>
+<div id="uploadForm">
+<p style="font-size:9px;color:var(--sub)">You are paid developer! Upload free unlimited!</p>
+<input class="note-input" id="upName" placeholder="App Name">
+<input class="note-input" id="upDev" placeholder="Your Business Name">
+<div style="display:flex;gap:6px"><input class="note-input" id="upEmoji" placeholder="Emoji" maxlength="2" style="flex:1"><input class="note-input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
+<select class="note-input" id="upCat"><option value="community">Community 👥</option><option value="wish">Wish 💭</option><option value="premium">Premium Paid 💰</option><option value="ai">AI 🤖</option></select>
+<textarea class="note-input" id="upDesc" placeholder="Describe your app..." rows="3"></textarea>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitApp()">🚀 Upload App (FREE - Already Paid)</button><button class="btn done" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+</div>
 </div>
 </div>
 
 <div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">←</div><div id="dTitle" style="font-weight:500;font-size:13px"></div><div style="margin-left:auto;display:flex;gap:8px"><span id="likeBtn" style="cursor:pointer" onclick="likeApp()">❤️ <span id="likeCount">0</span></span></div></div>
-<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:15px"></h2><div id="dDev" style="font-size:10px;color:var(--green)"></div><div id="dMeta" style="font-size:9px;color:var(--sub)"></div></div></div>
-<div class="install"><button class="btn" id="installBtn">Install</button><button class="btn outline" id="voteBtn" onclick="voteWish()">🗳️ Vote Wish</button><div style="font-size:9px;color:var(--sub)" id="installInfo">Free • Community</div></div>
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">←</div><div id="dTitle" style="font-weight:500;font-size:12px"></div><div style="margin-left:auto"><span id="likeBtn" onclick="likeApp()" style="cursor:pointer">❤️ <span id="likeCount">0</span></span></div></div>
+<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:14px"></h2><div id="dDev" style="font-size:9px;color:var(--green)"></div><div id="dMeta" style="font-size:8px;color:var(--sub)"></div></div></div>
+<div class="install"><button class="btn" id="installBtn">Install FREE</button><div style="font-size:8px;color:var(--sub)" id="installInfo">FREE • Community</div></div>
 <div class="screen" id="screen"></div>
 </div>
 <div class="toast" id="toast"></div>
-  <script>
+<script>
+let lang='en';
+function toggleLang(){
+let langs=['en','ig','pidgin'];
+let idx=langs.indexOf(lang);
+lang=langs[(idx+1)%langs.length];
+document.getElementById('langBtn').textContent=lang==='en'?'🌐':'🇳🇬';
+showToast('Lang: '+lang.toUpperCase());
+}
 const defaultApps=[
-{n:"ZO AI",d:"ZO Intelligence",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"AI",likes:245,desc:"Ask anything! Built inside store"},
-{n:"Video Call",d:"ZO Connect",c:"social",col:"#00bcd4",e:"📹",r:"4.9",t:"videocall",badge:"REAL",likes:189,desc:"Real video call"},
-{n:"Camera",d:"ZO Media",c:"media",col:"#ea4335",e:"📷",r:"4.9",t:"camera",badge:"REAL",likes:320,desc:"Real camera with capture"},
-{n:"Calculator",d:"ZO Labs",c:"tools",col:"#4285f4",e:"🧮",r:"4.8",t:"calc",badge:"WORKING",likes:412,desc:"Working calculator"},
-{n:"QR Maker",d:"ZO Tools",c:"tools",col:"#000",e:"🔳",r:"4.8",t:"qr",badge:"NEW",likes:156,desc:"Generate QR codes"},
-{n:"File Share",d:"ZO System",c:"system",col:"#ff9800",e:"📤",r:"4.9",t:"shareit",badge:"FAST",likes:278,desc:"Fast file sharing"},
-{n:"Maps",d:"ZO Maps",c:"essential",col:"#34a853",e:"📍",r:"4.8",t:"maps",badge:"GPS",likes:201,desc:"Real GPS location"},
-{n:"Gallery",d:"ZO Media",c:"media",col:"#34a853",e:"🖼️",r:"4.9",t:"gallery",likes:334,desc:"Photo gallery"},
-{n:"Notes",d:"ZO Labs",c:"essential",col:"#ffab00",e:"📝",r:"4.9",t:"notes",likes:298,desc:"Save notes"},
-{n:"Chat",d:"ZO Social",c:"social",col:"#00bcd4",e:"💬",r:"4.9",t:"chat",likes:445,desc:"Community chat"}
+{n:"ZO AI",d:"ZO Intelligence ✅",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"VERIFIED",verified:true,likes:1245,price:0,desc:"AI assistant - FREE for all users"},
+{n:"Video Call",d:"ZO Connect ✅",c:"premium",col:"#00bcd4",e:"📹",r:"4.9",t:"videocall",badge:"VERIFIED",verified:true,likes:892,price:0,desc:"Real video call - FREE"},
+{n:"Camera Pro",d:"ZO Media ✅",c:"media",col:"#ea4335",e:"📷",r:"5.0",t:"camera",badge:"VERIFIED",verified:true,likes:1320,price:0,desc:"Real camera"},
+{n:"Calculator",d:"ZO Labs ✅",c:"tools",col:"#4285f4",e:"🧮",r:"4.9",t:"calc",badge:"VERIFIED",verified:true,likes:2412,price:0,desc:"Working calc"},
+{n:"Market Hub",d:"ZO Commerce ✅",c:"community",col:"#ff9800",e:"🛒",r:"4.9",t:"market",badge:"FREE",verified:true,likes:892,price:0,desc:"Buy and sell"},
+{n:"POS App",d:"ZO Business ✅",c:"community",col:"#4caf50",e:"💳",r:"5.0",t:"pos",badge:"FREE",verified:true,likes:543,price:0,desc:"POS - FREE"},
+{n:"Vault",d:"ZO Security ✅",c:"essential",col:"#607d8b",e:"🔒",r:"5.0",t:"vault",badge:"FREE",verified:true,likes:445,price:0,desc:"Security"}
 ];
-let customApps=JSON.parse(localStorage.getItem('zo_custom_apps')||'[]');
+let customApps=JSON.parse(localStorage.getItem('zo_v10_apps')||'[]');
 let allApps=[...defaultApps, ...customApps];
 const grid=document.getElementById('grid');
 const detail=document.getElementById('detail');
 const toast=document.getElementById('toast');
 let cur=null, stream=null;
-function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2200)}
+let isPaid=localStorage.getItem('zo_paid_dev')==='1';
+let wallet=parseInt(localStorage.getItem('zo_wallet')||'0');
+
+function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500)}
 function closeDetail(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}detail.classList.remove('active')}
-function openUpload(){document.getElementById('uploadModal').classList.add('active')}
+function openPayModal(){document.getElementById('payModal').classList.add('active')}
+function closePayModal(){document.getElementById('payModal').classList.remove('active')}
+function openUpload(){
+document.getElementById('uploadModal').classList.add('active');
+if(!isPaid){
+document.getElementById('uploadLock').style.display='block';
+document.getElementById('uploadForm').style.display='none';
+}else{
+document.getElementById('uploadLock').style.display='none';
+document.getElementById('uploadForm').style.display='block';
+}
+}
 function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
+
+function payForUpload(){
+// DEMO PAYMENT - For real, connect Paystack/Flutterwave here!
+if(confirm('Pay $9 / ₦12,000 to become ZO Developer? (Demo - Tap OK to simulate payment)')){
+isPaid=true;
+localStorage.setItem('zo_paid_dev','1');
+wallet+=12000;
+localStorage.setItem('zo_wallet',wallet);
+updatePayStatus();
+closePayModal();
+showToast('Payment Success! You are now Developer! 👑 $9 / ₦12,000 Paid ✅');
+setTimeout(()=>{openUpload();},500);
+}
+}
+function updatePayStatus(){
+let status=document.getElementById('devStatus');
+let uploadStatus=document.getElementById('uploadStatus');
+let bal=document.getElementById('walletBal');
+if(isPaid){
+status.textContent='✅ Paid Developer • Unlimited Uploads';
+status.style.color='#00ff88';
+uploadStatus.textContent='🔓 Unlocked';
+uploadStatus.style.color='#00ff88';
+bal.textContent='Paid: $9 / ₦12k';
+}else{
+status.textContent='🔒 Not Paid • Pay $9 / ₦12k to upload';
+uploadStatus.textContent='🔒 Locked';
+}
+}
+function exportStore(){
+let data={apps:customApps,paid:isPaid,date:new Date().toISOString()};
+let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+let url=URL.createObjectURL(blob);
+let a=document.createElement('a');a.href=url;a.download='zo-store-paid-backup.json';a.click();
+showToast('Backup Downloaded 💾');
+}
 function updateStats(){
 document.getElementById('totalApps').textContent=allApps.length;
-document.getElementById('communityCount').textContent=allApps.filter(a=>a.c==='community').length;
-document.getElementById('wishCount').textContent=allApps.filter(a=>a.c==='wish').length;
+document.getElementById('communityCount').textContent=allApps.filter(a=>a.c==='community'||a.custom).length;
 let c=0;allApps.forEach(a=>{if(localStorage.getItem('zo_'+a.n))c++});document.getElementById('installedCount').textContent=c;
+updatePayStatus();
 }
 function render(list){
 grid.innerHTML='';
-list.forEach((a,i)=>{
+list.forEach((a)=>{
 let idx=allApps.indexOf(a);
 let el=document.createElement('div');el.className='card';
-let badgeClass=a.c==='community'?'community':a.c==='wish'?'wish':'';
-el.innerHTML=`${a.badge?`<div class="badge ${badgeClass}">${a.badge}</div>`:''}<div class="icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta"><span>★ ${a.r||'4.8'}</span><span>❤️ ${a.likes||0}</span></div>`;
+el.innerHTML=`<div class="badge ${a.verified?'verified':a.c==='community'?'':'paid'}">${a.badge||'FREE'}</div><div class="icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified-tick">✓</div>':''}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta"><span>★ ${a.r||'4.8'}</span><span>❤️ ${a.likes||0}</span><span>FREE</span></div>`;
 el.onclick=()=>openApp(idx);
 grid.appendChild(el);
 });
@@ -134,102 +208,81 @@ function openApp(i){
 cur=allApps[i];
 detail.classList.add('active');
 document.getElementById('dIcon').style.background=cur.col;
-document.getElementById('dIcon').textContent=cur.e;
+document.getElementById('dIcon').innerHTML=`${cur.e}${cur.verified?'<div class="verified-tick">✓</div>':''}`;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d+(cur.custom?' • Uploaded by Community':'');
-document.getElementById('dMeta').textContent=`★ ${cur.r||'4.8'} • ${cur.likes||0} likes • ${cur.installs||0} installs • ${cur.badge||'Community'}`;
+document.getElementById('dDev').textContent=cur.d;
+document.getElementById('dMeta').textContent=`★ ${cur.r||'4.8'} • ${cur.likes||0} likes • FREE • ${cur.custom?'Community Paid Upload':'Official'}`;
 document.getElementById('likeCount').textContent=cur.likes||0;
-document.getElementById('likeBtn').style.opacity=localStorage.getItem('liked_'+cur.n)?'0.5':'1';
 let btn=document.getElementById('installBtn');
 let installed=localStorage.getItem('zo_'+cur.n);
-btn.textContent=installed?'Open':'Install';
+btn.textContent=installed?'Open':'Install FREE';
 btn.className=installed?'btn done':'btn';
-document.getElementById('voteBtn').style.display=cur.c==='wish'?'block':'none';
-document.getElementById('voteBtn').textContent=`🗳️ Vote (${cur.votes||0})`;
+document.getElementById('installInfo').textContent='FREE for users • Developer paid $9 / ₦12k to upload';
 buildApp(cur);
 }
 function buildApp(app){
 let s=document.getElementById('screen');
-if(app.t==='ai'){
-s.innerHTML=`<div class="mini"><div style="font-weight:500;font-size:12px">🤖 ZO AI</div><div id="aiBox" style="height:200px;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px"><div class="chat-msg">Hi CEO! I be ZO AI! Ask me anything! 🚀</div></div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="aiIn" placeholder="Ask AI..." style="flex:1"><button class="btn" onclick="askAI()">Ask</button></div></div><div class="mini"><b style="font-size:11px">About:</b><div style="font-size:10px;margin-top:4px">${app.desc||'AI assistant inside store'}</div><div style="margin-top:8px;font-size:10px"><b>Creator:</b> ${app.d}<br><b>Uploaded:</b> ${app.custom?'By community user':'ZO Labs'}</div></div>`;
-window.askAI=()=>{
-let inp=document.getElementById('aiIn');if(!inp.value)return;
-let box=document.getElementById('aiBox');
-let q=inp.value;
-let div=document.createElement('div');div.className='chat-msg me';div.textContent=q;box.appendChild(div);
-inp.value='';
-setTimeout(()=>{
-let ans="CEO, you don build community store where people fit upload! This na big idea! You fit monetize with small fee ₦100 per upload! Keep building!";
-let div2=document.createElement('div');div2.className='chat-msg';div2.textContent=ans;box.appendChild(div2);box.scrollTop=box.scrollHeight;
-},600);
-}
+if(app.t==='pos'){
+s.innerHTML=`<div class="mini"><div style="font-weight:600;font-size:11px">💳 ZO POS</div><div style="display:flex;gap:6px;margin-top:6px"><input class="note-input" id="posAmount" placeholder="Amount ₦" type="number" style="flex:1"><input class="note-input" id="posDesc" placeholder="For?" style="flex:1"></div><button class="btn" style="width:100%;margin-top:6px" onclick="doPOS()">Collect</button><div id="posHistory"></div></div>`;
+let history=JSON.parse(localStorage.getItem('zo_pos')||'[]');
+window.doPOS=()=>{let amt=parseInt(document.getElementById('posAmount').value);let desc=document.getElementById('posDesc').value||'Sale';if(!amt)return;history.unshift({amount:amt,desc:desc});localStorage.setItem('zo_pos',JSON.stringify(history));document.getElementById('posAmount').value='';refreshPOS();showToast('₦'+amt+' Collected');}
+function refreshPOS(){let list=document.getElementById('posHistory');if(!list)return;list.innerHTML='';history.slice(0,5).forEach(h=>{let div=document.createElement('div');div.className='todo-item';div.innerHTML=`<span>💰</span><div style="flex:1"><b>₦${h.amount}</b> - ${h.desc}</div>`;list.appendChild(div)});}
+setTimeout(refreshPOS,10);
 }else if(app.t==='camera'){
-s.innerHTML=`<div class="mini"><video id="vid" autoplay playsinline></video><div style="display:flex;gap:6px;margin-top:8px"><button class="btn" onclick="startCam()">Start</button><button class="btn" onclick="takePhoto()">📸 Capture</button><button class="btn done" onclick="stopCam()">Stop</button></div><div id="photoResult"></div></div>`;
-window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:true});document.getElementById('vid').srcObject=stream;showToast('Camera ON ✅')}catch{showToast('Allow camera')}};
+s.innerHTML=`<div class="mini"><video id="vid" autoplay playsinline></video><div style="display:flex;gap:5px;margin-top:6px"><button class="btn" onclick="startCam()">Start</button><button class="btn" onclick="takePhoto()">Capture</button><button class="btn done" onclick="stopCam()">Stop</button></div><div id="photoResult"></div></div>`;
+window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:true});document.getElementById('vid').srcObject=stream;}catch{showToast('Allow camera')}};
 window.stopCam=()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
-window.takePhoto=()=>{let v=document.getElementById('vid');let c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);let img=c.toDataURL('image/png');document.getElementById('photoResult').innerHTML=`<img src="${img}" style="width:100%;border-radius:10px;margin-top:6px">`;showToast('Captured ✅')}
+window.takePhoto=()=>{let v=document.getElementById('vid');let c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);document.getElementById('photoResult').innerHTML=`<img src="${c.toDataURL()}" style="width:100%;border-radius:10px;margin-top:6px">`;}
 }else{
-s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:36px">${app.e}</div><div style="text-align:center;font-weight:500;margin-top:6px">${app.n}</div><div style="text-align:center;font-size:10px;color:var(--sub)">${app.d}</div><div style="margin-top:10px;font-size:11px;line-height:1.5"><b>Description:</b><br>${app.desc||app.d+' - Community uploaded app'}<br><br><b>Details:</b><br>✅ Category: ${app.c}<br>✅ Likes: ${app.likes||0}<br>✅ Installs: ${app.installs||0}<br>✅ Votes: ${app.votes||0}<br>✅ Free • No GB<br>${app.custom?'<br>🌍 Uploaded by Community Member from Igbo Ukwu':'<br>🏢 Built by ZO Labs'}</div></div><div class="mini"><div style="font-size:11px;font-weight:500">💬 Comments</div><div id="commentList" style="margin-top:6px"><div style="font-size:10px;color:var(--sub)">No comments yet. Be first!</div></div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="commentIn" placeholder="Add comment..." style="flex:1"><button class="btn" onclick="addComment()">Post</button></div></div>`;
+s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:32px">${app.e}</div><div style="text-align:center;font-weight:600;margin-top:4px">${app.n}</div><div style="text-align:center;font-size:9px;color:var(--sub)">${app.d}</div><div style="margin-top:10px;font-size:10px;line-height:1.5"><b>${app.desc}</b><br><br>✅ FREE for users to install<br>✅ Developer paid $9 / ₦12,000 to upload this app<br>✅ Like Google Play Console ($25)<br>✅ Community upload system<br>${app.custom?'<br>🌍 Uploaded by Paid Developer':'<br>🏢 Official ZO Labs'}</div></div><div class="mini"><div style="font-size:10px;font-weight:600">💬 Comments</div><div id="commentList" style="margin-top:6px"><div style="font-size:9px;color:var(--sub)">Be first!</div></div><div style="display:flex;gap:5px;margin-top:6px"><input class="note-input" id="commentIn" placeholder="Add review..." style="flex:1"><button class="btn" onclick="addComment()">Post</button></div></div>`;
 window.addComment=()=>{
 let inp=document.getElementById('commentIn');if(!inp.value)return;
 let list=document.getElementById('commentList');
-if(list.textContent.includes('No comments')) list.innerHTML='';
-let div=document.createElement('div');div.className='todo-item';div.innerHTML=`<div style="flex:1"><b style="font-size:10px">You</b><div style="font-size:10px">${inp.value}</div></div>`;
-list.appendChild(div);inp.value='';showToast('Comment posted ✅');
+if(list.textContent.includes('Be first')) list.innerHTML='';
+let div=document.createElement('div');div.className='todo-item';div.innerHTML=`<div style="flex:1"><b>You</b><div>${inp.value}</div></div>`;
+list.appendChild(div);inp.value='';showToast('Posted ✅');
 }
 }
 }
 function likeApp(){
 if(!cur)return;
-if(localStorage.getItem('liked_'+cur.n)){showToast('You don like am before! ❤️');return}
+if(localStorage.getItem('liked_'+cur.n)){showToast('Already liked!');return}
 cur.likes=(cur.likes||0)+1;
 localStorage.setItem('liked_'+cur.n,'1');
-if(cur.custom){
-let idx=customApps.findIndex(a=>a.n===cur.n);
-if(idx>=0){customApps[idx].likes=cur.likes;localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));}
-}
+if(cur.custom){let idx=customApps.findIndex(a=>a.n===cur.n);if(idx>=0){customApps[idx].likes=cur.likes;localStorage.setItem('zo_v10_apps',JSON.stringify(customApps));}}
 document.getElementById('likeCount').textContent=cur.likes;
-showToast('Liked! ❤️ '+cur.likes);
 render(allApps);
-}
-function voteWish(){
-if(!cur||cur.c!=='wish')return;
-cur.votes=(cur.votes||0)+1;
-if(cur.custom){
-let idx=customApps.findIndex(a=>a.n===cur.n);
-if(idx>=0){customApps[idx].votes=cur.votes;localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));}
-}
-document.getElementById('voteBtn').textContent=`🗳️ Vote (${cur.votes})`;
-showToast('Voted! Wish go come true! 🗳️');
+showToast('Liked ❤️');
 }
 function submitApp(){
+if(!isPaid){showToast('Pay $9 / ₦12,000 first! 💳');openPayModal();return}
 let name=document.getElementById('upName').value.trim();
-let dev=document.getElementById('upDev').value.trim()||'Anonymous';
+let dev=document.getElementById('upDev').value.trim()||'Paid Developer';
 let emoji=document.getElementById('upEmoji').value.trim()||'📱';
 let color=document.getElementById('upColor').value.trim()||'#ff9800';
 let cat=document.getElementById('upCat').value;
-let desc=document.getElementById('upDesc').value.trim()||'Community app uploaded';
+let desc=document.getElementById('upDesc').value.trim()||'Wish version - Paid upload $9';
 if(!name){showToast('Put app name!');return}
-let newApp={n:name,d:dev,c:cat,col:color,e:emoji,r:'4.8',badge:cat==='wish'?'WISH':cat==='community'?'COMMUNITY':'NEW',likes:1,votes:cat==='wish'?1:0,installs:0,desc:desc,custom:true,t:'custom'};
+let badge=cat==='wish'?'WISH':'COMMUNITY';
+let newApp={n:name,d:dev+' 💳 Paid',c:cat,col:color,e:emoji,r:'4.8',badge:badge,verified:false,likes:1,votes:0,installs:0,price:0,desc:desc+' (Paid Developer - $9 / ₦12k)',custom:true,t:'custom'};
 customApps.unshift(newApp);
-localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));
+localStorage.setItem('zo_v10_apps',JSON.stringify(customApps));
 allApps=[...defaultApps, ...customApps];
 closeUpload();
-document.getElementById('upName').value='';document.getElementById('upDev').value='';document.getElementById('upEmoji').value='';document.getElementById('upDesc').value='';
+['upName','upDev','upEmoji','upDesc'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
+document.getElementById('upColor').value='#ff9800';
 render(allApps);
-showToast(name+' Uploaded! 🚀 People go see am!');
+showToast(name+' Uploaded! You paid $9 so upload FREE now! Unlimited! 🚀');
 filterCat(cat);
 }
 function filterCat(cat){
 document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-let nav=document.getElementById('nav');
-let target=[...nav.children].find(d=>d.dataset.f===cat);
+let target=[...document.getElementById('nav').children].find(d=>d.dataset.f===cat);
 if(target) target.classList.add('active');
 if(cat==='all') render(allApps);
 else render(allApps.filter(a=>a.c===cat));
 }
-function filterAll(){filterCat('all')}
 document.getElementById('installBtn').onclick=function(){
 if(!cur)return;
 let key='zo_'+cur.n;
@@ -239,17 +292,14 @@ setTimeout(()=>{
 this.textContent='Open';this.className='btn done';
 localStorage.setItem(key,'1');
 cur.installs=(cur.installs||0)+1;
-if(cur.custom){
-let idx=customApps.findIndex(a=>a.n===cur.n);
-if(idx>=0){customApps[idx].installs=cur.installs;localStorage.setItem('zo_custom_apps',JSON.stringify(customApps));}
-}
+if(cur.custom){let idx=customApps.findIndex(a=>a.n===cur.n);if(idx>=0){customApps[idx].installs=cur.installs;localStorage.setItem('zo_v10_apps',JSON.stringify(customApps));}}
 updateStats();
-showToast(cur.n+' Installed ✅');
-},700);
+showToast(cur.n+' Installed FREE ✅');
+},600);
 };
 document.getElementById('search').addEventListener('input',e=>{
 let q=e.target.value.toLowerCase();
-render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)||(a.desc&&a.desc.toLowerCase().includes(q))));
+render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)));
 });
 document.getElementById('nav').querySelectorAll('div').forEach(t=>{
 t.addEventListener('click',()=>{
@@ -263,8 +313,8 @@ document.getElementById('darkBtn').onclick=()=>{
 document.body.classList.toggle('dark');
 document.getElementById('darkBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙';
 };
-if(navigator.getBattery){navigator.getBattery().then(b=>{let el=document.getElementById('batt');if(el) el.textContent=Math.round(b.level*100)+'%'})}
 render(allApps);
+setTimeout(()=>{if(!isPaid) showToast('💳 Want to upload? Pay $9 / ₦12,000 once! Tap Pay $9 button! 👑');},1500);
 </script>
 </body>
 </html>
