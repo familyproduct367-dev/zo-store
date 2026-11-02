@@ -3,29 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V1 - Global Software Distribution Platform - Discover. Download. Build. Connect.</title>
-<meta name="description" content="ZO STORE - Global marketplace for apps, games, software. Discover, Download, Build, Connect. By ZO Technology">
+<title>ZO STORE V2+V3 - Professional Homepage + Categories - ZO Technology - Matthew Ayodele 7040958697</title>
 <meta name="theme-color" content="#01875f">
 <style>
-:root{--green:#01875f;--green-light:#00c853;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Google Sans',Roboto,Arial,sans-serif}
+:root{--green:#01875f;--green-light:#00c853;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800;--purple:#7c4dff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Google Sans,Roboto,Arial}
 body{background:var(--bg);color:var(--text)}
 .hdr{padding:12px 16px;background:var(--card);display:flex;gap:12px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
 .logo{display:flex;gap:8px;align-items:center}
 .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px}
 .logo-text b{display:block;font-size:16px;line-height:1}
-.logo-text span{font-size:10px;color:var(--sub);letter-spacing:.5px}
+.logo-text span{font-size:10px;color:var(--sub)}
 .search{flex:1;max-width:600px;background:var(--bg);border-radius:24px;padding:10px 16px;display:flex;gap:10px;align-items:center;border:1px solid var(--border)}
 .search input{border:none;background:transparent;outline:none;width:100%;font-size:14px}
-.search input::placeholder{color:var(--sub)}
+.announce{background:linear-gradient(90deg,var(--orange),gold);color:#000;padding:8px 16px;font-size:11px;text-align:center;font-weight:600;white-space:nowrap;overflow:auto}
+.carousel{margin:16px;border-radius:16px;overflow:hidden;position:relative;height:180px;background:var(--card);border:1px solid var(--border)}
+.carousel-track{display:flex;transition:transform .4s;height:100%}
+.slide{min-width:100%;height:100%;padding:20px;display:flex;justify-content:space-between;align-items:center;color:#fff}
+.slide h2{font-size:20px;line-height:1.2}
+.slide p{font-size:12px;margin-top:6px;opacity:.9}
+.slide-icon{font-size:50px}
+.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}
+.dot.active{background:#fff}
 .nav{padding:8px 16px;display:flex;gap:8px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:65px;z-index:29}
-.nav div{padding:8px 14px;font-size:13px;color:var(--sub);border-radius:20px;cursor:pointer;white-space:nowrap;border:1px solid var(--border);transition:.2s}
+.nav div{padding:8px 14px;font-size:13px;color:var(--sub);border-radius:20px;cursor:pointer;white-space:nowrap;border:1px solid var(--border)}
 .nav div.active{background:var(--green);color:#fff;border-color:var(--green);font-weight:600}
-.hero{margin:16px;background:linear-gradient(135deg,var(--green),#00bcd4,#7c4dff);border-radius:16px;padding:20px;color:#fff}
-.hero h1{font-size:22px;line-height:1.2}
-.hero p{font-size:13px;margin-top:6px;opacity:.9;line-height:1.4}
-.hero-stats{display:flex;gap:16px;margin-top:12px;font-size:11px}
-.grid{padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.section{padding:16px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.section-head h3{font-size:16px}
+.section-head span{font-size:12px;color:var(--green);cursor:pointer;font-weight:600}
+.grid{padding:0 16px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
 .card{background:var(--card);border-radius:16px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:.2s;position:relative}
 .card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);transform:translateY(-2px)}
 .card-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;position:relative}
@@ -33,10 +41,21 @@ body{background:var(--bg);color:var(--text)}
 .card h3{font-size:13px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-dev{font-size:11px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-meta{display:flex;gap:8px;margin-top:6px;font-size:11px;color:var(--sub)}
-.card-desc{font-size:11px;color:var(--sub);margin-top:6px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .badge{position:absolute;top:8px;right:8px;background:var(--green);color:#fff;font-size:8px;padding:3px 6px;border-radius:10px;font-weight:700}
-.badge.external{background:#ff9800}
-.badge.verified-badge{background:var(--blue)}
+.badge.external{background:var(--orange)}.badge.verified-badge{background:var(--blue)}
+.cat-page{display:none;padding:16px}
+.cat-page.active{display:block}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:12px}
+.cat-card{background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--border);cursor:pointer;text-align:center;transition:.2s}
+.cat-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.cat-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;margin:0 auto}
+.cat-card h4{font-size:13px;margin-top:10px}
+.cat-card p{font-size:10px;color:var(--sub);margin-top:4px}
+.cat-card span{font-size:11px;color:var(--green);font-weight:600;display:block;margin-top:6px}
+.subcat{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;justify-content:center}
+.subcat div{font-size:8px;background:var(--bg);border:1px solid var(--border);padding:3px 6px;border-radius:10px}
+.breadcrumb{font-size:11px;color:var(--sub);margin-bottom:12px}
+.breadcrumb b{color:var(--green);cursor:pointer}
 .detail{position:fixed;inset:0;background:var(--card);z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
 .detail-top{padding:12px 16px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card)}
@@ -44,287 +63,173 @@ body{background:var(--bg);color:var(--text)}
 .dicon{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;position:relative}
 .dinfo h2{font-size:20px}
 .dinfo .dev{font-size:12px;color:var(--green);margin-top:4px}
-.dinfo .meta{font-size:11px;color:var(--sub);margin-top:6px;display:flex;gap:8px}
+.dinfo .meta{font-size:11px;color:var(--sub);margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
 .actions{padding:0 16px 16px;display:flex;gap:8px;flex-wrap:wrap}
 .btn{background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:20px;font-weight:600;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px}
 .btn.secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.btn.external{background:#ff9800;color:#000}
+.btn.external{background:var(--orange);color:#000}
 .screens{padding:16px}
-.screens h3{font-size:14px;margin-bottom:8px}
-.scr-grid{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
-.scr{width:120px;height:200px;background:var(--bg);border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0}
-.info-box{background:var(--bg);border-radius:12px;padding:12px;margin-top:12px}
-.info-box h4{font-size:12px;margin-bottom:6px}
-.info-box p{font-size:11px;color:var(--sub);line-height:1.5}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#202124;color:#fff;padding:10px 16px;border-radius:20px;font-size:12px;display:none;z-index:400}
 .footer{padding:20px 16px;text-align:center;font-size:10px;color:var(--sub);border-top:1px solid var(--border);margin-top:20px;line-height:1.6}
 </style>
 </head>
 <body>
 <div class="hdr">
-<div class="logo"><div class="logo-icon">Z</div><div class="logo-text"><b>ZO STORE</b><span>Discover. Download. Build. Connect.</span></div></div>
-<div class="search"><span>🔍</span><input id="search" placeholder="Search apps, games, software..."></div>
+<div class="logo"><div class="logo-icon">Z</div><div class="logo-text"><b>ZO STORE</b><span>V2+V3 Professional • Discover. Download. Build. Connect.</span></div></div>
+<div class="search"><span>🔍</span><input id="search" placeholder="Search apps, games, software... V2+V3 search upgraded"></div>
 </div>
+<div class="announce">🎉 V2+V3 LIVE — Professional Homepage + Categories — Trending • Editor's Choice • Subcategories — CEO Matthew Ayodele Opay 7040958697 — GitHub Pages FREE</div>
+
+<div class="carousel" id="carousel">
+<div class="carousel-track" id="track">
+<div class="slide" style="background:linear-gradient(135deg,#01875f,#00bcd4)"><div><h2>🚀 ZO STORE V2 — Professional Homepage</h2><p>Discover apps like Play Store — Trending, Editor's Choice, Featured</p><div style="font-size:10px;margin-top:8px">Phase 1: Foundation V1-V20 • Mission: Make software accessible</div></div><div class="slide-icon">📱</div></div>
+<div class="slide" style="background:linear-gradient(135deg,#ff9800,gold)"><div style="color:#000"><h2>📂 V3 — App Categories + Subcategories</h2><p>Games, Business, Productivity, Tools — With subcategories & counts</p><div style="font-size:10px;margin-top:8px">Games: Action, Puzzle, Local • Business: POS, Market, Finance</div></div><div class="slide-icon">📂</div></div>
+<div class="slide" style="background:linear-gradient(135deg,#7c4dff,#e91e63)"><div><h2>🔗 2 Publishing Methods — APK + External Link</h2><p>Upload APK or submit Play Store/App Store/Website links — Verified!</p><div style="font-size:10px;margin-top:8px">Security checked • External links verified • CEO Opay 7040958697</div></div><div class="slide-icon">🔗</div></div>
+</div>
+<div class="dots" id="dots"><div class="dot active" onclick="goSlide(0)"></div><div class="dot" onclick="goSlide(1)"></div><div class="dot" onclick="goSlide(2)"></div></div>
+</div>
+
 <div class="nav" id="nav">
-<div class="active" data-f="all" onclick="filterCat('all',this)">All Apps</div>
-<div data-f="games" onclick="filterCat('games',this)">🎮 Games</div>
-<div data-f="productivity" onclick="filterCat('productivity',this)">⚡ Productivity</div>
-<div data-f="business" onclick="filterCat('business',this)">💼 Business</div>
-<div data-f="tools" onclick="filterCat('tools',this)">🛠️ Tools</div>
-<div data-f="external" onclick="filterCat('external',this)">🔗 External Links</div>
+<div class="active" data-f="all" onclick="showHome()">🏠 Home</div>
+<div data-f="categories" onclick="showCategories()">📂 Categories V3</div>
+<div data-f="games" onclick="filterCat('games')">🎮 Games</div>
+<div data-f="business" onclick="filterCat('business')">💼 Business</div>
+<div data-f="productivity" onclick="filterCat('productivity')">⚡ Productivity</div>
+<div data-f="trending" onclick="filterCat('trending')">🔥 Trending</div>
+<div data-f="editors" onclick="filterCat('editors')">⭐ Editor's Choice</div>
 </div>
-<div class="hero">
-<h1>ZO STORE V1 — Global Software Distribution Platform</h1>
-<p>By ZO Technology • Make software accessible to everyone, everywhere. We support APK uploads + External links (Play Store, App Store, Websites).</p>
-<div class="hero-stats"><span>📦 10 Apps Live</span><span>🌍 Global Ready</span><span>🔒 Security Checked</span><span>💳 CEO: Matthew Ayodele Opay 7040958697</span></div>
-</div>
+
+<div id="homePage">
+<div class="section"><div class="section-head"><h3>🔥 Trending Now — V2 Professional</h3><span onclick="filterCat('trending')">See all →</span></div></div>
+<div class="grid" id="trendingGrid"></div>
+<div class="section"><div class="section-head"><h3>⭐ Editor's Choice — V2</h3><span onclick="filterCat('editors')">See all →</span></div></div>
+<div class="grid" id="editorsGrid"></div>
+<div class="section"><div class="section-head"><h3>📦 All Apps — V1 Foundation</h3><span onclick="filterCat('all')">See all →</span></div></div>
 <div class="grid" id="grid"></div>
+</div>
+
+<div class="cat-page" id="catPage">
+<div class="breadcrumb"><b onclick="showHome()">Home</b> / Categories V3 — App Categories with Subcategories</div>
+<h3 style="font-size:18px">📂 App Categories — V3 — Professional Categories System</h3>
+<p style="font-size:11px;color:var(--sub);margin-top:6px">V3 Goal: Professional category browsing with counts and subcategories. Tap category to view apps inside.</p>
+<div class="cat-grid" id="catGrid"></div>
+<div style="margin-top:20px"><div class="section-head"><h3 id="catTitle">Select a category</h3></div><div class="grid" id="catAppsGrid"></div></div>
+</div>
+
 <div class="footer">
-<b>ZO TECHNOLOGY — BUILDING THE FUTURE, ONE VERSION AT A TIME. 🚀</b><br>
-V1 Goal: Real person can visit ZO STORE, discover app, access download.<br>
-Next: V2 Professional homepage • V3 Categories • V4 Search • V5 App details<br>
-Company: ZO Technology • Product: ZO STORE • Mission: Make software accessible to everyone, everywhere.<br>
-CEO: Matthew Ayodele • Opay 7040958697 • GitHub Pages Hosting (Free) • No Netlify Needed<br>
-Revenue Plan: Publishing fees, Subscriptions, Featured apps, Advertising, Enterprise plans<br>
-Security: We verify external links, scan APKs, check content before approval.
+<b>ZO STORE V2+V3 — ZO TECHNOLOGY — BUILDING THE FUTURE, ONE VERSION AT A TIME. 🚀</b><br>
+V2: Professional homepage ✅ • V3: App categories ✅ • Next: V4 Search system, V5 App details<br>
+Company: ZO Technology • Product: ZO STORE • Tagline: Discover. Download. Build. Connect.<br>
+CEO: Matthew Ayodele • Opay 7040958697 • GitHub Pages FREE Hosting • Phase 1 Foundation V1-V20<br>
+Publishing: Method A APK Upload + Method B External Links (Play Store, App Store, Websites) • Security: Verified links, scanned APKs
 </div>
 
 <div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer;font-size:14px">← Back to Store</div><div id="dTitle" style="font-weight:600;margin-left:12px"></div></div>
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:12px"></div></div>
 <div class="dhead"><div class="dicon" id="dIcon"></div><div class="dinfo"><h2 id="dName"></h2><div class="dev" id="dDev"></div><div class="meta" id="dMeta"></div></div></div>
 <div class="actions"><button class="btn" id="installBtn">⬇️ Download APK</button><button class="btn external" id="externalBtn" style="display:none">🔗 Visit Official Link</button><button class="btn secondary" id="shareBtn">↗️ Share</button></div>
-<div class="screens"><h3>Screenshots & Previews</h3><div class="scr-grid" id="scrGrid"></div><div class="info-box"><h4>📋 About this app</h4><p id="dDesc"></p></div><div class="info-box"><h4>🔒 Security & Verification</h4><p id="dSecurity"></p></div><div class="info-box"><h4>📦 Publishing Method</h4><p id="dPublish"></p></div><div class="info-box"><h4>👨‍💻 Developer Information</h4><p id="dDeveloper"></p></div></div>
+<div class="screens" id="screen"></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
-// ZO STORE V1 - FOUNDATION - Global Software Distribution Platform - ZO Technology
-// PHASE 1: V1 Basic working marketplace - CEO Matthew Ayodele Opay 7040958697
-// Supports: APK uploads + External links (Play Store, App Store, Websites)
-
 const APPS=[
-{
-n:"ZO Calculator",
-dev:"ZO Labs • Verified Developer ✓",
-c:"tools",
-col:"#4285f4",
-e:"🧮",
-r:"4.9",
-badge:"VERIFIED",
-verified:true,
-type:"apk",
-apkUrl:"#",
-externalUrl:"",
-desc:"Professional calculator for business and education. Clean, fast, offline. Supports both APK upload and external link methods.",
-screenshots:["🧮","📊","⚡"],
-security:"✅ Security checked • No malware • Permissions: No internet required • Verified by ZO Technology",
-publish:"Method A: APK file uploaded directly to ZO STORE secure storage. File size: 2.4MB. Version: 1.0.0. Last updated: Nov 2026.",
-developerInfo:"Developer: ZO Labs • Email: labs@zostore.com • Business: ZO Technology • Location: Nigeria/Global • Joined: 2026 • 10 apps published • Verified badge: Yes • Business account",
-likes:3412,installs:2200
-},
-{
-n:"Market Hub",
-dev:"ZO Commerce • Verified ✓",
-c:"business",
-col:"#ff9800",
-e:"🛒",
-r:"4.8",
-badge:"VERIFIED",
-verified:true,
-type:"external",
-apkUrl:"",
-externalUrl:"https://play.google.com/store",
-desc:"Buy and sell for Anambra market and global commerce. This app demonstrates EXTERNAL LINK publishing method.",
-screenshots:["🛒","💰","📦"],
-security:"✅ External link verified • Destination: Google Play Store • Redirect warning shown • Link checked: Safe • No APK hosted by ZO STORE",
-publish:"Method B: External application link. Developer submitted official Play Store link. ZO STORE displays app info and button redirects to official download destination. We verify links.",
-developerInfo:"Developer: ZO Commerce • External link method • Business account • Verified • Revenue model: Marketplace commission + Featured placement",
-likes:2892,installs:1500
-},
-{
-n:"POS Business",
-dev:"ZO Business • Verified ✓",
-c:"business",
-col:"#4caf50",
-e:"💳",
-r:"5.0",
-badge:"VERIFIED",
-verified:true,
-type:"apk",
-apkUrl:"#",
-externalUrl:"",
-desc:"Point of Sale for small businesses. Collect payments to Opay 7040958697 Matthew Ayodele. Offline capable, receipt printing.",
-screenshots:["💳","🧾","💵"],
-security:"✅ Security checked • APK scanned • No malware • Permissions: Camera (for QR), Storage (for receipts)",
-publish:"Method A: APK upload • Version management: V1.0 supports version 1.0.0, future updates via V17 version management system",
-developerInfo:"Business: ZO Business • CEO: Matthew Ayodele • Opay: 7040958697 • Use case: Small businesses in Nigeria • Global expansion plan: V81-V100",
-likes:1543,installs:980
-},
-{
-n:"ZO AI Assistant",
-dev:"ZO Intelligence • Verified ✓",
-c:"productivity",
-col:"#7c4dff",
-e:"🤖",
-r:"5.0",
-badge:"VERIFIED",
-verified:true,
-type:"external",
-apkUrl:"",
-externalUrl:"https://muse.ai",
-desc:"AI assistant for marketplace. Future: V101-V120 AI marketplace ecosystem. Now: Discovery assistant prototype.",
-screenshots:["🤖","💬","🧠"],
-security:"✅ External link: Official website • Verified • Future AI security: V111 AI-powered security analysis, V112 AI scam detection",
-publish:"Method B: External link to web application • Part of Phase 6 AI roadmap V101-V120",
-developerInfo:"Developer: ZO Intelligence • Part of ZO AI Studio (V182 future) • AI roadmap: Recommendations, search, descriptions, assistant",
-likes:2456,installs:1200
-},
-{
-n:"Video Call Pro",
-dev:"ZO Connect • Verified ✓",
-c:"productivity",
-col:"#00bcd4",
-e:"📹",
-r:"4.9",
-badge:"VERIFIED",
-verified:true,
-type:"apk",
-apkUrl:"#",
-externalUrl:"",
-desc:"Video calling for teams and families. HD quality, low data usage.",
-screenshots:["📹","👥","🎙️"],
-security:"✅ Security checked • Permissions: Camera, Microphone • Encrypted calls • No data collection",
-publish:"Method A: APK • Future: V61-V80 Gaming ecosystem includes video for game streaming links V75",
-developerInfo:"Developer: ZO Connect • Part of future social ecosystem V141-V160 developer messaging",
-likes:1892,installs:890
-},
-{
-n:"Anambra Games",
-dev:"Game Studio NG • Pending Verification",
-c:"games",
-col:"#e91e63",
-e:"🎮",
-r:"4.7",
-badge:"COMMUNITY",
-verified:false,
-type:"apk",
-apkUrl:"#",
-externalUrl:"",
-desc:"Local games for Anambra and global audience. Part of Phase 4 Gaming Ecosystem V61-V80 roadmap.",
-screenshots:["🎮","🏆","🎯"],
-security:"⏳ Pending admin moderation • Will be scanned for malware before approval • V20 admin dashboard goal",
-publish:"Method A: APK upload • Gaming marketplace future: V61 Gaming marketplace, V62 Mobile game categories, V64 Game developer accounts",
-developerInfo:"Developer: Game Studio NG • Indie creator • Future: V64 Game developer accounts, V71 Gaming communities, V72 Leaderboards",
-likes:756,installs:600
-},
-{
-n:"Church App",
-dev:"Community Developer • Free Publishing",
-c:"productivity",
-col:"#795548",
-e:"⛪",
-r:"4.8",
-badge:"COMMUNITY",
-verified:false,
-type:"external",
-apkUrl:"",
-externalUrl:"https://example.com/church",
-desc:"Example of community app using external link method. Church can publish via website link without APK.",
-screenshots:["⛪","🙏","📖"],
-security:"✅ External link verification: Shows where users are redirected • Part of V11 external app links requirement",
-publish:"Method B: External link • Example: Developer submits official website download link • ZO STORE verifies and shows destination",
-developerInfo:"Community publishing • Future paid publishing: Starter ₦3k/month, Professional ₦10k/month, Business ₦25k/month (proposed, not confirmed)",
-likes:445,installs:300
-},
-{
-n:"QR Maker Pro",
-dev:"ZO Tools • Verified ✓",
-c:"tools",
-col:"#000",
-e:"🔳",
-r:"4.9",
-badge:"VERIFIED",
-verified:true,
-type:"apk",
-apkUrl:"#",
-externalUrl:"",
-desc:"Generate QR codes for your business, Opay account 7040958697, products. Offline, fast.",
-screenshots:["🔳","📱","🖨️"],
-security:"✅ Security checked • No internet needed • Privacy focused",
-publish:"Method A: APK • Part of future developer tools marketplace V126",
-developerInfo:"Developer: ZO Tools • Tools category • Future: V126 Developer tools marketplace, V127 Productivity software",
-likes:756,installs:600
-},
-{
-n:"Igbo Translate",
-dev:"ZO Labs • Verified ✓",
-c:"tools",
-col:"#3f51b5",
-e:"🌍",
-r:"5.0",
-badge:"VERIFIED",
-verified:true,
-type:"apk",
-apkUrl:"#",
-externalUrl:"",
-desc:"Translate Igbo to English offline. Supports multiple languages roadmap V57.",
-screenshots:["🌍","🔤","💬"],
-security:"✅ Security checked • Future AI translation V115",
-publish:"Method A: APK • Future: V57 Multiple languages, V115 AI translation",
-developerInfo:"Developer: ZO Labs • Language focus • Global marketplace V81-V100 will include country-specific marketplaces V85",
-likes:1634,installs:800
-},
-{
-n:"Web App Example",
-dev:"Business Example • External Link",
-c:"productivity",
-col:"#607d8b",
-e:"🌐",
-r:"4.6",
-badge:"EXTERNAL",
-verified:false,
-type:"external",
-apkUrl:"",
-externalUrl:"https://example.com",
-desc:"Example of Web Application marketplace (Future V124). Shows external link publishing for web apps.",
-screenshots:["🌐","💻","🔗"],
-security:"✅ External link • Web app • Verified redirect • Part of V124 Web applications marketplace",
-publish:"Method B: External link • Future phases: V121 Windows, V122 Mac, V123 Linux, V124 Web apps, V125 Browser extensions",
-developerInfo:"Example business • Revenue sources: Publishing fees, Subscriptions, Featured apps, Advertising, Enterprise plans, SaaS subscriptions",
-likes:300,installs:150
-}
+{n:"ZO Calculator",dev:"ZO Labs • Verified ✓",c:"tools",sub:"productivity-tools",col:"#4285f4",e:"🧮",r:"4.9",badge:"VERIFIED",verified:true,type:"apk",trending:true,editors:true,desc:"Professional calculator — V1 foundation app — Clean, fast, offline.",likes:3412,installs:2200},
+{n:"Market Hub",dev:"ZO Commerce • Verified ✓",c:"business",sub:"business-market",col:"#ff9800",e:"🛒",r:"4.8",badge:"VERIFIED",verified:true,type:"external",externalUrl:"https://play.google.com/store",trending:true,editors:false,desc:"Buy & sell Anambra market — External link method — V3 subcategory: Market",likes:2892,installs:1500},
+{n:"POS Business",dev:"ZO Business • Verified ✓",c:"business",sub:"business-pos",col:"#4caf50",e:"💳",r:"5.0",badge:"VERIFIED",verified:true,type:"apk",trending:true,editors:true,desc:"POS for small businesses — Collect to Opay 7040958697 — Business subcategory: POS",likes:1543,installs:980},
+{n:"ZO AI Assistant",dev:"ZO Intelligence • Verified ✓",c:"productivity",sub:"productivity-ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"VERIFIED",verified:true,type:"external",externalUrl:"https://muse.ai",trending:false,editors:true,desc:"AI assistant — V101-V120 AI roadmap — Productivity subcategory: AI",likes:2456,installs:1200},
+{n:"Video Call Pro",dev:"ZO Connect • Verified ✓",c:"productivity",sub:"productivity-communication",col:"#00bcd4",e:"📹",r:"4.9",badge:"VERIFIED",verified:true,type:"apk",trending:false,editors:false,desc:"Video call HD — Productivity subcategory: Communication",likes:1892,installs:890},
+{n:"Anambra Games",dev:"Game Studio NG",c:"games",sub:"games-local",col:"#e91e63",e:"🎮",r:"4.7",badge:"COMMUNITY",verified:false,type:"apk",trending:true,editors:false,desc:"Local games — V61-V80 Gaming ecosystem — Games subcategory: Local",likes:756,installs:600},
+{n:"Church App",dev:"Community Developer",c:"productivity",sub:"productivity-community",col:"#795548",e:"⛪",r:"4.8",badge:"COMMUNITY",verified:false,type:"external",externalUrl:"https://example.com/church",trending:false,editors:false,desc:"Community church app — External link method — Community example",likes:445,installs:300},
+{n:"QR Maker Pro",dev:"ZO Tools • Verified ✓",c:"tools",sub:"tools-business",col:"#000",e:"🔳",r:"4.9",badge:"VERIFIED",verified:true,type:"apk",trending:false,editors:true,desc:"QR generator for Opay 7040958697 — Tools subcategory: Business Tools",likes:756,installs:600},
+{n:"Igbo Translate",dev:"ZO Labs • Verified ✓",c:"tools",sub:"tools-language",col:"#3f51b5",e:"🌍",r:"5.0",badge:"VERIFIED",verified:true,type:"apk",trending:false,editors:false,desc:"Igbo <-> English — V57 Multiple languages, V115 AI translation",likes:1634,installs:800},
+{n:"Puzzle Game",dev:"Game Studio NG",c:"games",sub:"games-puzzle",col:"#9c27b0",e:"🧩",r:"4.6",badge:"COMMUNITY",verified:false,type:"apk",trending:true,editors:false,desc:"Puzzle games — Games subcategory: Puzzle — Part of V62 Mobile game categories",likes:500,installs:400},
+{n:"Action Game",dev:"Game Studio Pro",c:"games",sub:"games-action",col:"#f44336",e:"⚔️",r:"4.8",badge:"COMMUNITY",verified:false,type:"external",externalUrl:"https://play.google.com/store",trending:true,editors:true,desc:"Action games — Games subcategory: Action — External link method for games",likes:1200,installs:900},
+{n:"Finance Tracker",dev:"Business Tools • Verified ✓",c:"business",sub:"business-finance",col:"#009688",e:"📊",r:"4.9",badge:"VERIFIED",verified:true,type:"apk",trending:false,editors:true,desc:"Finance tracker — Business subcategory: Finance — Business software future V129",likes:980,installs:700}
 ];
 
-let currentFilter='all', cur=null;
-const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
+const CATEGORIES=[
+{id:"games",name:"Games",emoji:"🎮",col:"#e91e63",desc:"Gaming marketplace — Future V61-V80",count:0,subs:[{id:"games-action",name:"Action"},{id:"games-puzzle",name:"Puzzle"},{id:"games-local",name:"Local / Anambra"}]},
+{id:"business",name:"Business",emoji:"💼",col:"#ff9800",desc:"Business software — Future V129",count:0,subs:[{id:"business-pos",name:"POS"},{id:"business-market",name:"Market"},{id:"business-finance",name:"Finance"}]},
+{id:"productivity",name:"Productivity",emoji:"⚡",col:"#7c4dff",desc:"Productivity & AI — Future V101-V120 AI",count:0,subs:[{id:"productivity-ai",name:"AI Tools"},{id:"productivity-communication",name:"Communication"},{id:"productivity-community",name:"Community"}]},
+{id:"tools",name:"Tools",emoji:"🛠️",col:"#4285f4",desc:"Developer & Business Tools — Future V126",count:0,subs:[{id:"tools-business",name:"Business Tools"},{id:"tools-language",name:"Language"},{id:"productivity-tools",name:"Productivity Tools"}]},
+{id:"external",name:"External Links",emoji:"🔗",col:"#607d8b",desc:"Play Store, App Store, Websites — Method B",count:0,subs:[{id:"external-play",name:"Play Store"},{id:"external-web",name:"Websites"}]}
+];
+
+let currentFilter='all', cur=null, slideIdx=0;
+const grid=document.getElementById('grid'), trendingGrid=document.getElementById('trendingGrid'), editorsGrid=document.getElementById('editorsGrid'), catGrid=document.getElementById('catGrid'), catAppsGrid=document.getElementById('catAppsGrid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
 
 function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',3000)}
 function closeDetail(){detail.classList.remove('active')}
+function showHome(){document.getElementById('homePage').style.display='block';document.getElementById('catPage').classList.remove('active');filterCat('all');window.scrollTo(0,0)}
+function showCategories(){document.getElementById('homePage').style.display='none';document.getElementById('catPage').classList.add('active');renderCategories();window.scrollTo(0,0)}
 
-function filterCat(cat, el){
-currentFilter=cat;
-document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-if(el) el.classList.add('active');
-else{
-let target=document.querySelector(`.nav div[data-f="${cat}"]`);
-if(target) target.classList.add('active');
-}
-if(cat==='all') render(APPS);
-else render(APPS.filter(a=>a.c===cat || (cat==='external' && a.type==='external')));
+function renderCategories(){
+CATEGORIES.forEach(c=>{c.count=APPS.filter(a=>a.c===c.id || (c.id==='external' && a.type==='external')).length});
+catGrid.innerHTML='';
+CATEGORIES.forEach(cat=>{
+let el=document.createElement('div');
+el.className='cat-card';
+el.innerHTML=`<div class="cat-icon" style="background:${cat.col}">${cat.emoji}</div><h4>${cat.name}</h4><p>${cat.desc}</p><span>${cat.count} apps</span><div class="subcat">${cat.subs.map(s=>`<div>${s.name}</div>`).join('')}</div>`;
+el.onclick=()=>openCategory(cat.id);
+catGrid.appendChild(el);
+});
+document.getElementById('catTitle').textContent='Select a category to view apps';
+catAppsGrid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--sub);font-size:12px">Tap a category above to see apps inside that category and its subcategories</div>';
 }
 
-function render(list){
-grid.innerHTML='';
-list.forEach((a,i)=>{
+function openCategory(catId){
+let cat=CATEGORIES.find(c=>c.id===catId);
+if(!cat) return;
+document.getElementById('catTitle').textContent=cat.emoji+' '+cat.name+' — '+cat.count+' apps';
+let filtered=APPS.filter(a=>a.c===catId || (catId==='external' && a.type==='external'));
+catAppsGrid.innerHTML='';
+if(filtered.length===0){
+catAppsGrid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:20px;font-size:12px">No apps in ${cat.name} yet — Upload coming in V13</div>`;
+return;
+}
+filtered.forEach((a)=>{
 let idx=APPS.indexOf(a);
 let el=document.createElement('div');
 el.className='card';
 let badgeClass=a.verified?'verified-badge':a.type==='external'?'external':'';
-el.innerHTML=`<div class="badge ${badgeClass}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified">✓</div>':''}</div><h3>${a.n}</h3><div class="card-dev">${a.dev}</div><div class="card-meta"><span>★ ${a.r}</span><span>⬇️ ${a.installs}</span><span>❤️ ${a.likes}</span></div><div class="card-desc">${a.desc}</div>`;
+el.innerHTML=`<div class="badge ${badgeClass}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified">✓</div>':''}</div><h3>${a.n}</h3><div class="card-dev">${a.dev} • ${a.sub}</div><div class="card-meta"><span>★ ${a.r}</span><span>⬇️ ${a.installs}</span></div>`;
 el.onclick=()=>openApp(idx);
-grid.appendChild(el);
+catAppsGrid.appendChild(el);
 });
 }
 
+function filterCat(cat){
+currentFilter=cat;
+document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
+let target=document.querySelector(`.nav div[data-f="${cat}"]`);
+if(target) target.classList.add('active');
+document.getElementById('homePage').style.display='block';
+document.getElementById('catPage').classList.remove('active');
+if(cat==='all'){renderAll();return;}
+if(cat==='trending'){render(trendingGrid, APPS.filter(a=>a.trending)); document.getElementById('grid').innerHTML=''; document.getElementById('editorsGrid').innerHTML=''; window.scrollTo(0,200); return;}
+if(cat==='editors'){render(editorsGrid, APPS.filter(a=>a.editors)); document.getElementById('grid').innerHTML=''; document.getElementById('trendingGrid').innerHTML=''; return;}
+if(cat==='categories'){showCategories();return;}
+render(grid, APPS.filter(a=>a.c===cat || (cat==='external' && a.type==='external')));
+if(cat!=='all') window.scrollTo(0,350);
+}
+
+function renderAll(){
+render(trendingGrid, APPS.filter(a=>a.trending).slice(0,4));
+render(editorsGrid, APPS.filter(a=>a.editors).slice(0,4));
+render(grid, APPS);
+}
+function render(container, list){
+container.innerHTML='';
+list.forEach((a)=>{
+let idx=APPS.indexOf(a);
+let el=document.createElement('div');
+el.className='card';
+let badgeClass=a.verified?'verified-badge':a.type==='external'?'external':'';
+el.innerHTML=`<div class="badge ${badgeClass}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified">✓</div>':''}</div><h3>${a.n}</h3><div class="card-dev">${a.dev}</div><div class="card-meta"><span>★ ${a.r}</span><span>⬇️ ${a.installs}</span><span>${a.sub}</span></div>`;
+el.onclick=()=>openApp(idx);
+container.appendChild(el);
+});
+}
 function openApp(i){
 cur=APPS[i];
 detail.classList.add('active');
@@ -333,69 +238,55 @@ document.getElementById('dIcon').innerHTML=`${cur.e}${cur.verified?'<div class="
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
 document.getElementById('dDev').textContent=cur.dev;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes • ${cur.verified?'Verified ✓':'Community'} • ${cur.type==='apk'?'APK Upload':'External Link'}`;
-document.getElementById('dDesc').textContent=cur.desc;
-document.getElementById('dSecurity').textContent=cur.security;
-document.getElementById('dPublish').textContent=cur.publish;
-document.getElementById('dDeveloper').textContent=cur.developerInfo;
+document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes • Category: ${cur.c} / ${cur.sub} • ${cur.type==='apk'?'APK Upload Method A':'External Link Method B'} • ${cur.verified?'Verified ✓':'Community'}`;
 let apkBtn=document.getElementById('installBtn');
 let extBtn=document.getElementById('externalBtn');
-if(cur.type==='apk'){
-apkBtn.style.display='flex';
-apkBtn.textContent='⬇️ Download APK';
-extBtn.style.display='none';
-}else{
-apkBtn.style.display='none';
-extBtn.style.display='flex';
-extBtn.textContent='🔗 Visit Official Link — '+new URL(cur.externalUrl).hostname;
-}
-let scrGrid=document.getElementById('scrGrid');
-scrGrid.innerHTML='';
-cur.screenshots.forEach(s=>{
-let div=document.createElement('div');
-div.className='scr';
-div.textContent=s;
-scrGrid.appendChild(div);
-});
+if(cur.type==='apk'){apkBtn.style.display='flex';extBtn.style.display='none';}
+else{apkBtn.style.display='none';extBtn.style.display='flex';extBtn.textContent='🔗 Visit Official — '+cur.externalUrl.replace('https://','').split('/')[0];}
+document.getElementById('screen').innerHTML=`<div style="padding:16px"><div style="display:flex;gap:8px;overflow:auto"><div style="width:100px;height:180px;background:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;border:1px solid var(--border)">${cur.e}</div><div style="width:100px;height:180px;background:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;border:1px solid var(--border)">📱</div><div style="width:100px;height:180px;background:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;border:1px solid var(--border)">⭐</div></div><div style="background:var(--bg);border-radius:12px;padding:12px;margin-top:12px"><h4 style="font-size:12px">📋 About this app — V3 Category: ${cur.c} / ${cur.sub}</h4><p style="font-size:11px;color:var(--sub);margin-top:6px;line-height:1.5">${cur.desc}<br><br>Publishing Method: ${cur.type==='apk'?'Method A: APK uploaded to ZO STORE secure storage — We scan for malware, check permissions':'Method B: External link — Developer submitted official link — We verify destination and show warning'}<br><br>Category System V3: Main category ${cur.c} with subcategory ${cur.sub} — Part of professional category browsing.</p></div><div style="background:var(--bg);border-radius:12px;padding:12px;margin-top:12px"><h4 style="font-size:12px">🔒 Security & Verification — V20 Admin goal</h4><p style="font-size:11px;color:var(--sub);margin-top:6px">Verified by ZO Technology • ${cur.verified?'Verified Developer Badge ✓':'Community — Pending verification'} • Security checks as per roadmap V111-V120 AI security future • External links: We show where users are redirected as you instructed.</p></div></div>`;
 }
 
 document.getElementById('installBtn').onclick=function(){
 if(!cur) return;
-showToast('⬇️ Downloading '+cur.n+' APK... (V1 Demo: File storage will use secure cloud storage in backend phase)');
-setTimeout(()=>showToast('✅ '+cur.n+' APK Downloaded! (In real backend, file would be from Supabase/PostgreSQL storage)'),1500);
+showToast('⬇️ Downloading '+cur.n+' APK... (V2+V3: APK storage will be Supabase/PostgreSQL in backend phase)');
 };
-
 document.getElementById('externalBtn').onclick=function(){
 if(!cur) return;
-if(confirm('🔗 External Link Verification:\n\nYou are being redirected to:\n'+cur.externalUrl+'\n\nThis is an external download destination.\nZO STORE verified this link is safe.\n\nContinue to official site?')){
-showToast('🔗 Redirecting to '+cur.externalUrl+'... (V1 shows verification as per your requirement)');
+if(confirm('🔗 External Link Verification — V3\n\nRedirect to:\n'+cur.externalUrl+'\n\nVerified: Safe\nContinue?')){
+showToast('🔗 Redirecting to '+cur.externalUrl);
 setTimeout(()=>window.open(cur.externalUrl,'_blank'),800);
 }
 };
-
 document.getElementById('shareBtn').onclick=function(){
 if(!cur) return;
-if(navigator.share){
-navigator.share({title:cur.n,text:cur.desc,url:location.href});
-}else{
 navigator.clipboard.writeText(location.href);
-showToast('🔗 Link copied! Share '+cur.n);
-}
+showToast('🔗 Link copied for '+cur.n);
 };
-
 document.getElementById('search').addEventListener('input',function(e){
 let q=e.target.value.toLowerCase().trim();
-if(!q){filterCat(currentFilter);return;}
-let filtered=APPS.filter(a=>a.n.toLowerCase().includes(q)||a.dev.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q)||a.c.toLowerCase().includes(q));
-render(filtered);
+if(!q){renderAll();return;}
+let filtered=APPS.filter(a=>a.n.toLowerCase().includes(q)||a.dev.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q)||a.c.toLowerCase().includes(q)||a.sub.toLowerCase().includes(q));
+render(grid, filtered);
+document.getElementById('trendingGrid').innerHTML='';
+document.getElementById('editorsGrid').innerHTML='';
 if(filtered.length===0){
-grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px 10px;font-size:13px;color:var(--sub)"><div style="font-size:40px">🔍</div><b>No results for "${q}"</b><br>Try Games, Business, Productivity, Tools<br><br>Future V41 Advanced search, V42 Smart recommendations, V101 AI search</div>`;
+grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px 10px;font-size:13px;color:var(--sub)"><div style="font-size:40px">🔍</div><b>No results for "${q}"</b><br>Try Games, Business, POS, Market, AI, Tools<br><br>Future: V4 Search system, V41 Advanced search, V101 AI search</div>`;
 }
 });
 
-// INIT V1
-render(APPS);
-setTimeout(()=>{showToast('🚀 ZO STORE V1 Live! '+APPS.length+' apps • APK + External Links • Foundation Phase V1-V20 • CEO Matthew Ayodele Opay 7040958697 • GitHub Pages Free Hosting');},1000);
+function goSlide(n){
+slideIdx=n;
+document.getElementById('track').style.transform='translateX(-'+(n*100)+'%)';
+document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+}
+setInterval(()=>{
+slideIdx=(slideIdx+1)%3;
+goSlide(slideIdx);
+},4000);
+
+// INIT V2+V3
+renderAll();
+setTimeout(()=>{showToast('🚀 ZO STORE V2+V3 LIVE! Professional homepage + Categories with subcategories • CEO Matthew Ayodele Opay 7040958697 • GitHub Pages FREE');},1000);
 </script>
 </body>
 </html>
