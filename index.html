@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V6-V16 - Full Foundation</title>
+<title>ZO STORE</title>
 <meta name="theme-color" content="#01875f">
 <style>
 :root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800}
@@ -59,104 +59,101 @@ body{background:var(--bg);color:var(--text);padding-bottom:60px}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search... V4 improved"></div><div class="icon" onclick="openUser()">👤</div><div class="icon" onclick="openDev()">💼</div></div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search apps..."></div><div class="icon" onclick="openUser()">👤</div><div class="icon" onclick="openDev()">💼</div></div>
 <div class="nav" id="nav">
 <div class="active" data-f="all" onclick="filterCat('all',this)">All</div>
 <div data-f="games" onclick="filterCat('games',this)">Games</div>
 <div data-f="business" onclick="filterCat('business',this)">Business</div>
 <div data-f="productivity" onclick="filterCat('productivity',this)">Productivity</div>
 <div data-f="tools" onclick="filterCat('tools',this)">Tools</div>
-<div data-f="downloads" onclick="showDownloads()">⬇️ Downloads</div>
+<div data-f="downloads" onclick="showDownloads()">Downloads</div>
 </div>
 <div class="grid" id="grid"></div>
 
-<!-- User Modal V8-V10 -->
 <div class="modal" id="userModal">
 <div class="box">
-<h3 style="font-size:14px">👤 User Account — V8-V10</h3>
-<div id="userLoggedOut">
-<input class="input" id="uEmail" placeholder="Email">
+<h3 style="font-size:14px">User Account</h3>
+<div id="userLoggedOut" style="margin-top:10px">
+<input class="input" id="uEmail" placeholder="Email address">
 <input class="input" id="uPass" type="password" placeholder="Password">
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="userRegister()">Register V8</button><button class="btn sec" style="flex:1" onclick="userLogin()">Login V9</button></div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="userRegister()">Create Account</button><button class="btn sec" style="flex:1" onclick="userLogin()">Sign In</button></div>
 </div>
 <div id="userLoggedIn" style="display:none">
 <div style="text-align:center;padding:10px"><div style="width:60px;height:60px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;margin:0 auto">👤</div><b id="uName" style="display:block;margin-top:8px;font-size:13px"></b><span id="uEmailShow" style="font-size:10px;color:var(--sub)"></span></div>
 <div class="dash-grid"><div class="dash-card"><b id="uDownloads">0</b><span>Downloads</span></div><div class="dash-card"><b id="uSaved">0</b><span>Saved</span></div></div>
-<div class="info" style="margin-top:10px"><h4>V10 Profile</h4><p>Email: <span id="uEmailInfo"></span><br>Joined: <span id="uJoined"></span><br>Opay future: 7040958697</p></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="userLogout()">Logout</button>
+<div class="info" style="margin-top:10px"><h4>Profile</h4><p>Email: <span id="uEmailInfo"></span><br>Joined: <span id="uJoined"></span></p></div>
+<button class="btn sec" style="width:100%;margin-top:8px" onclick="userLogout()">Sign Out</button>
 </div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeUser()">Close</button>
+<button class="btn sec" style="width:100%;margin-top:10px" onclick="closeUser()">Close</button>
 </div>
 </div>
 
-<!-- Dev Modal V11-V16 -->
 <div class="modal" id="devModal">
 <div class="box">
-<h3 style="font-size:14px">💼 Developer — V11-V16</h3>
-<div id="devLoggedOut">
-<input class="input" id="dEmail" placeholder="Developer Email">
-<input class="input" id="dNameInput" placeholder="Business Name">
+<h3 style="font-size:14px">Developer Center</h3>
+<div id="devLoggedOut" style="margin-top:10px">
+<input class="input" id="dEmail" placeholder="Developer email">
+<input class="input" id="dNameInput" placeholder="Business name">
 <input class="input" id="dPass" type="password" placeholder="Password">
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="devRegister()">Register Dev V11</button><button class="btn sec" style="flex:1" onclick="devLogin()">Login</button></div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="devRegister()">Create Developer Account</button><button class="btn sec" style="flex:1" onclick="devLogin()">Sign In</button></div>
 </div>
 <div id="devLoggedIn" style="display:none">
-<div class="info"><h4>V12 Dashboard</h4><p>Dev: <span id="devNameShow"></span><br>Email: <span id="devEmailShow"></span><br>Opay: 7040958697 Matthew Ayodele for future paid</p>
+<div class="info"><h4>Dashboard</h4><p>Business: <span id="devNameShow"></span><br>Email: <span id="devEmailShow"></span></p>
 <div class="dash-grid"><div class="dash-card"><b id="devAppsCount">0</b><span>My Apps</span></div><div class="dash-card"><b id="devTotalInstalls">0</b><span>Installs</span></div></div></div>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="openUpload()">📤 Upload App V13</button><button class="btn sec" style="flex:1" onclick="showMyApps()">My Apps</button></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="devLogout()">Logout Dev</button>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="openUpload()">Upload App</button><button class="btn sec" style="flex:1" onclick="showMyApps()">My Apps</button></div>
+<button class="btn sec" style="width:100%;margin-top:8px" onclick="devLogout()">Sign Out</button>
 </div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeDev()">Close</button>
+<button class="btn sec" style="width:100%;margin-top:10px" onclick="closeDev()">Close</button>
 </div>
 </div>
 
-<!-- Upload Modal V13-V16 -->
 <div class="modal" id="uploadModal">
 <div class="box">
-<h3 style="font-size:14px">📤 Upload App — V13-V16</h3>
-<input class="input" id="upName" placeholder="App Name V16">
-<input class="input" id="upDesc" placeholder="Description V16 - What does app do?">
-<textarea class="input" id="upLongDesc" placeholder="Long description V16 - Full details, features..." rows="3"></textarea>
-<div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="upEmoji" placeholder="Emoji 📱" style="flex:1"><input class="input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
+<h3 style="font-size:14px">Upload App</h3>
+<input class="input" id="upName" placeholder="App name">
+<input class="input" id="upDesc" placeholder="Short description">
+<textarea class="input" id="upLongDesc" placeholder="Full description, features..." rows="3"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="upEmoji" placeholder="Icon emoji 📱" style="flex:1"><input class="input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
 <select class="input" id="upCat"><option value="tools">Tools</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="games">Games</option></select>
-<select class="input" id="upType" onchange="toggleUploadType()"><option value="apk">Method A: APK Upload V14</option><option value="external">Method B: External Link V15</option></select>
-<div id="apkSection"><div style="margin-top:8px"><b style="font-size:10px">V14 APK File Upload:</b><input type="file" id="apkFile" accept=".apk,.aab" style="font-size:10px;margin-top:4px"><div id="apkInfo" style="font-size:9px;color:var(--sub);margin-top:4px"></div></div></div>
-<div id="extSection" style="display:none"><input class="input" id="extUrl" placeholder="External URL V15 - Play Store / App Store / Website link"><div style="font-size:8px;color:var(--sub);margin-top:4px">We verify external links as per roadmap</div></div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitUpload()">🚀 Publish V13</button><button class="btn sec" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+<select class="input" id="upType" onchange="toggleUploadType()"><option value="apk">APK Upload</option><option value="external">External Link</option></select>
+<div id="apkSection"><div style="margin-top:8px"><b style="font-size:10px">APK File:</b><input type="file" id="apkFile" accept=".apk,.aab" style="font-size:10px;margin-top:4px"><div id="apkInfo" style="font-size:9px;color:var(--sub);margin-top:4px"></div></div></div>
+<div id="extSection" style="display:none"><input class="input" id="extUrl" placeholder="External URL - Play Store / App Store / Website"><div style="font-size:8px;color:var(--sub);margin-top:4px">We verify all external links</div></div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitUpload()">Publish App</button><button class="btn sec" style="flex:1" onclick="closeUpload()">Cancel</button></div>
 </div>
 </div>
 
 <div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px;font-size:12px"></div><div style="margin-left:auto;display:flex;gap:6px"><button class="btn small sec" onclick="saveApp()">💾 Save</button></div></div>
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px;font-size:12px"></div><div style="margin-left:auto;display:flex;gap:6px"><button class="btn small sec" onclick="saveApp()">Save</button></div></div>
 <div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:16px"></h2><div style="font-size:10px;color:var(--green)" id="dDev"></div><div style="font-size:9px;color:var(--sub);margin-top:4px" id="dMeta"></div></div></div>
-<div class="actions"><button class="btn" id="installBtn">⬇️ Download APK V7</button><button class="btn ext" id="externalBtn" style="display:none">🔗 Visit Official Link V15</button><button class="btn sec" onclick="shareApp()">Share</button></div>
+<div class="actions"><button class="btn" id="installBtn">Download</button><button class="btn ext" id="externalBtn" style="display:none">Visit Link</button><button class="btn sec" onclick="shareApp()">Share</button></div>
 <div class="tabs" id="tabs">
-<div class="active" data-t="about" onclick="switchTab('about',this)">About V16</div>
-<div data-t="screens" onclick="switchTab('screens',this)">Screens V6</div>
+<div class="active" data-t="about" onclick="switchTab('about',this)">About</div>
+<div data-t="screens" onclick="switchTab('screens',this)">Screenshots</div>
 <div data-t="versions" onclick="switchTab('versions',this)">Versions</div>
 <div data-t="privacy" onclick="switchTab('privacy',this)">Privacy</div>
-<div data-t="dev" onclick="switchTab('dev',this)">Developer V11</div>
+<div data-t="dev" onclick="switchTab('dev',this)">Developer</div>
 </div>
 <div class="tab-content" id="tabContent"></div>
 </div>
 
-<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="showDownloads()"><span>⬇️</span>Downloads V7</div><div onclick="openUpload()"><span>📤</span>Upload V13</div><div onclick="openUser()"><span>👤</span>Profile V10</div><div onclick="openDev()"><span>💼</span>Dev V12</div></div>
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="showDownloads()"><span>⬇️</span>Downloads</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openUser()"><span>👤</span>Profile</div><div onclick="openDev()"><span>💼</span>Developer</div></div>
 <div class="toast" id="toast"></div>
 <script>
 const DEFAULT_APPS=[
 {n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",sub:"calc",col:"#4285f4",e:"🧮",r:"4.9",badge:"APK",type:"apk",verified:true,ver:"2.1.0",size:"2.4MB",updated:"Nov 1",desc:"Calculator for business",longDesc:"Professional calculator with history, business mode, offline. Features: Basic, Scientific, Business calc, No ads, Offline.",screens:["🧮","📊","⚡","🔢"],perms:["No internet"],dev:"ZO Labs",email:"labs@zostore.com",likes:3412,installs:2200,url:"#"},
 {n:"Market Hub",d:"ZO Commerce • Verified",c:"business",sub:"market",col:"#ff9800",e:"🛒",r:"4.8",badge:"LINK",type:"link",verified:true,ver:"1.5.2",size:"External",updated:"Oct 28",desc:"Buy & sell Anambra market",longDesc:"Marketplace for Anambra and global. Buy, sell, chat, deliver. External link method redirects to Play Store.",screens:["🛒","💰","📦"],perms:["Internet"],dev:"ZO Commerce",email:"commerce@zostore.com",likes:2892,installs:1500,url:"https://play.google.com/store"},
 {n:"POS Business",d:"ZO Business • Verified",c:"business",sub:"pos",col:"#4caf50",e:"💳",r:"5.0",badge:"APK",type:"apk",verified:true,ver:"3.0.1",size:"8.2MB",updated:"Nov 2",desc:"POS for small business",longDesc:"POS system: Collect to Opay 7040958697 Matthew Ayodele. Receipts, QR, inventory, offline.",screens:["💳","🧾","💵","📱"],perms:["Camera","Storage"],dev:"ZO Business",email:"biz@zostore.com",likes:1543,installs:980,url:"#"},
-{n:"ZO AI",d:"ZO Intelligence • Verified",c:"productivity",sub:"ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"LINK",type:"link",verified:true,ver:"1.0.0",size:"Web",updated:"Nov 2026",desc:"AI assistant",longDesc:"AI assistant for ZO STORE. Future V101-V120 AI ecosystem.",screens:["🤖","💬","🧠"],perms:["Internet"],dev:"ZO Intelligence",email:"ai@zostore.com",likes:2456,installs:1200,url:"https://muse.ai"},
+{n:"ZO AI",d:"ZO Intelligence • Verified",c:"productivity",sub:"ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"LINK",type:"link",verified:true,ver:"1.0.0",size:"Web",updated:"Nov 2026",desc:"AI assistant",longDesc:"AI assistant for ZO STORE.",screens:["🤖","💬","🧠"],perms:["Internet"],dev:"ZO Intelligence",email:"ai@zostore.com",likes:2456,installs:1200,url:"https://muse.ai"},
 {n:"Video Call",d:"ZO Connect • Verified",c:"productivity",sub:"call",col:"#00bcd4",e:"📹",r:"4.9",badge:"APK",type:"apk",verified:true,ver:"2.0.3",size:"12MB",updated:"Oct 30",desc:"Video call HD",longDesc:"Video calling: HD, low data, group call, screen share.",screens:["📹","👥","🎙️"],perms:["Camera","Mic"],dev:"ZO Connect",email:"connect@zostore.com",likes:1892,installs:890,url:"#"},
-{n:"Anambra Games",d:"Game Studio",c:"games",sub:"local",col:"#e91e63",e:"🎮",r:"4.7",badge:"APK",type:"apk",verified:false,ver:"0.9.5",size:"45MB",updated:"Oct 25",desc:"Local games",longDesc:"Local games for Anambra culture, Igbo language.",screens:["🎮","🏆","🎯"],perms:["Storage"],dev:"Game Studio NG",email:"games@ng.com",likes:756,installs:600,url:"#"}
+{n:"Anambra Games",d:"Game Studio",c:"games",sub:"local",col:"#e91e63",e:"🎮",r:"4.7",badge:"APK",type:"apk",verified:false,ver:"0.9.5",size:"45MB",updated:"Oct 25",desc:"Local games",longDesc:"Local games for Anambra culture.",screens:["🎮","🏆","🎯"],perms:["Storage"],dev:"Game Studio NG",email:"games@ng.com",likes:756,installs:600,url:"#"}
 ];
 let customApps=[], downloads=[], savedApps=[], currentUser=null, currentDev=null, cur=null;
 try{
-customApps=JSON.parse(localStorage.getItem('zo_v16_custom')||'[]');
-downloads=JSON.parse(localStorage.getItem('zo_downloads_v7')||'[]');
-savedApps=JSON.parse(localStorage.getItem('zo_saved_v6')||'[]');
-currentUser=JSON.parse(localStorage.getItem('zo_user_v8')||'null');
-currentDev=JSON.parse(localStorage.getItem('zo_dev_v11')||'null');
+customApps=JSON.parse(localStorage.getItem('zo_clean_custom')||'[]');
+downloads=JSON.parse(localStorage.getItem('zo_downloads')||'[]');
+savedApps=JSON.parse(localStorage.getItem('zo_saved')||'[]');
+currentUser=JSON.parse(localStorage.getItem('zo_user')||'null');
+currentDev=JSON.parse(localStorage.getItem('zo_dev')||'null');
 }catch(e){}
 let allApps=[...DEFAULT_APPS,...customApps];
 const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
@@ -187,44 +184,44 @@ document.getElementById('dIcon').textContent=cur.e;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
 document.getElementById('dDev').textContent=cur.d+' • v'+cur.ver+' • '+cur.size;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes • ${cur.type} • ${cur.verified?'Verified':'Community'}`;
+document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes`;
 document.getElementById('installBtn').style.display=cur.type==='apk'?'block':'none';
 document.getElementById('externalBtn').style.display=cur.type==='link'?'block':'none';
-document.getElementById('installBtn').textContent='⬇️ Download APK v'+cur.ver+' V7';
-document.getElementById('externalBtn').textContent='🔗 Visit Link V15';
+document.getElementById('installBtn').textContent='Download';
+document.getElementById('externalBtn').textContent='Visit Link';
 switchTab('about');
 }
 function switchTab(t,el){
 if(el){document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
 else{document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));let target=document.querySelector(`.tabs div[data-t="${t}"]`);if(target) target.classList.add('active');}
 let c=document.getElementById('tabContent');
-if(t==='about') c.innerHTML=`<div class="info"><h4>V16 App Description & Info</h4><p><b>Short:</b> ${cur.desc}<br><br><b>Full:</b> ${cur.longDesc}<br><br><b>Version:</b> ${cur.ver}<br><b>Size:</b> ${cur.size}<br><b>Updated:</b> ${cur.updated}<br><b>Category:</b> ${cur.c}/${cur.sub}<br><b>Type:</b> ${cur.type} — ${cur.type==='apk'?'Method A APK V14':'Method B External Link V15'}<br><b>Installs:</b> ${cur.installs}<br><b>Rating:</b> ${cur.r}</p></div>`;
-else if(t==='screens') c.innerHTML=`<div class="info"><h4>V6 Screenshots & Previews</h4><div class="scr">${cur.screens.map(s=>`<div>${s}</div>`).join('')}</div><p style="margin-top:8px;font-size:10px;color:var(--sub)">V6: Swipe screenshots — App previews — Future V114 AI-generated previews</p></div>`;
-else if(t==='versions') c.innerHTML=`<div class="info"><h4>Version Management — V17 (preview)</h4><p><b>Current:</b> v${cur.ver} (${cur.updated})<br><b>History:</b><br>• v${cur.ver} — ${cur.updated} — Latest<br>• v${(parseFloat(cur.ver)-0.1).toFixed(1)} — Bug fixes<br>• v1.0.0 — Initial<br><br>Future: V31 Update notifications, V53 Update centre</p></div>`;
-else if(t==='privacy') c.innerHTML=`<div class="info"><h4>Privacy & Permissions</h4><p><b>Perms:</b> ${cur.perms.join(', ')}<br><b>Security:</b> Checked • No malware<br><b>External verification:</b> ${cur.type==='link'?cur.url:'N/A'}<br><br>Future: V164 Advanced malware detection, V111 AI security</p></div>`;
-else if(t==='dev') c.innerHTML=`<div class="info"><h4>V11 Developer Registration & V12 Dashboard Info</h4><p><b>Developer:</b> ${cur.dev}<br><b>Email:</b> ${cur.email}<br><b>Business:</b> ${cur.dev}<br><b>Verified:</b> ${cur.verified?'Yes ✓':'No — Pending'}<br><br><b>Opay for future paid:</b> 7040958697 Matthew Ayodele<br><b>Publishing:</b> Method ${cur.type==='apk'?'A APK V14':'B External V15'}<br><br>Future V21-V40: Paid accounts, subscriptions, wallet, analytics</p></div>`;
+if(t==='about') c.innerHTML=`<div class="info"><h4>About this app</h4><p><b>${cur.desc}</b><br><br>${cur.longDesc}<br><br><b>Version:</b> ${cur.ver}<br><b>Size:</b> ${cur.size}<br><b>Updated:</b> ${cur.updated}<br><b>Category:</b> ${cur.c}/${cur.sub}</p></div>`;
+else if(t==='screens') c.innerHTML=`<div class="info"><h4>Screenshots</h4><div class="scr">${cur.screens.map(s=>`<div>${s}</div>`).join('')}</div></div>`;
+else if(t==='versions') c.innerHTML=`<div class="info"><h4>Version History</h4><p><b>Current:</b> v${cur.ver} (${cur.updated})<br><br>• v${cur.ver} — Latest<br>• v${(parseFloat(cur.ver)-0.1).toFixed(1)} — Bug fixes<br>• v1.0.0 — Initial release</p></div>`;
+else if(t==='privacy') c.innerHTML=`<div class="info"><h4>Privacy & Security</h4><p><b>Permissions:</b> ${cur.perms.join(', ')}<br><b>Security:</b> Checked • No malware<br><b>Link:</b> ${cur.type==='link'?cur.url:'Hosted by ZO STORE'}</p></div>`;
+else if(t==='dev') c.innerHTML=`<div class="info"><h4>Developer</h4><p><b>${cur.dev}</b><br>Email: ${cur.email}<br>Verified: ${cur.verified?'Yes':'Pending'}<br><br>Type: ${cur.type==='apk'?'APK Upload':'External Link'}</p></div>`;
 }
 function openUser(){document.getElementById('userModal').classList.add('active');updateUserUI()}
 function closeUser(){document.getElementById('userModal').classList.remove('active')}
 function userRegister(){
 let email=document.getElementById('uEmail').value.trim();
 let pass=document.getElementById('uPass').value.trim();
-if(!email||!pass){showToast('Put email & pass');return;}
-currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString(),downloads:0,saved:0};
-localStorage.setItem('zo_user_v8',JSON.stringify(currentUser));
-showToast('✅ Registered V8 — Logged in V9');
+if(!email||!pass){showToast('Enter email & password');return;}
+currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString()};
+localStorage.setItem('zo_user',JSON.stringify(currentUser));
+showToast('Account created');
 updateUserUI();
 }
 function userLogin(){
 let email=document.getElementById('uEmail').value.trim();
 let pass=document.getElementById('uPass').value.trim();
-if(!email||!pass){showToast('Put email & pass');return;}
-currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString(),downloads:downloads.length,saved:savedApps.length};
-localStorage.setItem('zo_user_v8',JSON.stringify(currentUser));
-showToast('✅ Logged in V9');
+if(!email||!pass){showToast('Enter email & password');return;}
+currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString()};
+localStorage.setItem('zo_user',JSON.stringify(currentUser));
+showToast('Signed in');
 updateUserUI();
 }
-function userLogout(){currentUser=null;localStorage.removeItem('zo_user_v8');updateUserUI();showToast('Logged out');}
+function userLogout(){currentUser=null;localStorage.removeItem('zo_user');updateUserUI();showToast('Signed out');}
 function updateUserUI(){
 let out=document.getElementById('userLoggedOut');
 let inn=document.getElementById('userLoggedIn');
@@ -236,29 +233,29 @@ function devRegister(){
 let email=document.getElementById('dEmail').value.trim();
 let name=document.getElementById('dNameInput').value.trim();
 let pass=document.getElementById('dPass').value.trim();
-if(!email||!name||!pass){showToast('Fill all');return;}
-currentDev={email:email,name:name,joined:new Date().toLocaleDateString(),apps:0};
-localStorage.setItem('zo_dev_v11',JSON.stringify(currentDev));
-showToast('✅ Dev Registered V11 — Dashboard V12 Ready');
+if(!email||!name||!pass){showToast('Fill all fields');return;}
+currentDev={email:email,name:name,joined:new Date().toLocaleDateString()};
+localStorage.setItem('zo_dev',JSON.stringify(currentDev));
+showToast('Developer account created');
 updateDevUI();
 }
 function devLogin(){
 let email=document.getElementById('dEmail').value.trim();
-if(!email){showToast('Put email');return;}
+if(!email){showToast('Enter email');return;}
 let name=document.getElementById('dNameInput').value.trim()||'Developer';
-currentDev={email:email,name:name,joined:new Date().toLocaleDateString(),apps:customApps.length};
-localStorage.setItem('zo_dev_v11',JSON.stringify(currentDev));
-showToast('✅ Dev Logged in');
+currentDev={email:email,name:name,joined:new Date().toLocaleDateString()};
+localStorage.setItem('zo_dev',JSON.stringify(currentDev));
+showToast('Developer signed in');
 updateDevUI();
 }
-function devLogout(){currentDev=null;localStorage.removeItem('zo_dev_v11');updateDevUI();showToast('Dev logged out');}
+function devLogout(){currentDev=null;localStorage.removeItem('zo_dev');updateDevUI();showToast('Signed out');}
 function updateDevUI(){
 let out=document.getElementById('devLoggedOut');
 let inn=document.getElementById('devLoggedIn');
 if(currentDev){out.style.display='none';inn.style.display='block';document.getElementById('devNameShow').textContent=currentDev.name;document.getElementById('devEmailShow').textContent=currentDev.email;document.getElementById('devAppsCount').textContent=customApps.length;let total=0;allApps.forEach(a=>total+=a.installs);document.getElementById('devTotalInstalls').textContent=total;}else{out.style.display='block';inn.style.display='none';}
 }
 function openUpload(){
-if(!currentDev){showToast('Login as Developer first V11');openDev();return;}
+if(!currentDev){showToast('Sign in as developer first');openDev();return;}
 document.getElementById('uploadModal').classList.add('active');
 }
 function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
@@ -270,7 +267,7 @@ document.getElementById('extSection').style.display=type==='external'?'block':'n
 document.getElementById('apkFile').addEventListener('change',e=>{
 let file=e.target.files[0];
 if(!file) return;
-document.getElementById('apkInfo').textContent=`Selected: ${file.name} • ${(file.size/1024/1024).toFixed(2)}MB • V14 APK upload ready`;
+document.getElementById('apkInfo').textContent=`Selected: ${file.name} • ${(file.size/1024/1024).toFixed(2)}MB`;
 });
 function submitUpload(){
 let name=document.getElementById('upName').value.trim();
@@ -281,43 +278,41 @@ let color=document.getElementById('upColor').value.trim()||'#ff9800';
 let cat=document.getElementById('upCat').value;
 let type=document.getElementById('upType').value;
 let extUrl=document.getElementById('extUrl').value.trim();
-if(!name||!desc){showToast('Put name & short desc V16');return;}
-if(type==='external'&&!extUrl){showToast('Put external URL V15');return;}
-if(type==='apk'&&!document.getElementById('apkFile').files[0]){showToast('Select APK file V14 (demo: any file allowed)');}
-let newApp={n:name,d:(currentDev?currentDev.name:'Dev')+' • Community',c:cat,sub:cat,type:type==='apk'?'apk':'link',verified:false,ver:"1.0.0",size:type==='apk'?(document.getElementById('apkFile').files[0]?(document.getElementById('apkFile').files[0].size/1024/1024).toFixed(1)+'MB':'2MB'):'External',updated:"Just now",desc:desc,longDesc:longDesc,col:color,e:emoji,r:"4.5",badge:type==='apk'?'APK':'LINK',screens:[emoji,"📱","⭐"],perms:type==='apk'?["Storage"]:["Internet"],dev:currentDev?currentDev.name:'Community Dev',email:currentDev?currentDev.email:'dev@community.com',likes:1,installs:0,url:type==='external'?extUrl:'#',custom:true};
+if(!name||!desc){showToast('Enter app name & description');return;}
+if(type==='external'&&!extUrl){showToast('Enter external URL');return;}
+let newApp={n:name,d:(currentDev?currentDev.name:'Developer'),c:cat,sub:cat,type:type==='apk'?'apk':'link',verified:false,ver:"1.0.0",size:type==='apk'?(document.getElementById('apkFile').files[0]?(document.getElementById('apkFile').files[0].size/1024/1024).toFixed(1)+'MB':'2MB'):'External',updated:"Just now",desc:desc,longDesc:longDesc,col:color,e:emoji,r:"4.5",badge:type==='apk'?'APK':'LINK',screens:[emoji,"📱","⭐"],perms:type==='apk'?["Storage"]:["Internet"],dev:currentDev?currentDev.name:'Community Dev',email:currentDev?currentDev.email:'dev@community.com',likes:1,installs:0,url:type==='external'?extUrl:'#',custom:true};
 customApps.unshift(newApp);
 allApps=[...DEFAULT_APPS,...customApps];
-localStorage.setItem('zo_v16_custom',JSON.stringify(customApps));
+localStorage.setItem('zo_clean_custom',JSON.stringify(customApps));
 closeUpload();
 ['upName','upDesc','upLongDesc','upEmoji','extUrl'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
 document.getElementById('upColor').value='#ff9800';
 document.getElementById('apkFile').value='';
 document.getElementById('apkInfo').textContent='';
 render(allApps);
-showToast(name+' Published! V13-V16 — '+(type==='apk'?'APK V14':'External V15'));
+showToast(name+' published');
 }
 function showMyApps(){
 closeDev();
-if(customApps.length===0){showToast('No apps yet — Upload V13');return;}
+if(customApps.length===0){showToast('No apps yet');return;}
 render(customApps);
-showToast(customApps.length+' My Apps — V12 Dashboard');
 }
 function showDownloads(){
 let list=allApps.filter(a=>downloads.includes(a.n));
-if(list.length===0){render([]);grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--sub);font-size:11px"><div style="font-size:30px">⬇️</div>No downloads yet<br>Download history V55 future<br>Tap app → Download APK V7</div>`;return;}
+if(list.length===0){render([]);grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--sub);font-size:11px"><div style="font-size:30px">⬇️</div>No downloads yet<br>Tap app → Download</div>`;return;}
 render(list);
 }
 function saveApp(){
 if(!cur) return;
 if(savedApps.includes(cur.n)){showToast('Already saved');return;}
 savedApps.push(cur.n);
-localStorage.setItem('zo_saved_v6',JSON.stringify(savedApps));
-showToast('💾 Saved — V56 Saved applications');
+localStorage.setItem('zo_saved',JSON.stringify(savedApps));
+showToast('Saved');
 }
 function shareApp(){
 if(!cur) return;
 navigator.clipboard.writeText(location.href);
-showToast('🔗 Link copied');
+showToast('Link copied');
 }
 document.getElementById('search').addEventListener('input',e=>{
 let q=e.target.value.toLowerCase().trim();
@@ -326,21 +321,17 @@ render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.c.toLowerCase().includ
 });
 document.getElementById('installBtn').onclick=()=>{
 if(!cur) return;
-if(!currentUser){showToast('Register/Login first V8-V9 to download');openUser();return;}
+if(!currentUser){showToast('Sign in first to download');openUser();return;}
 downloads.push(cur.n);
-localStorage.setItem('zo_downloads_v7',JSON.stringify(downloads));
-showToast('⬇️ Downloading '+cur.n+' APK v'+cur.ver+' V7 — Added to history V55');
+localStorage.setItem('zo_downloads',JSON.stringify(downloads));
+showToast('Downloading '+cur.n);
 };
 document.getElementById('externalBtn').onclick=()=>{
 if(!cur) return;
-if(confirm('🔗 V15 External Link Verification:\n\nGo to:\n'+cur.url+'\n\nVerified: Safe\nContinue?')){
-if(currentUser){downloads.push(cur.n);localStorage.setItem('zo_downloads_v7',JSON.stringify(downloads));}
-window.open(cur.url,'_blank');
-showToast('🔗 Redirecting to official link V15');
-}
+if(confirm('Go to:\n'+cur.url+'?')){if(currentUser){downloads.push(cur.n);localStorage.setItem('zo_downloads',JSON.stringify(downloads));}window.open(cur.url,'_blank');showToast('Redirecting...');}
 };
 render(allApps);
-setTimeout(()=>showToast('🚀 V6-V16 LIVE! Screenshots V6, Downloads V7, User V8-V10, Dev V11-V12, Upload V13-V16 — Ready for V17!'),1000);
+setTimeout(()=>showToast('ZO STORE — Clean professional version — No version labels'),1000);
 </script>
 </body>
 </html>
