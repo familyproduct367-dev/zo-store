@@ -3,236 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V21-V40</title>
+<title>ZO STORE Phase 3</title>
 <meta name="theme-color" content="#01875f">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f8f9fa;padding-bottom:70px}
-.hdr{padding:12px;background:#fff;display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:10;border-bottom:1px solid #eee}
-.logo{width:32px;height:32px;background:#01875f;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
-.search{flex:1;background:#f1f3f4;border-radius:20px;padding:8px 12px;display:flex;gap:8px}
-.search input{border:none;background:transparent;outline:none;width:100%;font-size:13px}
-.icon{width:36px;height:36px;background:#f1f3f4;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
-.nav{padding:10px;display:flex;gap:8px;overflow:auto;background:#fff;border-bottom:1px solid #eee}
-.nav div{padding:8px 14px;border:1px solid #ddd;border-radius:20px;cursor:pointer;white-space:nowrap;font-size:12px;background:#fff}
-.nav div.active{background:#01875f;color:#fff;border-color:#01875f}
-.grid{padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.card{background:#fff;border-radius:12px;padding:10px;border:1px solid #eee;cursor:pointer}
+:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#eee;--blue:#1a73e8;--orange:#ff9800;--red:#ea4335}
+body{background:var(--bg);color:var(--text);padding-bottom:75px;transition:.3s}
+body.dark{--bg:#121212;--card:#1e1e1e;--text:#fff;--sub:#aaa;--border:#333;background:var(--bg);color:var(--text)}
+.hdr{padding:12px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:20;border-bottom:1px solid var(--border)}
+.logo{width:34px;height:34px;background:var(--green);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.search{flex:1;background:var(--bg);border-radius:22px;padding:8px 14px;display:flex;gap:8px;border:1px solid var(--border)}
+.search input{border:none;background:transparent;outline:none;width:100%;font-size:13px;color:var(--text)}
+.icon{width:36px;height:36px;background:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;position:relative}
+.dot{position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--red);border-radius:50%}
+.nav{padding:10px;display:flex;gap:8px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border)}
+.nav div{padding:8px 14px;border:1px solid var(--border);border-radius:20px;cursor:pointer;white-space:nowrap;font-size:11px;background:var(--card);color:var(--text)}
+.nav div.active{background:var(--green);color:#fff;border-color:var(--green)}
+.hero{margin:12px;padding:14px;background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:14px;display:flex;justify-content:space-between;align-items:center}
+.hero b{font-size:14px;display:block}
+.hero span{font-size:10px;opacity:.9}
+.section{padding:12px 12px 0;font-size:13px;font-weight:700;display:flex;justify-content:space-between}
+.grid{padding:10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.card{background:var(--card);border-radius:14px;padding:10px;border:1px solid var(--border);cursor:pointer;position:relative}
 .card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;margin-bottom:6px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;padding:15px}
+.badge{font-size:7px;padding:3px 6px;border-radius:8px;color:#fff;font-weight:700;position:absolute;top:8px;right:8px}
+.badge.trend{background:var(--red)}.badge.top{background:var(--blue)}.badge.editor{background:var(--orange)}.badge.wish{background:#e91e63}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;padding:14px}
 .modal.show{display:flex}
-.box{background:#fff;border-radius:14px;padding:18px;width:100%;max-width:420px;max-height:90vh;overflow:auto}
-.input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:10px;font-size:13px;outline:none}
-.btn{width:100%;padding:12px;border:none;border-radius:25px;background:#01875f;color:#fff;font-weight:700;cursor:pointer;margin-top:10px;font-size:13px}
-.btn.sec{background:#f1f3f4;color:#333;border:1px solid #ddd}
-.btn.gold{background:#ff9800;color:#000}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:10px 0}
-.bnav div{text-align:center;font-size:10px;color:#666;cursor:pointer}
-.bnav div.active{color:#01875f}
+.box{background:var(--card);color:var(--text);border-radius:16px;padding:18px;width:100%;max-width:440px;max-height:92vh;overflow:auto}
+.input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);margin-top:10px;font-size:13px;outline:none;background:var(--card);color:var(--text)}
+.btn{width:100%;padding:12px;border:none;border-radius:25px;background:var(--green);color:#fff;font-weight:700;cursor:pointer;margin-top:10px;font-size:13px}
+.btn.sec{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.btn.gold{background:var(--orange);color:#000}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0;z-index:30}
+.bnav div{text-align:center;font-size:9px;color:var(--sub);cursor:pointer}
+.bnav div.active{color:var(--green)}
 .bnav span{font-size:20px;display:block}
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 20px;border-radius:25px;font-size:12px;display:none;z-index:200}
-.plan{border:2px solid #eee;border-radius:12px;padding:12px;margin-top:10px;cursor:pointer;text-align:center}
-.plan.active{border-color:#01875f;background:#e8f5e9}
-.wallet{background:linear-gradient(135deg,#01875f,#1a73e8);color:#fff;border-radius:14px;padding:14px}
-.detail{position:fixed;inset:0;background:#f8f9fa;z-index:90;display:none;overflow:auto}
+.detail{position:fixed;inset:0;background:var(--bg);z-index:90;display:none;overflow:auto}
 .detail.show{display:block}
+.filter-row{display:flex;gap:8px;margin-top:10px;overflow:auto}
+.filter-row select{padding:8px 10px;border-radius:20px;border:1px solid var(--border);font-size:11px;background:var(--card);color:var(--text)}
+.bundle{border:2px dashed var(--green);border-radius:14px;padding:12px;margin-top:10px;text-align:center}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="searchInput" placeholder="Search..." oninput="searchApps()"></div><div class="icon" onclick="showModal('notifModal')">🔔</div><div class="icon" onclick="showModal('userModal')">👤</div><div class="icon" onclick="showModal('devModal')">💼</div></div>
-<div class="nav"><div class="active" onclick="filterCat('all',this)">All</div><div onclick="filterCat('games',this)">Games</div><div onclick="filterCat('business',this)">Business</div><div onclick="filterCat('productivity',this)">Productivity</div><div onclick="filterCat('tools',this)">Tools</div><div onclick="showMyApps()">My Apps</div></div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="searchInput" placeholder="Search apps, games, collections..." oninput="searchApps()"></div><div class="icon" onclick="showModal('notifModal')">🔔<div class="dot" id="notifDot" style="display:none"></div></div><div class="icon" onclick="showModal('wishlistModal')">❤️</div><div class="icon" onclick="toggleDark()">🌙</div><div class="icon" onclick="showModal('userModal')">👤</div></div>
+
+<div class="nav">
+<div class="active" onclick="filterCat('all',this)">All</div>
+<div onclick="filterCat('trending',this)">🔥 Trending</div>
+<div onclick="filterCat('top',this)">🏆 Top Charts</div>
+<div onclick="filterCat('editor',this)">⭐ Editor's Choice</div>
+<div onclick="filterCat('games',this)">🎮 Games</div>
+<div onclick="filterCat('business',this)">💼 Business</div>
+<div onclick="filterCat('productivity',this)">⚡ Productivity</div>
+<div onclick="filterCat('tools',this)">🛠️ Tools</div>
+<div onclick="filterCat('collections',this)">📦 Collections</div>
+<div onclick="showRecentlyViewed()">👁️ Recent</div>
+</div>
+
+<div class="hero"><div><b id="heroTitle">Welcome to ZO Store</b><span id="heroSub">Trending apps • Daily rewards • Collections</span></div><div style="text-align:right"><button class="btn" style="width:auto;padding:6px 12px;font-size:10px;background:#fff;color:#000" onclick="claimDaily()">🎁 Daily Reward</button><div style="font-size:9px;margin-top:4px" id="streakTxt">Streak: 0 days</div></div></div>
+
+<div class="section"><span>🔥 Trending Now</span><span style="font-size:10px;color:var(--green);cursor:pointer" onclick="filterCat('trending')">See All</span></div>
+<div class="grid" id="trendingGrid"></div>
+
+<div class="section"><span>🏆 Top Charts</span><span style="font-size:10px;color:var(--green);cursor:pointer" onclick="filterCat('top')">See All</span></div>
+<div class="grid" id="topGrid"></div>
+
+<div class="section"><span>⭐ Editor's Choice Collections</span><span style="font-size:10px;color:var(--green);cursor:pointer" onclick="showModal('collectionsModal')">View Collections</span></div>
+<div class="grid" id="editorGrid"></div>
+
+<div class="section"><span>📱 All Apps</span><div style="font-size:10px;color:var(--sub)"><span onclick="showModal('filterModal')" style="cursor:pointer">⚙️ Filters</span> • <span onclick="showModal('compareModal')" style="cursor:pointer">⚖️ Compare</span></div></div>
 <div class="grid" id="grid"></div>
 
-<div class="modal" id="userModal"><div class="box"><h3>👤 User Account</h3><input class="input" id="uEmail" placeholder="Email"><input class="input" id="uPass" type="password" placeholder="Password"><button class="btn" onclick="loginUser()">Sign In / Create Account</button><p id="userStatus" style="font-size:11px;margin-top:10px;color:#666"></p><button class="btn sec" onclick="hideModal('userModal')">Close</button></div></div>
+<div class="modal" id="userModal"><div class="box"><h3>User Account</h3><input class="input" id="uEmail" placeholder="Email"><input class="input" id="uPass" type="password" placeholder="Password"><button class="btn" onclick="loginUser()">Sign In / Create Account</button><div id="userAchievements" style="margin-top:12px;font-size:11px;background:var(--bg);padding:10px;border-radius:10px"><b>Achievements</b><div id="achieveList">Sign in to see badges</div></div><div style="margin-top:10px;font-size:11px"><b>Referral System</b><div>Your code: <b id="refCode">ZO-MATT-001</b> <button onclick="shareReferral()" style="padding:4px 8px;border-radius:10px;border:1px solid var(--border);cursor:pointer">Share</button><br>Invites: <b id="refCount">0</b> • Earnings: <b id="refEarn">₦0</b></div></div><button class="btn sec" onclick="hideModal('userModal')">Close</button></div></div>
 
-<div class="modal" id="devModal"><div class="box"><h3>💼 Developer Center V21-V40</h3>
-<div id="devOut"><input class="input" id="dEmail" placeholder="Email"><input class="input" id="dName" placeholder="Business name"><select class="input" id="dAccType"><option value="individual">Individual</option><option value="business">Business Account V35</option></select><input class="input" id="dPass" type="password" placeholder="Password"><button class="btn" onclick="createDev()">Create Developer Account V21</button><button class="btn sec" onclick="loginDev()">Sign In</button></div>
-<div id="devIn" style="display:none"><div class="wallet"><b id="devNameTxt"></b><div id="devPlanTxt" style="font-size:11px;margin-top:4px"></div><div style="margin-top:10px;display:flex;gap:10px"><div><b id="walletTxt">₦0</b><div style="font-size:9px">Wallet V27</div></div><div><b id="earnTxt">₦0</b><div style="font-size:9px">Earnings V28</div></div><div><b id="appsCount">0</b><div style="font-size:9px">Apps V36</div></div></div></div>
-<div style="margin-top:12px"><b>Subscription Plans V23:</b>
-<div class="plan" onclick="choosePlan('starter',3000)"><b>Starter — ₦3,000/mo</b><br><span style="font-size:11px">3 apps • Free/Premium V24</span></div>
-<div class="plan" onclick="choosePlan('professional',10000)"><b>Professional — ₦10,000/mo</b><br><span style="font-size:11px">10 apps • Verified badge V34</span></div>
-<div class="plan" onclick="choosePlan('business',25000)"><b>Business — ₦25,000/mo</b><br><span style="font-size:11px">Unlimited • Business account</span></div>
+<div class="modal" id="devModal"><div class="box"><h3>Developer Center</h3>
+<div id="devOut"><input class="input" id="dEmail" placeholder="Email"><input class="input" id="dName" placeholder="Business name"><select class="input" id="dAccType"><option value="individual">Individual</option><option value="business">Business Account</option></select><input class="input" id="dPass" type="password" placeholder="Password"><button class="btn" onclick="createDev()">Create Developer Account</button><button class="btn sec" onclick="loginDev()">Sign In</button></div>
+<div id="devIn" style="display:none"><div style="background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:14px;padding:14px"><b id="devNameTxt"></b><div id="devPlanTxt" style="font-size:11px;margin-top:4px"></div><div style="margin-top:10px;display:flex;gap:10px"><div><b id="walletTxt">₦0</b><div style="font-size:9px">Wallet</div></div><div><b id="earnTxt">₦0</b><div style="font-size:9px">Earnings</div></div><div><b id="appsCount">0</b><div style="font-size:9px">Apps</div></div></div></div>
+<div style="margin-top:12px"><b>Subscription Plans</b>
+<div style="border:2px solid var(--border);border-radius:12px;padding:12px;margin-top:8px;cursor:pointer;text-align:center" onclick="choosePlan('starter',3000)"><b>Starter — ₦3,000/mo</b><div style="font-size:11px">3 apps</div></div>
+<div style="border:2px solid var(--border);border-radius:12px;padding:12px;margin-top:8px;cursor:pointer;text-align:center" onclick="choosePlan('professional',10000)"><b>Professional — ₦10,000/mo</b><div style="font-size:11px">10 apps • Verified badge</div></div>
+<div style="border:2px solid var(--border);border-radius:12px;padding:12px;margin-top:8px;cursor:pointer;text-align:center" onclick="choosePlan('business',25000)"><b>Business — ₦25,000/mo</b><div style="font-size:11px">Unlimited</div></div>
 </div>
-<button class="btn" onclick="showModal('uploadModal')">📤 Upload App V22</button>
-<button class="btn sec" onclick="showMyApps()">📦 Manage Apps V36</button>
-<button class="btn sec" onclick="showModal('walletModal')">💳 Wallet & Analytics V27-V30</button>
-<button class="btn sec" onclick="showModal('supportModal')">🆘 Support V39</button>
+<button class="btn" onclick="showModal('uploadModal')">Upload App</button>
+<button class="btn sec" onclick="showMyApps()">Manage My Apps</button>
+<button class="btn sec" onclick="showModal('walletModal')">Wallet & Analytics</button>
 <button class="btn sec" onclick="logoutDev()">Sign Out</button>
 </div>
 <button class="btn sec" onclick="hideModal('devModal')">Close</button></div></div>
 
-<div class="modal" id="payModal"><div class="box"><h3>💳 Payment V25-V26 — Opay 7040958697</h3><div style="background:linear-gradient(135deg,#01875f,#1a73e8);color:#fff;border-radius:12px;padding:16px;text-align:center;margin-top:12px"><div>Transfer to</div><b>OPAY</b><div style="font-size:24px;font-weight:900">7040958697</div><div>Matthew Ayodele</div><div id="payAmt" style="margin-top:10px;background:gold;color:#000;padding:8px 16px;border-radius:10px;display:inline-block;font-weight:900;font-size:18px">₦3,000</div><div id="payPlan" style="font-size:11px;margin-top:6px">Starter Plan</div></div><input class="input" id="pName" placeholder="Your name"><input class="input" id="pRef" placeholder="Transfer reference"><input type="file" id="proofFile" accept="image/*" style="margin-top:10px"><img id="proofImg" style="width:100%;margin-top:10px;border-radius:10px;display:none"><button class="btn gold" onclick="submitPay()">Submit Payment with Proof V26</button><button class="btn" onclick="demoPay()" style="background:#1a73e8">Demo Pay Instant (For Testing)</button><button class="btn sec" onclick="hideModal('payModal')">Cancel</button></div></div>
+<div class="modal" id="payModal"><div class="box"><h3>Payment — Opay 7040958697</h3><div style="background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:12px;padding:16px;text-align:center;margin-top:12px"><div>Transfer to</div><b>OPAY</b><div style="font-size:24px;font-weight:900">7040958697</div><div>Matthew Ayodele</div><div id="payAmt" style="margin-top:10px;background:gold;color:#000;padding:8px 16px;border-radius:10px;display:inline-block;font-weight:900;font-size:18px">₦3,000</div><div id="payPlan" style="font-size:11px;margin-top:6px">Starter Plan</div></div><input class="input" id="pName" placeholder="Your name"><input class="input" id="pRef" placeholder="Transfer reference"><input type="file" id="proofFile" accept="image/*" style="margin-top:10px"><img id="proofImg" style="width:100%;margin-top:10px;border-radius:10px;display:none"><button class="btn gold" onclick="submitPay()">Submit Payment with Proof</button><button class="btn" onclick="demoPay()" style="background:var(--blue)">Demo Pay Instant</button><button class="btn sec" onclick="hideModal('payModal')">Cancel</button></div></div>
 
-<div class="modal" id="uploadModal"><div class="box"><h3>📤 Upload App V22</h3><select class="input" id="pubType"><option value="free">Free Publishing V24</option><option value="premium">Premium Publishing ₦500 V24</option></select><input class="input" id="upName" placeholder="App name"><input class="input" id="upDesc" placeholder="Short description V16"><textarea class="input" id="upLong" placeholder="Full description"></textarea><input class="input" id="upEmoji" placeholder="Icon emoji 📱" value="📱"><select class="input" id="upCat"><option value="tools">Tools</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="games">Games</option></select><select class="input" id="upType"><option value="apk">APK Upload V14</option><option value="link">External Link V15</option></select><input type="file" id="apkFile" style="margin-top:10px;font-size:12px"><input class="input" id="extUrl" placeholder="https://... for external"><button class="btn" onclick="publishApp()">Publish App</button><button class="btn sec" onclick="hideModal('uploadModal')">Cancel</button></div></div>
-<div class="modal" id="walletModal"><div class="box"><h3>💳 Wallet V27 • Earnings V28 • Analytics V29-V30</h3><div class="wallet"><b id="walletDetail">₦0</b><div>Balance — Wallet V27</div><div style="margin-top:8px"><b id="earnDetail">₦0</b> Total Earnings</div></div><div style="margin-top:12px;font-size:12px;line-height:1.8" id="analyticsBox"></div><button class="btn sec" onclick="hideModal('walletModal')">Close</button></div></div>
+<div class="modal" id="uploadModal"><div class="box"><h3>Upload App</h3><select class="input" id="pubType"><option value="free">Free Publishing</option><option value="premium">Premium Publishing ₦500</option></select><input class="input" id="upName" placeholder="App name"><input class="input" id="upDesc" placeholder="Short description"><textarea class="input" id="upLong" placeholder="Full description"></textarea><input class="input" id="upEmoji" placeholder="Icon emoji 📱" value="📱"><select class="input" id="upCat"><option value="tools">Tools</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="games">Games</option></select><select class="input" id="upType"><option value="apk">APK Upload</option><option value="link">External Link</option></select><input type="file" id="apkFile" style="margin-top:10px;font-size:12px"><input class="input" id="extUrl" placeholder="https://... for external"><button class="btn" onclick="publishApp()">Publish App</button><button class="btn sec" onclick="hideModal('uploadModal')">Cancel</button></div></div>
+<div class="modal" id="walletModal"><div class="box"><h3>Wallet & Analytics</h3><div style="background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:14px;padding:14px"><b id="walletDetail">₦0</b><div>Balance</div><div style="margin-top:8px"><b id="earnDetail">₦0</b> Total Earnings</div></div><div style="margin-top:12px;font-size:12px;line-height:1.8" id="analyticsBox"></div><div class="bundle"><b>App Bundles</b><div style="font-size:11px;margin-top:4px">Create bundle of your apps • Discount for users</div><button class="btn sec" onclick="createBundle()">Create Bundle</button></div><div style="margin-top:10px;font-size:11px"><b>Promo Codes</b><div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="promoInput" placeholder="Enter promo code e.g. ZO50" style="margin:0"><button class="btn" style="width:auto;margin:0;padding:10px 14px" onclick="applyPromo()">Apply</button></div><div id="promoStatus" style="font-size:10px;margin-top:6px;color:var(--green)"></div></div><button class="btn sec" onclick="hideModal('walletModal')">Close</button></div></div>
 
-<div class="modal" id="notifModal"><div class="box"><h3>🔔 Notifications V31-V32</h3><div id="notifList" style="font-size:12px;margin-top:10px">No notifications — Update notifications V31 & Approval notifications V32 will appear here</div><button class="btn sec" onclick="hideModal('notifModal')">Close</button></div></div>
+<div class="modal" id="wishlistModal"><div class="box"><h3>❤️ Wishlist & Collections</h3><div id="wishlistGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px"></div><div style="margin-top:12px"><b>Your Collections</b><div id="collectionsList" style="font-size:11px;margin-top:6px">No collections yet</div><button class="btn sec" onclick="createCollection()">Create Collection</button></div><button class="btn sec" onclick="hideModal('wishlistModal')">Close</button></div></div>
 
-<div class="modal" id="supportModal"><div class="box"><h3>🆘 Support Center V39</h3><div style="font-size:12px;line-height:1.8;margin-top:10px">• Paid accounts V21<br>• Subscription plans V23<br>• Payment verification V25-V26<br>• Developer wallet V27<br>• Verification badge V33-V34<br>• Business accounts V35<br>• Multiple apps V36<br>• Publishing history V37<br>• Removal/restoration V38<br>• Contact: support@zostore.com<br>• Opay: 7040958697</div><button class="btn sec" onclick="hideModal('supportModal')">Close</button></div></div>
+<div class="modal" id="collectionsModal"><div class="box"><h3>📦 Featured Collections</h3><div id="featuredCollections" style="margin-top:10px"></div><button class="btn sec" onclick="hideModal('collectionsModal')">Close</button></div></div>
 
-<div class="modal" id="adminModal"><div class="box"><h3>👑 Admin V20-V40 Complete System</h3><input class="input" id="adminPass" type="password" placeholder="Password: 7040958697 or zo2025"><button class="btn" onclick="adminLogin()">Login Admin</button><div id="adminPanel" style="display:none;margin-top:12px"><div id="adminStats" style="font-size:11px;background:#f1f3f4;padding:10px;border-radius:10px"></div><div id="pendingApps" style="margin-top:10px"></div></div><button class="btn sec" onclick="hideModal('adminModal')">Close</button></div></div>
+<div class="modal" id="notifModal"><div class="box"><h3>🔔 Notifications</h3><div id="notifList" style="font-size:12px;margin-top:10px">No notifications</div><button class="btn sec" onclick="hideModal('notifModal')">Close</button></div></div>
 
-<div class="detail" id="detail"><div style="padding:12px;display:flex;gap:10px;align-items:center;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0"><div onclick="hideDetail()" style="cursor:pointer">← Back</div><b id="dTitle" style="margin-left:10px"></b></div><div style="padding:16px;display:flex;gap:14px"><div class="card-icon" id="dIcon" style="width:64px;height:64px;font-size:28px"></div><div><h2 id="dName"></h2><div id="dDev" style="font-size:11px;color:#01875f"></div><div id="dMeta" style="font-size:10px;color:#666;margin-top:4px"></div></div></div><div style="padding:0 16px 16px;display:flex;gap:8px"><button class="btn" style="width:auto" onclick="downloadApp()">⬇️ Download V7</button><button class="btn sec" style="width:auto" onclick="manageApp()">Manage V36</button><button class="btn sec" style="width:auto" onclick="hideDetail()">Close</button></div><div style="padding:16px"><div id="dDesc" style="background:#fff;padding:14px;border-radius:12px;border:1px solid #eee;font-size:12px;line-height:1.7"></div></div></div>
+<div class="modal" id="filterModal"><div class="box"><h3>Advanced Search & Filters</h3><div class="filter-row"><select id="filterCategory"><option value="all">All Categories</option><option value="games">Games</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="tools">Tools</option></select><select id="filterSort"><option value="newest">Newest</option><option value="popular">Most Popular</option><option value="rating">Top Rated</option><option value="price_low">Price Low</option><option value="price_high">Price High</option></select><select id="filterPrice"><option value="all">All Prices</option><option value="free">Free Only</option><option value="paid">Paid Only</option></select></div><div style="margin-top:12px;font-size:11px"><label><input type="checkbox" id="filterVerified"> Verified only</label><br><label><input type="checkbox" id="filterBusiness"> Business accounts only</label><br><label><input type="checkbox" id="filterOffline"> Offline available</label></div><button class="btn" onclick="applyFilters()">Apply Filters</button><button class="btn sec" onclick="hideModal('filterModal')">Close</button></div></div>
 
-<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="showModal('uploadModal')"><span>📤</span>Upload V22</div><div onclick="showModal('walletModal')"><span>💳</span>Wallet V27</div><div onclick="showModal('devModal')"><span>💼</span>Developer</div><div onclick="showModal('adminModal')"><span>👑</span>Admin</div></div>
+<div class="modal" id="compareModal"><div class="box"><h3>Compare Apps</h3><div id="compareList" style="font-size:11px;margin-top:10px">No apps selected for comparison — Tap "Compare" on app to add</div><button class="btn sec" onclick="clearCompare()">Clear Comparison</button><button class="btn sec" onclick="hideModal('compareModal')">Close</button></div></div>
+
+<div class="modal" id="adminModal"><div class="box"><h3>Admin — Complete System</h3><input class="input" id="adminPass" type="password" placeholder="Password: 7040958697 or zo2025"><button class="btn" onclick="adminLogin()">Login Admin</button><div id="adminPanel" style="display:none;margin-top:12px"><div id="adminStats" style="font-size:11px;background:var(--bg);padding:10px;border-radius:10px"></div><div id="pendingApps" style="margin-top:10px"></div></div><button class="btn sec" onclick="hideModal('adminModal')">Close</button></div></div>
+
+<div class="detail" id="detail"><div style="padding:12px;display:flex;gap:10px;align-items:center;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0"><div onclick="hideDetail()" style="cursor:pointer">← Back</div><b id="dTitle" style="margin-left:10px"></b><div style="margin-left:auto;display:flex;gap:8px"><div class="icon" onclick="toggleWishlist()" style="width:32px;height:32px">❤️</div><div class="icon" onclick="shareApp()" style="width:32px;height:32px">↗️</div></div></div><div style="padding:16px;display:flex;gap:14px"><div class="card-icon" id="dIcon" style="width:64px;height:64px;font-size:28px"></div><div><h2 id="dName"></h2><div id="dDev" style="font-size:11px;color:var(--green)"></div><div id="dMeta" style="font-size:10px;color:var(--sub);margin-top:4px"></div></div></div><div style="padding:0 16px 16px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" style="width:auto" onclick="downloadApp()">⬇️ Download</button><button class="btn sec" style="width:auto" onclick="addToCompare()">⚖️ Compare</button><button class="btn sec" style="width:auto" onclick="showRelated()">🔗 Related</button><button class="btn sec" style="width:auto" onclick="manageApp()">Manage</button></div><div style="padding:16px"><div id="dDesc" style="background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--border);font-size:12px;line-height:1.7"></div><div id="relatedApps" style="margin-top:12px"></div><div id="recentlyViewedBox" style="margin-top:12px;font-size:11px"></div></div></div>
+
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="filterCat('trending')"><span>🔥</span>Trending</div><div onclick="showModal('wishlistModal')"><span>❤️</span>Wishlist</div><div onclick="showModal('devModal')"><span>💼</span>Developer</div><div onclick="showModal('adminModal')"><span>👑</span>Admin</div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 var APPS=[
-{n:"ZO Calculator",d:"ZO Labs • Verified V34",c:"tools",col:"#4285f4",e:"🧮",r:"4.9",ver:"2.1.0",size:"2.4MB",status:"approved",verified:true,account:"business",publish:"free",installs:2200,earnings:0,desc:"Calculator V16 description",url:"#"},
-{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",col:"#ff9800",e:"🛒",r:"4.8",ver:"1.5.2",size:"External",status:"approved",verified:true,account:"business",publish:"premium V24",installs:1500,earnings:500,desc:"Market Hub with external link V15",url:"https://play.google.com/store"},
-{n:"POS Business",d:"ZO Business",c:"business",col:"#4caf50",e:"💳",r:"5.0",ver:"3.0.1",size:"8.2MB",status:"approved",verified:true,account:"business",publish:"free",installs:980,earnings:0,desc:"POS with Opay 7040958697 V25",url:"#"},
-{n:"ZO AI",d:"ZO Intelligence",c:"productivity",col:"#7c4dff",e:"🤖",r:"5.0",ver:"1.0.0",size:"Web",status:"approved",verified:true,account:"business",publish:"free",installs:1200,earnings:0,desc:"AI assistant V101 roadmap",url:"https://muse.ai"},
-{n:"Video Call",d:"ZO Connect",c:"productivity",col:"#00bcd4",e:"📹",r:"4.9",ver:"2.0.3",size:"12MB",status:"approved",verified:false,account:"individual",publish:"free",installs:890,earnings:0,desc:"Video call",url:"#"},
-{n:"Anambra Games",d:"Game Studio",c:"games",col:"#e91e63",e:"🎮",r:"4.7",ver:"0.9.5",size:"45MB",status:"pending",verified:false,account:"individual",publish:"free",installs:0,earnings:0,desc:"Local games pending approval",url:"#"}
+{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",col:"#4285f4",e:"🧮",r:4.9,ver:"2.1.0",size:"2.4MB",status:"approved",verified:true,account:"business",publish:"free",installs:3200,earnings:0,desc:"Professional calculator offline",url:"#",trending:true,top:true,editor:true,offline:true},
+{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",col:"#ff9800",e:"🛒",r:4.8,ver:"1.5.2",size:"External",status:"approved",verified:true,account:"business",publish:"premium",installs:2500,earnings:500,desc:"Anambra market marketplace",url:"https://play.google.com/store",trending:true,top:true,editor:false,offline:false},
+{n:"POS Business",d:"ZO Business",c:"business",col:"#4caf50",e:"💳",r:5.0,ver:"3.0.1",size:"8.2MB",status:"approved",verified:true,account:"business",publish:"free",installs:1980,earnings:0,desc:"POS with Opay 7040958697",url:"#",trending:false,top:true,editor:true,offline:true},
+{n:"ZO AI",d:"ZO Intelligence",c:"productivity",col:"#7c4dff",e:"🤖",r:5.0,ver:"1.0.0",size:"Web",status:"approved",verified:true,account:"business",publish:"free",installs:4200,earnings:0,desc:"AI assistant",url:"https://muse.ai",trending:true,top:true,editor:true,offline:false},
+{n:"Video Call",d:"ZO Connect",c:"productivity",col:"#00bcd4",e:"📹",r:4.9,ver:"2.0.3",size:"12MB",status:"approved",verified:false,account:"individual",publish:"free",installs:1890,earnings:0,desc:"Video call HD",url:"#",trending:true,top:false,editor:false,offline:false},
+{n:"Anambra Games",d:"Game Studio",c:"games",col:"#e91e63",e:"🎮",r:4.7,ver:"0.9.5",size:"45MB",status:"approved",verified:false,account:"individual",publish:"free",installs:3200,earnings:0,desc:"Local games",url:"#",trending:true,top:true,editor:false,offline:true},
+{n:"File Manager Pro",d:"ZO Tools",c:"tools",col:"#795548",e:"📁",r:4.6,ver:"1.2.0",size:"5.5MB",status:"approved",verified:true,account:"business",publish:"free",installs:1200,earnings:0,desc:"Manage files",url:"#",trending:false,top:false,editor:true,offline:true},
+{n:"Business Analytics",d:"Analytics Pro",c:"business",col:"#009688",e:"📊",r:4.9,ver:"2.5.0",size:"15MB",status:"approved",verified:true,account:"business",publish:"premium",installs:800,earnings:300,desc:"Business analytics",url:"#",trending:false,top:true,editor:true,offline:false}
 ];
-var custom=[], dev=null, user=null, wallet=0, earn=0, notifs=[], cur=null, selPlan='', selPrice=0, isAdmin=false;
+var custom=[], dev=null, user=null, wallet=0, earn=0, notifs=[], cur=null, selPlan='', selPrice=0, isAdmin=false, wishlist=[], recentlyViewed=[], compareList=[], collections=[], streak=0, refCount=0, dark=false;
 try{
-custom=JSON.parse(localStorage.getItem('z_custom40')||'[]');
-dev=JSON.parse(localStorage.getItem('z_dev40')||'null');
-user=JSON.parse(localStorage.getItem('z_user40')||'null');
-wallet=parseInt(localStorage.getItem('z_wallet40')||'0');
-earn=parseInt(localStorage.getItem('z_earn40')||'0');
-notifs=JSON.parse(localStorage.getItem('z_notifs40')||'[]');
+custom=JSON.parse(localStorage.getItem('z_custom60')||'[]');
+dev=JSON.parse(localStorage.getItem('z_dev60')||'null');
+user=JSON.parse(localStorage.getItem('z_user60')||'null');
+wallet=parseInt(localStorage.getItem('z_wallet60')||'0');
+earn=parseInt(localStorage.getItem('z_earn60')||'0');
+notifs=JSON.parse(localStorage.getItem('z_notifs60')||'[]');
+wishlist=JSON.parse(localStorage.getItem('z_wish60')||'[]');
+recentlyViewed=JSON.parse(localStorage.getItem('z_recent60')||'[]');
+compareList=JSON.parse(localStorage.getItem('z_compare60')||'[]');
+collections=JSON.parse(localStorage.getItem('z_collections60')||'[]');
+streak=parseInt(localStorage.getItem('z_streak60')||'0');
+refCount=parseInt(localStorage.getItem('z_ref60')||'0');
+dark=localStorage.getItem('z_dark60')==='true';
 }catch(e){}
 var all=APPS.concat(custom);
+if(dark) document.body.classList.add('dark');
+
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},3000)}
 function showModal(id){document.getElementById(id).classList.add('show')}
 function hideModal(id){document.getElementById(id).classList.remove('show')}
 function hideDetail(){document.getElementById('detail').classList.remove('show')}
-function render(list){
-var g=document.getElementById('grid');
+
+function render(list, targetId){
+var id=targetId||'grid';
+var g=document.getElementById(id);
+if(!g) return;
 g.innerHTML='';
-if(list.length===0){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#666">No apps<br><small>Upload or check Admin for pending</small></div>';return;}
+if(list.length===0){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--sub)">No apps</div>';return;}
 list.forEach(function(a){
 var d=document.createElement('div');
 d.className='card';
 d.onclick=function(){openApp(a)};
-d.innerHTML='<div class="card-icon" style="background:'+a.col+'">'+a.e+'</div><h3>'+a.n+'</h3><div style="font-size:10px;color:#666">'+a.d+'</div><div style="font-size:9px;margin-top:4px"><span style="background:'+(a.verified?'#1a73e8':'#01875f')+';color:#fff;padding:2px 6px;border-radius:6px">'+(a.verified?'VERIFIED':'APK')+'</span> ★'+a.r+' • ₦'+a.earnings+'</div>';
+var badge='';
+if(a.trending) badge='<div class="badge trend">TRENDING</div>';
+else if(a.top) badge='<div class="badge top">TOP</div>';
+else if(a.editor) badge='<div class="badge editor">EDITORS</div>';
+if(wishlist.find(function(w){return w.n===a.n})) badge='<div class="badge wish">❤️ WISHLIST</div>';
+d.innerHTML=badge+'<div class="card-icon" style="background:'+a.col+'">'+a.e+'</div><h3>'+a.n+'</h3><div style="font-size:10px;color:var(--sub)">'+a.d+'</div><div style="font-size:9px;margin-top:4px">★'+a.r+' • '+a.installs+' installs</div>';
 g.appendChild(d);
 });
 }
+function renderAll(){
+render(all.filter(function(a){return a.trending}).slice(0,4),'trendingGrid');
+render(all.filter(function(a){return a.top}).slice(0,4),'topGrid');
+render(all.filter(function(a){return a.editor}).slice(0,4),'editorGrid');
+render(isAdmin?all:all.filter(function(a){return a.status==='approved'}),'grid');
+}
+
 function openApp(a){
-cur=all.concat(custom).find(function(x){return x.n===a.n})||a;
+cur=all.find(function(x){return x.n===a.n})||a;
 document.getElementById('detail').classList.add('show');
 document.getElementById('dIcon').style.background=cur.col;
 document.getElementById('dIcon').textContent=cur.e;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d+' • '+cur.account+' V35 • '+(cur.verified?'Verified V34':'Not verified V33');
-document.getElementById('dMeta').textContent=cur.installs+' installs • v'+cur.ver+' • '+cur.publish+' • '+cur.status+' • Earnings ₦'+cur.earnings+' V28';
-document.getElementById('dDesc').innerHTML='<b>'+cur.desc+'</b><br><br>Version: '+cur.ver+' V17<br>Size: '+cur.size+'<br>Category: '+cur.c+'<br>Publish: '+cur.publish+' V24<br>Account: '+cur.account+' V35<br>Verified: '+(cur.verified?'Yes badge V34':'No V33')+'<br>Status: '+cur.status+'<br>Earnings: ₦'+cur.earnings+' V28<br>Wallet V27: ₦'+wallet+'<br>Analytics V29-V30: Downloads '+cur.installs+'<br>Update notif V31, Approval notif V32<br>History V37, Removal V38, Support V39, Complete V40';
+document.getElementById('dDev').textContent=cur.d+' • '+cur.account+' • '+(cur.verified?'Verified':'');
+document.getElementById('dMeta').textContent=cur.installs+' installs • v'+cur.ver+' • '+cur.publish+' • '+cur.status;
+document.getElementById('dDesc').innerHTML='<b>'+cur.desc+'</b><br><br>Size: '+cur.size+'<br>Category: '+cur.c+'<br>Publish: '+cur.publish+'<br>Account: '+cur.account+'<br>Verified: '+(cur.verified?'Yes':'No')+'<br>Offline: '+(cur.offline?'Yes':'No')+'<br>Earnings: ₦'+cur.earnings+'<br><br><b>Share:</b> Tap ↗️ to share app<br><b>Related Apps:</b> See below<br><b>Bundles & Promo:</b> Available in Wallet';
+recentlyViewed=recentlyViewed.filter(function(x){return x.n!==cur.n});
+recentlyViewed.unshift({n:cur.n,col:cur.col,e:cur.e});
+recentlyViewed=recentlyViewed.slice(0,10);
+localStorage.setItem('z_recent60',JSON.stringify(recentlyViewed));
+document.getElementById('recentlyViewedBox').innerHTML='Recently viewed: '+recentlyViewed.map(function(x){return x.e+' '+x.n}).join(', ');
+showRelated();
+}
+function showRelated(){
+if(!cur) return;
+var related=all.filter(function(a){return a.c===cur.c&&a.n!==cur.n}).slice(0,3);
+document.getElementById('relatedApps').innerHTML=related.length?'<b>Related Apps:</b><div style="display:flex;gap:8px;margin-top:8px;overflow:auto">'+related.map(function(a){return '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px;min-width:80px;text-align:center;cursor:pointer" onclick="openApp({n:\''+a.n+'\'})"><div style="font-size:20px">'+a.e+'</div><div style="font-size:9px">'+a.n+'</div></div>'}).join('')+'</div>':'';
 }
 function filterCat(cat,el){
 if(el){document.querySelectorAll('.nav div').forEach(function(d){d.classList.remove('active')});el.classList.add('active')}
 var list=isAdmin?all:all.filter(function(a){return a.status==='approved'});
-if(cat!=='all') list=list.filter(function(a){return a.c===cat});
-render(list);
+if(cat==='trending') list=list.filter(function(a){return a.trending});
+else if(cat==='top') list=list.filter(function(a){return a.top});
+else if(cat==='editor') list=list.filter(function(a){return a.editor});
+else if(cat==='collections') {showModal('collectionsModal'); return;}
+else if(cat!=='all') list=list.filter(function(a){return a.c===cat});
+render(list,'grid');
 }
 function searchApps(){
 var q=document.getElementById('searchInput').value.toLowerCase().trim();
 var list=isAdmin?all:all.filter(function(a){return a.status==='approved'});
-if(q) list=list.filter(function(a){return a.n.toLowerCase().indexOf(q)>-1||a.c.toLowerCase().indexOf(q)>-1});
-render(list);
+if(q) list=list.filter(function(a){return a.n.toLowerCase().indexOf(q)>-1||a.c.toLowerCase().indexOf(q)>-1||a.desc.toLowerCase().indexOf(q)>-1});
+render(list,'grid');
+}
+function showRecentlyViewed(){
+if(recentlyViewed.length===0){toast('No recent apps');return;}
+render(recentlyViewed.map(function(r){return all.find(function(a){return a.n===r.n})||r}).filter(Boolean),'grid');
+toast('Recently viewed — '+recentlyViewed.length+' apps');
+}
+function toggleWishlist(){
+if(!cur) return;
+var idx=wishlist.findIndex(function(w){return w.n===cur.n});
+if(idx>-1){wishlist.splice(idx,1);toast('Removed from wishlist');}
+else{wishlist.unshift(cur);toast('Added to wishlist ❤️');}
+localStorage.setItem('z_wish60',JSON.stringify(wishlist));
+updateWishlistUI();
+}
+function updateWishlistUI(){
+var g=document.getElementById('wishlistGrid');
+if(!g) return;
+g.innerHTML=wishlist.length?wishlist.map(function(a){return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center;cursor:pointer" onclick="openApp({n:\''+a.n+'\'})"><div style="font-size:24px">'+a.e+'</div><div style="font-size:10px;margin-top:4px">'+a.n+'</div></div>'}).join(''):'<div style="grid-column:1/-1;text-align:center;color:var(--sub)">No wishlist yet — Tap ❤️ on app</div>';
+document.getElementById('collectionsList').innerHTML=collections.length?collections.map(function(c){return '<div style="padding:6px;background:var(--bg);border-radius:8px;margin-top:6px"><b>'+c.name+'</b> — '+c.apps.length+' apps</div>'}).join(''):'No collections — Create one';
+}
+function createCollection(){
+var name=prompt('Collection name:');
+if(!name) return;
+collections.push({name:name,apps:wishlist.slice(0,3)});
+localStorage.setItem('z_collections60',JSON.stringify(collections));
+updateWishlistUI();
+toast('Collection created: '+name);
+}
+function shareApp(){
+if(!cur) return;
+if(navigator.share){navigator.share({title:cur.n,text:cur.desc,url:window.location.href});}
+else{prompt('Share this app:', window.location.href+'?app='+encodeURIComponent(cur.n));}
+toast('Share — App link copied');
+}
+function addToCompare(){
+if(!cur) return;
+if(compareList.find(function(a){return a.n===cur.n})){toast('Already in compare');return;}
+compareList.push(cur);
+localStorage.setItem('z_compare60',JSON.stringify(compareList));
+updateCompareUI();
+toast('Added to compare — '+compareList.length+'/3');
+}
+function updateCompareUI(){
+document.getElementById('compareList').innerHTML=compareList.length?compareList.map(function(a){return '<div style="padding:8px;background:var(--bg);border-radius:8px;margin-top:6px"><b>'+a.e+' '+a.n+'</b><br>★'+a.r+' • '+a.installs+' installs • '+a.size+' • ₦'+a.earnings+'</div>'}).join(''):'No apps selected';
+}
+function clearCompare(){compareList=[];localStorage.setItem('z_compare60',JSON.stringify(compareList));updateCompareUI();toast('Comparison cleared');}
+function toggleDark(){dark=!dark;document.body.classList.toggle('dark',dark);localStorage.setItem('z_dark60',dark);toast(dark?'Dark mode ON':'Light mode ON');}
+function claimDaily(){
+var last=localStorage.getItem('z_lastClaim')||0;
+var now=Date.now();
+if(now-parseInt(last)<1000*60*60*12){toast('Come back later — Daily reward every 12h');return;}
+streak++;localStorage.setItem('z_streak60',streak);localStorage.setItem('z_lastClaim',now);
+wallet+=100;earn+=100;localStorage.setItem('z_wallet60',wallet);localStorage.setItem('z_earn60',earn);
+document.getElementById('streakTxt').textContent='Streak: '+streak+' days';
+toast('Daily reward claimed! +₦100 — Streak '+streak);
+}
+function createBundle(){
+var name=prompt('Bundle name (e.g. Business Pack):');
+if(!name) return;
+toast('Bundle created: '+name+' — 3 apps • 20% off');
+}
+function applyPromo(){
+var code=document.getElementById('promoInput').value.trim().toUpperCase();
+if(code==='ZO50'){document.getElementById('promoStatus').textContent='Promo applied! 50% off publishing fee — ₦250 saved';wallet+=250;localStorage.setItem('z_wallet60',wallet);}
+else if(code==='FREE100'){document.getElementById('promoStatus').textContent='Promo applied! Free premium publishing for 1 app';}
+else{document.getElementById('promoStatus').textContent='Invalid code — Try ZO50 or FREE100';}
+}
+function shareReferral(){
+var code=document.getElementById('refCode').textContent;
+if(navigator.share){navigator.share({title:'ZO Store Referral',text:'Use my referral code '+code+' to get ₦500 bonus',url:window.location.href});}
+else{prompt('Share referral code:', code+' — '+window.location.href);}
+refCount++;localStorage.setItem('z_ref60',refCount);
+document.getElementById('refCount').textContent=refCount;
+toast('Referral shared — Invite friends!');
 }
 function loginUser(){
 var e=document.getElementById('uEmail').value.trim();
 if(!e){toast('Enter email');return;}
-user={email:e};localStorage.setItem('z_user40',JSON.stringify(user));
-document.getElementById('userStatus').textContent='Signed in: '+e;toast('Signed in');hideModal('userModal');
+user={email:e,achievements:['First Login','Explorer']};
+localStorage.setItem('z_user60',JSON.stringify(user));
+document.getElementById('achieveList').innerHTML='🏆 First Login • 🌟 Explorer • 🔥 Streak '+streak+'<br>Badges earned: 3';
+toast('Signed in — Achievements unlocked');
+hideModal('userModal');
 }
 function createDev(){
 var e=document.getElementById('dEmail').value.trim();
 var n=document.getElementById('dName').value.trim();
 var t=document.getElementById('dAccType').value;
 if(!e||!n){toast('Fill email & name');return;}
-dev={email:e,name:n,account:t,plan:'free',verified:false};localStorage.setItem('z_dev40',JSON.stringify(dev));
-toast('Developer account created V21');updateDev();
+dev={email:e,name:n,account:t,plan:'free',verified:false};localStorage.setItem('z_dev60',JSON.stringify(dev));
+toast('Developer account created');updateDev();
 }
 function loginDev(){if(!dev){toast('Create account first');return;}updateDev();toast('Signed in');}
-function logoutDev(){dev=null;localStorage.removeItem('z_dev40');document.getElementById('devOut').style.display='block';document.getElementById('devIn').style.display='none';toast('Signed out');}
+function logoutDev(){dev=null;localStorage.removeItem('z_dev60');document.getElementById('devOut').style.display='block';document.getElementById('devIn').style.display='none';toast('Signed out');}
 function updateDev(){
 if(!dev) return;
 document.getElementById('devOut').style.display='none';
 document.getElementById('devIn').style.display='block';
 document.getElementById('devNameTxt').textContent=dev.name+' ('+dev.account+')';
-document.getElementById('devPlanTxt').textContent=dev.plan+' plan • '+(dev.verified?'Verified V34 • Business V35':'Not verified')+' • Paid V21';
-document.getElementById('walletTxt').textContent='₦'+wallet;
-document.getElementById('earnTxt').textContent='₦'+earn;
-document.getElementById('appsCount').textContent=custom.length;
-}
-function choosePlan(plan,price){selPlan=plan;selPrice=price;document.getElementById('payAmt').textContent='₦'+price.toLocaleString();document.getElementById('payPlan').textContent=plan+' plan V23 — '+price;showModal('payModal');}
-function submitPay(){
-var n=document.getElementById('pName').value.trim();
-var r=document.getElementById('pRef').value.trim();
-if(!n||!r){toast('Enter name & ref');return;}
-notifs.unshift({t:'Payment ₦'+selPrice+' for '+selPlan+' — Pending V25 — '+n+' — Opay 7040958697',time:new Date().toLocaleString()});
-localStorage.setItem('z_notifs40',JSON.stringify(notifs));
-toast('Payment submitted with proof V26 — Pending verification');hideModal('payModal');
-document.getElementById('notifList').innerHTML=notifs.map(function(x){return '<div style="padding:8px;background:#f1f3f4;border-radius:8px;margin-top:6px"><b>'+x.time+'</b><br>'+x.t+'</div>'}).join('');
-}
-function demoPay(){
-if(!dev){toast('Create dev first');return;}
-dev.plan=selPlan;dev.verified=true;if(selPlan==='business') dev.account='business';
-wallet+=selPrice;earn+=selPrice;localStorage.setItem('z_wallet40',wallet);localStorage.setItem('z_earn40',earn);localStorage.setItem('z_dev40',JSON.stringify(dev));
-notifs.unshift({t:'Subscription active: '+selPlan+' ₦'+selPrice+' — Verified badge V34 granted — Business V35',time:new Date().toLocaleString()});
-localStorage.setItem('z_notifs40',JSON.stringify(notifs));
-updateDev();hideModal('payModal');toast('Demo Pay Success V26 — '+selPlan+' active — Verified ✓ — Wallet ₦'+wallet);
-}
-function publishApp(){
-if(!dev){toast('Create developer first V21');showModal('devModal');return;}
-var name=document.getElementById('upName').value.trim();
-var desc=document.getElementById('upDesc').value.trim();
-if(!name||!desc){toast('Enter name & desc');return;}
-var limit={free:1,starter:3,professional:10,business:100}[dev.plan]||1;
-if(custom.length>=limit&&!isAdmin){toast('Limit '+limit+' reached — Upgrade plan V23');showModal('devModal');return;}
-var emoji=document.getElementById('upEmoji').value||'📱';
-var cat=document.getElementById('upCat').value;
-var type=document.getElementById('upType').value;
-var pub=document.getElementById('pubType').value;
-var url=document.getElementById('extUrl').value.trim();
-if(pub==='premium'&&!confirm('Premium publishing ₦500 V24 — Pay via Opay 7040958697?')) return;
-var app={n:name,d:dev.name+(dev.verified?' • Verified V34':''),c:cat,col:"#ff9800",e:emoji,r:"4.5",ver:"1.0.0",size:type==='link'?'External':'2MB',status:"pending",verified:dev.verified,account:dev.account,publish:pub,installs:0,earnings:pub==='premium'?500:0,desc:desc,url:type==='link'?url:'#',type:type};
-custom.unshift(app);all=APPS.concat(custom);localStorage.setItem('z_custom40',JSON.stringify(custom));
-if(pub==='premium'){wallet+=500;earn+=500;localStorage.setItem('z_wallet40',wallet);localStorage.setItem('z_earn40',earn);}
-notifs.unshift({t:'App submitted: '+name+' — Pending approval V32 — History V37',time:new Date().toLocaleString()});
-localStorage.setItem('z_notifs40',JSON.stringify(notifs));
-hideModal('uploadModal');
-document.getElementById('upName').value='';document.getElementById('upDesc').value='';document.getElementById('upLong').value='';
-render(isAdmin?all:all.filter(function(a){return a.status==='approved'}));
-toast(name+' submitted — Pending review V22');updateDev();
-}
-function showMyApps(){if(custom.length===0){toast('No apps yet');return;}render(custom);hideModal('devModal');toast(custom.length+' apps — Multiple apps V36');}
-function downloadApp(){if(!cur) return;cur.installs++;localStorage.setItem('z_custom40',JSON.stringify(custom));toast('Downloading '+cur.n+' V7 — '+cur.installs+' downloads V30');}
-function manageApp(){
-if(!cur) return;
-var act=prompt('Manage '+cur.n+'\n1=Edit name V36\n2=Remove V38\n3=Restore V38\n4=Delete\nEnter 1-4:');
-if(act==='1'){var nn=prompt('New name',cur.n);if(nn){cur.n=nn;localStorage.setItem('z_custom40',JSON.stringify(custom));toast('Edited V36');render(all);hideDetail();}}
-else if(act==='2'){cur.status='removed';localStorage.setItem('z_custom40',JSON.stringify(custom));toast('Removed V38 — Can restore');render(all);hideDetail();}
-else if(act==='3'){var rem=all.filter(function(a){return a.status==='removed'});if(rem.length===0){toast('No removed apps');return;}var name=prompt('Removed: '+rem.map(function(a){return a.n}).join(', ')+'\nEnter name to restore:');var app=rem.find(function(a){return a.n===name});if(app){app.status='pending';localStorage.setItem('z_custom40',JSON.stringify(custom));toast('Restored V38 — Pending');render(all);}}
-else if(act==='4'){if(confirm('Delete forever?')){custom=custom.filter(function(a){return a.n!==cur.n});all=APPS.concat(custom);localStorage.setItem('z_custom40',JSON.stringify(custom));toast('Deleted');render(all);hideDetail();}}
-}
-function adminLogin(){
-var p=document.getElementById('adminPass').value.trim();
-if(p==='7040958697'||p==='zo2025'){
-isAdmin=true;document.getElementById('adminPanel').style.display='block';
-var pend=all.filter(function(a){return a.status==='pending'}).length;
-document.getElementById('adminStats').innerHTML='Admin V20-V40 Complete System V40<br>Pending: '+pend+' • Total: '+all.length+' • Wallet: ₦'+wallet+' • Earnings: ₦'+earn+' • Opay 7040958697 V25-V26<br>Verification V33-V34, Business V35, History V37, Removal V38, Support V39';
-var pendList=all.filter(function(a){return a.status==='pending'});
-document.getElementById('pendingApps').innerHTML=pendList.length?pendList.map(function(a){return '<div style="padding:10px;background:#f1f3f4;border-radius:10px;margin-top:8px"><b>'+a.e+' '+a.n+'</b> • '+a.account+' • '+a.publish+'<br><button onclick="approveApp(\''+a.n+'\')" style="padding:6px 12px;background:#01875f;color:#fff;border:none;border-radius:6px;margin-top:6px;cursor:pointer">Approve V20</button> <button onclick="rejectApp(\''+a.n+'\')" style="padding:6px 12px;background:#ea4335;color:#fff;border:none;border-radius:6px;margin-top:6px;cursor:pointer">Reject</button></div>'}).join(''):'No pending';
-render(all);toast('Admin ON — Complete management V40');
-}else toast('Wrong password');
-}
-function approveApp(name){var a=all.find(function(x){return x.n===name});if(a){a.status='approved';a.verified=true;localStorage.setItem('z_custom40',JSON.stringify(custom));notifs.unshift({t:'Approval notification V32: '+name+' approved ✓',time:new Date().toLocaleString()});localStorage.setItem('z_notifs40',JSON.stringify(notifs));toast('Approved '+name);adminLogin();render(all);}}
-function rejectApp(name){var a=all.find(function(x){return x.n===name});if(a){a.status='rejected';localStorage.setItem('z_custom40',JSON.stringify(custom));toast('Rejected');adminLogin();render(all);}}
-document.getElementById('proofFile')&&document.getElementById('proofFile').addEventListener('change',function(e){var f=e.target.files[0];if(!f) return;var r=new FileReader();r.onload=function(ev){document.getElementById('proofImg').src=ev.target.result;document.getElementById('proofImg').style.display='block';};r.readAsDataURL(f);});
-render(all.filter(function(a){return a.status==='approved'}));
-if(dev) updateDev();
-document.getElementById('walletDetail').textContent='₦'+wallet;
-document.getElementById('earnDetail').textContent='₦'+earn;
-document.getElementById('analyticsBox').innerHTML='Download analytics V30: '+all.reduce(function(s,a){return s+a.installs},0)+' total downloads<br>Sales analytics V29: ₦'+earn+' revenue<br>Publishing history V37: '+all.length+' apps<br>Removal V38: Archive ready<br>Support V39: Help center';
-if(notifs.length>0) document.getElementById('notifList').innerHTML=notifs.map(function(x){return '<div style="padding:8px;background:#f1f3f4;border-radius:8px;margin-top:6px"><b>'+x.time+'</b><br>'+x.t+'</div>'}).join('');
-setTimeout(function(){toast('V21-V40 FIXED — All buttons work — Upload, Wallet, Developer, Admin LIVE!')},800);
-</script>
-</body>
-</html>
+document.getElementById('devPlanTxt'
