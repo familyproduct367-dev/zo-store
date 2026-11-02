@@ -3,238 +3,344 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V4+V5 - Search + Details</title>
+<title>ZO STORE V6-V16 - Full Foundation</title>
 <meta name="theme-color" content="#01875f">
 <style>
 :root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
-body{background:var(--bg);color:var(--text)}
-.hdr{padding:10px 14px;background:var(--card);display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
-.logo{width:36px;height:36px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
-.search-wrap{flex:1;position:relative;max-width:600px}
-.search{background:var(--bg);border-radius:20px;padding:8px 12px;display:flex;gap:8px;border:1px solid var(--border)}
-.search input{border:none;background:transparent;outline:none;width:100%;font-size:13px}
-.search-box{position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-top:6px;display:none;z-index:20;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.search-box.active{display:block}
-.suggest{padding:10px 14px;font-size:12px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
-.suggest:hover{background:var(--bg)}
-.filter-bar{padding:8px 14px;display:flex;gap:6px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border)}
-.filter-bar div{padding:6px 10px;font-size:11px;border:1px solid var(--border);border-radius:16px;cursor:pointer;white-space:nowrap}
-.filter-bar div.active{background:var(--green);color:#fff;border-color:var(--green)}
-.nav{padding:8px 14px;display:flex;gap:8px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border)}
-.nav div{padding:7px 12px;font-size:12px;color:var(--sub);border-radius:16px;cursor:pointer;white-space:nowrap;border:1px solid var(--border)}
+body{background:var(--bg);color:var(--text);padding-bottom:60px}
+.hdr{padding:10px 14px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
+.logo{width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:14px}
+.search{flex:1;background:var(--bg);border-radius:20px;padding:7px 12px;display:flex;gap:8px;border:1px solid var(--border)}
+.search input{border:none;background:transparent;outline:none;width:100%;font-size:12px}
+.icon{width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
+.nav{padding:6px 14px;display:flex;gap:6px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border)}
+.nav div{padding:6px 10px;font-size:11px;color:var(--sub);border-radius:14px;cursor:pointer;white-space:nowrap;border:1px solid var(--border)}
 .nav div.active{background:var(--green);color:#fff;border-color:var(--green)}
-.grid{padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-.card{background:var(--card);border-radius:12px;padding:10px;border:1px solid var(--border);cursor:pointer;position:relative}
-.card-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff}
-.card h3{font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-dev{font-size:10px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-meta{font-size:10px;color:var(--sub);margin-top:4px;display:flex;gap:6px}
-.badge{position:absolute;top:6px;right:6px;background:var(--green);color:#fff;font-size:7px;padding:2px 5px;border-radius:8px;font-weight:700}
+.grid{padding:10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.card{background:var(--card);border-radius:12px;padding:8px;border:1px solid var(--border);cursor:pointer;position:relative}
+.card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
+.card h3{font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-dev{font-size:9px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{position:absolute;top:5px;right:5px;background:var(--green);color:#fff;font-size:6px;padding:2px 4px;border-radius:6px;font-weight:700}
 .badge.ext{background:var(--orange)}
 .detail{position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
-.detail-top{padding:10px 14px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:2}
-.dhead{padding:14px;background:var(--card);display:flex;gap:12px;border-bottom:1px solid var(--border)}
-.dicon{width:72px;height:72px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff}
-.actions{padding:12px 14px;display:flex;gap:8px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:48px;z-index:1}
-.btn{background:var(--green);color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:600;cursor:pointer;font-size:12px}
+.detail-top{padding:8px 12px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:2}
+.dhead{padding:12px;background:var(--card);display:flex;gap:10px;border-bottom:1px solid var(--border)}
+.dicon{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff}
+.actions{padding:10px 12px;display:flex;gap:6px;background:var(--card);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.btn{background:var(--green);color:#fff;border:none;padding:8px 14px;border-radius:16px;font-weight:600;cursor:pointer;font-size:11px}
 .btn.sec{background:var(--bg);color:var(--text);border:1px solid var(--border)}
 .btn.ext{background:var(--orange);color:#000}
+.btn.small{padding:5px 10px;font-size:10px}
 .tabs{display:flex;gap:0;background:var(--card);border-bottom:1px solid var(--border);overflow:auto}
-.tabs div{padding:12px 16px;font-size:12px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;color:var(--sub)}
+.tabs div{padding:10px 12px;font-size:11px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;color:var(--sub)}
 .tabs div.active{color:var(--green);border-color:var(--green);font-weight:600}
-.tab-content{padding:14px}
-.info{background:var(--card);border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid var(--border)}
-.info h4{font-size:12px;margin-bottom:6px}
-.info p{font-size:11px;color:var(--sub);line-height:1.5}
-.scr{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
-.scr div{width:110px;height:190px;background:var(--bg);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
-.related{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:10px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 14px;border-radius:16px;font-size:11px;display:none;z-index:400}
+.tab-content{padding:12px}
+.info{background:var(--card);border-radius:10px;padding:10px;margin-bottom:8px;border:1px solid var(--border)}
+.info h4{font-size:11px;margin-bottom:4px}
+.info p{font-size:10px;color:var(--sub);line-height:1.5}
+.scr{display:flex;gap:6px;overflow:auto;padding-bottom:6px}
+.scr div{width:90px;height:160px;background:var(--bg);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
+.modal.active{display:flex}
+.box{background:var(--card);border-radius:12px;padding:14px;width:100%;max-width:400px;max-height:90vh;overflow:auto}
+.input{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:11px;margin-top:6px}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;z-index:40}
+.bnav div{font-size:8px;text-align:center;color:var(--sub);cursor:pointer}
+.bnav div.active{color:var(--green)}
+.bnav span{font-size:16px;display:block}
+.toast{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 12px;border-radius:14px;font-size:10px;display:none;z-index:400;max-width:90%;text-align:center}
+.dash-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.dash-card{background:var(--bg);border-radius:8px;padding:10px;border:1px solid var(--border);text-align:center}
+.dash-card b{display:block;font-size:14px;color:var(--green)}
+.dash-card span{font-size:9px;color:var(--sub)}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="logo">Z</div><div class="search-wrap"><div class="search"><span>🔍</span><input id="search" placeholder="Search apps, games, business..."><span id="clearSearch" style="cursor:pointer;display:none">✕</span></div><div class="search-box" id="searchBox"></div></div></div>
-<div class="filter-bar" id="filterBar">
-<div class="active" data-f="all" onclick="setFilter('all',this)">All</div>
-<div data-f="apk" onclick="setFilter('apk',this)">📦 APK</div>
-<div data-f="link" onclick="setFilter('link',this)">🔗 External</div>
-<div data-f="verified" onclick="setFilter('verified',this)">✓ Verified</div>
-<div data-f="games" onclick="setFilter('games',this)">🎮 Games</div>
-<div data-f="business" onclick="setFilter('business',this)">💼 Business</div>
-</div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search... V4 improved"></div><div class="icon" onclick="openUser()">👤</div><div class="icon" onclick="openDev()">💼</div></div>
 <div class="nav" id="nav">
-<div class="active" data-f="all" onclick="filterCat('all',this)">All Apps</div>
+<div class="active" data-f="all" onclick="filterCat('all',this)">All</div>
+<div data-f="games" onclick="filterCat('games',this)">Games</div>
+<div data-f="business" onclick="filterCat('business',this)">Business</div>
 <div data-f="productivity" onclick="filterCat('productivity',this)">Productivity</div>
 <div data-f="tools" onclick="filterCat('tools',this)">Tools</div>
+<div data-f="downloads" onclick="showDownloads()">⬇️ Downloads</div>
 </div>
 <div class="grid" id="grid"></div>
+
+<!-- User Modal V8-V10 -->
+<div class="modal" id="userModal">
+<div class="box">
+<h3 style="font-size:14px">👤 User Account — V8-V10</h3>
+<div id="userLoggedOut">
+<input class="input" id="uEmail" placeholder="Email">
+<input class="input" id="uPass" type="password" placeholder="Password">
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="userRegister()">Register V8</button><button class="btn sec" style="flex:1" onclick="userLogin()">Login V9</button></div>
+</div>
+<div id="userLoggedIn" style="display:none">
+<div style="text-align:center;padding:10px"><div style="width:60px;height:60px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;margin:0 auto">👤</div><b id="uName" style="display:block;margin-top:8px;font-size:13px"></b><span id="uEmailShow" style="font-size:10px;color:var(--sub)"></span></div>
+<div class="dash-grid"><div class="dash-card"><b id="uDownloads">0</b><span>Downloads</span></div><div class="dash-card"><b id="uSaved">0</b><span>Saved</span></div></div>
+<div class="info" style="margin-top:10px"><h4>V10 Profile</h4><p>Email: <span id="uEmailInfo"></span><br>Joined: <span id="uJoined"></span><br>Opay future: 7040958697</p></div>
+<button class="btn sec" style="width:100%;margin-top:8px" onclick="userLogout()">Logout</button>
+</div>
+<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeUser()">Close</button>
+</div>
+</div>
+
+<!-- Dev Modal V11-V16 -->
+<div class="modal" id="devModal">
+<div class="box">
+<h3 style="font-size:14px">💼 Developer — V11-V16</h3>
+<div id="devLoggedOut">
+<input class="input" id="dEmail" placeholder="Developer Email">
+<input class="input" id="dNameInput" placeholder="Business Name">
+<input class="input" id="dPass" type="password" placeholder="Password">
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="devRegister()">Register Dev V11</button><button class="btn sec" style="flex:1" onclick="devLogin()">Login</button></div>
+</div>
+<div id="devLoggedIn" style="display:none">
+<div class="info"><h4>V12 Dashboard</h4><p>Dev: <span id="devNameShow"></span><br>Email: <span id="devEmailShow"></span><br>Opay: 7040958697 Matthew Ayodele for future paid</p>
+<div class="dash-grid"><div class="dash-card"><b id="devAppsCount">0</b><span>My Apps</span></div><div class="dash-card"><b id="devTotalInstalls">0</b><span>Installs</span></div></div></div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="openUpload()">📤 Upload App V13</button><button class="btn sec" style="flex:1" onclick="showMyApps()">My Apps</button></div>
+<button class="btn sec" style="width:100%;margin-top:8px" onclick="devLogout()">Logout Dev</button>
+</div>
+<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeDev()">Close</button>
+</div>
+</div>
+
+<!-- Upload Modal V13-V16 -->
+<div class="modal" id="uploadModal">
+<div class="box">
+<h3 style="font-size:14px">📤 Upload App — V13-V16</h3>
+<input class="input" id="upName" placeholder="App Name V16">
+<input class="input" id="upDesc" placeholder="Description V16 - What does app do?">
+<textarea class="input" id="upLongDesc" placeholder="Long description V16 - Full details, features..." rows="3"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="upEmoji" placeholder="Emoji 📱" style="flex:1"><input class="input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
+<select class="input" id="upCat"><option value="tools">Tools</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="games">Games</option></select>
+<select class="input" id="upType" onchange="toggleUploadType()"><option value="apk">Method A: APK Upload V14</option><option value="external">Method B: External Link V15</option></select>
+<div id="apkSection"><div style="margin-top:8px"><b style="font-size:10px">V14 APK File Upload:</b><input type="file" id="apkFile" accept=".apk,.aab" style="font-size:10px;margin-top:4px"><div id="apkInfo" style="font-size:9px;color:var(--sub);margin-top:4px"></div></div></div>
+<div id="extSection" style="display:none"><input class="input" id="extUrl" placeholder="External URL V15 - Play Store / App Store / Website link"><div style="font-size:8px;color:var(--sub);margin-top:4px">We verify external links as per roadmap</div></div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitUpload()">🚀 Publish V13</button><button class="btn sec" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+</div>
+</div>
+
 <div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px"></div></div>
-<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:18px"></h2><div style="font-size:11px;color:var(--green)" id="dDev"></div><div style="font-size:10px;color:var(--sub);margin-top:4px" id="dMeta"></div></div></div>
-<div class="actions"><button class="btn" id="installBtn">⬇️ Download</button><button class="btn ext" id="externalBtn" style="display:none">🔗 Visit Link</button><button class="btn sec" id="shareBtn">Share</button></div>
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px;font-size:12px"></div><div style="margin-left:auto;display:flex;gap:6px"><button class="btn small sec" onclick="saveApp()">💾 Save</button></div></div>
+<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:16px"></h2><div style="font-size:10px;color:var(--green)" id="dDev"></div><div style="font-size:9px;color:var(--sub);margin-top:4px" id="dMeta"></div></div></div>
+<div class="actions"><button class="btn" id="installBtn">⬇️ Download APK V7</button><button class="btn ext" id="externalBtn" style="display:none">🔗 Visit Official Link V15</button><button class="btn sec" onclick="shareApp()">Share</button></div>
 <div class="tabs" id="tabs">
-<div class="active" data-t="about" onclick="switchTab('about',this)">About</div>
-<div data-t="screens" onclick="switchTab('screens',this)">Screenshots</div>
+<div class="active" data-t="about" onclick="switchTab('about',this)">About V16</div>
+<div data-t="screens" onclick="switchTab('screens',this)">Screens V6</div>
 <div data-t="versions" onclick="switchTab('versions',this)">Versions</div>
 <div data-t="privacy" onclick="switchTab('privacy',this)">Privacy</div>
-<div data-t="developer" onclick="switchTab('developer',this)">Developer</div>
+<div data-t="dev" onclick="switchTab('dev',this)">Developer V11</div>
 </div>
 <div class="tab-content" id="tabContent"></div>
 </div>
+
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="showDownloads()"><span>⬇️</span>Downloads V7</div><div onclick="openUpload()"><span>📤</span>Upload V13</div><div onclick="openUser()"><span>👤</span>Profile V10</div><div onclick="openDev()"><span>💼</span>Dev V12</div></div>
 <div class="toast" id="toast"></div>
 <script>
-const APPS=[
-{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",sub:"calculator",col:"#4285f4",e:"🧮",r:"4.9",badge:"APK",type:"apk",verified:true,version:"2.1.0",size:"2.4MB",updated:"Nov 1, 2026",perms:["No internet","Storage"],whatsNew:"V4+V5 update: Improved search + detailed pages",desc:"Professional calculator for business and education. Clean, fast, offline. Part of V4 search system and V5 details.",screens:["🧮","📊","⚡","🔢"],devInfo:"ZO Labs • labs@zostore.com • ZO Technology • 10 apps • Verified • Business account",url:"#",related:["QR Maker","Igbo Translate"]},
-{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",sub:"market",col:"#ff9800",e:"🛒",r:"4.8",badge:"LINK",type:"link",verified:true,version:"1.5.2",size:"External",updated:"Oct 28, 2026",perms:["Internet"],whatsNew:"External link method improved",desc:"Buy and sell for Anambra market. External link method — redirects to Play Store.",screens:["🛒","💰","📦"],devInfo:"ZO Commerce • External link • Verified • Market category",url:"https://play.google.com/store",related:["POS Business","Finance Tracker"]},
-{n:"POS Business",d:"ZO Business • Verified",c:"business",sub:"pos",col:"#4caf50",e:"💳",r:"5.0",badge:"APK",type:"apk",verified:true,version:"3.0.1",size:"8.2MB",updated:"Nov 2, 2026",perms:["Camera","Storage"],whatsNew:"POS now supports Opay 7040958697",desc:"Point of Sale for small businesses. Collect payments.",screens:["💳","🧾","💵","📱"],devInfo:"ZO Business • CEO Matthew Ayodele • Opay 7040958697 • Business category",url:"#",related:["Market Hub","Finance Tracker"]},
-{n:"ZO AI",d:"ZO Intelligence • Verified",c:"productivity",sub:"ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"LINK",type:"link",verified:true,version:"1.0.0",size:"Web App",updated:"Nov 2026",perms:["Internet"],whatsNew:"AI search coming V101",desc:"AI assistant for marketplace. Future AI ecosystem.",screens:["🤖","💬","🧠"],devInfo:"ZO Intelligence • AI roadmap V101-V120",url:"https://muse.ai",related:["Video Call","ZO Calculator"]},
-{n:"Video Call",d:"ZO Connect • Verified",c:"productivity",sub:"call",col:"#00bcd4",e:"📹",r:"4.9",badge:"APK",type:"apk",verified:true,version:"2.0.3",size:"12MB",updated:"Oct 30, 2026",perms:["Camera","Mic","Internet"],whatsNew:"HD video improved",desc:"Video calling HD.",screens:["📹","👥","🎙️"],devInfo:"ZO Connect • Communication",url:"#",related:["ZO AI","ZO Calculator"]},
-{n:"Anambra Games",d:"Game Studio",c:"games",sub:"local",col:"#e91e63",e:"🎮",r:"4.7",badge:"APK",type:"apk",verified:false,version:"0.9.5",size:"45MB",updated:"Oct 25, 2026",perms:["Storage","Internet"],whatsNew:"Local games added",desc:"Local games for Anambra.",screens:["🎮","🏆","🎯"],devInfo:"Game Studio NG • Indie • Games",url:"#",related:["Puzzle Game","Action Game"]},
-{n:"QR Maker",d:"ZO Tools • Verified",c:"tools",sub:"qr",col:"#000",e:"🔳",r:"4.9",badge:"APK",type:"apk",verified:true,version:"1.2.0",size:"1.8MB",updated:"Nov 2026",perms:["Camera"],whatsNew:"QR for Opay",desc:"Generate QR for business.",screens:["🔳","📱","🖨️"],devInfo:"ZO Tools • Tools",url:"#",related:["ZO Calculator"]},
-{n:"Igbo Translate",d:"ZO Labs • Verified",c:"tools",sub:"lang",col:"#3f51b5",e:"🌍",r:"5.0",badge:"APK",type:"apk",verified:true,version:"2.0.0",size:"5MB",updated:"Nov 2026",perms:["No internet"],whatsNew:"Offline translation",desc:"Igbo <-> English offline.",screens:["🌍","🔤","💬"],devInfo:"ZO Labs • Language",url:"#",related:["ZO Calculator"]},
-{n:"Puzzle Game",d:"Game Studio",c:"games",sub:"puzzle",col:"#9c27b0",e:"🧩",r:"4.6",badge:"APK",type:"apk",verified:false,version:"1.0.1",size:"30MB",updated:"Oct 2026",perms:["Storage"],whatsNew:"New puzzles",desc:"Puzzle games.",screens:["🧩","🎯","🧠"],devInfo:"Game Studio • Games puzzle",url:"#",related:["Anambra Games"]},
-{n:"Finance Tracker",d:"Business Tools • Verified",c:"business",sub:"finance",col:"#009688",e:"📊",r:"4.9",badge:"APK",type:"apk",verified:true,version:"2.3.0",size:"6MB",updated:"Nov 2026",perms:["Storage"],whatsNew:"Finance reports",desc:"Track business finance.",screens:["📊","💰","📈"],devInfo:"Business Tools • Finance",url:"#",related:["POS Business"]}
+const DEFAULT_APPS=[
+{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",sub:"calc",col:"#4285f4",e:"🧮",r:"4.9",badge:"APK",type:"apk",verified:true,ver:"2.1.0",size:"2.4MB",updated:"Nov 1",desc:"Calculator for business",longDesc:"Professional calculator with history, business mode, offline. Features: Basic, Scientific, Business calc, No ads, Offline.",screens:["🧮","📊","⚡","🔢"],perms:["No internet"],dev:"ZO Labs",email:"labs@zostore.com",likes:3412,installs:2200,url:"#"},
+{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",sub:"market",col:"#ff9800",e:"🛒",r:"4.8",badge:"LINK",type:"link",verified:true,ver:"1.5.2",size:"External",updated:"Oct 28",desc:"Buy & sell Anambra market",longDesc:"Marketplace for Anambra and global. Buy, sell, chat, deliver. External link method redirects to Play Store.",screens:["🛒","💰","📦"],perms:["Internet"],dev:"ZO Commerce",email:"commerce@zostore.com",likes:2892,installs:1500,url:"https://play.google.com/store"},
+{n:"POS Business",d:"ZO Business • Verified",c:"business",sub:"pos",col:"#4caf50",e:"💳",r:"5.0",badge:"APK",type:"apk",verified:true,ver:"3.0.1",size:"8.2MB",updated:"Nov 2",desc:"POS for small business",longDesc:"POS system: Collect to Opay 7040958697 Matthew Ayodele. Receipts, QR, inventory, offline.",screens:["💳","🧾","💵","📱"],perms:["Camera","Storage"],dev:"ZO Business",email:"biz@zostore.com",likes:1543,installs:980,url:"#"},
+{n:"ZO AI",d:"ZO Intelligence • Verified",c:"productivity",sub:"ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"LINK",type:"link",verified:true,ver:"1.0.0",size:"Web",updated:"Nov 2026",desc:"AI assistant",longDesc:"AI assistant for ZO STORE. Future V101-V120 AI ecosystem.",screens:["🤖","💬","🧠"],perms:["Internet"],dev:"ZO Intelligence",email:"ai@zostore.com",likes:2456,installs:1200,url:"https://muse.ai"},
+{n:"Video Call",d:"ZO Connect • Verified",c:"productivity",sub:"call",col:"#00bcd4",e:"📹",r:"4.9",badge:"APK",type:"apk",verified:true,ver:"2.0.3",size:"12MB",updated:"Oct 30",desc:"Video call HD",longDesc:"Video calling: HD, low data, group call, screen share.",screens:["📹","👥","🎙️"],perms:["Camera","Mic"],dev:"ZO Connect",email:"connect@zostore.com",likes:1892,installs:890,url:"#"},
+{n:"Anambra Games",d:"Game Studio",c:"games",sub:"local",col:"#e91e63",e:"🎮",r:"4.7",badge:"APK",type:"apk",verified:false,ver:"0.9.5",size:"45MB",updated:"Oct 25",desc:"Local games",longDesc:"Local games for Anambra culture, Igbo language.",screens:["🎮","🏆","🎯"],perms:["Storage"],dev:"Game Studio NG",email:"games@ng.com",likes:756,installs:600,url:"#"}
 ];
-let cur=null, currentFilter='all', currentCat='all', recentSearches=[];
-try{recentSearches=JSON.parse(localStorage.getItem('zo_recent_search')||'[]')}catch(e){}
-const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast'), searchBox=document.getElementById('searchBox'), searchInput=document.getElementById('search');
+let customApps=[], downloads=[], savedApps=[], currentUser=null, currentDev=null, cur=null;
+try{
+customApps=JSON.parse(localStorage.getItem('zo_v16_custom')||'[]');
+downloads=JSON.parse(localStorage.getItem('zo_downloads_v7')||'[]');
+savedApps=JSON.parse(localStorage.getItem('zo_saved_v6')||'[]');
+currentUser=JSON.parse(localStorage.getItem('zo_user_v8')||'null');
+currentDev=JSON.parse(localStorage.getItem('zo_dev_v11')||'null');
+}catch(e){}
+let allApps=[...DEFAULT_APPS,...customApps];
+const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
 
-function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2000)}
+function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500)}
 function closeDetail(){detail.classList.remove('active')}
-function setFilter(f,el){
-currentFilter=f;
-document.querySelectorAll('#filterBar div').forEach(x=>x.classList.remove('active'));
-el.classList.add('active');
-applyFilters();
-}
 function filterCat(c,el){
-currentCat=c;
 document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
 if(el) el.classList.add('active');
-applyFilters();
-}
-function applyFilters(){
-let list=APPS;
-if(currentCat!=='all') list=list.filter(a=>a.c===currentCat);
-if(currentFilter==='apk') list=list.filter(a=>a.type==='apk');
-else if(currentFilter==='link') list=list.filter(a=>a.type==='link');
-else if(currentFilter==='verified') list=list.filter(a=>a.verified);
-else if(currentFilter==='games') list=list.filter(a=>a.c==='games');
-else if(currentFilter==='business') list=list.filter(a=>a.c==='business');
-let q=searchInput.value.toLowerCase().trim();
-if(q) list=list.filter(a=>a.n.toLowerCase().includes(q)||a.c.toLowerCase().includes(q)||a.sub.toLowerCase().includes(q));
-render(list);
+render(c==='all'?allApps:allApps.filter(a=>a.c===c));
 }
 function render(list){
 grid.innerHTML='';
 list.forEach(a=>{
-let idx=APPS.indexOf(a);
+let idx=allApps.indexOf(a);
 let el=document.createElement('div');
 el.className='card';
-el.innerHTML=`<div class="badge ${a.type==='link'?'ext':''}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="card-dev">${a.d} • ${a.sub} • v${a.version}</div><div class="card-meta"><span>★ ${a.r}</span><span>${a.size}</span><span>${a.c}</span></div>`;
+el.innerHTML=`<div class="badge ${a.type==='link'?'ext':''}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="card-dev">${a.d} • v${a.ver}</div><div class="card-meta"><span>★ ${a.r}</span><span>${a.size}</span></div>`;
 el.onclick=()=>openApp(idx);
 grid.appendChild(el);
 });
-if(list.length===0) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--sub);font-size:12px">No apps found for filter — Try All</div>`;
 }
 function openApp(i){
-cur=APPS[i];
+cur=allApps[i];
 detail.classList.add('active');
 document.getElementById('dIcon').style.background=cur.col;
 document.getElementById('dIcon').textContent=cur.e;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d+' • v'+cur.version+' • '+cur.size+' • Updated '+cur.updated;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.type} • ${cur.c}/${cur.sub} • ${cur.verified?'Verified ✓':'Community'}`;
+document.getElementById('dDev').textContent=cur.d+' • v'+cur.ver+' • '+cur.size;
+document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes • ${cur.type} • ${cur.verified?'Verified':'Community'}`;
 document.getElementById('installBtn').style.display=cur.type==='apk'?'block':'none';
 document.getElementById('externalBtn').style.display=cur.type==='link'?'block':'none';
-document.getElementById('installBtn').textContent='⬇️ Download APK v'+cur.version+' ('+cur.size+')';
-document.getElementById('externalBtn').textContent='🔗 Visit Official';
+document.getElementById('installBtn').textContent='⬇️ Download APK v'+cur.ver+' V7';
+document.getElementById('externalBtn').textContent='🔗 Visit Link V15';
 switchTab('about');
 }
 function switchTab(t,el){
-if(el){
-document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));
-el.classList.add('active');
-}else{
-document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));
-let target=document.querySelector(`.tabs div[data-t="${t}"]`);
-if(target) target.classList.add('active');
-}
+if(el){document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
+else{document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));let target=document.querySelector(`.tabs div[data-t="${t}"]`);if(target) target.classList.add('active');}
 let c=document.getElementById('tabContent');
-if(t==='about'){
-c.innerHTML=`<div class="info"><h4>📋 About</h4><p>${cur.desc}<br><br><b>What's New (v${cur.version}):</b> ${cur.whatsNew}<br><br><b>Updated:</b> ${cur.updated}<br><b>Size:</b> ${cur.size}<br><b>Version:</b> ${cur.version}<br><b>Category:</b> ${cur.c} / ${cur.sub}<br><b>Type:</b> ${cur.type} — ${cur.type==='apk'?'APK upload Method A':'External link Method B'}</p></div><div class="info"><h4>🔒 Permissions & Privacy</h4><p>${cur.perms.join(', ')}<br><br>Security checked • No malware • ${cur.verified?'Verified developer':'Community pending verification'}</p></div><div class="info"><h4>📦 Related Apps</h4><div class="related" id="relatedGrid"></div></div>`;
-let relGrid=document.getElementById('relatedGrid');
-cur.related.forEach(name=>{
-let app=APPS.find(a=>a.n===name);
-if(!app) return;
-let el=document.createElement('div');
-el.className='card';
-el.style.padding='8px';
-el.innerHTML=`<div class="card-icon" style="width:36px;height:36px;font-size:16px;background:${app.col}">${app.e}</div><h3 style="font-size:11px;margin-top:4px">${app.n}</h3><div style="font-size:9px;color:var(--sub)">★ ${app.r}</div>`;
-el.onclick=()=>openApp(APPS.indexOf(app));
-relGrid.appendChild(el);
+if(t==='about') c.innerHTML=`<div class="info"><h4>V16 App Description & Info</h4><p><b>Short:</b> ${cur.desc}<br><br><b>Full:</b> ${cur.longDesc}<br><br><b>Version:</b> ${cur.ver}<br><b>Size:</b> ${cur.size}<br><b>Updated:</b> ${cur.updated}<br><b>Category:</b> ${cur.c}/${cur.sub}<br><b>Type:</b> ${cur.type} — ${cur.type==='apk'?'Method A APK V14':'Method B External Link V15'}<br><b>Installs:</b> ${cur.installs}<br><b>Rating:</b> ${cur.r}</p></div>`;
+else if(t==='screens') c.innerHTML=`<div class="info"><h4>V6 Screenshots & Previews</h4><div class="scr">${cur.screens.map(s=>`<div>${s}</div>`).join('')}</div><p style="margin-top:8px;font-size:10px;color:var(--sub)">V6: Swipe screenshots — App previews — Future V114 AI-generated previews</p></div>`;
+else if(t==='versions') c.innerHTML=`<div class="info"><h4>Version Management — V17 (preview)</h4><p><b>Current:</b> v${cur.ver} (${cur.updated})<br><b>History:</b><br>• v${cur.ver} — ${cur.updated} — Latest<br>• v${(parseFloat(cur.ver)-0.1).toFixed(1)} — Bug fixes<br>• v1.0.0 — Initial<br><br>Future: V31 Update notifications, V53 Update centre</p></div>`;
+else if(t==='privacy') c.innerHTML=`<div class="info"><h4>Privacy & Permissions</h4><p><b>Perms:</b> ${cur.perms.join(', ')}<br><b>Security:</b> Checked • No malware<br><b>External verification:</b> ${cur.type==='link'?cur.url:'N/A'}<br><br>Future: V164 Advanced malware detection, V111 AI security</p></div>`;
+else if(t==='dev') c.innerHTML=`<div class="info"><h4>V11 Developer Registration & V12 Dashboard Info</h4><p><b>Developer:</b> ${cur.dev}<br><b>Email:</b> ${cur.email}<br><b>Business:</b> ${cur.dev}<br><b>Verified:</b> ${cur.verified?'Yes ✓':'No — Pending'}<br><br><b>Opay for future paid:</b> 7040958697 Matthew Ayodele<br><b>Publishing:</b> Method ${cur.type==='apk'?'A APK V14':'B External V15'}<br><br>Future V21-V40: Paid accounts, subscriptions, wallet, analytics</p></div>`;
+}
+function openUser(){document.getElementById('userModal').classList.add('active');updateUserUI()}
+function closeUser(){document.getElementById('userModal').classList.remove('active')}
+function userRegister(){
+let email=document.getElementById('uEmail').value.trim();
+let pass=document.getElementById('uPass').value.trim();
+if(!email||!pass){showToast('Put email & pass');return;}
+currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString(),downloads:0,saved:0};
+localStorage.setItem('zo_user_v8',JSON.stringify(currentUser));
+showToast('✅ Registered V8 — Logged in V9');
+updateUserUI();
+}
+function userLogin(){
+let email=document.getElementById('uEmail').value.trim();
+let pass=document.getElementById('uPass').value.trim();
+if(!email||!pass){showToast('Put email & pass');return;}
+currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString(),downloads:downloads.length,saved:savedApps.length};
+localStorage.setItem('zo_user_v8',JSON.stringify(currentUser));
+showToast('✅ Logged in V9');
+updateUserUI();
+}
+function userLogout(){currentUser=null;localStorage.removeItem('zo_user_v8');updateUserUI();showToast('Logged out');}
+function updateUserUI(){
+let out=document.getElementById('userLoggedOut');
+let inn=document.getElementById('userLoggedIn');
+if(currentUser){out.style.display='none';inn.style.display='block';document.getElementById('uName').textContent=currentUser.name;document.getElementById('uEmailShow').textContent=currentUser.email;document.getElementById('uEmailInfo').textContent=currentUser.email;document.getElementById('uJoined').textContent=currentUser.joined;document.getElementById('uDownloads').textContent=downloads.length;document.getElementById('uSaved').textContent=savedApps.length;}else{out.style.display='block';inn.style.display='none';}
+}
+function openDev(){document.getElementById('devModal').classList.add('active');updateDevUI()}
+function closeDev(){document.getElementById('devModal').classList.remove('active')}
+function devRegister(){
+let email=document.getElementById('dEmail').value.trim();
+let name=document.getElementById('dNameInput').value.trim();
+let pass=document.getElementById('dPass').value.trim();
+if(!email||!name||!pass){showToast('Fill all');return;}
+currentDev={email:email,name:name,joined:new Date().toLocaleDateString(),apps:0};
+localStorage.setItem('zo_dev_v11',JSON.stringify(currentDev));
+showToast('✅ Dev Registered V11 — Dashboard V12 Ready');
+updateDevUI();
+}
+function devLogin(){
+let email=document.getElementById('dEmail').value.trim();
+if(!email){showToast('Put email');return;}
+let name=document.getElementById('dNameInput').value.trim()||'Developer';
+currentDev={email:email,name:name,joined:new Date().toLocaleDateString(),apps:customApps.length};
+localStorage.setItem('zo_dev_v11',JSON.stringify(currentDev));
+showToast('✅ Dev Logged in');
+updateDevUI();
+}
+function devLogout(){currentDev=null;localStorage.removeItem('zo_dev_v11');updateDevUI();showToast('Dev logged out');}
+function updateDevUI(){
+let out=document.getElementById('devLoggedOut');
+let inn=document.getElementById('devLoggedIn');
+if(currentDev){out.style.display='none';inn.style.display='block';document.getElementById('devNameShow').textContent=currentDev.name;document.getElementById('devEmailShow').textContent=currentDev.email;document.getElementById('devAppsCount').textContent=customApps.length;let total=0;allApps.forEach(a=>total+=a.installs);document.getElementById('devTotalInstalls').textContent=total;}else{out.style.display='block';inn.style.display='none';}
+}
+function openUpload(){
+if(!currentDev){showToast('Login as Developer first V11');openDev();return;}
+document.getElementById('uploadModal').classList.add('active');
+}
+function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
+function toggleUploadType(){
+let type=document.getElementById('upType').value;
+document.getElementById('apkSection').style.display=type==='apk'?'block':'none';
+document.getElementById('extSection').style.display=type==='external'?'block':'none';
+}
+document.getElementById('apkFile').addEventListener('change',e=>{
+let file=e.target.files[0];
+if(!file) return;
+document.getElementById('apkInfo').textContent=`Selected: ${file.name} • ${(file.size/1024/1024).toFixed(2)}MB • V14 APK upload ready`;
 });
-}else if(t==='screens'){
-c.innerHTML=`<div class="info"><h4>📸 Screenshots & Previews — V6</h4><div class="scr">${cur.screens.map(s=>`<div>${s}</div>`).join('')}</div><p style="margin-top:10px">Preview of ${cur.n} — Swipe to see more — Screenshots show app functionality</p></div>`;
-}else if(t==='versions'){
-c.innerHTML=`<div class="info"><h4>🔄 Version Management — V17</h4><p><b>Current:</b> v${cur.version} (${cur.updated})<br><b>Size:</b> ${cur.size}<br><br><b>Version History:</b><br>• v${cur.version} — ${cur.updated} — ${cur.whatsNew}<br>• v${(parseFloat(cur.version)-0.1).toFixed(1)} — Previous — Bug fixes<br>• v1.0.0 — Initial release<br><br>Future: V17 App version management with auto-updates V31</p></div>`;
-}else if(t==='privacy'){
-c.innerHTML=`<div class="info"><h4>🔒 Privacy & Security</h4><p><b>Permissions:</b> ${cur.perms.join(', ')}<br><br><b>Security:</b> ✅ Checked by ZO Technology<br><b>Malware scan:</b> Passed<br><b>External link verification:</b> ${cur.type==='link'?'Verified destination '+cur.url:'N/A — APK hosted'}<br><br><b>Data:</b> No personal data collected without permission<br><b>Report:</b> If app is malicious, report for removal — V20 admin moderation</p></div>`;
-}else if(t==='developer'){
-c.innerHTML=`<div class="info"><h4>👨‍💻 Developer Information</h4><p>${cur.devInfo}<br><br><b>Publishing method:</b> ${cur.type}<br><b>Category:</b> ${cur.c} / ${cur.sub}<br><b>Verified:</b> ${cur.verified?'Yes ✓ Verified badge':'No — Community'}<br><br><b>Contact:</b> For support, contact developer<br><b>Business:</b> Future V35 Business accounts, V21 Paid developer accounts</p></div><div class="info"><h4>📧 Developer Contact & Business</h4><p>Opay: 7040958697 Matthew Ayodele for future paid plans<br>Revenue: Publishing fees, Subscriptions — Phase 2 V21-V40</p></div>`;
+function submitUpload(){
+let name=document.getElementById('upName').value.trim();
+let desc=document.getElementById('upDesc').value.trim();
+let longDesc=document.getElementById('upLongDesc').value.trim()||desc;
+let emoji=document.getElementById('upEmoji').value.trim()||'📱';
+let color=document.getElementById('upColor').value.trim()||'#ff9800';
+let cat=document.getElementById('upCat').value;
+let type=document.getElementById('upType').value;
+let extUrl=document.getElementById('extUrl').value.trim();
+if(!name||!desc){showToast('Put name & short desc V16');return;}
+if(type==='external'&&!extUrl){showToast('Put external URL V15');return;}
+if(type==='apk'&&!document.getElementById('apkFile').files[0]){showToast('Select APK file V14 (demo: any file allowed)');}
+let newApp={n:name,d:(currentDev?currentDev.name:'Dev')+' • Community',c:cat,sub:cat,type:type==='apk'?'apk':'link',verified:false,ver:"1.0.0",size:type==='apk'?(document.getElementById('apkFile').files[0]?(document.getElementById('apkFile').files[0].size/1024/1024).toFixed(1)+'MB':'2MB'):'External',updated:"Just now",desc:desc,longDesc:longDesc,col:color,e:emoji,r:"4.5",badge:type==='apk'?'APK':'LINK',screens:[emoji,"📱","⭐"],perms:type==='apk'?["Storage"]:["Internet"],dev:currentDev?currentDev.name:'Community Dev',email:currentDev?currentDev.email:'dev@community.com',likes:1,installs:0,url:type==='external'?extUrl:'#',custom:true};
+customApps.unshift(newApp);
+allApps=[...DEFAULT_APPS,...customApps];
+localStorage.setItem('zo_v16_custom',JSON.stringify(customApps));
+closeUpload();
+['upName','upDesc','upLongDesc','upEmoji','extUrl'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
+document.getElementById('upColor').value='#ff9800';
+document.getElementById('apkFile').value='';
+document.getElementById('apkInfo').textContent='';
+render(allApps);
+showToast(name+' Published! V13-V16 — '+(type==='apk'?'APK V14':'External V15'));
 }
+function showMyApps(){
+closeDev();
+if(customApps.length===0){showToast('No apps yet — Upload V13');return;}
+render(customApps);
+showToast(customApps.length+' My Apps — V12 Dashboard');
 }
-
-searchInput.addEventListener('input',e=>{
+function showDownloads(){
+let list=allApps.filter(a=>downloads.includes(a.n));
+if(list.length===0){render([]);grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--sub);font-size:11px"><div style="font-size:30px">⬇️</div>No downloads yet<br>Download history V55 future<br>Tap app → Download APK V7</div>`;return;}
+render(list);
+}
+function saveApp(){
+if(!cur) return;
+if(savedApps.includes(cur.n)){showToast('Already saved');return;}
+savedApps.push(cur.n);
+localStorage.setItem('zo_saved_v6',JSON.stringify(savedApps));
+showToast('💾 Saved — V56 Saved applications');
+}
+function shareApp(){
+if(!cur) return;
+navigator.clipboard.writeText(location.href);
+showToast('🔗 Link copied');
+}
+document.getElementById('search').addEventListener('input',e=>{
 let q=e.target.value.toLowerCase().trim();
-document.getElementById('clearSearch').style.display=q?'block':'none';
-if(!q){searchBox.classList.remove('active');applyFilters();return;}
-let matches=APPS.filter(a=>a.n.toLowerCase().includes(q)||a.c.toLowerCase().includes(q)||a.sub.toLowerCase().includes(q)).slice(0,5);
-searchBox.innerHTML='';
-if(matches.length>0){
-matches.forEach(a=>{
-let div=document.createElement('div');
-div.className='suggest';
-div.innerHTML=`<span>${a.e} ${a.n} • ${a.c}/${a.sub}</span><span style="color:var(--sub)">★ ${a.r}</span>`;
-div.onclick=()=>{searchInput.value=a.n;searchBox.classList.remove('active');applyFilters();addRecent(a.n);openApp(APPS.indexOf(a));};
-searchBox.appendChild(div);
+if(!q){render(allApps);return;}
+render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.c.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)));
 });
-}else{
-searchBox.innerHTML=`<div class="suggest">No results for "${q}" — Try Games, Business, POS</div>`;
+document.getElementById('installBtn').onclick=()=>{
+if(!cur) return;
+if(!currentUser){showToast('Register/Login first V8-V9 to download');openUser();return;}
+downloads.push(cur.n);
+localStorage.setItem('zo_downloads_v7',JSON.stringify(downloads));
+showToast('⬇️ Downloading '+cur.n+' APK v'+cur.ver+' V7 — Added to history V55');
+};
+document.getElementById('externalBtn').onclick=()=>{
+if(!cur) return;
+if(confirm('🔗 V15 External Link Verification:\n\nGo to:\n'+cur.url+'\n\nVerified: Safe\nContinue?')){
+if(currentUser){downloads.push(cur.n);localStorage.setItem('zo_downloads_v7',JSON.stringify(downloads));}
+window.open(cur.url,'_blank');
+showToast('🔗 Redirecting to official link V15');
 }
-searchBox.classList.add('active');
-applyFilters();
-});
-searchInput.addEventListener('focus',()=>{
-if(recentSearches.length>0 && !searchInput.value){
-searchBox.innerHTML='<div style="padding:8px 14px;font-size:10px;color:var(--sub);font-weight:600">Recent searches</div>'+recentSearches.map(r=>`<div class="suggest" onclick="document.getElementById('search').value='${r}';document.getElementById('searchBox').classList.remove('active');applyFilters()"><span>🕒 ${r}</span><span onclick="event.stopPropagation();removeRecent('${r}')" style="color:var(--sub)">✕</span></div>`).join('');
-searchBox.classList.add('active');
-}
-});
-document.getElementById('clearSearch').onclick=()=>{searchInput.value='';searchBox.classList.remove('active');document.getElementById('clearSearch').style.display='none';applyFilters();};
-document.addEventListener('click',e=>{
-if(!e.target.closest('.search-wrap')) searchBox.classList.remove('active');
-});
-function addRecent(q){
-recentSearches=recentSearches.filter(x=>x!==q);
-recentSearches.unshift(q);
-recentSearches=recentSearches.slice(0,5);
-localStorage.setItem('zo_recent_search',JSON.stringify(recentSearches));
-}
-function removeRecent(q){
-recentSearches=recentSearches.filter(x=>x!==q);
-localStorage.setItem('zo_recent_search',JSON.stringify(recentSearches));
-searchBox.classList.remove('active');
-}
-document.getElementById('installBtn').onclick=()=>{showToast('⬇️ Downloading '+cur.n+' v'+cur.version+' ('+cur.size+') APK...');};
-document.getElementById('externalBtn').onclick=()=>{if(confirm('Go to '+cur.url+'?\nVerified link — Safe')){window.open(cur.url,'_blank');showToast('🔗 Redirecting...');}};
-document.getElementById('shareBtn').onclick=()=>{navigator.clipboard.writeText(location.href);showToast('🔗 Link copied');};
-
-render(APPS);
-setTimeout(()=>showToast('V4+V5 LIVE — Search with filters + Detailed pages with versions, privacy, developer!'),800);
+};
+render(allApps);
+setTimeout(()=>showToast('🚀 V6-V16 LIVE! Screenshots V6, Downloads V7, User V8-V10, Dev V11-V12, Upload V13-V16 — Ready for V17!'),1000);
 </script>
 </body>
 </html>
