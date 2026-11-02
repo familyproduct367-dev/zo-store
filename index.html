@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE</title>
+<title>ZO STORE V17-V20</title>
 <meta name="theme-color" content="#01875f">
 <style>
-:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800}
+:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800;--red:#ea4335}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
 body{background:var(--bg);color:var(--text);padding-bottom:60px}
 .hdr{padding:10px 14px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
@@ -22,14 +22,16 @@ body{background:var(--bg);color:var(--text);padding-bottom:60px}
 .card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
 .card h3{font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-dev{font-size:9px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-size:9px;color:var(--sub);margin-top:3px;display:flex;gap:4px}
 .badge{position:absolute;top:5px;right:5px;background:var(--green);color:#fff;font-size:6px;padding:2px 4px;border-radius:6px;font-weight:700}
-.badge.ext{background:var(--orange)}
+.badge.pending{background:var(--orange)}
+.badge.rejected{background:var(--red)}
 .detail{position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
 .detail-top{padding:8px 12px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:2}
 .dhead{padding:12px;background:var(--card);display:flex;gap:10px;border-bottom:1px solid var(--border)}
 .dicon{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff}
-.actions{padding:10px 12px;display:flex;gap:6px;background:var(--card);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.actions{padding:10px 12px;display:flex;gap:6px;background:var(--card);border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
 .btn{background:var(--green);color:#fff;border:none;padding:8px 14px;border-radius:16px;font-weight:600;cursor:pointer;font-size:11px}
 .btn.sec{background:var(--bg);color:var(--text);border:1px solid var(--border)}
 .btn.ext{background:var(--orange);color:#000}
@@ -45,28 +47,32 @@ body{background:var(--bg);color:var(--text);padding-bottom:60px}
 .scr div{width:90px;height:160px;background:var(--bg);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
 .modal.active{display:flex}
-.box{background:var(--card);border-radius:12px;padding:14px;width:100%;max-width:400px;max-height:90vh;overflow:auto}
+.box{background:var(--card);border-radius:12px;padding:14px;width:100%;max-width:420px;max-height:90vh;overflow:auto}
 .input{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:11px;margin-top:6px}
+.stars{display:flex;gap:4px;font-size:20px;cursor:pointer;margin:6px 0}
+.stars span{color:#e0e0e0}
+.stars span.active{color:gold}
+.review{padding:8px;background:var(--bg);border-radius:8px;margin-top:6px;border:1px solid var(--border)}
+.review-head{display:flex;justify-content:space-between;font-size:10px}
+.review-text{font-size:10px;margin-top:4px;line-height:1.4}
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;z-index:40}
 .bnav div{font-size:8px;text-align:center;color:var(--sub);cursor:pointer}
 .bnav div.active{color:var(--green)}
 .bnav span{font-size:16px;display:block}
 .toast{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 12px;border-radius:14px;font-size:10px;display:none;z-index:400;max-width:90%;text-align:center}
-.dash-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
-.dash-card{background:var(--bg);border-radius:8px;padding:10px;border:1px solid var(--border);text-align:center}
-.dash-card b{display:block;font-size:14px;color:var(--green)}
-.dash-card span{font-size:9px;color:var(--sub)}
+.admin-bar{background:#111;color:#0f0;padding:6px 12px;font-size:9px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:50}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search apps..."></div><div class="icon" onclick="openUser()">👤</div><div class="icon" onclick="openDev()">💼</div></div>
+<div id="adminBar" class="admin-bar" style="display:none"><span>Admin Mode • <span id="adminStats"></span></span><span onclick="toggleAdmin()" style="cursor:pointer">Exit ✕</span></div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search apps..."></div><div class="icon" onclick="openUser()">👤</div><div class="icon" onclick="openAdminLogin()">👑</div></div>
 <div class="nav" id="nav">
 <div class="active" data-f="all" onclick="filterCat('all',this)">All</div>
 <div data-f="games" onclick="filterCat('games',this)">Games</div>
 <div data-f="business" onclick="filterCat('business',this)">Business</div>
 <div data-f="productivity" onclick="filterCat('productivity',this)">Productivity</div>
 <div data-f="tools" onclick="filterCat('tools',this)">Tools</div>
-<div data-f="downloads" onclick="showDownloads()">Downloads</div>
+<div data-f="pending" id="pendingTab" style="display:none" onclick="filterCat('pending',this)">Pending</div>
 </div>
 <div class="grid" id="grid"></div>
 
@@ -74,36 +80,24 @@ body{background:var(--bg);color:var(--text);padding-bottom:60px}
 <div class="box">
 <h3 style="font-size:14px">User Account</h3>
 <div id="userLoggedOut" style="margin-top:10px">
-<input class="input" id="uEmail" placeholder="Email address">
+<input class="input" id="uEmail" placeholder="Email">
 <input class="input" id="uPass" type="password" placeholder="Password">
 <div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="userRegister()">Create Account</button><button class="btn sec" style="flex:1" onclick="userLogin()">Sign In</button></div>
 </div>
 <div id="userLoggedIn" style="display:none">
 <div style="text-align:center;padding:10px"><div style="width:60px;height:60px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;margin:0 auto">👤</div><b id="uName" style="display:block;margin-top:8px;font-size:13px"></b><span id="uEmailShow" style="font-size:10px;color:var(--sub)"></span></div>
-<div class="dash-grid"><div class="dash-card"><b id="uDownloads">0</b><span>Downloads</span></div><div class="dash-card"><b id="uSaved">0</b><span>Saved</span></div></div>
-<div class="info" style="margin-top:10px"><h4>Profile</h4><p>Email: <span id="uEmailInfo"></span><br>Joined: <span id="uJoined"></span></p></div>
 <button class="btn sec" style="width:100%;margin-top:8px" onclick="userLogout()">Sign Out</button>
 </div>
 <button class="btn sec" style="width:100%;margin-top:10px" onclick="closeUser()">Close</button>
 </div>
 </div>
 
-<div class="modal" id="devModal">
+<div class="modal" id="adminLoginModal">
 <div class="box">
-<h3 style="font-size:14px">Developer Center</h3>
-<div id="devLoggedOut" style="margin-top:10px">
-<input class="input" id="dEmail" placeholder="Developer email">
-<input class="input" id="dNameInput" placeholder="Business name">
-<input class="input" id="dPass" type="password" placeholder="Password">
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="devRegister()">Create Developer Account</button><button class="btn sec" style="flex:1" onclick="devLogin()">Sign In</button></div>
-</div>
-<div id="devLoggedIn" style="display:none">
-<div class="info"><h4>Dashboard</h4><p>Business: <span id="devNameShow"></span><br>Email: <span id="devEmailShow"></span></p>
-<div class="dash-grid"><div class="dash-card"><b id="devAppsCount">0</b><span>My Apps</span></div><div class="dash-card"><b id="devTotalInstalls">0</b><span>Installs</span></div></div></div>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="openUpload()">Upload App</button><button class="btn sec" style="flex:1" onclick="showMyApps()">My Apps</button></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="devLogout()">Sign Out</button>
-</div>
-<button class="btn sec" style="width:100%;margin-top:10px" onclick="closeDev()">Close</button>
+<h3 style="font-size:14px">Admin Access</h3>
+<input class="input" id="adminPass" type="password" placeholder="Admin password">
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="loginAdmin()">Login</button><button class="btn sec" style="flex:1" onclick="closeAdminLogin()">Cancel</button></div>
+<div style="font-size:9px;color:var(--sub);margin-top:8px">Hint: 7040958697 or zo2025</div>
 </div>
 </div>
 
@@ -112,48 +106,61 @@ body{background:var(--bg);color:var(--text);padding-bottom:60px}
 <h3 style="font-size:14px">Upload App</h3>
 <input class="input" id="upName" placeholder="App name">
 <input class="input" id="upDesc" placeholder="Short description">
-<textarea class="input" id="upLongDesc" placeholder="Full description, features..." rows="3"></textarea>
-<div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="upEmoji" placeholder="Icon emoji 📱" style="flex:1"><input class="input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
+<textarea class="input" id="upLongDesc" placeholder="Full description..." rows="3"></textarea>
+<div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="upEmoji" placeholder="Icon emoji" style="flex:1"><input class="input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
 <select class="input" id="upCat"><option value="tools">Tools</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="games">Games</option></select>
 <select class="input" id="upType" onchange="toggleUploadType()"><option value="apk">APK Upload</option><option value="external">External Link</option></select>
-<div id="apkSection"><div style="margin-top:8px"><b style="font-size:10px">APK File:</b><input type="file" id="apkFile" accept=".apk,.aab" style="font-size:10px;margin-top:4px"><div id="apkInfo" style="font-size:9px;color:var(--sub);margin-top:4px"></div></div></div>
-<div id="extSection" style="display:none"><input class="input" id="extUrl" placeholder="External URL - Play Store / App Store / Website"><div style="font-size:8px;color:var(--sub);margin-top:4px">We verify all external links</div></div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitUpload()">Publish App</button><button class="btn sec" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+<div id="apkSection"><input type="file" id="apkFile" accept=".apk,.aab" style="font-size:10px;margin-top:6px"><div id="apkInfo" style="font-size:9px;color:var(--sub);margin-top:4px"></div></div>
+<div id="extSection" style="display:none"><input class="input" id="extUrl" placeholder="External URL - Play Store / App Store / Website"></div>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitUpload()">Publish</button><button class="btn sec" style="flex:1" onclick="closeUpload()">Cancel</button></div>
+</div>
+</div>
+
+<div class="modal" id="versionModal">
+<div class="box">
+<h3 style="font-size:14px">Add New Version</h3>
+<input class="input" id="verNumber" placeholder="Version number e.g. 2.0.0">
+<textarea class="input" id="verNotes" placeholder="What's new in this version?" rows="3"></textarea>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitVersion()">Publish Version</button><button class="btn sec" style="flex:1" onclick="closeVersionModal()">Cancel</button></div>
 </div>
 </div>
 
 <div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px;font-size:12px"></div><div style="margin-left:auto;display:flex;gap:6px"><button class="btn small sec" onclick="saveApp()">Save</button></div></div>
-<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:16px"></h2><div style="font-size:10px;color:var(--green)" id="dDev"></div><div style="font-size:9px;color:var(--sub);margin-top:4px" id="dMeta"></div></div></div>
-<div class="actions"><button class="btn" id="installBtn">Download</button><button class="btn ext" id="externalBtn" style="display:none">Visit Link</button><button class="btn sec" onclick="shareApp()">Share</button></div>
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px;font-size:12px"></div></div>
+<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:16px"></h2><div style="font-size:10px;color:var(--green)" id="dDev"></div><div style="font-size:9px;color:var(--sub);margin-top:4px" id="dMeta"></div><div style="margin-top:6px;display:flex;align-items:center;gap:6px"><span id="dRating" style="font-size:12px;font-weight:700"></span><span id="dStars" style="font-size:12px;color:gold"></span><span id="dReviewCount" style="font-size:10px;color:var(--sub)"></span></div></div></div>
+<div class="actions"><button class="btn" id="installBtn">Download</button><button class="btn ext" id="externalBtn" style="display:none">Visit Link</button><button class="btn sec" onclick="openReviewModal()">Rate</button><button class="btn sec" id="adminActionsBtn" style="display:none">Moderate</button></div>
 <div class="tabs" id="tabs">
 <div class="active" data-t="about" onclick="switchTab('about',this)">About</div>
-<div data-t="screens" onclick="switchTab('screens',this)">Screenshots</div>
+<div data-t="screens" onclick="switchTab('screens',this)">Screens</div>
 <div data-t="versions" onclick="switchTab('versions',this)">Versions</div>
-<div data-t="privacy" onclick="switchTab('privacy',this)">Privacy</div>
-<div data-t="dev" onclick="switchTab('dev',this)">Developer</div>
+<div data-t="ratings" onclick="switchTab('ratings',this)">Ratings</div>
+<div data-t="reviews" onclick="switchTab('reviews',this)">Reviews</div>
 </div>
 <div class="tab-content" id="tabContent"></div>
 </div>
 
-<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="showDownloads()"><span>⬇️</span>Downloads</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openUser()"><span>👤</span>Profile</div><div onclick="openDev()"><span>💼</span>Developer</div></div>
+<div class="modal" id="reviewModal">
+<div class="box">
+<h3 style="font-size:14px">Rate & Review</h3>
+<div class="stars" id="ratingStars"><span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span onclick="setRating(5)">★</span></div>
+<textarea class="input" id="reviewText" placeholder="Write your review..." rows="3"></textarea>
+<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitReview()">Submit Review</button><button class="btn sec" style="flex:1" onclick="closeReviewModal()">Cancel</button></div>
+</div>
+</div>
+
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openUser()"><span>👤</span>Profile</div><div onclick="openAdminLogin()"><span>👑</span>Admin</div></div>
 <div class="toast" id="toast"></div>
 <script>
 const DEFAULT_APPS=[
-{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",sub:"calc",col:"#4285f4",e:"🧮",r:"4.9",badge:"APK",type:"apk",verified:true,ver:"2.1.0",size:"2.4MB",updated:"Nov 1",desc:"Calculator for business",longDesc:"Professional calculator with history, business mode, offline. Features: Basic, Scientific, Business calc, No ads, Offline.",screens:["🧮","📊","⚡","🔢"],perms:["No internet"],dev:"ZO Labs",email:"labs@zostore.com",likes:3412,installs:2200,url:"#"},
-{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",sub:"market",col:"#ff9800",e:"🛒",r:"4.8",badge:"LINK",type:"link",verified:true,ver:"1.5.2",size:"External",updated:"Oct 28",desc:"Buy & sell Anambra market",longDesc:"Marketplace for Anambra and global. Buy, sell, chat, deliver. External link method redirects to Play Store.",screens:["🛒","💰","📦"],perms:["Internet"],dev:"ZO Commerce",email:"commerce@zostore.com",likes:2892,installs:1500,url:"https://play.google.com/store"},
-{n:"POS Business",d:"ZO Business • Verified",c:"business",sub:"pos",col:"#4caf50",e:"💳",r:"5.0",badge:"APK",type:"apk",verified:true,ver:"3.0.1",size:"8.2MB",updated:"Nov 2",desc:"POS for small business",longDesc:"POS system: Collect to Opay 7040958697 Matthew Ayodele. Receipts, QR, inventory, offline.",screens:["💳","🧾","💵","📱"],perms:["Camera","Storage"],dev:"ZO Business",email:"biz@zostore.com",likes:1543,installs:980,url:"#"},
-{n:"ZO AI",d:"ZO Intelligence • Verified",c:"productivity",sub:"ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"LINK",type:"link",verified:true,ver:"1.0.0",size:"Web",updated:"Nov 2026",desc:"AI assistant",longDesc:"AI assistant for ZO STORE.",screens:["🤖","💬","🧠"],perms:["Internet"],dev:"ZO Intelligence",email:"ai@zostore.com",likes:2456,installs:1200,url:"https://muse.ai"},
-{n:"Video Call",d:"ZO Connect • Verified",c:"productivity",sub:"call",col:"#00bcd4",e:"📹",r:"4.9",badge:"APK",type:"apk",verified:true,ver:"2.0.3",size:"12MB",updated:"Oct 30",desc:"Video call HD",longDesc:"Video calling: HD, low data, group call, screen share.",screens:["📹","👥","🎙️"],perms:["Camera","Mic"],dev:"ZO Connect",email:"connect@zostore.com",likes:1892,installs:890,url:"#"},
-{n:"Anambra Games",d:"Game Studio",c:"games",sub:"local",col:"#e91e63",e:"🎮",r:"4.7",badge:"APK",type:"apk",verified:false,ver:"0.9.5",size:"45MB",updated:"Oct 25",desc:"Local games",longDesc:"Local games for Anambra culture.",screens:["🎮","🏆","🎯"],perms:["Storage"],dev:"Game Studio NG",email:"games@ng.com",likes:756,installs:600,url:"#"}
+{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",col:"#4285f4",e:"🧮",r:4.9,rc:124,ratings:[5,5,5,4,5],reviews:[{u:"John",r:5,t:"Best calculator! Very fast",l:12},{u:"Ada",r:4,t:"Good for business",l:5}],ver:"2.1.0",size:"2.4MB",updated:"Nov 1",desc:"Calculator for business",longDesc:"Professional calculator with history, business mode, offline.",screens:["🧮","📊","⚡"],perms:["No internet"],dev:"ZO Labs",status:"approved",versions:[{v:"2.1.0",d:"Nov 1",n:"Improved search"},{v:"2.0.0",d:"Oct 15",n:"New UI"},{v:"1.0.0",d:"Sep 1",n:"Initial release"}],likes:3412,installs:2200,url:"#"},
+{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",col:"#ff9800",e:"🛒",r:4.8,rc:89,ratings:[5,4,5,5,4],reviews:[{u:"Market Woman",r:5,t:"I sell my goods fast!",l:20}],ver:"1.5.2",size:"External",updated:"Oct 28",desc:"Buy & sell Anambra market",longDesc:"Marketplace for Anambra.",screens:["🛒","💰","📦"],perms:["Internet"],dev:"ZO Commerce",status:"approved",versions:[{v:"1.5.2",d:"Oct 28",n:"Bug fixes"},{v:"1.0.0",d:"Sep 1",n:"Launch"}],likes:2892,installs:1500,url:"https://play.google.com/store"},
+{n:"POS Business",d:"ZO Business • Verified",c:"business",col:"#4caf50",e:"💳",r:5.0,rc:56,ratings:[5,5,5,5,5],reviews:[{u:"Shop Owner",r:5,t:"POS works with Opay 7040958697",l:30}],ver:"3.0.1",size:"8.2MB",updated:"Nov 2",desc:"POS for small business",longDesc:"POS system: Collect to Opay.",screens:["💳","🧾","💵"],perms:["Camera"],dev:"ZO Business",status:"approved",versions:[{v:"3.0.1",d:"Nov 2",n:"Opay integration"}],likes:1543,installs:980,url:"#"},
+{n:"Anambra Games",d:"Game Studio",c:"games",col:"#e91e63",e:"🎮",r:4.7,rc:20,ratings:[4,5,4,5,4],reviews:[{u:"Gamer",r:4,t:"Fun local games",l:8}],ver:"0.9.5",size:"45MB",updated:"Oct 25",desc:"Local games",longDesc:"Local games for Anambra.",screens:["🎮","🏆","🎯"],perms:["Storage"],dev:"Game Studio",status:"pending",versions:[{v:"0.9.5",d:"Oct 25",n:"Beta"}],likes:756,installs:600,url:"#"}
 ];
-let customApps=[], downloads=[], savedApps=[], currentUser=null, currentDev=null, cur=null;
+let customApps=[], currentUser=null, isAdmin=false, cur=null, curRating=0;
 try{
-customApps=JSON.parse(localStorage.getItem('zo_clean_custom')||'[]');
-downloads=JSON.parse(localStorage.getItem('zo_downloads')||'[]');
-savedApps=JSON.parse(localStorage.getItem('zo_saved')||'[]');
+customApps=JSON.parse(localStorage.getItem('zo_v17_custom')||'[]');
 currentUser=JSON.parse(localStorage.getItem('zo_user')||'null');
-currentDev=JSON.parse(localStorage.getItem('zo_dev')||'null');
 }catch(e){}
 let allApps=[...DEFAULT_APPS,...customApps];
 const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
@@ -163,7 +170,14 @@ function closeDetail(){detail.classList.remove('active')}
 function filterCat(c,el){
 document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
 if(el) el.classList.add('active');
-render(c==='all'?allApps:allApps.filter(a=>a.c===c));
+let list=allApps;
+if(c!=='all'){
+if(c==='pending') list=allApps.filter(a=>a.status==='pending');
+else list=allApps.filter(a=>a.c===c && (isAdmin || a.status==='approved'));
+}else{
+if(!isAdmin) list=allApps.filter(a=>a.status==='approved');
+}
+render(list);
 }
 function render(list){
 grid.innerHTML='';
@@ -171,10 +185,13 @@ list.forEach(a=>{
 let idx=allApps.indexOf(a);
 let el=document.createElement('div');
 el.className='card';
-el.innerHTML=`<div class="badge ${a.type==='link'?'ext':''}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="card-dev">${a.d} • v${a.ver}</div><div class="card-meta"><span>★ ${a.r}</span><span>${a.size}</span></div>`;
+let statusBadge=a.status==='pending'?'pending':a.status==='rejected'?'rejected':'';
+let badgeText=a.status==='pending'?'PENDING':a.status==='rejected'?'REJECTED':a.type==='link'?'LINK':'APK';
+el.innerHTML=`<div class="badge ${statusBadge || (a.type==='link'?'ext':'')}">${badgeText}</div><div class="card-icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="card-dev">${a.d} • v${a.ver}</div><div class="card-meta"><span>★ ${a.r.toFixed(1)}</span><span>(${a.rc})</span><span>${a.size}</span></div>`;
 el.onclick=()=>openApp(idx);
 grid.appendChild(el);
 });
+if(list.length===0) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--sub);font-size:11px">No apps — ${isAdmin?'No pending':'All approved apps shown'}</div>`;
 }
 function openApp(i){
 cur=allApps[i];
@@ -184,90 +201,78 @@ document.getElementById('dIcon').textContent=cur.e;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
 document.getElementById('dDev').textContent=cur.d+' • v'+cur.ver+' • '+cur.size;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes`;
-document.getElementById('installBtn').style.display=cur.type==='apk'?'block':'none';
+document.getElementById('dMeta').textContent=`${cur.installs} installs • Updated ${cur.updated} • ${cur.status}`;
+document.getElementById('dRating').textContent=cur.r.toFixed(1);
+document.getElementById('dStars').textContent='★'.repeat(Math.round(cur.r))+'☆'.repeat(5-Math.round(cur.r));
+document.getElementById('dReviewCount').textContent=`(${cur.rc} reviews)`;
+document.getElementById('installBtn').style.display=cur.type==='link'?'none':'block';
 document.getElementById('externalBtn').style.display=cur.type==='link'?'block':'none';
-document.getElementById('installBtn').textContent='Download';
-document.getElementById('externalBtn').textContent='Visit Link';
+document.getElementById('adminActionsBtn').style.display=isAdmin?'block':'none';
 switchTab('about');
 }
 function switchTab(t,el){
 if(el){document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
-else{document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));let target=document.querySelector(`.tabs div[data-t="${t}"]`);if(target) target.classList.add('active');}
+else{document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));let tg=document.querySelector(`.tabs div[data-t="${t}"]`);if(tg) tg.classList.add('active');}
 let c=document.getElementById('tabContent');
-if(t==='about') c.innerHTML=`<div class="info"><h4>About this app</h4><p><b>${cur.desc}</b><br><br>${cur.longDesc}<br><br><b>Version:</b> ${cur.ver}<br><b>Size:</b> ${cur.size}<br><b>Updated:</b> ${cur.updated}<br><b>Category:</b> ${cur.c}/${cur.sub}</p></div>`;
+if(t==='about') c.innerHTML=`<div class="info"><h4>About</h4><p><b>${cur.desc}</b><br><br>${cur.longDesc}<br><br><b>Version:</b> ${cur.ver}<br><b>Size:</b> ${cur.size}<br><b>Updated:</b> ${cur.updated}<br><b>Status:</b> ${cur.status}<br><b>Category:</b> ${cur.c}</p></div><div class="info"><h4>Permissions</h4><p>${cur.perms.join(', ')}<br>Security checked • No malware</p></div>`;
 else if(t==='screens') c.innerHTML=`<div class="info"><h4>Screenshots</h4><div class="scr">${cur.screens.map(s=>`<div>${s}</div>`).join('')}</div></div>`;
-else if(t==='versions') c.innerHTML=`<div class="info"><h4>Version History</h4><p><b>Current:</b> v${cur.ver} (${cur.updated})<br><br>• v${cur.ver} — Latest<br>• v${(parseFloat(cur.ver)-0.1).toFixed(1)} — Bug fixes<br>• v1.0.0 — Initial release</p></div>`;
-else if(t==='privacy') c.innerHTML=`<div class="info"><h4>Privacy & Security</h4><p><b>Permissions:</b> ${cur.perms.join(', ')}<br><b>Security:</b> Checked • No malware<br><b>Link:</b> ${cur.type==='link'?cur.url:'Hosted by ZO STORE'}</p></div>`;
-else if(t==='dev') c.innerHTML=`<div class="info"><h4>Developer</h4><p><b>${cur.dev}</b><br>Email: ${cur.email}<br>Verified: ${cur.verified?'Yes':'Pending'}<br><br>Type: ${cur.type==='apk'?'APK Upload':'External Link'}</p></div>`;
+else if(t==='versions') c.innerHTML=`<div class="info"><h4>Version History</h4>${cur.versions.map(v=>`<div style="padding:8px 0;border-bottom:1px solid var(--border)"><b>v${v.v}</b> • ${v.d}<br><span style="font-size:10px;color:var(--sub)">${v.n}</span></div>`).join('')}<button class="btn small" style="margin-top:10px" onclick="openVersionModal()">Add New Version</button></div>`;
+else if(t==='ratings') c.innerHTML=`<div class="info"><h4>Ratings — ${cur.r.toFixed(1)} average from ${cur.rc} users</h4><div style="font-size:24px;color:gold">${'★'.repeat(Math.round(cur.r))}${'☆'.repeat(5-Math.round(cur.r))} <span style="font-size:14px;color:var(--text)">${cur.r.toFixed(1)}</span></div><div style="margin-top:10px">${[5,4,3,2,1].map(star=>{let count=cur.ratings.filter(r=>r===star).length;let pct=cur.rc?Math.round(count/cur.rc*100):0;return `<div style="display:flex;gap:8px;align-items:center;font-size:10px;margin-top:4px"><span>${star}★</span><div style="flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:gold"></div></div><span>${pct}%</span></div>`}).join('')}</div><button class="btn small" style="margin-top:10px" onclick="openReviewModal()">Rate this app</button></div>`;
+else if(t==='reviews') c.innerHTML=`<div class="info"><h4>Reviews (${cur.reviews.length})</h4><button class="btn small" onclick="openReviewModal()">Write a review</button>${cur.reviews.map((rev,i)=>`<div class="review"><div class="review-head"><b>${rev.u}</b><span>${'★'.repeat(rev.r)}</span></div><div class="review-text">${rev.t}</div><div style="font-size:9px;color:var(--sub);margin-top:4px">👍 ${rev.l} likes • <span style="cursor:pointer" onclick="likeReview(${i})">Like</span></div></div>`).join('')||'<p style="font-size:10px;color:var(--sub);margin-top:8px">No reviews yet — Be first to review!</p>'}</div>`;
 }
-function openUser(){document.getElementById('userModal').classList.add('active');updateUserUI()}
+function openUser(){document.getElementById('userModal').classList.add('active')}
 function closeUser(){document.getElementById('userModal').classList.remove('active')}
 function userRegister(){
-let email=document.getElementById('uEmail').value.trim();
-let pass=document.getElementById('uPass').value.trim();
-if(!email||!pass){showToast('Enter email & password');return;}
-currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString()};
+let e=document.getElementById('uEmail').value.trim();
+let p=document.getElementById('uPass').value.trim();
+if(!e||!p){showToast('Enter email & password');return;}
+currentUser={email:e,name:e.split('@')[0]};
 localStorage.setItem('zo_user',JSON.stringify(currentUser));
-showToast('Account created');
-updateUserUI();
+showToast('Account created');closeUser();
 }
 function userLogin(){
-let email=document.getElementById('uEmail').value.trim();
-let pass=document.getElementById('uPass').value.trim();
-if(!email||!pass){showToast('Enter email & password');return;}
-currentUser={email:email,name:email.split('@')[0],joined:new Date().toLocaleDateString()};
+let e=document.getElementById('uEmail').value.trim();
+let p=document.getElementById('uPass').value.trim();
+if(!e||!p){showToast('Enter email & password');return;}
+currentUser={email:e,name:e.split('@')[0]};
 localStorage.setItem('zo_user',JSON.stringify(currentUser));
-showToast('Signed in');
-updateUserUI();
+showToast('Signed in');closeUser();
 }
-function userLogout(){currentUser=null;localStorage.removeItem('zo_user');updateUserUI();showToast('Signed out');}
-function updateUserUI(){
-let out=document.getElementById('userLoggedOut');
-let inn=document.getElementById('userLoggedIn');
-if(currentUser){out.style.display='none';inn.style.display='block';document.getElementById('uName').textContent=currentUser.name;document.getElementById('uEmailShow').textContent=currentUser.email;document.getElementById('uEmailInfo').textContent=currentUser.email;document.getElementById('uJoined').textContent=currentUser.joined;document.getElementById('uDownloads').textContent=downloads.length;document.getElementById('uSaved').textContent=savedApps.length;}else{out.style.display='block';inn.style.display='none';}
+function userLogout(){currentUser=null;localStorage.removeItem('zo_user');closeUser();showToast('Signed out');}
+function openAdminLogin(){document.getElementById('adminLoginModal').classList.add('active')}
+function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('active')}
+function loginAdmin(){
+let pass=document.getElementById('adminPass').value.trim();
+if(pass==='7040958697'||pass==='zo2025'||pass==='matthew2025'){
+isAdmin=true;
+document.getElementById('adminBar').style.display='flex';
+document.getElementById('pendingTab').style.display='block';
+document.getElementById('adminStats').textContent=allApps.filter(a=>a.status==='pending').length+' pending • '+allApps.length+' total • Opay 7040958697';
+closeAdminLogin();
+render(allApps);
+showToast('Admin mode ON');
+}else showToast('Wrong password');
 }
-function openDev(){document.getElementById('devModal').classList.add('active');updateDevUI()}
-function closeDev(){document.getElementById('devModal').classList.remove('active')}
-function devRegister(){
-let email=document.getElementById('dEmail').value.trim();
-let name=document.getElementById('dNameInput').value.trim();
-let pass=document.getElementById('dPass').value.trim();
-if(!email||!name||!pass){showToast('Fill all fields');return;}
-currentDev={email:email,name:name,joined:new Date().toLocaleDateString()};
-localStorage.setItem('zo_dev',JSON.stringify(currentDev));
-showToast('Developer account created');
-updateDevUI();
-}
-function devLogin(){
-let email=document.getElementById('dEmail').value.trim();
-if(!email){showToast('Enter email');return;}
-let name=document.getElementById('dNameInput').value.trim()||'Developer';
-currentDev={email:email,name:name,joined:new Date().toLocaleDateString()};
-localStorage.setItem('zo_dev',JSON.stringify(currentDev));
-showToast('Developer signed in');
-updateDevUI();
-}
-function devLogout(){currentDev=null;localStorage.removeItem('zo_dev');updateDevUI();showToast('Signed out');}
-function updateDevUI(){
-let out=document.getElementById('devLoggedOut');
-let inn=document.getElementById('devLoggedIn');
-if(currentDev){out.style.display='none';inn.style.display='block';document.getElementById('devNameShow').textContent=currentDev.name;document.getElementById('devEmailShow').textContent=currentDev.email;document.getElementById('devAppsCount').textContent=customApps.length;let total=0;allApps.forEach(a=>total+=a.installs);document.getElementById('devTotalInstalls').textContent=total;}else{out.style.display='block';inn.style.display='none';}
+function toggleAdmin(){
+isAdmin=false;
+document.getElementById('adminBar').style.display='none';
+document.getElementById('pendingTab').style.display='none';
+filterCat('all',document.querySelector('.nav div[data-f="all"]'));
+showToast('Admin OFF');
 }
 function openUpload(){
-if(!currentDev){showToast('Sign in as developer first');openDev();return;}
 document.getElementById('uploadModal').classList.add('active');
 }
 function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
 function toggleUploadType(){
-let type=document.getElementById('upType').value;
-document.getElementById('apkSection').style.display=type==='apk'?'block':'none';
-document.getElementById('extSection').style.display=type==='external'?'block':'none';
+let t=document.getElementById('upType').value;
+document.getElementById('apkSection').style.display=t==='apk'?'block':'none';
+document.getElementById('extSection').style.display=t==='external'?'block':'none';
 }
 document.getElementById('apkFile').addEventListener('change',e=>{
-let file=e.target.files[0];
-if(!file) return;
-document.getElementById('apkInfo').textContent=`Selected: ${file.name} • ${(file.size/1024/1024).toFixed(2)}MB`;
+let f=e.target.files[0];
+if(!f) return;
+document.getElementById('apkInfo').textContent=f.name+' • '+(f.size/1024/1024).toFixed(2)+'MB';
 });
 function submitUpload(){
 let name=document.getElementById('upName').value.trim();
@@ -278,60 +283,84 @@ let color=document.getElementById('upColor').value.trim()||'#ff9800';
 let cat=document.getElementById('upCat').value;
 let type=document.getElementById('upType').value;
 let extUrl=document.getElementById('extUrl').value.trim();
-if(!name||!desc){showToast('Enter app name & description');return;}
+if(!name||!desc){showToast('Enter name & description');return;}
 if(type==='external'&&!extUrl){showToast('Enter external URL');return;}
-let newApp={n:name,d:(currentDev?currentDev.name:'Developer'),c:cat,sub:cat,type:type==='apk'?'apk':'link',verified:false,ver:"1.0.0",size:type==='apk'?(document.getElementById('apkFile').files[0]?(document.getElementById('apkFile').files[0].size/1024/1024).toFixed(1)+'MB':'2MB'):'External',updated:"Just now",desc:desc,longDesc:longDesc,col:color,e:emoji,r:"4.5",badge:type==='apk'?'APK':'LINK',screens:[emoji,"📱","⭐"],perms:type==='apk'?["Storage"]:["Internet"],dev:currentDev?currentDev.name:'Community Dev',email:currentDev?currentDev.email:'dev@community.com',likes:1,installs:0,url:type==='external'?extUrl:'#',custom:true};
+let newApp={n:name,d:"Community • Pending review",c:cat,col:color,e:emoji,r:0,rc:0,ratings:[],reviews:[],ver:"1.0.0",size:type==='apk'?'2MB':'External',updated:"Just now",desc:desc,longDesc:longDesc,screens:[emoji,"📱","⭐"],perms:type==='apk'?["Storage"]:["Internet"],dev:"Community",status:"pending",versions:[{v:"1.0.0",d:"Just now",n:"Initial release"}],likes:0,installs:0,url:type==='external'?extUrl:'#',type:type==='apk'?'apk':'link',custom:true};
 customApps.unshift(newApp);
 allApps=[...DEFAULT_APPS,...customApps];
-localStorage.setItem('zo_clean_custom',JSON.stringify(customApps));
+localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));
 closeUpload();
 ['upName','upDesc','upLongDesc','upEmoji','extUrl'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
 document.getElementById('upColor').value='#ff9800';
 document.getElementById('apkFile').value='';
 document.getElementById('apkInfo').textContent='';
-render(allApps);
-showToast(name+' published');
+render(isAdmin?allApps:allApps.filter(a=>a.status==='approved'));
+showToast(name+' submitted — Pending admin review');
 }
-function showMyApps(){
-closeDev();
-if(customApps.length===0){showToast('No apps yet');return;}
-render(customApps);
+function openVersionModal(){document.getElementById('versionModal').classList.add('active')}
+function closeVersionModal(){document.getElementById('versionModal').classList.remove('active')}
+function submitVersion(){
+let v=document.getElementById('verNumber').value.trim();
+let n=document.getElementById('verNotes').value.trim();
+if(!v){showToast('Enter version number');return;}
+cur.versions.unshift({v:v,d:"Just now",n:n||"Update"});
+cur.ver=v;
+cur.updated="Just now";
+localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));
+closeVersionModal();
+switchTab('versions');
+showToast('Version v'+v+' added');
 }
-function showDownloads(){
-let list=allApps.filter(a=>downloads.includes(a.n));
-if(list.length===0){render([]);grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--sub);font-size:11px"><div style="font-size:30px">⬇️</div>No downloads yet<br>Tap app → Download</div>`;return;}
-render(list);
+function openReviewModal(){
+if(!currentUser){showToast('Sign in to review');openUser();return;}
+document.getElementById('reviewModal').classList.add('active');
 }
-function saveApp(){
-if(!cur) return;
-if(savedApps.includes(cur.n)){showToast('Already saved');return;}
-savedApps.push(cur.n);
-localStorage.setItem('zo_saved',JSON.stringify(savedApps));
-showToast('Saved');
+function closeReviewModal(){document.getElementById('reviewModal').classList.remove('active');curRating=0;updateStars();}
+function setRating(r){curRating=r;updateStars();}
+function updateStars(){
+document.querySelectorAll('#ratingStars span').forEach((s,i)=>{s.classList.toggle('active',i<curRating);});
 }
-function shareApp(){
-if(!cur) return;
-navigator.clipboard.writeText(location.href);
-showToast('Link copied');
+function submitReview(){
+let text=document.getElementById('reviewText').value.trim();
+if(!curRating){showToast('Select stars');return;}
+if(!text){showToast('Write review text');return;}
+cur.reviews.unshift({u:currentUser?currentUser.name:'User',r:curRating,t:text,l:0});
+cur.ratings.push(curRating);
+cur.rc=cur.ratings.length;
+cur.r=cur.ratings.reduce((a,b)=>a+b,0)/cur.ratings.length;
+localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));
+closeReviewModal();
+document.getElementById('reviewText').value='';
+curRating=0;
+updateStars();
+document.getElementById('dRating').textContent=cur.r.toFixed(1);
+document.getElementById('dStars').textContent='★'.repeat(Math.round(cur.r))+'☆'.repeat(5-Math.round(cur.r));
+document.getElementById('dReviewCount').textContent=`(${cur.rc} reviews)`;
+switchTab('reviews');
+showToast('Review submitted');
 }
+function likeReview(i){
+cur.reviews[i].l++;
+localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));
+switchTab('reviews');
+showToast('Liked review');
+}
+document.getElementById('adminActionsBtn').onclick=()=>{
+if(!isAdmin) return;
+let action=prompt(`Moderate ${cur.n}\n1=Approve\n2=Reject\n3=Delete\nEnter 1,2,3:`);
+if(action==='1'){cur.status='approved';showToast('Approved '+cur.n);localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));render(allApps);closeDetail();}
+else if(action==='2'){cur.status='rejected';showToast('Rejected');localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));render(allApps);closeDetail();}
+else if(action==='3'){if(confirm('Delete?')){customApps=customApps.filter(a=>a.n!==cur.n);allApps=[...DEFAULT_APPS,...customApps];localStorage.setItem('zo_v17_custom',JSON.stringify(customApps));render(allApps);closeDetail();showToast('Deleted');}}
+};
 document.getElementById('search').addEventListener('input',e=>{
 let q=e.target.value.toLowerCase().trim();
-if(!q){render(allApps);return;}
-render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.c.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)));
+if(!q){render(isAdmin?allApps:allApps.filter(a=>a.status==='approved'));return;}
+render(allApps.filter(a=>(a.n.toLowerCase().includes(q)||a.c.toLowerCase().includes(q))&&(isAdmin||a.status==='approved')));
 });
-document.getElementById('installBtn').onclick=()=>{
-if(!cur) return;
-if(!currentUser){showToast('Sign in first to download');openUser();return;}
-downloads.push(cur.n);
-localStorage.setItem('zo_downloads',JSON.stringify(downloads));
-showToast('Downloading '+cur.n);
-};
-document.getElementById('externalBtn').onclick=()=>{
-if(!cur) return;
-if(confirm('Go to:\n'+cur.url+'?')){if(currentUser){downloads.push(cur.n);localStorage.setItem('zo_downloads',JSON.stringify(downloads));}window.open(cur.url,'_blank');showToast('Redirecting...');}
-};
-render(allApps);
-setTimeout(()=>showToast('ZO STORE — Clean professional version — No version labels'),1000);
+document.getElementById('installBtn').onclick=()=>{showToast('Downloading '+cur.n+' v'+cur.ver);};
+document.getElementById('externalBtn').onclick=()=>{if(confirm('Go to '+cur.url+'?')){window.open(cur.url,'_blank');showToast('Redirecting...');}};
+render(allApps.filter(a=>a.status==='approved'));
+setTimeout(()=>showToast('V17-V20 CLEAN — Versions, Ratings, Reviews, Admin moderation ready!'),1000);
 </script>
 </body>
 </html>
