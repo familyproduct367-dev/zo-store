@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V15.1 - Matthew Ayodele - Final Complete</title>
+<title>ZO STORE V16 - OUR OWN PAYMENT SYSTEM - Matthew Ayodele</title>
 <meta name="theme-color" content="#01875f">
 <style>
 :root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed}
@@ -19,7 +19,7 @@ body{background:var(--bg);color:var(--text);padding-bottom:75px}
 .nav{display:flex;gap:12px;padding:0 14px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:29}
 .nav div{padding:9px 0;font-size:10px;color:var(--sub);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
 .nav div.active{color:var(--green);border-color:var(--green);font-weight:700}
-.banner{margin:10px;background:linear-gradient(135deg,#01875f,#00ff88,#7c4dff);border-radius:14px;padding:12px;color:#fff;display:flex;justify-content:space-between}
+.banner{margin:10px;background:linear-gradient(135deg,#01875f,#00bcd4,#7c4dff);border-radius:14px;padding:12px;color:#fff;display:flex;justify-content:space-between}
 .wallet{background:linear-gradient(135deg,#01875f,#1d9bf0);color:#fff;border-radius:12px;padding:10px;margin:10px 14px;font-size:10px;display:flex;justify-content:space-between}
 .stats{display:flex;gap:5px;padding:0 14px;flex-wrap:wrap}
 .stat{background:var(--card);border-radius:8px;padding:6px;flex:1;min-width:65px;border:1px solid var(--border);text-align:center;font-size:9px}
@@ -27,7 +27,7 @@ body{background:var(--bg);color:var(--text);padding-bottom:75px}
 .grid{padding:8px 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:7px}
 .card{background:var(--card);border-radius:12px;padding:7px;border:1px solid var(--border);cursor:pointer;position:relative}
 .badge{position:absolute;top:4px;right:4px;background:var(--green);color:#fff;font-size:6px;padding:2px 5px;border-radius:8px;font-weight:700}
-.badge.gold{background:gold;color:#000}.badge.blue{background:#1d9bf0}
+.badge.gold{background:gold;color:#000}.badge.blue{background:#1d9bf0}.badge.pending{background:#ff9800}
 .icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;position:relative}
 .verified-tick{position:absolute;bottom:-3px;right:-3px;background:#1d9bf0;color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;font-size:8px;border:2px solid var(--card)}
 .card h3{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -46,73 +46,63 @@ body{background:var(--bg);color:var(--text);padding-bottom:75px}
 .btn{background:var(--green);color:#fff;border:none;padding:7px 14px;border-radius:16px;font-weight:600;cursor:pointer;font-size:10px}
 .btn.done{background:var(--bg);color:var(--sub)}
 .btn.pay{background:linear-gradient(135deg,#ff9800,gold);color:#000;font-weight:800}
+.btn.approve{background:#00c853;color:#fff;font-weight:800}
 .screen{padding:10px}
 .mini{background:var(--bg);border-radius:10px;padding:9px;margin-top:7px}
 .note-input{width:100%;padding:7px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:10px;margin-top:5px}
 .toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 14px;border-radius:14px;font-size:10px;display:none;z-index:400;max-width:90%;text-align:center}
-.upload-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
+.upload-modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
 .upload-modal.active{display:flex}
-.upload-box{background:var(--card);border-radius:14px;padding:14px;width:100%;max-width:420px;max-height:92vh;overflow:auto}
+.upload-box{background:var(--card);border-radius:14px;padding:14px;width:100%;max-width:440px;max-height:94vh;overflow:auto}
 .pay-wall{background:linear-gradient(135deg,#01875f,#00bcd4);color:#fff;border-radius:12px;padding:14px;text-align:center;margin:10px 0;border:2px solid gold}
-.account-box{background:var(--bg);border:1px dashed var(--green);border-radius:10px;padding:10px;margin:8px 0}
-.admin-bar{background:#111;color:#0f0;padding:6px 12px;font-size:9px;display:flex;justify-content:space-between}
+.admin-bar{background:#111;color:#0f0;padding:6px 12px;font-size:9px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:50}
+.pending-item{display:flex;gap:8px;padding:8px;background:var(--bg);border-radius:8px;margin-top:6px;align-items:center;font-size:9px;border-left:3px solid #ff9800}
+.approved-item{border-left-color:#00c853}
 </style>
 </head>
 <body>
-<div id="adminBar" class="admin-bar" style="display:none"><span>👑 CEO MATTHEW AYODELE • REV: <span id="adminRev">₦0</span> • DEVS: <span id="adminDev">0</span> • OPAY: 7040958697</span><span onclick="toggleAdmin()" style="cursor:pointer">Exit ✕</span></div>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search V15.1 Final..."></div><div class="icon-btn" onclick="toggleLang()">🌐</div><div class="icon-btn" id="darkBtn">🌙</div><button class="upload-btn" onclick="openUpload()">+ Upload</button></div>
-<div class="nav" id="nav"><div class="active" data-f="all">All</div><div data-f="community">Community 👥</div><div data-f="wish">Wishes 💭</div><div data-f="ai">AI 🤖</div><div data-f="account">My Account 🏦</div></div>
-<div class="banner"><div><b>ZO STORE V15.1 FINAL — CEO MATTHEW AYODELE</b><div style="font-size:9px">Opay: 7040958697 • Matthew Ayodele • $9 / ₦12,000 to upload</div><div style="font-size:7px;margin-top:2px">Manual Opay Transfer • Pay once, upload unlimited • No Paystack • Our own payment!</div></div><div style="font-size:22px">🏦</div></div>
-<div class="wallet"><div><b>💳 Developer Account</b><div style="font-size:8px" id="devStatus">Not Paid • Pay ₦12k to Opay 7040958697</div></div><div style="text-align:right"><b id="walletBal">🔒 Locked</b><div style="font-size:8px" id="walletAction">Tap Pay</div></div></div>
-<div class="stats"><div class="stat"><b id="totalApps">0</b>Total</div><div class="stat"><b id="communityCount">0</b>Community</div><div class="stat"><b id="installedCount">0</b>Installed</div><div class="stat"><b id="devCount">0</b>Developers</div><div class="stat"><b id="revCount">₦0</b>Revenue</div></div>
+<div id="adminBar" class="admin-bar" style="display:none"><span>👑 V16 OUR PAYMENT • REV: <span id="adminRev">₦0</span> • DEVS: <span id="adminDev">0</span> • PENDING: <span id="adminPend">0</span> • OPAY 7040958697</span><span onclick="toggleAdmin()" style="cursor:pointer">Exit ✕</span></div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search V16 Our Payment System..."></div><div class="icon-btn" id="darkBtn">🌙</div><button class="upload-btn" onclick="openUpload()">+ Upload</button></div>
+<div class="nav" id="nav"><div class="active" data-f="all">All</div><div data-f="community">Community 👥</div><div data-f="pending">Pending ⏳</div><div data-f="ai">AI 🤖</div><div data-f="account">My Account 🏦</div></div>
+<div class="banner"><div><b>ZO STORE V16 — OUR OWN PAYMENT SYSTEM</b><div style="font-size:9px">Opay 7040958697 Matthew Ayodele • Upload proof • Admin approve • We be the bank!</div><div style="font-size:7px;margin-top:2px">V16: No Paystack — We build our own — Manual verification + Screenshot proof</div></div><div style="font-size:22px">🏦</div></div>
+<div class="wallet"><div><b>💳 Developer Account V16</b><div style="font-size:8px" id="devStatus">Not Paid • Transfer to Opay 7040958697</div></div><div style="text-align:right"><b id="walletBal">🔒 Locked</b><div style="font-size:8px" id="walletAction">Tap to Pay</div></div></div>
+<div class="stats"><div class="stat"><b id="totalApps">0</b>Total</div><div class="stat"><b id="communityCount">0</b>Community</div><div class="stat"><b id="devCount">0</b>Developers</div><div class="stat"><b id="pendingCount">0</b>Pending</div><div class="stat"><b id="revCount">₦0</b>Revenue</div></div>
 <div class="grid" id="grid"></div>
-<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openPayModal()"><span>💳</span>Pay ₦12k</div><div onclick="openAccountModal()"><span>🏦</span>Account</div></div>
-
-<div class="upload-modal" id="accountModal">
-<div class="upload-box">
-<h3>🏦 CEO Account — Matthew Ayodele</h3>
-<p style="font-size:9px;color:var(--sub)">Your account wey people go pay to — Saved inside V15.1</p>
-<div class="account-box">
-<b style="font-size:11px;color:var(--green)">✅ Current Account (Active):</b>
-<div style="font-size:12px;margin-top:6px;font-weight:700">Bank: Opay<br>Number: 7040958697<br>Name: Matthew Ayodele<br>Amount: ₦12,000</div>
-<div style="font-size:9px;margin-top:6px;color:var(--sub)">This account don already hardcoded for V15.1 — Everybody wey open store go see am!</div>
-<input class="note-input" id="bankName" placeholder="Bank Name" value="Opay">
-<input class="note-input" id="acctNumber" placeholder="Account Number" value="7040958697">
-<input class="note-input" id="acctName" placeholder="Account Name" value="Matthew Ayodele">
-</div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="saveAccount()">💾 Save / Update Account</button><button class="btn done" style="flex:1" onclick="closeAccountModal()">Close</button></div>
-</div>
-</div>
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openPayModal()"><span>💳</span>Pay</div><div onclick="openAdmin()"><span>👑</span>Admin</div></div>
 
 <div class="upload-modal" id="payModal">
 <div class="upload-box">
-<h3>💳 Pay to Become Developer — ₦12,000</h3>
-<div class="pay-wall"><div style="font-size:24px">🏦</div><b>Transfer to CEO Account</b><div style="font-size:11px;margin-top:6px">Bank: <b>Opay</b></div><div style="font-size:18px;font-weight:900;margin-top:4px">7040958697</div><div style="font-size:12px;margin-top:2px;font-weight:700">Matthew Ayodele</div><div style="font-size:14px;font-weight:900;margin-top:8px;background:gold;color:#000;padding:4px 8px;border-radius:8px;display:inline-block">₦12,000 / $9</div><div style="font-size:9px;margin-top:8px">After transfer, tap "I don pay" below — E go unlock!</div></div>
-<div style="font-size:10px;line-height:1.6">
-<b>V13-V15 Manual Payment — Our Own System:</b><br>
-1️⃣ Open your Opay / PalmPay / Bank app<br>
-2️⃣ Transfer <b>₦12,000</b> to <b>Opay 7040958697 Matthew Ayodele</b><br>
-3️⃣ Come back, tap <b>"I don pay ₦12,000"</b><br>
-4️⃣ You go become developer — Upload unlimited!<br><br>
-No Paystack, no extra charges — Direct to CEO!
+<h3>💳 V16 Our Own Payment — ₦12,000 to Opay 7040958697</h3>
+<div class="pay-wall"><div style="font-size:22px">🏦</div><b>Transfer to CEO</b><div style="font-size:10px;margin-top:4px">Bank: <b>Opay</b></div><div style="font-size:20px;font-weight:900">7040958697</div><div style="font-size:12px;font-weight:700">Matthew Ayodele</div><div style="font-size:14px;font-weight:900;margin-top:6px;background:gold;color:#000;padding:5px 10px;border-radius:8px;display:inline-block">₦12,000 / $9</div><div style="font-size:9px;margin-top:6px">V16: Upload proof after transfer — We verify!</div></div>
+<div style="font-size:10px;line-height:1.5">
+<b>Our Own Payment System — How e work:</b><br>
+1️⃣ Transfer ₦12k to <b>Opay 7040958697 Matthew Ayodele</b><br>
+2️⃣ Fill form below + upload proof screenshot (optional)<br>
+3️⃣ Tap <b>Submit Payment</b> → Status go be <b>Pending ⏳</b><br>
+4️⃣ CEO go check for Admin panel, approve you!<br>
+5️⃣ You go unlock automatically!<br><br>
 </div>
-<input class="note-input" id="payName" placeholder="Your Name (for record)">
-<input class="note-input" id="payRef" placeholder="Transfer Reference / Your Opay Name (Optional)">
+<input class="note-input" id="payName" placeholder="Your Full Name">
+<input class="note-input" id="payPhone" placeholder="Your Phone / WhatsApp Number">
+<input class="note-input" id="payRef" placeholder="Transfer Ref / Date / e.g. Opay 10:30am">
+<textarea class="note-input" id="payProof" placeholder="Proof note - e.g. I transfer from PalmPay by 2pm, my name na John" rows="2"></textarea>
+<div style="font-size:8px;color:var(--sub);margin-top:6px">📸 Proof screenshot: For V16, you fit upload image URL or just describe. V17 we go add real image upload!</div>
+<input class="note-input" id="payImage" placeholder="Proof image URL (optional) - or leave empty">
 <div style="display:flex;gap:6px;margin-top:10px">
-<button class="btn pay" style="flex:1" onclick="payManual()">✅ I Don Transfer ₦12,000 to 7040958697 — Unlock Me!</button>
+<button class="btn pay" style="flex:1" onclick="submitPayment()">📤 Submit Payment Proof — Pending Verification</button>
 </div>
-<button class="btn" style="width:100%;margin-top:6px;background:#000;color:#fff" onclick="payDemo()">🧪 Demo Pay (Test without money — For you to test)</button>
+<button class="btn done" style="width:100%;margin-top:6px" onclick="payDemo()">🧪 Demo Pay (CEO Test - Instant unlock)</button>
 <button class="btn done" style="width:100%;margin-top:6px" onclick="closePayModal()">Cancel</button>
-<div style="font-size:7px;text-align:center;margin-top:8px">V15.1 Final • CEO: Matthew Ayodele • Opay 7040958697 • Manual Payment • No Paystack • Our own system after we finish this!</div>
+<div id="myPaymentStatus" style="margin-top:10px;display:none"></div>
 </div>
 </div>
 
 <div class="upload-modal" id="uploadModal">
 <div class="upload-box">
-<h3>📤 Upload App — V15.1 Final</h3>
-<div id="uploadLock" style="display:none"><div class="pay-wall"><b>🔒 Upload Locked</b><div style="font-size:9px;margin-top:4px">Pay ₦12,000 to Opay 7040958697 Matthew Ayodele</div><button class="btn pay" style="margin-top:8px;width:100%" onclick="closeUpload();openPayModal()">💳 Pay ₦12,000 Now — Opay 7040958697</button></div></div>
+<h3>📤 Upload App — V16 Our Payment</h3>
+<div id="uploadLock" style="display:none"><div class="pay-wall"><b>🔒 Upload Locked — Pay ₦12k</b><div style="font-size:9px;margin-top:4px">Opay 7040958697 Matthew Ayodele • Upload proof for verification</div><button class="btn pay" style="margin-top:8px;width:100%" onclick="closeUpload();openPayModal()">💳 Pay & Submit Proof Now</button><div id="uploadLockStatus" style="font-size:9px;margin-top:8px;text-align:center"></div></div></div>
 <div id="uploadForm">
-<div style="font-size:9px;color:var(--green);background:#01875f11;padding:6px;border-radius:6px">✅ Paid Developer — Upload unlimited FREE! CEO: Matthew Ayodele</div>
+<div style="font-size:9px;color:var(--green);background:#01875f11;padding:6px;border-radius:6px">✅ Paid Developer Approved — Upload unlimited FREE! Opay 7040958697</div>
 <input class="note-input" id="upName" placeholder="App Name">
 <input class="note-input" id="upDev" placeholder="Your Business Name">
 <div style="display:flex;gap:6px"><input class="note-input" id="upEmoji" placeholder="Emoji" style="flex:1"><input class="note-input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
@@ -131,133 +121,129 @@ No Paystack, no extra charges — Direct to CEO!
 </div>
 <div class="toast" id="toast"></div>
 <script>
-// V15.1 FINAL CONFIG - CEO MATTHEW AYODELE - HARDCODED ACCOUNT
-const DEFAULT_BANK = 'Opay';
-const DEFAULT_ACCT = '7040958697';
-const DEFAULT_NAME = 'Matthew Ayodele';
-const UPLOAD_FEE = 12000;
-
+const DEFAULT_BANK='Opay', DEFAULT_ACCT='7040958697', DEFAULT_NAME='Matthew Ayodele';
 const defaultApps=[
-{n:"ZO AI",d:"ZO Intelligence ✅",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"VERIFIED",verified:true,likes:2456,installs:1200,price:0,desc:"AI assistant — FREE! CEO: Matthew Ayodele"},
+{n:"ZO AI",d:"ZO Intelligence ✅",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",t:"ai",badge:"VERIFIED",verified:true,likes:2456,installs:1200,price:0,desc:"AI assistant — FREE!"},
 {n:"Video Call",d:"ZO Connect ✅",c:"ai",col:"#00bcd4",e:"📹",r:"4.9",t:"videocall",badge:"VERIFIED",verified:true,likes:1892,installs:890,price:0,desc:"Video call FREE"},
 {n:"Camera Pro",d:"ZO Media ✅",c:"media",col:"#ea4335",e:"📷",r:"5.0",t:"camera",badge:"VERIFIED",verified:true,likes:3320,installs:2100,price:0,desc:"Camera HD"},
-{n:"POS Business",d:"ZO Business ✅",c:"premium",col:"#4caf50",e:"💳",r:"5.0",t:"pos",badge:"VERIFIED",verified:true,likes:1543,installs:980,price:0,desc:"POS for market — Collect money to Opay 7040958697 — FREE"},
-{n:"Market Hub",d:"ZO Commerce ✅",c:"community",col:"#ff9800",e:"🛒",r:"4.9",t:"market",badge:"VERIFIED",verified:true,likes:2892,installs:1500,price:0,desc:"Buy & sell for Anambra"},
-{n:"QR Maker",d:"ZO Tools ✅",c:"essential",col:"#000",e:"🔳",r:"4.9",t:"qr",badge:"VERIFIED",verified:true,likes:756,installs:600,price:0,desc:"Generate QR for your business"},
+{n:"POS Business",d:"ZO Business ✅",c:"premium",col:"#4caf50",e:"💳",r:"5.0",t:"pos",badge:"VERIFIED",verified:true,likes:1543,installs:980,price:0,desc:"POS — Collect to Opay 7040958697 — FREE"},
+{n:"Market Hub",d:"ZO Commerce ✅",c:"community",col:"#ff9800",e:"🛒",r:"4.9",t:"market",badge:"VERIFIED",verified:true,likes:2892,installs:1500,price:0,desc:"Buy & sell"},
+{n:"QR Maker",d:"ZO Tools ✅",c:"essential",col:"#000",e:"🔳",r:"4.9",t:"qr",badge:"VERIFIED",verified:true,likes:756,installs:600,price:0,desc:"QR generator"},
 {n:"File Share",d:"ZO System ✅",c:"essential",col:"#ff9800",e:"📤",r:"5.0",t:"shareit",badge:"VERIFIED",verified:true,likes:2278,installs:1300,price:0,desc:"Share files fast"},
 {n:"Calculator",d:"ZO Labs ✅",c:"essential",col:"#4285f4",e:"🧮",r:"4.9",t:"calc",badge:"VERIFIED",verified:true,likes:3412,installs:2200,price:0,desc:"Calculator"},
 {n:"Igbo Translate",d:"ZO Labs ✅",c:"ai",col:"#3f51b5",e:"🌍",r:"5.0",t:"translate",badge:"VERIFIED",verified:true,likes:1634,installs:800,price:0,desc:"Translate Igbo<->English"},
 {n:"Vault",d:"ZO Security ✅",c:"essential",col:"#607d8b",e:"🔒",r:"5.0",t:"vault",badge:"VERIFIED",verified:true,likes:445,installs:300,price:0,desc:"Security vault"}
 ];
-let customApps=JSON.parse(localStorage.getItem('zo_v15_apps')||'[]');
+let customApps=JSON.parse(localStorage.getItem('zo_v16_apps')||localStorage.getItem('zo_v15_apps')||'[]');
 let allApps=[...defaultApps, ...customApps];
 const grid=document.getElementById('grid');
 const detail=document.getElementById('detail');
 const toast=document.getElementById('toast');
 let cur=null, stream=null, isAdmin=false;
-let isPaid=localStorage.getItem('zo_paid_dev_v15')==='1';
-let totalRevenue=parseInt(localStorage.getItem('zo_total_revenue_v15')||'0');
-let totalDevs=parseInt(localStorage.getItem('zo_total_devs_v15')||'0');
-let bankName=localStorage.getItem('zo_bank_name')||DEFAULT_BANK;
-let acctNumber=localStorage.getItem('zo_acct_number')||DEFAULT_ACCT;
-let acctName=localStorage.getItem('zo_acct_name')||DEFAULT_NAME;
+let isPaid=localStorage.getItem('zo_paid_dev_v16')==='1' || localStorage.getItem('zo_paid_dev_v15')==='1';
+let totalRevenue=parseInt(localStorage.getItem('zo_total_revenue_v16')||localStorage.getItem('zo_total_revenue_v15')||'0');
+let totalDevs=parseInt(localStorage.getItem('zo_total_devs_v16')||localStorage.getItem('zo_total_devs_v15')||'0');
+let pendingPayments=JSON.parse(localStorage.getItem('zo_pending_payments_v16')||'[]');
+let approvedPayments=JSON.parse(localStorage.getItem('zo_approved_payments_v16')||'[]');
 
 function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',3000)}
 function closeDetail(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}detail.classList.remove('active')}
-function openPayModal(){document.getElementById('payModal').classList.add('active')}
+function openPayModal(){checkMyStatus();document.getElementById('payModal').classList.add('active')}
 function closePayModal(){document.getElementById('payModal').classList.remove('active')}
-function openAccountModal(){
-document.getElementById('bankName').value=bankName;
-document.getElementById('acctNumber').value=acctNumber;
-document.getElementById('acctName').value=acctName;
-document.getElementById('accountModal').classList.add('active');
-}
-function closeAccountModal(){document.getElementById('accountModal').classList.remove('active')}
 function openUpload(){
 document.getElementById('uploadModal').classList.add('active');
+let statusDiv=document.getElementById('uploadLockStatus');
 if(!isPaid){
 document.getElementById('uploadLock').style.display='block';
 document.getElementById('uploadForm').style.display='none';
+let myPending=pendingPayments.find(p=>p.phone===localStorage.getItem('zo_my_phone'));
+if(myPending){statusDiv.innerHTML=`⏳ Your payment pending verification!<br>Name: ${myPending.name}<br>Ref: ${myPending.ref}<br>CEO go approve soon!`;statusDiv.style.color='#ff9800';}
+else{statusDiv.innerHTML='No pending payment — Pay ₦12k to Opay 7040958697';statusDiv.style.color='var(--sub)';}
 }else{
 document.getElementById('uploadLock').style.display='none';
 document.getElementById('uploadForm').style.display='block';
 }
 }
 function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
-function toggleLang(){showToast('EN/IG/PIDGIN V15.1 ✅ CEO Matthew Ayodele')}
-function saveAccount(){
-bankName=document.getElementById('bankName').value.trim()||DEFAULT_BANK;
-acctNumber=document.getElementById('acctNumber').value.trim()||DEFAULT_ACCT;
-acctName=document.getElementById('acctName').value.trim()||DEFAULT_NAME;
-localStorage.setItem('zo_bank_name',bankName);
-localStorage.setItem('zo_acct_number',acctNumber);
-localStorage.setItem('zo_acct_name',acctName);
-closeAccountModal();
-showToast('🏦 Account Updated! '+bankName+' '+acctNumber+' '+acctName+' ✅ V15.1 Final');
+function toggleLang(){showToast('V16 Our Payment System ✅ CEO Matthew Ayodele')}
+function checkMyStatus(){
+let div=document.getElementById('myPaymentStatus');
+let myPhone=localStorage.getItem('zo_my_phone');
+let myPending=pendingPayments.find(p=>p.phone===myPhone);
+if(isPaid){div.style.display='block';div.innerHTML=`<div style="background:#00c853;color:#fff;padding:8px;border-radius:8px;font-size:10px;text-align:center">✅ You are Approved Paid Developer! Opay 7040958697 • Upload unlimited!</div>`;}
+else if(myPending){div.style.display='block';div.innerHTML=`<div style="background:#ff9800;color:#fff;padding:8px;border-radius:8px;font-size:10px;text-align:center">⏳ Pending Verification<br>Name: ${myPending.name}<br>Phone: ${myPending.phone}<br>Ref: ${myPending.ref}<br>CEO go approve you soon for Admin panel!</div>`;}
+else{div.style.display='none';}
 }
-function payManual(){
-let name=document.getElementById('payName').value.trim()||'Developer';
-let ref=document.getElementById('payRef').value.trim()||'No ref';
-if(confirm(`Confirm you don transfer ₦12,000 to Opay 7040958697 Matthew Ayodele?\nName: ${name}\nTap OK to unlock upload!`)){
-isPaid=true;
-localStorage.setItem('zo_paid_dev_v15','1');
-totalRevenue+=12000;
-totalDevs+=1;
-localStorage.setItem('zo_total_revenue_v15',totalRevenue);
-localStorage.setItem('zo_total_devs_v15',totalDevs);
-// Save payer record
-let payers=JSON.parse(localStorage.getItem('zo_payers')||'[]');
-payers.unshift({name:name,ref:ref,amount:12000,bank:bankName+' '+acctNumber,time:Date.now()});
-localStorage.setItem('zo_payers',JSON.stringify(payers));
+function submitPayment(){
+let name=document.getElementById('payName').value.trim();
+let phone=document.getElementById('payPhone').value.trim();
+let ref=document.getElementById('payRef').value.trim();
+let proof=document.getElementById('payProof').value.trim();
+let image=document.getElementById('payImage').value.trim();
+if(!name||!phone){showToast('Put your name and phone!');return}
+if(!ref){showToast('Put transfer ref/date!');return}
+let payment={id:Date.now(),name:name,phone:phone,ref:ref,proof:proof,image:image,amount:12000,bank:DEFAULT_BANK+' '+DEFAULT_ACCT,time:Date.now(),status:'pending'};
+pendingPayments.unshift(payment);
+localStorage.setItem('zo_pending_payments_v16',JSON.stringify(pendingPayments));
+localStorage.setItem('zo_my_phone',phone);
+localStorage.setItem('zo_my_name',name);
 updatePayStatus();
 closePayModal();
-showToast('✅ Confirmed! You don pay ₦12,000 to 7040958697! You are now Developer! Upload unlimited! 👑');
-setTimeout(openUpload,600);
-}
+showToast('📤 Payment Submitted! Pending verification ⏳ CEO Matthew Ayodele go approve you soon! Check Admin panel if you be CEO!');
 }
 function payDemo(){
 isPaid=true;
-localStorage.setItem('zo_paid_dev_v15','1');
+localStorage.setItem('zo_paid_dev_v16','1');
 totalRevenue+=12000;
 totalDevs+=1;
-localStorage.setItem('zo_total_revenue_v15',totalRevenue);
-localStorage.setItem('zo_total_devs_v15',totalDevs);
+localStorage.setItem('zo_total_revenue_v16',totalRevenue);
+localStorage.setItem('zo_total_devs_v16',totalDevs);
+let demoPay={id:Date.now(),name:localStorage.getItem('zo_my_name')||'CEO Matthew Ayodele',phone:'CEO Demo',ref:'DEMO-'+Date.now(),proof:'Demo pay',amount:12000,time:Date.now(),status:'approved'};
+approvedPayments.unshift(demoPay);
+localStorage.setItem('zo_approved_payments_v16',JSON.stringify(approvedPayments));
 updatePayStatus();
 closePayModal();
-showToast('✅ Demo Pay Success! Test mode — You are Developer! Upload unlimited! V15.1 Final! 👑');
+showToast('✅ Demo Approved! You are Developer! V16 Our Payment System! 👑');
 setTimeout(openUpload,600);
 }
 function updatePayStatus(){
 let devStatus=document.getElementById('devStatus');
 let walletBal=document.getElementById('walletBal');
 let walletAction=document.getElementById('walletAction');
-let walletBox=document.getElementById('walletBox');
+let myPhone=localStorage.getItem('zo_my_phone');
+let myPending=pendingPayments.find(p=>p.phone===myPhone);
 if(isPaid){
-devStatus.textContent='✅ Paid Developer • ₦12k to Opay 7040958697 Matthew Ayodele • Unlimited';
-walletBal.textContent='👑 PAID';
+devStatus.textContent='✅ Approved Paid Developer • Opay 7040958697 • Unlimited upload';
+walletBal.textContent='👑 PAID & APPROVED';
 walletBal.style.color='#00ff88';
-walletAction.textContent='✅ Unlocked';
-walletBox.style.background='linear-gradient(135deg,#01875f,#00ff88)';
+walletAction.textContent='✅ Approved';
+}else if(myPending){
+devStatus.textContent=`⏳ Pending Verification • ${myPending.name} • ${myPending.ref} • Wait for CEO approval`;
+walletBal.textContent='⏳ PENDING';
+walletBal.style.color='#ff9800';
+walletAction.textContent='Pending ⏳';
 }else{
-devStatus.textContent='🔒 Not Paid • Pay ₦12k to Opay 7040958697 Matthew Ayodele';
+devStatus.textContent='🔒 Not Paid • Transfer ₦12k to Opay 7040958697 Matthew Ayodele then submit proof';
 walletBal.textContent='🔒 Locked';
-walletAction.textContent='Tap to Pay ₦12k';
+walletAction.textContent='Tap to Pay';
 }
 document.getElementById('totalApps').textContent=allApps.length;
 document.getElementById('communityCount').textContent=customApps.length;
 let installed=0;allApps.forEach(a=>{if(localStorage.getItem('zo_'+a.n))installed++});
 document.getElementById('installedCount').textContent=installed;
 document.getElementById('devCount').textContent=totalDevs;
+document.getElementById('pendingCount').textContent=pendingPayments.length;
 document.getElementById('revCount').textContent='₦'+totalRevenue.toLocaleString();
 document.getElementById('adminRev').textContent='₦'+totalRevenue.toLocaleString();
 document.getElementById('adminDev').textContent=totalDevs;
+document.getElementById('adminPend').textContent=pendingPayments.length;
 }
 function render(list){
 grid.innerHTML='';
 list.forEach((a)=>{
 let idx=allApps.indexOf(a);
 let el=document.createElement('div');el.className='card';
-let badgeType=a.verified?'blue':a.custom?'gold':'';
+let badgeType=a.verified?'blue':a.custom?'gold':a.c==='pending'?'pending':'';
 el.innerHTML=`<div class="badge ${badgeType}">${a.badge||(a.custom?'COMMUNITY':'FREE')}</div><div class="icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified-tick">✓</div>':''}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta"><span>★ ${a.r||'4.8'}</span><span>❤️ ${a.likes||0}</span><span>📥 ${a.installs||0}</span></div>`;
 el.onclick=()=>openApp(idx);
 grid.appendChild(el);
@@ -265,6 +251,23 @@ grid.appendChild(el);
 updatePayStatus();
 }
 function openApp(i){
+if(i>=allApps.length){
+let pendApp={n:"Pending Payments ⏳",d:"Our Payment System V16",c:"pending",col:"#ff9800",e:"⏳",r:"5.0",t:"pending",badge:"PENDING",verified:false,likes:pendingPayments.length,desc:"V16 Our Own Payment System"};
+cur=pendApp;
+document.getElementById('dIcon').style.background=pendApp.col;
+document.getElementById('dIcon').innerHTML=pendApp.e;
+document.getElementById('dName').textContent=pendApp.n;
+document.getElementById('dTitle').textContent=pendApp.n;
+document.getElementById('dDev').textContent=pendApp.d;
+document.getElementById('dMeta').textContent=pendingPayments.length+' pending • '+approvedPayments.length+' approved • Opay 7040958697';
+document.getElementById('likeCount').textContent=pendingPayments.length;
+document.getElementById('installBtn').style.display='none';
+document.getElementById('installInfo').textContent='V16 Our Own Payment System • CEO Admin Only';
+document.getElementById('detail').classList.add('active');
+document.getElementById('adminDel').style.display=isAdmin?'inline':'none';
+buildApp(pendApp);
+return;
+}
 cur=allApps[i];
 detail.classList.add('active');
 document.getElementById('dIcon').style.background=cur.col;
@@ -272,33 +275,31 @@ document.getElementById('dIcon').innerHTML=`${cur.e}${cur.verified?'<div class="
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
 document.getElementById('dDev').textContent=cur.d;
-document.getElementById('dMeta').textContent=`★ ${cur.r||'4.8'} • ${cur.likes||0} likes • ${cur.installs||0} installs • ${cur.verified?'Verified ✓':'Community'} • FREE for users • CEO Matthew Ayodele`;
+document.getElementById('dMeta').textContent=`★ ${cur.r||'4.8'} • ${cur.likes||0} likes • ${cur.installs||0} installs • ${cur.verified?'Verified ✓':'Community'} • FREE • CEO Matthew Ayodele`;
 document.getElementById('likeCount').textContent=cur.likes||0;
 let installed=localStorage.getItem('zo_'+cur.n);
 let btn=document.getElementById('installBtn');
+btn.style.display='block';
 btn.textContent=installed?'Open':'Install FREE';
 btn.className=installed?'btn done':'btn';
-document.getElementById('installInfo').textContent=cur.custom?'Community upload • Paid ₦12k to Opay 7040958697':'Official ZO Labs • V15.1 Final Complete • CEO Matthew Ayodele • Opay 7040958697';
+document.getElementById('installInfo').textContent=cur.custom?'Community upload • Paid ₦12k Opay 7040958697':'Official ZO Labs • V16 Our Payment System • CEO Matthew Ayodele';
 document.getElementById('adminDel').style.display=isAdmin?'inline':'none';
 buildApp(cur);
 }
 function buildApp(app){
 let s=document.getElementById('screen');
-if(app.c==='account' || app.t==='account'){
-let payers=JSON.parse(localStorage.getItem('zo_payers')||'[]');
-let payerList=payers.slice(0,5).map(p=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:9px"><span>${p.name}</span><span>₦${p.amount}</span><span style="color:var(--sub)">${new Date(p.time).toLocaleDateString()}</span></div>`).join('')||'<div style="font-size:9px;color:var(--sub)">No payers yet — Be first!</div>';
-s.innerHTML=`<div class="mini"><div style="font-weight:700;font-size:11px">🏦 CEO Account — V15.1 Final — Matthew Ayodele</div><div style="font-size:11px;margin-top:8px;line-height:1.8;background:gold;color:#000;padding:10px;border-radius:8px;text-align:center"><b>Bank: Opay</b><br><b style="font-size:16px">7040958697</b><br><b>Matthew Ayodele</b><br><b>₦12,000</b></div><div style="font-size:10px;margin-top:10px;line-height:1.6">
-<b>Stats:</b><br>
-Total Revenue: ₦${totalRevenue.toLocaleString()}<br>
-Total Developers: ${totalDevs}<br>
-Total Community Apps: ${customApps.length}<br>
-Upload Fee: ₦12,000 once<br><br>
-<b>Recent Payers:</b><br>${payerList}
-</div><button class="btn" style="width:100%;margin-top:10px" onclick="openAccountModal()">🏦 Edit Account</button><button class="btn done" style="width:100%;margin-top:6px" onclick="openPayModal()">💳 View Pay Page</button></div><div class="mini"><div style="font-size:9px">✅ V13 Manual Pay ✅ V14 Referral ✅ V15 Account Inside ✅ V15.1 Your Opay Hardcoded<br>After this we go build our own payment system!</div></div>`;
+if(app.t==='pending'){
+let pendingHtml=pendingPayments.length===0?'<div style="font-size:10px;color:var(--sub)">No pending payments — All approved! ✅</div>':pendingPayments.map((p,idx)=>`
+<div class="pending-item">
+<div style="flex:1"><b>${p.name}</b><br><span style="font-size:8px">📞 ${p.phone} • Ref: ${p.ref}</span><br><span style="font-size:8px;color:var(--sub)">${p.proof||'No proof note'} • ${new Date(p.time).toLocaleString()}</span><br><span style="font-size:8px">💰 ₦${p.amount} • ${p.bank}</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><button class="btn approve" style="font-size:8px;padding:4px 8px" onclick="approvePayment(${idx})">✅ Approve</button><button class="btn done" style="font-size:8px;padding:4px 8px" onclick="rejectPayment(${idx})">❌ Reject</button></div>
+</div>`).join('');
+let approvedHtml=approvedPayments.slice(0,5).map(p=>`<div class="pending-item approved-item"><div style="flex:1"><b>${p.name} ✅</b><br><span style="font-size:8px">${p.phone} • ${p.ref} • ₦${p.amount}</span></div><span style="font-size:8px;color:#00c853">Approved</span></div>`).join('')||'<div style="font-size:9px;color:var(--sub)">No approved yet</div>';
+s.innerHTML=`<div class="mini"><div style="font-weight:700;font-size:11px">⏳ Pending Payments — V16 Our Own Payment System — CEO Matthew Ayodele</div><div style="font-size:9px;margin-top:6px;color:var(--sub)">You be CEO, you dey approve people wey transfer ₦12k to Opay 7040958697. Tap Approve to unlock them!</div><div style="margin-top:10px">${pendingHtml}</div></div><div class="mini"><div style="font-weight:700;font-size:10px">✅ Recently Approved (Last 5)</div><div style="margin-top:6px">${approvedHtml}</div></div><div class="mini"><div style="font-size:9px">💳 Account: Opay 7040958697 Matthew Ayodele • Total Revenue: ₦${totalRevenue.toLocaleString()} • Total Devs: ${totalDevs} • Pending: ${pendingPayments.length}<br><br>How to verify: Check your Opay app, confirm you receive ₦12k from ${pendingPayments[0]?.name||'person'}, then tap Approve!</div></div>`;
 return;
 }
 if(app.t==='pos'){
-s.innerHTML=`<div class="mini"><div style="font-weight:700;font-size:11px">💳 ZO POS — Collect to Opay 7040958697</div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="posAmount" placeholder="Amount ₦" type="number" style="flex:1"><input class="note-input" id="posDesc" placeholder="For?" style="flex:1"></div><button class="btn" style="width:100%;margin-top:8px" onclick="doPOS()">💰 Collect to Opay 7040958697</button><div id="posHistory"></div></div>`;
+s.innerHTML=`<div class="mini"><div style="font-weight:700;font-size:11px">💳 ZO POS — Collect to Opay 7040958697 Matthew Ayodele</div><div style="display:flex;gap:6px;margin-top:8px"><input class="note-input" id="posAmount" placeholder="Amount ₦" type="number" style="flex:1"><input class="note-input" id="posDesc" placeholder="For?" style="flex:1"></div><button class="btn" style="width:100%;margin-top:8px" onclick="doPOS()">💰 Collect to Opay 7040958697</button><div id="posHistory"></div></div>`;
 let history=JSON.parse(localStorage.getItem('zo_pos')||'[]');
 window.doPOS=()=>{let amt=parseInt(document.getElementById('posAmount').value);let desc=document.getElementById('posDesc').value||'Sale';if(!amt)return;history.unshift({amount:amt,desc:desc});localStorage.setItem('zo_pos',JSON.stringify(history));document.getElementById('posAmount').value='';refreshPOS();showToast('₦'+amt+' Collected to Opay 7040958697 ✅');}
 function refreshPOS(){let list=document.getElementById('posHistory');if(!list)return;list.innerHTML='';history.slice(0,5).forEach(h=>{let d=document.createElement('div');d.style.cssText='display:flex;gap:6px;padding:6px;background:var(--card);border-radius:6px;margin-top:5px;font-size:10px';d.innerHTML=`<span>💰</span><div style="flex:1"><b>₦${h.amount}</b> - ${h.desc} • Opay 7040958697</div>`;list.appendChild(d)});}
@@ -309,15 +310,45 @@ window.startCam=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({
 window.stopCam=()=>{if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
 window.takePhoto=()=>{let v=document.getElementById('vid');let c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);document.getElementById('photoResult').innerHTML=`<img src="${c.toDataURL()}" style="width:100%;border-radius:10px;margin-top:6px">`;}
 }else{
-s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:36px">${app.e}</div><div style="text-align:center;font-weight:700;margin-top:6px">${app.n}</div><div style="text-align:center;font-size:9px;color:var(--sub)">${app.d}</div><div style="margin-top:12px;font-size:10px;line-height:1.6"><b>${app.desc}</b><br><br>✅ FREE for users<br>✅ Community upload paid ₦12k to Opay 7040958697 Matthew Ayodele<br>✅ V15.1 Final Complete<br>✅ CEO: Matthew Ayodele</div></div>`;
+s.innerHTML=`<div class="mini"><div style="text-align:center;font-size:36px">${app.e}</div><div style="text-align:center;font-weight:700;margin-top:6px">${app.n}</div><div style="text-align:center;font-size:9px;color:var(--sub)">${app.d}</div><div style="margin-top:12px;font-size:10px;line-height:1.6"><b>${app.desc}</b><br><br>✅ FREE for users<br>✅ Paid ₦12k to Opay 7040958697 Matthew Ayodele<br>✅ V16 Our Own Payment System<br>✅ CEO: Matthew Ayodele</div></div>`;
 }
+}
+window.approvePayment=function(idx){
+let p=pendingPayments[idx];
+if(!p)return;
+if(!confirm(`Approve ${p.name} ${p.phone} Ref ${p.ref}? You confirm you receive ₦12k for Opay 7040958697?`)) return;
+pendingPayments.splice(idx,1);
+approvedPayments.unshift({...p,status:'approved',approvedTime:Date.now()});
+localStorage.setItem('zo_pending_payments_v16',JSON.stringify(pendingPayments));
+localStorage.setItem('zo_approved_payments_v16',JSON.stringify(approvedPayments));
+totalRevenue+=12000;
+totalDevs+=1;
+localStorage.setItem('zo_total_revenue_v16',totalRevenue);
+localStorage.setItem('zo_total_devs_v16',totalDevs);
+// If na yourself you approve, unlock your own account too
+if(p.phone===localStorage.getItem('zo_my_phone')){
+isPaid=true;
+localStorage.setItem('zo_paid_dev_v16','1');
+}
+updatePayStatus();
+showToast(`✅ Approved ${p.name}! Revenue ₦${totalRevenue.toLocaleString()} • Opay 7040958697`);
+if(cur && cur.t==='pending') buildApp(cur);
+}
+window.rejectPayment=function(idx){
+let p=pendingPayments[idx];
+if(!confirm(`Reject ${p.name}?`)) return;
+pendingPayments.splice(idx,1);
+localStorage.setItem('zo_pending_payments_v16',JSON.stringify(pendingPayments));
+updatePayStatus();
+showToast(`❌ Rejected ${p.name}`);
+if(cur && cur.t==='pending') buildApp(cur);
 }
 function likeApp(){
 if(!cur)return;
 if(localStorage.getItem('liked_'+cur.n)){showToast('Already liked');return}
 cur.likes=(cur.likes||0)+1;
 localStorage.setItem('liked_'+cur.n,'1');
-if(cur.custom){let idx=customApps.findIndex(a=>a.n===cur.n);if(idx>=0){customApps[idx].likes=cur.likes;localStorage.setItem('zo_v15_apps',JSON.stringify(customApps));}}
+if(cur.custom){let idx=customApps.findIndex(a=>a.n===cur.n);if(idx>=0){customApps[idx].likes=cur.likes;localStorage.setItem('zo_v16_apps',JSON.stringify(customApps));}}
 document.getElementById('likeCount').textContent=cur.likes;
 render(allApps);
 showToast('Liked ❤️');
@@ -327,109 +358,37 @@ if(!isAdmin){showToast('Only Admin!');return}
 if(!cur.custom){showToast('Cannot delete official!');return}
 if(!confirm('Delete '+cur.n+'?')) return;
 customApps=customApps.filter(a=>a.n!==cur.n);
-localStorage.setItem('zo_v15_apps',JSON.stringify(customApps));
+localStorage.setItem('zo_v16_apps',JSON.stringify(customApps));
 allApps=[...defaultApps, ...customApps];
 closeDetail();
 render(allApps);
 showToast('Deleted 🗑️');
 }
 function openAdmin(){
-let pass=prompt('Super Admin Password? Hint: zo2025');
-if(pass==='zo2025'){
+let pass=prompt('Super Admin Password? Hint: zo2025 or matthew2025');
+if(pass==='zo2025' || pass==='matthew2025' || pass==='7040958697'){
 isAdmin=true;
 document.getElementById('adminBar').style.display='flex';
 document.getElementById('adminDel').style.display='inline';
-showToast('Admin ON 👑 CEO Matthew Ayodele • Revenue ₦'+totalRevenue.toLocaleString()+' • Opay 7040958697');
-}else showToast('Wrong!');
+showToast(`Admin ON 👑 CEO Matthew Ayodele • Rev ₦${totalRevenue.toLocaleString()} • Pending ${pendingPayments.length} • Opay 7040958697`);
+filterCat('pending');
+}else showToast('Wrong! Try zo2025');
 }
-function toggleAdmin(){isAdmin=false;document.getElementById('adminBar').style.display='none';document.getElementById('adminDel').style.display='none';showToast('Admin OFF')}
+function toggleAdmin(){isAdmin=false;document.getElementById('adminBar').style.display='none';document.getElementById('adminDel').style.display='none';filterCat('all');showToast('Admin OFF')}
 function submitApp(){
-if(!isPaid){showToast('Pay ₦12k to Opay 7040958697 first!');openPayModal();return}
+if(!isPaid){showToast('Pay ₦12k to Opay 7040958697 first! Submit proof!');openPayModal();return}
 let name=document.getElementById('upName').value.trim();
 let dev=document.getElementById('upDev').value.trim()||'Paid Dev';
 let emoji=document.getElementById('upEmoji').value.trim()||'📱';
 let color=document.getElementById('upColor').value.trim()||'#ff9800';
 let cat=document.getElementById('upCat').value;
-let desc=document.getElementById('upDesc').value.trim()||'Community app V15.1';
+let desc=document.getElementById('upDesc').value.trim()||'Community app V16';
 if(!name){showToast('Put app name!');return}
 let badge=cat==='wish'?'WISH':cat==='premium'?'PREMIUM':'COMMUNITY';
-let newApp={n:name,d:dev+' 💳 Paid ₦12k Opay',c:cat,col:color,e:emoji,r:'4.8',badge:badge,verified:false,likes:1,installs:0,price:0,desc:desc+' (Paid ₦12k to Opay 7040958697 Matthew Ayodele)',custom:true,t:'custom'};
+let newApp={n:name,d:dev+' 💳 Paid ₦12k Opay',c:cat,col:color,e:emoji,r:'4.8',badge:badge,verified:false,likes:1,installs:0,price:0,desc:desc+' (Paid ₦12k to Opay 7040958697 Matthew Ayodele - V16 Our Own Payment)',custom:true,t:'custom'};
 customApps.unshift(newApp);
-localStorage.setItem('zo_v15_apps',JSON.stringify(customApps));
+localStorage.setItem('zo_v16_apps',JSON.stringify(customApps));
 allApps=[...defaultApps, ...customApps];
 closeUpload();
 ['upName','upDev','upEmoji','upDesc'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
-document.getElementById('upColor').value='#ff9800';
-render(allApps);
-showToast(name+' Uploaded! V15.1 Final! CEO Matthew Ayodele 🚀');
-filterCat(cat);
-}
-function filterCat(cat){
-document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-let target=[...document.getElementById('nav').children].find(d=>d.dataset.f===cat);
-if(target) target.classList.add('active');
-if(cat==='account'){
-let accountApp={n:"My Account 🏦",d:"CEO Matthew Ayodele • Opay 7040958697",c:"account",col:"#01875f",e:"🏦",r:"5.0",t:"account",badge:"CEO",verified:true,likes:1,desc:"CEO Account"};
-openApp(allApps.length);
-cur=accountApp;
-document.getElementById('dIcon').style.background=accountApp.col;
-document.getElementById('dIcon').innerHTML=accountApp.e;
-document.getElementById('dName').textContent=accountApp.n;
-document.getElementById('dTitle').textContent=accountApp.n;
-document.getElementById('dDev').textContent=accountApp.d;
-document.getElementById('dMeta').textContent='Opay 7040958697 Matthew Ayodele • V15.1 Final';
-document.getElementById('likeCount').textContent=1;
-document.getElementById('installBtn').style.display='none';
-document.getElementById('installInfo').textContent='V15.1 Final • CEO Account';
-document.getElementById('detail').classList.add('active');
-buildApp(accountApp);
-return;
-}
-if(cat==='all') render(allApps);
-else render(allApps.filter(a=>a.c===cat));
-}
-document.getElementById('installBtn').onclick=function(){
-if(!cur)return;
-let key='zo_'+cur.n;
-if(localStorage.getItem(key)){showToast(cur.n+' Opening... 🚀');return}
-this.textContent='Installing...';
-setTimeout(()=>{
-this.textContent='Open';this.className='btn done';
-localStorage.setItem(key,'1');
-cur.installs=(cur.installs||0)+1;
-if(cur.custom){let idx=customApps.findIndex(a=>a.n===cur.n);if(idx>=0){customApps[idx].installs=cur.installs;localStorage.setItem('zo_v15_apps',JSON.stringify(customApps));}}
-updatePayStatus();
-showToast(cur.n+' Installed FREE ✅');
-render(allApps);
-},600);
-};
-document.getElementById('search').addEventListener('input',e=>{
-let q=e.target.value.toLowerCase();
-if(q.includes('account')||q.includes('opay')||q.includes('7040')){openAccountModal();return}
-render(allApps.filter(a=>a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)||(a.desc&&a.desc.toLowerCase().includes(q))));
-});
-document.getElementById('nav').querySelectorAll('div').forEach(t=>{
-t.addEventListener('click',()=>{
-document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-t.classList.add('active');
-filterCat(t.dataset.f);
-});
-});
-document.getElementById('darkBtn').onclick=()=>{
-document.body.classList.toggle('dark');
-document.getElementById('darkBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙';
-};
-// Init with default Opay account if first time
-if(!localStorage.getItem('zo_bank_name')){
-localStorage.setItem('zo_bank_name',DEFAULT_BANK);
-localStorage.setItem('zo_acct_number',DEFAULT_ACCT);
-localStorage.setItem('zo_acct_name',DEFAULT_NAME);
-}
-render(allApps);
-setTimeout(()=>{
-if(!isPaid) showToast('👑 V15.1 FINAL! CEO Matthew Ayodele • Pay ₦12k to Opay 7040958697 to upload! No Paystack — Our own system! 🚀');
-else showToast('👑 Welcome Paid Developer! V15.1 Final Complete! CEO Matthew Ayodele • Opay 7040958697');
-},1500);
-</script>
-</body>
-</html>
+document.getElementById('
