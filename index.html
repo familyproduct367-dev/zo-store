@@ -3,515 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V21-V40 Business</title>
+<title>ZO STORE FIXED</title>
 <meta name="theme-color" content="#01875f">
 <style>
-:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800;--red:#ea4335;--gold:gold}
+:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8;--orange:#ff9800;--red:#ea4335}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
-body{background:var(--bg);color:var(--text);padding-bottom:60px}
-.hdr{padding:10px 14px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
-.logo{width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:14px}
+body{background:var(--bg);color:var(--text);padding-bottom:70px}
+.hdr{padding:10px 12px;background:var(--card);display:flex;gap:8px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
+.logo{width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
 .search{flex:1;background:var(--bg);border-radius:20px;padding:7px 12px;display:flex;gap:8px;border:1px solid var(--border)}
 .search input{border:none;background:transparent;outline:none;width:100%;font-size:12px}
-.icon{width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;position:relative}
-.badge-dot{position:absolute;top:0;right:0;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--card)}
-.nav{padding:6px 14px;display:flex;gap:6px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border)}
-.nav div{padding:6px 10px;font-size:11px;color:var(--sub);border-radius:14px;cursor:pointer;white-space:nowrap;border:1px solid var(--border)}
+.icon{width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px}
+.nav{padding:8px 12px;display:flex;gap:6px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border)}
+.nav div{padding:6px 12px;font-size:11px;border:1px solid var(--border);border-radius:16px;cursor:pointer;white-space:nowrap;background:var(--card)}
 .nav div.active{background:var(--green);color:#fff;border-color:var(--green)}
-.grid{padding:10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
-.card{background:var(--card);border-radius:12px;padding:8px;border:1px solid var(--border);cursor:pointer;position:relative}
-.card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff}
-.card h3{font-size:11px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-dev{font-size:9px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.badge{position:absolute;top:5px;right:5px;background:var(--green);color:#fff;font-size:6px;padding:2px 4px;border-radius:6px;font-weight:700}
-.badge.gold{background:var(--gold);color:#000}.badge.blue{background:var(--blue)}.badge.orange{background:var(--orange)}
+.grid{padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.card{background:var(--card);border-radius:12px;padding:10px;border:1px solid var(--border);cursor:pointer}
+.card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;margin-bottom:6px}
+.card h3{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-dev{font-size:9px;color:var(--sub);margin-top:2px}
+.badge{font-size:7px;background:var(--green);color:#fff;padding:2px 5px;border-radius:6px;display:inline-block;margin-top:4px}
 .detail{position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
-.detail-top{padding:8px 12px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:2}
-.dhead{padding:12px;background:var(--card);display:flex;gap:10px;border-bottom:1px solid var(--border)}
-.dicon{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff}
-.actions{padding:10px 12px;display:flex;gap:6px;background:var(--card);border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
-.btn{background:var(--green);color:#fff;border:none;padding:8px 14px;border-radius:16px;font-weight:600;cursor:pointer;font-size:11px}
-.btn.sec{background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.btn.gold{background:linear-gradient(135deg,var(--orange),var(--gold));color:#000;font-weight:800}
-.btn.small{padding:5px 10px;font-size:10px}
-.tabs{display:flex;gap:0;background:var(--card);border-bottom:1px solid var(--border);overflow:auto}
-.tabs div{padding:10px 12px;font-size:11px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;color:var(--sub)}
-.tabs div.active{color:var(--green);border-color:var(--green);font-weight:600}
-.tab-content{padding:12px}
-.info{background:var(--card);border-radius:10px;padding:10px;margin-bottom:8px;border:1px solid var(--border)}
-.info h4{font-size:11px;margin-bottom:4px}
-.info p{font-size:10px;color:var(--sub);line-height:1.5}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
 .modal.active{display:flex}
-.box{background:var(--card);border-radius:12px;padding:14px;width:100%;max-width:460px;max-height:92vh;overflow:auto}
-.input{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:11px;margin-top:6px}
-.plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
-.plan{border:2px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:.2s}
-.plan.active{border-color:var(--green);background:rgba(1,135,95,.06)}
-.plan b{display:block;font-size:12px}
-.plan span{font-size:9px;color:var(--sub);display:block;margin-top:2px}
-.plan .price{font-size:14px;font-weight:800;color:var(--green);margin-top:4px}
-.wallet{background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:12px;padding:12px;margin-bottom:8px}
-.wallet-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
-.wallet-card{background:rgba(255,255,255,.15);border-radius:8px;padding:8px;text-align:center}
-.wallet-card b{display:block;font-size:13px}
-.wallet-card span{font-size:8px;opacity:.9}
-.chart{height:60px;background:var(--bg);border-radius:8px;display:flex;align-items:end;gap:3px;padding:6px;margin-top:8px}
-.chart div{flex:1;background:var(--green);border-radius:3px;min-height:4px}
-.notif{padding:8px;background:var(--bg);border-radius:8px;margin-top:6px;border-left:3px solid var(--green);font-size:10px}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;z-index:40}
-.bnav div{font-size:8px;text-align:center;color:var(--sub);cursor:pointer}
+.box{background:var(--card);border-radius:12px;padding:16px;width:100%;max-width:420px;max-height:90vh;overflow:auto}
+.input{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);margin-top:8px;font-size:12px;outline:none}
+.btn{background:var(--green);color:#fff;border:none;padding:10px 16px;border-radius:20px;font-weight:600;cursor:pointer;font-size:12px;margin-top:8px;width:100%}
+.btn.sec{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.btn.gold{background:var(--orange);color:#000}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0;z-index:40}
+.bnav div{font-size:9px;text-align:center;color:var(--sub);cursor:pointer;padding:4px 10px}
 .bnav div.active{color:var(--green)}
-.bnav span{font-size:16px;display:block}
-.toast{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 12px;border-radius:14px;font-size:10px;display:none;z-index:400;max-width:90%;text-align:center}
-.admin-bar{background:#111;color:#0f0;padding:6px 12px;font-size:9px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:50}
+.bnav span{font-size:18px;display:block}
+.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:20px;font-size:11px;display:none;z-index:500}
+.plan{border:2px solid var(--border);border-radius:10px;padding:10px;text-align:center;cursor:pointer;margin-top:8px}
+.plan.active{border-color:var(--green);background:rgba(1,135,95,.08)}
+.wallet{background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:12px;padding:12px}
 </style>
 </head>
 <body>
-<div id="adminBar" class="admin-bar" style="display:none"><span>Admin • <span id="adminStats"></span></span><span onclick="toggleAdmin()" style="cursor:pointer">Exit ✕</span></div>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search apps..."></div><div class="icon" onclick="openNotifs()">🔔<div class="badge-dot" id="notifDot" style="display:none"></div></div><div class="icon" onclick="openUser()">👤</div><div class="icon" onclick="openDev()">💼</div></div>
-<div class="nav" id="nav">
-<div class="active" data-f="all" onclick="filterCat('all',this)">All</div>
-<div data-f="games" onclick="filterCat('games',this)">Games</div>
-<div data-f="business" onclick="filterCat('business',this)">Business</div>
-<div data-f="productivity" onclick="filterCat('productivity',this)">Productivity</div>
-<div data-f="tools" onclick="filterCat('tools',this)">Tools</div>
-<div data-f="myapps" onclick="showMyApps()">My Apps</div>
+<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="searchBox" placeholder="Search apps..." oninput="doSearch()"></div><div class="icon" onclick="openModal('notifModal')">🔔</div><div class="icon" onclick="openModal('userModal')">👤</div><div class="icon" onclick="openModal('devModal')">💼</div></div>
+<div class="nav">
+<div class="active" id="tabAll" onclick="filterCat('all')">All</div>
+<div onclick="filterCat('games')">Games</div>
+<div onclick="filterCat('business')">Business</div>
+<div onclick="filterCat('productivity')">Productivity</div>
+<div onclick="filterCat('tools')">Tools</div>
+<div onclick="showMyApps()">My Apps</div>
 </div>
 <div class="grid" id="grid"></div>
 
-<div class="modal" id="userModal">
-<div class="box">
-<h3 style="font-size:14px">User Account</h3>
-<div id="userLoggedOut" style="margin-top:10px">
-<input class="input" id="uEmail" placeholder="Email">
-<input class="input" id="uPass" type="password" placeholder="Password">
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="userRegister()">Create Account</button><button class="btn sec" style="flex:1" onclick="userLogin()">Sign In</button></div>
-</div>
-<div id="userLoggedIn" style="display:none">
-<div style="text-align:center;padding:8px"><div style="width:50px;height:50px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;margin:0 auto">👤</div><b id="uName" style="display:block;margin-top:6px;font-size:12px"></b></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="userLogout()">Sign Out</button>
-</div>
-<button class="btn sec" style="width:100%;margin-top:10px" onclick="closeUser()">Close</button>
-</div>
-</div>
+<div class="modal" id="userModal"><div class="box"><h3>User Account</h3><input class="input" id="uEmail" placeholder="Email"><input class="input" id="uPass" type="password" placeholder="Password"><button class="btn" onclick="userLogin()">Sign In / Create Account</button><button class="btn sec" onclick="closeModal('userModal')">Close</button><div id="userInfo" style="font-size:11px;margin-top:10px;color:var(--sub)"></div></div></div>
 
-<div class="modal" id="devModal">
-<div class="box">
-<h3 style="font-size:14px">Developer Center</h3>
-<div id="devLoggedOut" style="margin-top:10px">
+<div class="modal" id="devModal"><div class="box">
+<h3>Developer Center — V21-V40</h3>
+<div id="devLoggedOut">
 <input class="input" id="dEmail" placeholder="Developer email">
-<input class="input" id="dNameInput" placeholder="Business name">
-<select class="input" id="dAccountType"><option value="individual">Individual</option><option value="business">Business Account</option></select>
+<input class="input" id="dName" placeholder="Business name">
+<select class="input" id="dType"><option value="individual">Individual</option><option value="business">Business Account</option></select>
 <input class="input" id="dPass" type="password" placeholder="Password">
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="devRegister()">Create Account</button><button class="btn sec" style="flex:1" onclick="devLogin()">Sign In</button></div>
+<button class="btn" onclick="devRegister()">Create Developer Account</button>
+<button class="btn sec" onclick="devLogin()">Sign In</button>
 </div>
 <div id="devLoggedIn" style="display:none">
-<div class="wallet"><div style="display:flex;justify-content:space-between"><div><b id="devNameShow"></b><div style="font-size:9px;opacity:.9" id="devPlanBadge">Free Plan</div></div><div style="text-align:right"><b id="walletBal">₦0</b><div style="font-size:8px;opacity:.9">Wallet Balance</div></div></div>
-<div class="wallet-grid"><div class="wallet-card"><b id="devAppsCount">0</b><span>My Apps</span></div><div class="wallet-card"><b id="devTotalInstalls">0</b><span>Total Installs</span></div><div class="wallet-card"><b id="devEarnings">₦0</b><span>Earnings</span></div><div class="wallet-card"><b id="devPending">0</b><span>Pending</span></div></div></div>
-<div class="info"><h4>Subscription Plans</h4>
-<div class="plan-grid">
-<div class="plan" onclick="selectPlan('starter',this)"><b>Starter</b><span>3 apps</span><div class="price">₦3,000/mo</div><span>Basic publishing</span></div>
-<div class="plan" onclick="selectPlan('professional',this)"><b>Professional</b><span>10 apps</span><div class="price">₦10,000/mo</div><span>Verified badge</span></div>
-<div class="plan" onclick="selectPlan('business',this)"><b>Business</b><span>Unlimited</span><div class="price">₦25,000/mo</div><span>Business account</span></div>
-<div class="plan" onclick="selectPlan('enterprise',this)"><b>Enterprise</b><span>Custom</span><div class="price">Custom</div><span>API + Support</span></div>
+<div class="wallet"><b id="devNameShow"></b><div id="devPlanShow" style="font-size:10px;margin-top:2px">Free Plan</div><div style="margin-top:8px"><b id="walletBal">₦0</b> Balance • <b id="earnBal">₦0</b> Earnings</div></div>
+<div style="margin-top:10px"><b style="font-size:12px">Subscription Plans</b>
+<div class="plan" onclick="selectPlan('starter',3000)"><b>Starter — ₦3,000/mo</b><div style="font-size:10px">3 apps • Basic publishing</div></div>
+<div class="plan" onclick="selectPlan('professional',10000)"><b>Professional — ₦10,000/mo</b><div style="font-size:10px">10 apps • Verified badge</div></div>
+<div class="plan" onclick="selectPlan('business',25000)"><b>Business — ₦25,000/mo</b><div style="font-size:10px">Unlimited • Business account</div></div>
 </div>
-<div style="margin-top:8px;font-size:9px;color:var(--sub)">Selected: <b id="selectedPlan">Free — 1 app</b> • <span id="planStatus">Not subscribed</span></div>
+<button class="btn" onclick="openModal('uploadModal')">Upload App</button>
+<button class="btn sec" onclick="showMyApps()">Manage My Apps</button>
+<button class="btn sec" onclick="openModal('walletModal')">Wallet & Earnings</button>
+<button class="btn sec" onclick="devLogout()">Sign Out</button>
 </div>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" style="flex:1" onclick="openUpload()">Upload App</button><button class="btn sec" style="flex:1" onclick="showMyApps()">Manage Apps</button></div>
-<div style="display:flex;gap:6px;margin-top:6px"><button class="btn sec" style="flex:1" onclick="openWallet()">Wallet</button><button class="btn sec" style="flex:1" onclick="openAnalytics()">Analytics</button><button class="btn sec" style="flex:1" onclick="openSupport()">Support</button></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="devLogout()">Sign Out</button>
-</div>
-<button class="btn sec" style="width:100%;margin-top:10px" onclick="closeDev()">Close</button>
-</div>
-</div>
+<button class="btn sec" onclick="closeModal('devModal')">Close</button>
+</div></div>
 
-<div class="modal" id="payModal">
-<div class="box">
-<h3 style="font-size:14px">Payment — Opay 7040958697</h3>
-<div style="background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:10px;padding:12px;text-align:center;margin-top:8px"><div style="font-size:10px">Transfer to</div><b>Opay</b><div style="font-size:18px;font-weight:900">7040958697</div><div style="font-size:11px">Matthew Ayodele</div><div id="payAmount" style="font-size:16px;font-weight:900;margin-top:6px;background:gold;color:#000;padding:4px 10px;border-radius:8px;display:inline-block">₦3,000</div><div style="font-size:8px;margin-top:4px" id="payDesc">Starter Plan</div></div>
-<input class="input" id="payName" placeholder="Your full name">
-<input class="input" id="payPhone" placeholder="Phone / WhatsApp">
-<input class="input" id="payRef" placeholder="Transfer reference / time">
-<div style="margin-top:8px"><b style="font-size:10px">Upload proof screenshot:</b><input type="file" id="proofFile" accept="image/*" style="font-size:10px;margin-top:4px"><div id="proofPreview" style="display:none;margin-top:6px"><img id="proofImg" style="width:100%;max-height:120px;border-radius:8px;border:1px solid var(--border)"></div></div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn gold" style="flex:1" onclick="submitPayment()">Submit Payment</button><button class="btn sec" style="flex:1" onclick="closePay()">Cancel</button></div>
-<button class="btn sec" style="width:100%;margin-top:6px" onclick="payDemo()">Demo Pay (Instant)</button>
-</div>
-</div>
+<div class="modal" id="payModal"><div class="box">
+<h3>Payment — Opay 7040958697</h3>
+<div style="background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;border-radius:10px;padding:12px;text-align:center;margin-top:10px"><div>Transfer to</div><b>OPAY</b><div style="font-size:20px;font-weight:900">7040958697</div><div>Matthew Ayodele</div><div id="payAmount" style="margin-top:8px;background:gold;color:#000;padding:6px 12px;border-radius:8px;display:inline-block;font-weight:900">₦3,000</div></div>
+<input class="input" id="payName" placeholder="Your name">
+<input class="input" id="payRef" placeholder="Transfer ref">
+<input type="file" id="proofFile" accept="image/*" style="margin-top:10px;font-size:11px">
+<img id="proofImg" style="width:100%;margin-top:8px;border-radius:8px;display:none">
+<button class="btn gold" onclick="submitPay()">Submit Payment with Proof</button>
+<button class="btn" onclick="demoPay()" style="background:var(--blue)">Demo Pay (Instant) — For Testing</button>
+<button class="btn sec" onclick="closeModal('payModal')">Cancel</button>
+</div></div>
 
-<div class="modal" id="walletModal">
-<div class="box">
-<h3 style="font-size:14px">Wallet & Earnings</h3>
-<div class="wallet"><b id="walletDetailBal">₦0</b><div style="font-size:10px">Available balance</div><div style="margin-top:8px;font-size:9px">Earnings from app sales, featured placements</div></div>
-<div class="info"><h4>Earnings Dashboard</h4><p>Total Revenue: <b id="earnTotal">₦0</b><br>From Subscriptions: <b id="earnSubs">₦0</b><br>From Publishing Fees: <b id="earnFees">₦0</b><br>Pending Payout: <b id="earnPending">₦0</b></p><div class="chart" id="earnChart"></div></div>
-<div class="info"><h4>Publishing History</h4><div id="publishHistory" style="font-size:10px"></div></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeWallet()">Close</button>
-</div>
-</div>
-
-<div class="modal" id="analyticsModal">
-<div class="box">
-<h3 style="font-size:14px">Analytics</h3>
-<div class="info"><h4>Download Analytics</h4><div class="chart" id="downloadChart"></div><p style="margin-top:6px">Total Downloads: <b id="analyticsDownloads">0</b> • Last 7 days trend</p></div>
-<div class="info"><h4>App Sales Analytics</h4><div class="chart" id="salesChart"></div><p>Sales from paid apps, subscriptions</p></div>
-<div class="info"><h4>Apps Performance</h4><div id="appsPerformance" style="font-size:10px"></div></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeAnalytics()">Close</button>
-</div>
-</div>
-
-<div class="modal" id="uploadModal">
-<div class="box">
-<h3 style="font-size:14px">Upload App</h3>
-<select class="input" id="publishType"><option value="free">Free Publishing</option><option value="premium">Premium Publishing (₦500/app)</option></select>
+<div class="modal" id="uploadModal"><div class="box">
+<h3>Upload App</h3>
+<select class="input" id="pubType"><option value="free">Free Publishing</option><option value="premium">Premium Publishing ₦500</option></select>
 <input class="input" id="upName" placeholder="App name">
 <input class="input" id="upDesc" placeholder="Short description">
-<textarea class="input" id="upLongDesc" placeholder="Full description..." rows="2"></textarea>
-<div style="display:flex;gap:6px;margin-top:6px"><input class="input" id="upEmoji" placeholder="Icon emoji" style="flex:1"><input class="input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
+<textarea class="input" id="upLong" placeholder="Full description"></textarea>
+<input class="input" id="upEmoji" placeholder="Icon emoji e.g. 📱" value="📱">
 <select class="input" id="upCat"><option value="tools">Tools</option><option value="business">Business</option><option value="productivity">Productivity</option><option value="games">Games</option></select>
-<select class="input" id="upType" onchange="toggleUploadType()"><option value="apk">APK Upload</option><option value="external">External Link</option></select>
-<div id="apkSection"><input type="file" id="apkFile" accept=".apk,.aab" style="font-size:10px;margin-top:6px"><div id="apkInfo" style="font-size:9px;color:var(--sub);margin-top:4px"></div></div>
-<div id="extSection" style="display:none"><input class="input" id="extUrl" placeholder="External URL - Play Store / App Store / Website"></div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitUpload()">Publish App</button><button class="btn sec" style="flex:1" onclick="closeUpload()">Cancel</button></div>
-</div>
-</div>
+<select class="input" id="upType"><option value="apk">APK Upload</option><option value="link">External Link</option></select>
+<input type="file" id="apkFile" style="margin-top:8px;font-size:11px">
+<input class="input" id="extUrl" placeholder="External URL https://...">
+<button class="btn" onclick="publishApp()">Publish App</button>
+<button class="btn sec" onclick="closeModal('uploadModal')">Cancel</button>
+</div></div>
 
-<div class="modal" id="notifModal">
-<div class="box">
-<h3 style="font-size:14px">Notifications</h3>
-<div id="notifList"></div>
-<button class="btn sec" style="width:100%;margin-top:10px" onclick="closeNotifs()">Close</button>
-</div>
-</div>
+<div class="modal" id="walletModal"><div class="box"><h3>Wallet & Earnings — V27-V30</h3><div class="wallet"><b id="walletDetail">₦0</b><div>Total Earnings</div></div><div style="margin-top:10px;font-size:11px" id="earnHistory">No history yet</div><button class="btn sec" onclick="closeModal('walletModal')">Close</button></div></div>
+<div class="modal" id="notifModal"><div class="box"><h3>Notifications — V31-V32</h3><div id="notifList" style="font-size:11px;margin-top:10px">No notifications yet — Updates & approvals will show here</div><button class="btn sec" onclick="closeModal('notifModal')">Close</button></div></div>
+<div class="modal" id="adminModal"><div class="box"><h3>Admin — V20,V40</h3><input class="input" id="adminPass" type="password" placeholder="Password 7040958697 or zo2025"><button class="btn" onclick="adminLogin()">Login Admin</button><div id="adminPanel" style="display:none;margin-top:10px"><div id="adminStats" style="font-size:11px"></div><div id="pendingList" style="margin-top:10px"></div></div><button class="btn sec" onclick="closeModal('adminModal')">Close</button></div></div>
 
-<div class="modal" id="supportModal">
-<div class="box">
-<h3 style="font-size:14px">Developer Support Center</h3>
-<div class="info"><h4>Help Articles</h4><p>• How to publish app<br>• Payment verification<br>• Verification badge<br>• Business account setup<br>• Analytics guide<br>• Opay 7040958697 payment help</p></div>
-<div class="info"><h4>Contact Support</h4><p>Email: support@zostore.com<br>WhatsApp: 7040958697<br>Response: Within 24 hours<br><br>For enterprise: Custom pricing & API access</p></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeSupport()">Close</button>
-</div>
-</div>
+<div class="detail" id="detail"><div style="padding:10px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><b id="dTitle" style="margin-left:10px"></b></div><div style="padding:14px;display:flex;gap:12px"><div class="card-icon" id="dIcon" style="width:64px;height:64px;font-size:28px"></div><div><h2 id="dName"></h2><div id="dDev" style="font-size:11px;color:var(--green)"></div><div id="dMeta" style="font-size:10px;color:var(--sub);margin-top:4px"></div></div></div><div style="padding:0 14px 14px;display:flex;gap:8px"><button class="btn" style="width:auto" id="installBtn" onclick="doDownload()">Download</button><button class="btn sec" style="width:auto" onclick="closeDetail()">Close</button><button class="btn sec" style="width:auto" onclick="manageApp()">Manage</button></div><div style="padding:14px"><div id="dDesc" style="font-size:11px;line-height:1.6;background:var(--card);padding:12px;border-radius:10px;border:1px solid var(--border)"></div></div></div>
 
-<div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;margin-left:10px;font-size:12px"></div></div>
-<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:16px"></h2><div style="font-size:10px;color:var(--green)" id="dDev"></div><div style="font-size:9px;color:var(--sub);margin-top:4px" id="dMeta"></div></div></div>
-<div class="actions"><button class="btn" id="installBtn">Download</button><button class="btn ext" id="externalBtn" style="display:none">Visit Link</button><button class="btn sec" onclick="openReviewModal()">Rate</button><button class="btn sec" id="manageBtn" style="display:none">Manage</button></div>
-<div class="tabs"><div class="active" data-t="about" onclick="switchTab('about',this)">About</div><div data-t="screens" onclick="switchTab('screens',this)">Screens</div><div data-t="versions" onclick="switchTab('versions',this)">Versions</div><div data-t="reviews" onclick="switchTab('reviews',this)">Reviews</div><div data-t="history" onclick="switchTab('history',this)">History</div></div>
-<div class="tab-content" id="tabContent"></div>
-</div>
-
-<div class="modal" id="reviewModal">
-<div class="box">
-<h3 style="font-size:14px">Rate & Review</h3>
-<div style="display:flex;gap:4px;font-size:22px;cursor:pointer;margin:6px 0" id="ratingStars"><span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span onclick="setRating(5)">★</span></div>
-<textarea class="input" id="reviewText" placeholder="Write review..." rows="3"></textarea>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitReview()">Submit</button><button class="btn sec" style="flex:1" onclick="closeReviewModal()">Cancel</button></div>
-</div>
-</div>
-
-<div class="modal" id="manageModal">
-<div class="box">
-<h3 style="font-size:14px">Manage App</h3>
-<div id="manageInfo" style="font-size:10px;margin-top:8px"></div>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn sec" style="flex:1" onclick="editApp()">Edit</button><button class="btn sec" style="flex:1" onclick="removeApp()">Remove</button><button class="btn sec" style="flex:1" onclick="restoreApp()">Restore</button></div>
-<button class="btn sec" style="width:100%;margin-top:8px" onclick="closeManage()">Close</button>
-</div>
-</div>
-
-<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openWallet()"><span>💳</span>Wallet</div><div onclick="openDev()"><span>💼</span>Developer</div><div onclick="openAdminLogin()"><span>👑</span>Admin</div></div>
+<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openModal('uploadModal')"><span>📤</span>Upload</div><div onclick="openModal('walletModal')"><span>💳</span>Wallet</div><div onclick="openModal('devModal')"><span>💼</span>Developer</div><div onclick="openModal('adminModal')"><span>👑</span>Admin</div></div>
 <div class="toast" id="toast"></div>
-<script>
-const DEFAULT_APPS=[
-{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",col:"#4285f4",e:"🧮",r:4.9,rc:124,type:"apk",ver:"2.1.0",size:"2.4MB",status:"approved",verified:true,account:"business",publish:"free",versions:[{v:"2.1.0",d:"Nov 1",n:"Improved"}],ratings:[5,5,4],reviews:[{u:"John",r:5,t:"Great!",l:2}],history:[{a:"Created",d:"Sep 1"},{a:"Approved",d:"Sep 2"},{a:"Updated v2.1.0",d:"Nov 1"}],installs:2200,earnings:0,url:"#"},
-{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",col:"#ff9800",e:"🛒",r:4.8,rc:89,type:"link",ver:"1.5.2",size:"External",status:"approved",verified:true,account:"business",publish:"premium",versions:[{v:"1.5.2",d:"Oct 28",n:"Fix"}],ratings:[5,4],reviews:[{u:"Ada",r:5,t:"Love market!",l:5}],history:[{a:"Created",d:"Oct 1"},{a:"Approved",d:"Oct 2"}],installs:1500,earnings:500,url:"https://play.google.com/store"},
-{n:"Anambra Games",d:"Game Studio",c:"games",col:"#e91e63",e:"🎮",r:4.7,rc:20,type:"apk",ver:"0.9.5",size:"45MB",status:"pending",verified:false,account:"individual",publish:"free",versions:[{v:"0.9.5",d:"Oct 25",n:"Beta"}],ratings:[4],reviews:[],history:[{a:"Created",d:"Oct 25"}],installs:0,earnings:0,url:"#"}
-];
-let customApps=[], currentUser=null, currentDev=null, isAdmin=false, cur=null, curRating=0, selectedPlanType='free', pendingPayments=[], notifs=[], walletBal=0, totalEarnings=0, proofData='';
-const PLANS={free:{name:"Free",price:0,limit:1},starter:{name:"Starter",price:3000,limit:3},professional:{name:"Professional",price:10000,limit:10},business:{name:"Business",price:25000,limit:100},enterprise:{name:"Enterprise",price:0,limit:999}};
-try{
-customApps=JSON.parse(localStorage.getItem('zo_v40_custom')||'[]');
-currentUser=JSON.parse(localStorage.getItem('zo_user')||'null');
-currentDev=JSON.parse(localStorage.getItem('zo_dev_v40')||'null');
-pendingPayments=JSON.parse(localStorage.getItem('zo_pending_pay_v40')||'[]');
-notifs=JSON.parse(localStorage.getItem('zo_notifs_v40')||'[]');
-walletBal=parseInt(localStorage.getItem('zo_wallet_bal')||'0');
-totalEarnings=parseInt(localStorage.getItem('zo_total_earn')||'0');
-}catch(e){}
-let allApps=[...DEFAULT_APPS,...customApps];
-const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
 
-function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500)}
-function closeDetail(){detail.classList.remove('active')}
-function filterCat(c,el){
-document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-if(el) el.classList.add('active');
-let list=allApps.filter(a=>isAdmin||a.status==='approved');
-if(c!=='all') list=list.filter(a=>a.c===c);
-render(list);
-}
+<script>
+var DEFAULT_APPS=[
+{n:"ZO Calculator",d:"ZO Labs • Verified",c:"tools",col:"#4285f4",e:"🧮",r:"4.9",ver:"2.1.0",size:"2.4MB",status:"approved",verified:true,account:"business",publish:"free",installs:2200,earnings:0,desc:"Professional calculator offline",url:"#"},
+{n:"Market Hub",d:"ZO Commerce • Verified",c:"business",col:"#ff9800",e:"🛒",r:"4.8",ver:"1.5.2",size:"External",status:"approved",verified:true,account:"business",publish:"premium",installs:1500,earnings:500,desc:"Anambra market marketplace",url:"https://play.google.com/store"},
+{n:"POS Business",d:"ZO Business",c:"business",col:"#4caf50",e:"💳",r:"5.0",ver:"3.0.1",size:"8.2MB",status:"approved",verified:true,account:"business",publish:"free",installs:980,earnings:0,desc:"POS with Opay 7040958697",url:"#"},
+{n:"ZO AI",d:"ZO Intelligence",c:"productivity",col:"#7c4dff",e:"🤖",r:"5.0",ver:"1.0.0",size:"Web",status:"approved",verified:true,account:"business",publish:"free",installs:1200,earnings:0,desc:"AI assistant",url:"https://muse.ai"},
+{n:"Video Call",d:"ZO Connect",c:"productivity",col:"#00bcd4",e:"📹",r:"4.9",ver:"2.0.3",size:"12MB",status:"approved",verified:false,account:"individual",publish:"free",installs:890,earnings:0,desc:"Video call HD",url:"#"},
+{n:"Anambra Games",d:"Game Studio",c:"games",col:"#e91e63",e:"🎮",r:"4.7",ver:"0.9.5",size:"45MB",status:"pending",verified:false,account:"individual",publish:"free",installs:0,earnings:0,desc:"Local games",url:"#"}
+];
+var customApps=[], currentUser=null, currentDev=null, isAdmin=false, cur=null, curPlan='', curPlanPrice=0, wallet=0, earnings=0, notifs=[];
+try{
+customApps=JSON.parse(localStorage.getItem('zo_fixed_custom')||'[]');
+currentUser=JSON.parse(localStorage.getItem('zo_fixed_user')||'null');
+currentDev=JSON.parse(localStorage.getItem('zo_fixed_dev')||'null');
+wallet=parseInt(localStorage.getItem('zo_fixed_wallet')||'0');
+earnings=parseInt(localStorage.getItem('zo_fixed_earn')||'0');
+notifs=JSON.parse(localStorage.getItem('zo_fixed_notifs')||'[]');
+}catch(e){}
+var allApps=DEFAULT_APPS.concat(customApps);
+
+function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(function(){t.style.display='none'},3000)}
+function openModal(id){document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+function closeDetail(){document.getElementById('detail').classList.remove('active')}
+
 function render(list){
+var grid=document.getElementById('grid');
 grid.innerHTML='';
-list.forEach(a=>{
-let idx=allApps.indexOf(a);
-let el=document.createElement('div');
-el.className='card';
-let badgeClass=a.verified?'blue':a.publish==='premium'?'gold':a.status==='pending'?'orange':'';
-let badgeText=a.status==='pending'?'PENDING':a.verified?'VERIFIED':a.publish==='premium'?'PREMIUM':a.type==='link'?'LINK':'APK';
-el.innerHTML=`<div class="badge ${badgeClass}">${badgeText}</div><div class="card-icon" style="background:${a.col}">${a.e}</div><h3>${a.n}</h3><div class="card-dev">${a.d} • ${a.account}</div><div class="card-meta"><span>★ ${a.r||0}</span><span>${a.ver}</span><span>₦${a.earnings}</span></div>`;
-el.onclick=()=>openApp(idx);
-grid.appendChild(el);
+if(list.length===0){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--sub)"><div style="font-size:40px">📭</div>No apps found<br><span style="font-size:11px">Upload or check pending in Admin</span></div>';return;}
+list.forEach(function(a,idx){
+var div=document.createElement('div');
+div.className='card';
+div.onclick=function(){openApp(idx,list)};
+div.innerHTML='<div class="card-icon" style="background:'+a.col+'">'+a.e+'</div><h3>'+a.n+'</h3><div class="card-dev">'+a.d+' • '+a.account+'</div><div class="badge">'+(a.verified?'VERIFIED ✓':a.status==='pending'?'PENDING':a.publish==='premium'?'PREMIUM':a.c.toUpperCase())+'</div><div style="font-size:9px;color:var(--sub);margin-top:4px">★ '+a.r+' • v'+a.ver+' • ₦'+a.earnings+'</div>';
+grid.appendChild(div);
 });
 }
-function openApp(i){
-cur=allApps[i];
-detail.classList.add('active');
+
+function openApp(idx,list){
+var actual=list[idx];
+cur=allApps.find(function(x){return x.n===actual.n});
+if(!cur) cur=actual;
+document.getElementById('detail').classList.add('active');
 document.getElementById('dIcon').style.background=cur.col;
 document.getElementById('dIcon').textContent=cur.e;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d+' • '+cur.account+' • '+(cur.verified?'Verified ✓':'Not verified')+' • '+cur.publish;
-document.getElementById('dMeta').textContent=`${cur.installs} installs • v${cur.ver} • ${cur.status} • Earnings ₦${cur.earnings}`;
-document.getElementById('installBtn').style.display=cur.type==='link'?'none':'block';
-document.getElementById('externalBtn').style.display=cur.type==='link'?'block':'none';
-document.getElementById('manageBtn').style.display=(currentDev||isAdmin)?'block':'none';
-switchTab('about');
+document.getElementById('dDev').textContent=cur.d+' • '+cur.account+' • '+(cur.verified?'Verified':'Not verified');
+document.getElementById('dMeta').textContent=cur.installs+' installs • v'+cur.ver+' • '+cur.size+' • '+cur.status;
+document.getElementById('dDesc').innerHTML='<b>'+cur.desc+'</b><br><br>Version: '+cur.ver+'<br>Size: '+cur.size+'<br>Category: '+cur.c+'<br>Publish: '+cur.publish+'<br>Account: '+cur.account+'<br>Verified badge: '+(cur.verified?'Yes ✓':'No')+'<br>Business account: '+(cur.account==='business'?'Yes':'No')+'<br>Status: '+cur.status+'<br>Earnings: ₦'+cur.earnings+'<br><br>Future: Download analytics, Sales analytics, Wallet, Support centre, Removal & Restoration';
 }
-function switchTab(t,el){
-if(el){document.querySelectorAll('.tabs div').forEach(x=>x.classList.remove('active'));el.classList.add('active');}
-let c=document.getElementById('tabContent');
-if(t==='about') c.innerHTML=`<div class="info"><h4>About</h4><p>${cur.d}<br>Version ${cur.ver} • ${cur.size}<br>Status: ${cur.status}<br>Account: ${cur.account} • Publish: ${cur.publish}<br>Verified: ${cur.verified?'Yes ✓ Badge':'No — Verification needed'}<br>Business account: ${cur.account==='business'?'Yes':'No'}</p></div><div class="info"><h4>Earnings & Analytics</h4><p>Installs: ${cur.installs}<br>Earnings: ₦${cur.earnings}<br>Sales analytics & Download analytics — V29-V30</p></div>`;
-else if(t==='screens') c.innerHTML=`<div class="info"><h4>Screenshots</h4><p>Screenshots for ${cur.n}</p></div>`;
-else if(t==='versions') c.innerHTML=`<div class="info"><h4>Version Management</h4>${cur.versions.map(v=>`<div style="padding:6px 0;border-bottom:1px solid var(--border)"><b>v${v.v}</b> • ${v.d}<br><span style="font-size:10px;color:var(--sub)">${v.n}</span></div>`).join('')}<p style="font-size:9px;margin-top:8px">Update notifications V31 — Users get notified on new versions</p></div>`;
-else if(t==='reviews') c.innerHTML=`<div class="info"><h4>Ratings & Reviews</h4><p>★ ${cur.r||0} from ${cur.rc||0} reviews<br><br>${cur.reviews.map(r=>`<div style="padding:6px 0;border-bottom:1px solid var(--border)"><b>${r.u}</b> ★${r.r}<br>${r.t}</div>`).join('')||'No reviews'}</p><button class="btn small" onclick="openReviewModal()">Write Review</button></div>`;
-else if(t==='history') c.innerHTML=`<div class="info"><h4>Publishing History</h4>${cur.history.map(h=>`<div style="padding:4px 0;font-size:10px"><b>${h.a}</b> • ${h.d}</div>`).join('')}<p style="margin-top:8px">Removal & Restoration V38 — App can be removed and restored<br>Multiple apps management V36 — Manage all your apps from dashboard</p></div>`;
+
+function filterCat(cat){
+document.querySelectorAll('.nav div').forEach(function(d){d.classList.remove('active')});
+if(event&&event.target) event.target.classList.add('active');
+else document.getElementById('tabAll').classList.add('active');
+var list=allApps;
+if(!isAdmin) list=list.filter(function(a){return a.status==='approved'});
+if(cat!=='all') list=list.filter(function(a){return a.c===cat});
+render(list);
 }
-function openUser(){document.getElementById('userModal').classList.add('active')}
-function closeUser(){document.getElementById('userModal').classList.remove('active')}
-function userRegister(){
-let e=document.getElementById('uEmail').value.trim();
-let p=document.getElementById('uPass').value.trim();
-if(!e||!p){showToast('Enter email & pass');return;}
-currentUser={email:e,name:e.split('@')[0]};
-localStorage.setItem('zo_user',JSON.stringify(currentUser));
-showToast('Account created');closeUser();
+
+function doSearch(){
+var q=document.getElementById('searchBox').value.toLowerCase().trim();
+var list=allApps;
+if(!isAdmin) list=list.filter(function(a){return a.status==='approved'});
+if(q) list=list.filter(function(a){return a.n.toLowerCase().indexOf(q)>-1||a.c.toLowerCase().indexOf(q)>-1});
+render(list);
 }
+
 function userLogin(){
-let e=document.getElementById('uEmail').value.trim();
-let p=document.getElementById('uPass').value.trim();
-if(!e||!p){showToast('Enter email & pass');return;}
-currentUser={email:e,name:e.split('@')[0]};
-localStorage.setItem('zo_user',JSON.stringify(currentUser));
-showToast('Signed in');closeUser();
-}
-function userLogout(){currentUser=null;localStorage.removeItem('zo_user');closeUser();showToast('Signed out');}
-function openDev(){document.getElementById('devModal').classList.add('active');updateDevUI()}
-function closeDev(){document.getElementById('devModal').classList.remove('active')}
-function devRegister(){
-let email=document.getElementById('dEmail').value.trim();
-let name=document.getElementById('dNameInput').value.trim();
-let accType=document.getElementById('dAccountType').value;
-let pass=document.getElementById('dPass').value.trim();
-if(!email||!name||!pass){showToast('Fill all');return;}
-currentDev={email:email,name:name,account:accType,plan:'free',verified:false,business:accType==='business',wallet:0,earnings:0};
-localStorage.setItem('zo_dev_v40',JSON.stringify(currentDev));
-showToast('Developer account created — Choose plan');updateDevUI();
-}
-function devLogin(){
-let email=document.getElementById('dEmail').value.trim();
+var email=document.getElementById('uEmail').value.trim();
 if(!email){showToast('Enter email');return;}
-let name=document.getElementById('dNameInput').value.trim()||'Developer';
-let accType=document.getElementById('dAccountType').value;
-currentDev=JSON.parse(localStorage.getItem('zo_dev_v40')||'null')||{email:email,name:name,account:accType,plan:'free',verified:false,business:accType==='business',wallet:walletBal,earnings:totalEarnings};
-localStorage.setItem('zo_dev_v40',JSON.stringify(currentDev));
-showToast('Signed in');updateDevUI();
+currentUser={email:email,name:email.split('@')[0]};
+localStorage.setItem('zo_fixed_user',JSON.stringify(currentUser));
+document.getElementById('userInfo').textContent='Signed in as '+email;
+showToast('Signed in');
+closeModal('userModal');
 }
-function devLogout(){currentDev=null;localStorage.removeItem('zo_dev_v40');closeDev();showToast('Signed out');}
+
+function devRegister(){
+var email=document.getElementById('dEmail').value.trim();
+var name=document.getElementById('dName').value.trim();
+var type=document.getElementById('dType').value;
+if(!email||!name){showToast('Fill email & business name');return;}
+currentDev={email:email,name:name,account:type,plan:'free',verified:false,wallet:wallet,earnings:earnings};
+localStorage.setItem('zo_fixed_dev',JSON.stringify(currentDev));
+showToast('Developer account created');
+updateDevUI();
+}
+
+function devLogin(){
+var email=document.getElementById('dEmail').value.trim();
+if(!email){showToast('Enter email');return;}
+if(!currentDev){showToast('Create account first');return;}
+updateDevUI();
+showToast('Signed in as developer');
+}
+
+function devLogout(){
+currentDev=null;
+localStorage.removeItem('zo_fixed_dev');
+document.getElementById('devLoggedOut').style.display='block';
+document.getElementById('devLoggedIn').style.display='none';
+showToast('Signed out');
+}
+
 function updateDevUI(){
 if(!currentDev) return;
-document.getElementById('devNameShow').textContent=currentDev.name;
-document.getElementById('devPlanBadge').textContent=(PLANS[currentDev.plan]?.name||'Free')+' Plan • '+(currentDev.verified?'Verified ✓':'Not verified')+' • '+(currentDev.business?'Business':'Individual');
-document.getElementById('walletBal').textContent='₦'+walletBal;
-document.getElementById('devAppsCount').textContent=customApps.length;
-let totalInstalls=0;let totalEarn=0;allApps.forEach(a=>{totalInstalls+=a.installs;totalEarn+=a.earnings;});
-document.getElementById('devTotalInstalls').textContent=totalInstalls;
-document.getElementById('devEarnings').textContent='₦'+totalEarn;
-document.getElementById('devPending').textContent=allApps.filter(a=>a.status==='pending').length;
-document.getElementById('selectedPlan').textContent=(PLANS[currentDev.plan]?.name||'Free')+' — '+(PLANS[currentDev.plan]?.limit||1)+' apps';
-document.getElementById('planStatus').textContent=currentDev.plan==='free'?'Free — Upgrade to publish more':'Active — '+PLANS[currentDev.plan].limit+' apps limit';
+document.getElementById('devLoggedOut').style.display='none';
+document.getElementById('devLoggedIn').style.display='block';
+document.getElementById('devNameShow').textContent=currentDev.name+' ('+currentDev.account+')';
+document.getElementById('devPlanShow').textContent=currentDev.plan+' plan • '+(currentDev.verified?'Verified ✓':'Not verified')+' • '+currentDev.account;
+document.getElementById('walletBal').textContent='₦'+wallet;
+document.getElementById('earnBal').textContent='₦'+earnings;
 }
-function selectPlan(plan,el){
-document.querySelectorAll('.plan').forEach(p=>p.classList.remove('active'));
-el.classList.add('active');
-selectedPlanType=plan;
-document.getElementById('selectedPlan').textContent=PLANS[plan].name+' — ₦'+PLANS[plan].price+'/mo';
-if(plan!=='free'&&plan!=='enterprise'){
-document.getElementById('payAmount').textContent='₦'+PLANS[plan].price.toLocaleString();
-document.getElementById('payDesc').textContent=PLANS[plan].name+' Plan — '+PLANS[plan].limit+' apps';
-document.getElementById('payModal').classList.add('active');
-}else if(plan==='enterprise'){
-showToast('Enterprise — Contact support for custom pricing');
-openSupport();
-}else{
-if(currentDev){currentDev.plan='free';localStorage.setItem('zo_dev_v40',JSON.stringify(currentDev));updateDevUI();showToast('Free plan selected — 1 app limit');}
+
+function selectPlan(plan,price){
+curPlan=plan;
+curPlanPrice=price;
+document.getElementById('payAmount').textContent='₦'+price.toLocaleString();
+openModal('payModal');
 }
+
+function submitPay(){
+var name=document.getElementById('payName').value.trim();
+var ref=document.getElementById('payRef').value.trim();
+if(!name||!ref){showToast('Enter name & ref');return;}
+notifs.unshift({text:'Payment submitted ₦'+curPlanPrice+' for '+curPlan+' — Pending — '+name+' — Opay 7040958697',time:new Date().toLocaleString()});
+localStorage.setItem('zo_fixed_notifs',JSON.stringify(notifs));
+showToast('Payment submitted with proof — Admin will verify');
+closeModal('payModal');
+document.getElementById('notifList').innerHTML=notifs.map(function(n){return '<div style="padding:8px;background:var(--bg);border-radius:8px;margin-top:6px"><b>'+n.time+'</b><br>'+n.text+'</div>'}).join('');
 }
-function openPayForPublish(isPremium){
-let amount=isPremium?500:0;
-if(amount===0){submitUploadFree();return;}
-document.getElementById('payAmount').textContent='₦'+amount;
-document.getElementById('payDesc').textContent=isPremium?'Premium Publishing — Per app':'Free Publishing';
-selectedPlanType=isPremium?'premium_publish':'free_publish';
-document.getElementById('payModal').classList.add('active');
-}
-function closePay(){document.getElementById('payModal').classList.remove('active');proofData='';document.getElementById('proofPreview').style.display='none';}
-document.getElementById('proofFile').addEventListener('change',e=>{
-let file=e.target.files[0];
-if(!file) return;
-let reader=new FileReader();
-reader.onload=ev=>{proofData=ev.target.result;document.getElementById('proofImg').src=proofData;document.getElementById('proofPreview').style.display='block';};
-reader.readAsDataURL(file);
-});
-function submitPayment(){
-let name=document.getElementById('payName').value.trim();
-let phone=document.getElementById('payPhone').value.trim();
-let ref=document.getElementById('payRef').value.trim();
-if(!name||!phone||!ref){showToast('Fill name, phone, ref');return;}
-let amount=PLANS[selectedPlanType]?.price|| (selectedPlanType==='premium_publish'?500:3000);
-let payment={id:Date.now(),name:name,phone:phone,ref:ref,amount:amount,plan:selectedPlanType,image:proofData,time:Date.now(),status:'pending'};
-pendingPayments.unshift(payment);
-localStorage.setItem('zo_pending_pay_v40',JSON.stringify(pendingPayments));
-addNotif('Payment submitted ₦'+amount+' for '+selectedPlanType+' — Pending verification — Opay 7040958697','payment');
-proofData='';document.getElementById('proofPreview').style.display='none';document.getElementById('proofFile').value='';
-closePay();
-showToast('Payment submitted with proof — Pending verification');
-updateDevUI();
-}
-function payDemo(){
-let plan=selectedPlanType;
-if(PLANS[plan]){
-currentDev.plan=plan;
-currentDev.verified=plan!=='free';
-if(plan==='business') currentDev.business=true;
-localStorage.setItem('zo_dev_v40',JSON.stringify(currentDev));
-walletBal+=PLANS[plan].price;
-totalEarnings+=PLANS[plan].price;
-localStorage.setItem('zo_wallet_bal',walletBal);
-localStorage.setItem('zo_total_earn',totalEarnings);
-addNotif('Subscription active: '+PLANS[plan].name+' — ₦'+PLANS[plan].price+' — Verified badge granted','subscription');
-addNotif('Approval notification: Your developer account verified','approval');
-closePay();
-updateDevUI();
-showToast('Demo Pay Success — Plan '+PLANS[plan].name+' active — Verified badge ✓');
-}else if(plan==='premium_publish'){
-walletBal+=500;
-totalEarnings+=500;
-localStorage.setItem('zo_wallet_bal',walletBal);
-localStorage.setItem('zo_total_earn',totalEarnings);
-closePay();
-showToast('Premium publishing fee paid — Ready to publish');
-submitUploadAfterPay('premium');
-}
-}
-function addNotif(text,type){
-notifs.unshift({id:Date.now(),text:text,type:type,time:new Date().toLocaleString(),read:false});
-localStorage.setItem('zo_notifs_v40',JSON.stringify(notifs));
-document.getElementById('notifDot').style.display='block';
-}
-function openNotifs(){
-document.getElementById('notifModal').classList.add('active');
-let list=document.getElementById('notifList');
-list.innerHTML=notifs.length?notifs.map(n=>`<div class="notif" style="border-left-color:${n.type==='payment'?'var(--orange)':n.type==='approval'?'var(--green)':'var(--blue)'}"><b>${n.type}</b> • ${n.time}<br>${n.text}</div>`).join(''):'<div style="font-size:10px;color:var(--sub);text-align:center;padding:20px">No notifications — Update notifications V31, Approval notifications V32 will appear here</div>';
-notifs.forEach(n=>n.read=true);
-localStorage.setItem('zo_notifs_v40',JSON.stringify(notifs));
-document.getElementById('notifDot').style.display='none';
-}
-function closeNotifs(){document.getElementById('notifModal').classList.remove('active')}
-function openWallet(){
-document.getElementById('walletModal').classList.add('active');
-document.getElementById('walletDetailBal').textContent='₦'+walletBal;
-document.getElementById('earnTotal').textContent='₦'+totalEarnings;
-document.getElementById('earnSubs').textContent='₦'+Math.round(totalEarnings*0.7);
-document.getElementById('earnFees').textContent='₦'+Math.round(totalEarnings*0.3);
-document.getElementById('earnPending').textContent='₦'+pendingPayments.reduce((a,b)=>a+b.amount,0);
-let chart=document.getElementById('earnChart');
-chart.innerHTML=[40,60,30,80,50,90,70].map(h=>`<div style="height:${h}%"></div>`).join('');
-let hist=document.getElementById('publishHistory');
-hist.innerHTML=allApps.slice(0,5).map(a=>`<div style="padding:4px 0;border-bottom:1px solid var(--border)"><b>${a.n}</b> • ${a.status} • v${a.ver} • ${a.history[0]?.d||''}</div>`).join('')||'No history';
-}
-function closeWallet(){document.getElementById('walletModal').classList.remove('active')}
-function openAnalytics(){
-document.getElementById('analyticsModal').classList.add('active');
-let totalDownloads=0;allApps.forEach(a=>totalDownloads+=a.installs);
-document.getElementById('analyticsDownloads').textContent=totalDownloads;
-document.getElementById('downloadChart').innerHTML=[20,40,60,30,80,50,90].map(h=>`<div style="height:${h}%"></div>`).join('');
-document.getElementById('salesChart').innerHTML=[10,30,20,50,40,70,60].map(h=>`<div style="height:${h}%;background:var(--blue)"></div>`).join('');
-document.getElementById('appsPerformance').innerHTML=allApps.slice(0,5).map(a=>`<div style="padding:4px 0;border-bottom:1px solid var(--border)"><b>${a.n}</b> • ${a.installs} installs • ₦${a.earnings} earnings • ★${a.r}</div>`).join('');
-}
-function closeAnalytics(){document.getElementById('analyticsModal').classList.remove('active')}
-function openSupport(){document.getElementById('supportModal').classList.add('active')}
-function closeSupport(){document.getElementById('supportModal').classList.remove('active')}
-function openUpload(){
-if(!currentDev){showToast('Create developer account first');openDev();return;}
-let limit=PLANS[currentDev.plan]?.limit||1;
-if(customApps.length>=limit&&!isAdmin){showToast('Limit reached: '+limit+' apps — Upgrade plan — Starter ₦3k, Professional ₦10k, Business ₦25k');openDev();return;}
-document.getElementById('uploadModal').classList.add('active');
-}
-function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
-function toggleUploadType(){
-let t=document.getElementById('upType').value;
-document.getElementById('apkSection').style.display=t==='apk'?'block':'none';
-document.getElementById('extSection').style.display=t==='external'?'block':'none';
-}
-document.getElementById('apkFile').addEventListener('change',e=>{
-let f=e.target.files[0];
-if(!f) return;
-document.getElementById('apkInfo').textContent=f.name+' • '+(f.size/1024/1024).toFixed(2)+'MB';
-});
-function submitUpload(){
-let publishType=document.getElementById('publishType').value;
-if(publishType==='premium'){
-openPayForPublish(true);
-return;
-}
-submitUploadAfterPay('free');
-}
-function submitUploadAfterPay(publishType){
-let name=document.getElementById('upName').value.trim();
-let desc=document.getElementById('upDesc').value.trim();
-let longDesc=document.getElementById('upLongDesc').value.trim()||desc;
-let emoji=document.getElementById('upEmoji').value.trim()||'📱';
-let color=document.getElementById('upColor').value.trim()||'#ff9800';
-let cat=document.getElementById('upCat').value;
-let type=document.getElementById('upType').value;
-let extUrl=document.getElementById('extUrl').value.trim();
-if(!name||!desc){showToast('Enter name & description');return;}
-if(type==='external'&&!extUrl){showToast('Enter external URL');return;}
-let verified=currentDev&&currentDev.verified;
-let account=currentDev?currentDev.account:'individual';
-let newApp={n:name,d:(currentDev?currentDev.name:'Developer')+(verified?' • Verified':'')+(account==='business'?' • Business':''),c:cat,col:color,e:emoji,r:0,rc:0,type:type==='apk'?'apk':'link',ver:"1.0.0",size:type==='apk'?'2MB':'External',status:"pending",verified:verified,account:account,publish:publishType,versions:[{v:"1.0.0",d:"Just now",n:"Initial release"}],ratings:[],reviews:[],history:[{a:"Created",d:"Just now"},{a:publishType==='premium'?"Premium publishing fee ₦500 paid":"Free publishing"}],likes:0,installs:0,earnings:publishType==='premium'?500:0,url:type==='external'?extUrl:'#',custom:true};
-customApps.unshift(newApp);
-allApps=[...DEFAULT_APPS,...customApps];
-localStorage.setItem('zo_v40_custom',JSON.stringify(customApps));
-closeUpload();
-['upName','upDesc','upLongDesc','upEmoji','extUrl'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
-document.getElementById('upColor').value='#ff9800';
-document.getElementById('apkFile').value='';
-document.getElementById('apkInfo').textContent='';
-addNotif('App submitted: '+name+' — Pending admin approval — Update notifications will be sent','approval');
-addNotif('Publishing history: '+name+' created — '+publishType,'history');
-render(isAdmin?allApps:allApps.filter(a=>a.status==='approved'));
-showToast(name+' submitted — Pending review — History recorded');
-updateDevUI();
-}
-function showMyApps(){
-let myList=customApps;
-if(myList.length===0){showToast('No apps — Upload first');return;}
-render(myList);
-showToast(myList.length+' apps — Multiple apps management');
-}
-function openReviewModal(){
-if(!currentUser){showToast('Sign in to review');openUser();return;}
-document.getElementById('reviewModal').classList.add('active');
-}
-function closeReviewModal(){document.getElementB
+
+function demoPay(){
+if(!currentDev){showToast('Create developer first');return;}
+currentDev.plan=curPlan;
+currentDev.verified=true;
+if(curPlan==='business') currentDev.account='business';
+wallet+=curPlanPrice;
+earnings+=curPlanPrice;
+localStorage.setItem('zo_fixed_wallet',wallet);
+localStorage.setItem('zo_fixed_earn',earnings);
+localStorage.setItem('zo_fixed_dev',JSON.stringify(currentDev));
+notifs.unshift({text:'Subscription active: '+curPlan+' ₦'+curPlanPrice+' — Ve
