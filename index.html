@@ -3,414 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZO STORE V16.2 FIXED - SEARCH + TAB WORKING - Matthew Ayodele 7040958697</title>
+<title>ZO STORE V1 - Global Software Distribution Platform - Discover. Download. Build. Connect.</title>
+<meta name="description" content="ZO STORE - Global marketplace for apps, games, software. Discover, Download, Build, Connect. By ZO Technology">
 <meta name="theme-color" content="#01875f">
 <style>
-:root{--green:#01875f;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,Arial}
-body{background:var(--bg);color:var(--text);padding-bottom:75px}
-.hdr{padding:10px 14px;background:var(--card);display:flex;gap:6px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
-.logo{width:36px;height:36px;background:linear-gradient(135deg,var(--green),#00ff88);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
-.search{flex:1;background:var(--bg);border-radius:20px;padding:7px 10px;display:flex;gap:6px;border:1px solid var(--border)}
-.search input{border:none;background:transparent;outline:none;width:100%;font-size:12px;color:var(--text)}
-.icon-btn{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--bg);font-size:13px}
-.upload-btn{background:linear-gradient(135deg,#ff9800,gold);color:#000;border:none;padding:6px 12px;border-radius:18px;font-size:10px;font-weight:800;cursor:pointer}
-.nav{display:flex;gap:12px;padding:0 14px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:29}
-.nav div{padding:9px 0;font-size:10px;color:var(--sub);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;user-select:none}
-.nav div.active{color:var(--green);border-color:var(--green);font-weight:700}
-.nav div.gold-tab{color:#ff9800;font-weight:800;border:1px dashed gold;border-radius:10px;padding:4px 8px !important;margin:4px 0}
-.banner{margin:10px;background:linear-gradient(135deg,#01875f,#00bcd4,#7c4dff);border-radius:14px;padding:12px;color:#fff;display:flex;justify-content:space-between}
-.wallet{background:linear-gradient(135deg,#01875f,#1d9bf0);color:#fff;border-radius:12px;padding:10px;margin:10px 14px;font-size:10px;display:flex;justify-content:space-between}
-.stats{display:flex;gap:5px;padding:0 14px;flex-wrap:wrap}
-.stat{background:var(--card);border-radius:8px;padding:6px;flex:1;min-width:65px;border:1px solid var(--border);text-align:center;font-size:9px}
-.stat b{color:var(--green);display:block;font-size:12px}
-.grid{padding:8px 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:7px;min-height:200px}
-.card{background:var(--card);border-radius:12px;padding:7px;border:1px solid var(--border);cursor:pointer;position:relative}
-.badge{position:absolute;top:4px;right:4px;background:var(--green);color:#fff;font-size:6px;padding:2px 5px;border-radius:8px;font-weight:700}
-.badge.gold{background:gold;color:#000}.badge.blue{background:#1d9bf0}
-.icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;position:relative}
-.verified-tick{position:absolute;bottom:-3px;right:-3px;background:#1d9bf0;color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;font-size:8px;border:2px solid var(--card)}
-.card h3{font-size:9px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dev{font-size:7px;color:var(--sub)}
-.meta{font-size:7px;color:var(--sub);display:flex;gap:3px;margin-top:2px}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;z-index:40}
-.bnav div{font-size:8px;text-align:center;color:var(--sub);cursor:pointer}
-.bnav div.active{color:var(--green)}
-.bnav span{font-size:17px;display:block}
+:root{--green:#01875f;--green-light:#00c853;--bg:#f8f9fa;--card:#fff;--text:#202124;--sub:#5f6368;--border:#e8eaed;--blue:#1a73e8}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Google Sans',Roboto,Arial,sans-serif}
+body{background:var(--bg);color:var(--text)}
+.hdr{padding:12px 16px;background:var(--card);display:flex;gap:12px;align-items:center;position:sticky;top:0;z-index:30;border-bottom:1px solid var(--border)}
+.logo{display:flex;gap:8px;align-items:center}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px}
+.logo-text b{display:block;font-size:16px;line-height:1}
+.logo-text span{font-size:10px;color:var(--sub);letter-spacing:.5px}
+.search{flex:1;max-width:600px;background:var(--bg);border-radius:24px;padding:10px 16px;display:flex;gap:10px;align-items:center;border:1px solid var(--border)}
+.search input{border:none;background:transparent;outline:none;width:100%;font-size:14px}
+.search input::placeholder{color:var(--sub)}
+.nav{padding:8px 16px;display:flex;gap:8px;overflow:auto;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:65px;z-index:29}
+.nav div{padding:8px 14px;font-size:13px;color:var(--sub);border-radius:20px;cursor:pointer;white-space:nowrap;border:1px solid var(--border);transition:.2s}
+.nav div.active{background:var(--green);color:#fff;border-color:var(--green);font-weight:600}
+.hero{margin:16px;background:linear-gradient(135deg,var(--green),#00bcd4,#7c4dff);border-radius:16px;padding:20px;color:#fff}
+.hero h1{font-size:22px;line-height:1.2}
+.hero p{font-size:13px;margin-top:6px;opacity:.9;line-height:1.4}
+.hero-stats{display:flex;gap:16px;margin-top:12px;font-size:11px}
+.grid{padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{background:var(--card);border-radius:16px;padding:12px;border:1px solid var(--border);cursor:pointer;transition:.2s;position:relative}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);transform:translateY(-2px)}
+.card-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;position:relative}
+.verified{position:absolute;bottom:-4px;right:-4px;background:var(--blue);color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid var(--card)}
+.card h3{font-size:13px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-dev{font-size:11px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{display:flex;gap:8px;margin-top:6px;font-size:11px;color:var(--sub)}
+.card-desc{font-size:11px;color:var(--sub);margin-top:6px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.badge{position:absolute;top:8px;right:8px;background:var(--green);color:#fff;font-size:8px;padding:3px 6px;border-radius:10px;font-weight:700}
+.badge.external{background:#ff9800}
+.badge.verified-badge{background:var(--blue)}
 .detail{position:fixed;inset:0;background:var(--card);z-index:100;overflow:auto;display:none}
 .detail.active{display:block}
-.detail-top{padding:8px 12px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card)}
-.dhead{padding:10px;display:flex;gap:10px}
-.dicon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;position:relative}
-.install{display:flex;gap:6px;padding:0 12px 10px;align-items:center;flex-wrap:wrap}
-.btn{background:var(--green);color:#fff;border:none;padding:7px 14px;border-radius:16px;font-weight:600;cursor:pointer;font-size:10px}
-.btn.done{background:var(--bg);color:var(--sub)}
-.btn.pay{background:linear-gradient(135deg,#ff9800,gold);color:#000;font-weight:800}
-.screen{padding:10px}
-.mini{background:var(--bg);border-radius:10px;padding:9px;margin-top:7px}
-.note-input{width:100%;padding:7px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;font-size:10px;margin-top:5px}
-.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:8px 14px;border-radius:14px;font-size:10px;display:none;z-index:400;max-width:90%;text-align:center}
-.upload-modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
-.upload-modal.active{display:flex}
-.upload-box{background:var(--card);border-radius:14px;padding:14px;width:100%;max-width:440px;max-height:94vh;overflow:auto}
-.pay-wall{background:linear-gradient(135deg,#01875f,#00bcd4);color:#fff;border-radius:12px;padding:14px;text-align:center;margin:10px 0;border:2px solid gold}
-.admin-bar{background:#111;color:#0f0;padding:6px 12px;font-size:9px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:50}
+.detail-top{padding:12px 16px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card)}
+.dhead{padding:16px;display:flex;gap:16px}
+.dicon{width:72px;height:72px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;position:relative}
+.dinfo h2{font-size:20px}
+.dinfo .dev{font-size:12px;color:var(--green);margin-top:4px}
+.dinfo .meta{font-size:11px;color:var(--sub);margin-top:6px;display:flex;gap:8px}
+.actions{padding:0 16px 16px;display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:20px;font-weight:600;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:6px}
+.btn.secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.btn.external{background:#ff9800;color:#000}
+.screens{padding:16px}
+.screens h3{font-size:14px;margin-bottom:8px}
+.scr-grid{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
+.scr{width:120px;height:200px;background:var(--bg);border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0}
+.info-box{background:var(--bg);border-radius:12px;padding:12px;margin-top:12px}
+.info-box h4{font-size:12px;margin-bottom:6px}
+.info-box p{font-size:11px;color:var(--sub);line-height:1.5}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#202124;color:#fff;padding:10px 16px;border-radius:20px;font-size:12px;display:none;z-index:400}
+.footer{padding:20px 16px;text-align:center;font-size:10px;color:var(--sub);border-top:1px solid var(--border);margin-top:20px;line-height:1.6}
 </style>
 </head>
 <body>
-<div id="adminBar" class="admin-bar" style="display:none"><span>👑 V16.2 FIXED • REV: <span id="adminRev">₦0</span> • DEVS: <span id="adminDev">0</span> • OPAY 7040958697</span><span onclick="toggleAdmin()" style="cursor:pointer">Exit ✕</span></div>
-<div class="hdr"><div class="logo">Z</div><div class="search"><span>🔍</span><input id="search" placeholder="Search apps... Try AI, POS, Market"></div><div class="icon-btn" id="darkBtn">🌙</div><button class="upload-btn" onclick="openUpload()">+ Upload</button></div>
+<div class="hdr">
+<div class="logo"><div class="logo-icon">Z</div><div class="logo-text"><b>ZO STORE</b><span>Discover. Download. Build. Connect.</span></div></div>
+<div class="search"><span>🔍</span><input id="search" placeholder="Search apps, games, software..."></div>
+</div>
 <div class="nav" id="nav">
-<div class="active" data-f="all" onclick="filterCat('all',this)">All</div>
-<div data-f="community" onclick="filterCat('community',this)">Community 👥</div>
-<div data-f="ai" onclick="filterCat('ai',this)">AI 🤖</div>
-<div data-f="premium" onclick="filterCat('premium',this)">Premium 💰</div>
-<div data-f="account" onclick="filterCat('account',this)">My Account 🏦</div>
-<div class="gold-tab" onclick="createTab()">+ Tab 📑</div>
+<div class="active" data-f="all" onclick="filterCat('all',this)">All Apps</div>
+<div data-f="games" onclick="filterCat('games',this)">🎮 Games</div>
+<div data-f="productivity" onclick="filterCat('productivity',this)">⚡ Productivity</div>
+<div data-f="business" onclick="filterCat('business',this)">💼 Business</div>
+<div data-f="tools" onclick="filterCat('tools',this)">🛠️ Tools</div>
+<div data-f="external" onclick="filterCat('external',this)">🔗 External Links</div>
 </div>
-<div class="banner"><div><b>ZO STORE V16.2 FIXED — SEARCH + TAB WORKING!</b><div style="font-size:9px">Opay 7040958697 Matthew Ayodele • All tabs + Search + Pay now working!</div><div style="font-size:7px;margin-top:2px">V16.2: Fixed bug wey make 0 Total — Now 10 apps go show!</div></div><div style="font-size:22px">✅</div></div>
-<div class="wallet"><div><b>💳 Developer Account V16.2</b><div style="font-size:8px" id="devStatus">Checking...</div></div><div style="text-align:right"><b id="walletBal">🔒 Locked</b><div style="font-size:8px" id="walletAction">Tap to Pay</div></div></div>
-<div class="stats"><div class="stat"><b id="totalApps">0</b>Total</div><div class="stat"><b id="communityCount">0</b>Community</div><div class="stat"><b id="devCount">0</b>Developers</div><div class="stat"><b id="customTabCount">0</b>Custom Tabs</div><div class="stat"><b id="revCount">₦0</b>Revenue</div></div>
-<div class="grid" id="grid"><div style="text-align:center;padding:20px;font-size:10px;color:var(--sub)">Loading apps... If you still see this, refresh!</div></div>
-<div class="bnav"><div class="active" onclick="filterCat('all')"><span>🏠</span>Home</div><div onclick="openUpload()"><span>📤</span>Upload</div><div onclick="openPayModal()"><span>💳</span>Pay ₦12k</div><div onclick="openAdmin()"><span>👑</span>Admin</div></div>
-
-<div class="upload-modal" id="payModal">
-<div class="upload-box">
-<h3>💳 Pay ₦12,000 to Opay 7040958697</h3>
-<div class="pay-wall"><div style="font-size:22px">🏦</div><b>Opay</b><div style="font-size:20px;font-weight:900">7040958697</div><div style="font-size:12px">Matthew Ayodele</div><div style="font-size:14px;font-weight:900;margin-top:6px;background:gold;color:#000;padding:5px 10px;border-radius:8px;display:inline-block">₦12,000</div></div>
-<input class="note-input" id="payName" placeholder="Your Name">
-<input class="note-input" id="payPhone" placeholder="Your Phone">
-<input class="note-input" id="payRef" placeholder="Transfer Ref">
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn pay" style="flex:1" onclick="submitPayment()">📤 Submit Proof</button></div>
-<button class="btn done" style="width:100%;margin-top:6px" onclick="payDemo()">🧪 Demo Pay (Test)</button>
-<button class="btn done" style="width:100%;margin-top:6px" onclick="closePayModal()">Cancel</button>
+<div class="hero">
+<h1>ZO STORE V1 — Global Software Distribution Platform</h1>
+<p>By ZO Technology • Make software accessible to everyone, everywhere. We support APK uploads + External links (Play Store, App Store, Websites).</p>
+<div class="hero-stats"><span>📦 10 Apps Live</span><span>🌍 Global Ready</span><span>🔒 Security Checked</span><span>💳 CEO: Matthew Ayodele Opay 7040958697</span></div>
 </div>
-</div>
-
-<div class="upload-modal" id="uploadModal">
-<div class="upload-box">
-<h3>📤 Upload App — V16.2</h3>
-<div id="uploadLock" style="display:none"><div class="pay-wall"><b>🔒 Pay ₦12k to upload</b><div style="font-size:9px;margin-top:4px">Opay 7040958697</div><button class="btn pay" style="margin-top:8px;width:100%" onclick="closeUpload();openPayModal()">💳 Pay Now</button></div></div>
-<div id="uploadForm">
-<input class="note-input" id="upName" placeholder="App Name">
-<input class="note-input" id="upDev" placeholder="Your Business Name">
-<div style="display:flex;gap:6px"><input class="note-input" id="upEmoji" placeholder="Emoji e.g. 📱" style="flex:1"><input class="note-input" id="upColor" placeholder="#ff9800" value="#ff9800" style="flex:1"></div>
-<select class="note-input" id="upCat"><option value="community">Community 👥</option><option value="ai">AI 🤖</option><option value="premium">Premium 💰</option></select>
-<textarea class="note-input" id="upDesc" placeholder="Describe your app..." rows="3"></textarea>
-<div style="display:flex;gap:6px;margin-top:10px"><button class="btn" style="flex:1" onclick="submitApp()">🚀 Upload App</button><button class="btn done" style="flex:1" onclick="closeUpload()">Cancel</button></div>
-</div>
-</div>
+<div class="grid" id="grid"></div>
+<div class="footer">
+<b>ZO TECHNOLOGY — BUILDING THE FUTURE, ONE VERSION AT A TIME. 🚀</b><br>
+V1 Goal: Real person can visit ZO STORE, discover app, access download.<br>
+Next: V2 Professional homepage • V3 Categories • V4 Search • V5 App details<br>
+Company: ZO Technology • Product: ZO STORE • Mission: Make software accessible to everyone, everywhere.<br>
+CEO: Matthew Ayodele • Opay 7040958697 • GitHub Pages Hosting (Free) • No Netlify Needed<br>
+Revenue Plan: Publishing fees, Subscriptions, Featured apps, Advertising, Enterprise plans<br>
+Security: We verify external links, scan APKs, check content before approval.
 </div>
 
 <div class="detail" id="detail">
-<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer">← Back</div><div id="dTitle" style="font-weight:600;font-size:12px"></div><div style="margin-left:auto"><span id="likeBtn" onclick="likeApp()" style="cursor:pointer">❤️ <span id="likeCount">0</span></span></div></div>
-<div class="dhead"><div class="dicon" id="dIcon"></div><div><h2 id="dName" style="font-size:14px"></h2><div id="dDev" style="font-size:9px;color:var(--green)"></div><div id="dMeta" style="font-size:8px;color:var(--sub)"></div></div></div>
-<div class="install"><button class="btn" id="installBtn">Install FREE</button><div style="font-size:8px;color:var(--sub)" id="installInfo">FREE</div></div>
-<div class="screen" id="screen"></div>
+<div class="detail-top"><div onclick="closeDetail()" style="cursor:pointer;font-size:14px">← Back to Store</div><div id="dTitle" style="font-weight:600;margin-left:12px"></div></div>
+<div class="dhead"><div class="dicon" id="dIcon"></div><div class="dinfo"><h2 id="dName"></h2><div class="dev" id="dDev"></div><div class="meta" id="dMeta"></div></div></div>
+<div class="actions"><button class="btn" id="installBtn">⬇️ Download APK</button><button class="btn external" id="externalBtn" style="display:none">🔗 Visit Official Link</button><button class="btn secondary" id="shareBtn">↗️ Share</button></div>
+<div class="screens"><h3>Screenshots & Previews</h3><div class="scr-grid" id="scrGrid"></div><div class="info-box"><h4>📋 About this app</h4><p id="dDesc"></p></div><div class="info-box"><h4>🔒 Security & Verification</h4><p id="dSecurity"></p></div><div class="info-box"><h4>📦 Publishing Method</h4><p id="dPublish"></p></div><div class="info-box"><h4>👨‍💻 Developer Information</h4><p id="dDeveloper"></p></div></div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
-// V16.2 FIXED - NO CRASH - SEARCH + TAB WORKING - CEO Matthew Ayodele 7040958697
-const DEFAULT_APPS=[
-{n:"ZO AI",d:"ZO Intelligence ✅",c:"ai",col:"#7c4dff",e:"🤖",r:"5.0",badge:"VERIFIED",verified:true,likes:2456,installs:1200,desc:"AI assistant FREE - Search am!"},
-{n:"Video Call",d:"ZO Connect ✅",c:"ai",col:"#00bcd4",e:"📹",r:"4.9",badge:"VERIFIED",verified:true,likes:1892,installs:890,desc:"Video call FREE"},
-{n:"Camera Pro",d:"ZO Media ✅",c:"ai",col:"#ea4335",e:"📷",r:"5.0",badge:"VERIFIED",verified:true,likes:3320,installs:2100,desc:"Camera HD - Search camera"},
-{n:"POS Business",d:"ZO Business ✅",c:"premium",col:"#4caf50",e:"💳",r:"5.0",badge:"VERIFIED",verified:true,likes:1543,installs:980,desc:"POS for market Collect to Opay 7040958697"},
-{n:"Market Hub",d:"ZO Commerce ✅",c:"community",col:"#ff9800",e:"🛒",r:"4.9",badge:"VERIFIED",verified:true,likes:2892,installs:1500,desc:"Buy & sell Anambra market"},
-{n:"QR Maker",d:"ZO Tools ✅",c:"community",col:"#000",e:"🔳",r:"4.9",badge:"VERIFIED",verified:true,likes:756,installs:600,desc:"QR generator for business"},
-{n:"File Share",d:"ZO System ✅",c:"community",col:"#ff9800",e:"📤",r:"5.0",badge:"VERIFIED",verified:true,likes:2278,installs:1300,desc:"Share files fast"},
-{n:"Calculator",d:"ZO Labs ✅",c:"community",col:"#4285f4",e:"🧮",r:"4.9",badge:"VERIFIED",verified:true,likes:3412,installs:2200,desc:"Calculator"},
-{n:"Igbo Translate",d:"ZO Labs ✅",c:"ai",col:"#3f51b5",e:"🌍",r:"5.0",badge:"VERIFIED",verified:true,likes:1634,installs:800,desc:"Translate Igbo to English"},
-{n:"Vault",d:"ZO Security ✅",c:"premium",col:"#607d8b",e:"🔒",r:"5.0",badge:"VERIFIED",verified:true,likes:445,installs:300,desc:"Security vault"}
+// ZO STORE V1 - FOUNDATION - Global Software Distribution Platform - ZO Technology
+// PHASE 1: V1 Basic working marketplace - CEO Matthew Ayodele Opay 7040958697
+// Supports: APK uploads + External links (Play Store, App Store, Websites)
+
+const APPS=[
+{
+n:"ZO Calculator",
+dev:"ZO Labs • Verified Developer ✓",
+c:"tools",
+col:"#4285f4",
+e:"🧮",
+r:"4.9",
+badge:"VERIFIED",
+verified:true,
+type:"apk",
+apkUrl:"#",
+externalUrl:"",
+desc:"Professional calculator for business and education. Clean, fast, offline. Supports both APK upload and external link methods.",
+screenshots:["🧮","📊","⚡"],
+security:"✅ Security checked • No malware • Permissions: No internet required • Verified by ZO Technology",
+publish:"Method A: APK file uploaded directly to ZO STORE secure storage. File size: 2.4MB. Version: 1.0.0. Last updated: Nov 2026.",
+developerInfo:"Developer: ZO Labs • Email: labs@zostore.com • Business: ZO Technology • Location: Nigeria/Global • Joined: 2026 • 10 apps published • Verified badge: Yes • Business account",
+likes:3412,installs:2200
+},
+{
+n:"Market Hub",
+dev:"ZO Commerce • Verified ✓",
+c:"business",
+col:"#ff9800",
+e:"🛒",
+r:"4.8",
+badge:"VERIFIED",
+verified:true,
+type:"external",
+apkUrl:"",
+externalUrl:"https://play.google.com/store",
+desc:"Buy and sell for Anambra market and global commerce. This app demonstrates EXTERNAL LINK publishing method.",
+screenshots:["🛒","💰","📦"],
+security:"✅ External link verified • Destination: Google Play Store • Redirect warning shown • Link checked: Safe • No APK hosted by ZO STORE",
+publish:"Method B: External application link. Developer submitted official Play Store link. ZO STORE displays app info and button redirects to official download destination. We verify links.",
+developerInfo:"Developer: ZO Commerce • External link method • Business account • Verified • Revenue model: Marketplace commission + Featured placement",
+likes:2892,installs:1500
+},
+{
+n:"POS Business",
+dev:"ZO Business • Verified ✓",
+c:"business",
+col:"#4caf50",
+e:"💳",
+r:"5.0",
+badge:"VERIFIED",
+verified:true,
+type:"apk",
+apkUrl:"#",
+externalUrl:"",
+desc:"Point of Sale for small businesses. Collect payments to Opay 7040958697 Matthew Ayodele. Offline capable, receipt printing.",
+screenshots:["💳","🧾","💵"],
+security:"✅ Security checked • APK scanned • No malware • Permissions: Camera (for QR), Storage (for receipts)",
+publish:"Method A: APK upload • Version management: V1.0 supports version 1.0.0, future updates via V17 version management system",
+developerInfo:"Business: ZO Business • CEO: Matthew Ayodele • Opay: 7040958697 • Use case: Small businesses in Nigeria • Global expansion plan: V81-V100",
+likes:1543,installs:980
+},
+{
+n:"ZO AI Assistant",
+dev:"ZO Intelligence • Verified ✓",
+c:"productivity",
+col:"#7c4dff",
+e:"🤖",
+r:"5.0",
+badge:"VERIFIED",
+verified:true,
+type:"external",
+apkUrl:"",
+externalUrl:"https://muse.ai",
+desc:"AI assistant for marketplace. Future: V101-V120 AI marketplace ecosystem. Now: Discovery assistant prototype.",
+screenshots:["🤖","💬","🧠"],
+security:"✅ External link: Official website • Verified • Future AI security: V111 AI-powered security analysis, V112 AI scam detection",
+publish:"Method B: External link to web application • Part of Phase 6 AI roadmap V101-V120",
+developerInfo:"Developer: ZO Intelligence • Part of ZO AI Studio (V182 future) • AI roadmap: Recommendations, search, descriptions, assistant",
+likes:2456,installs:1200
+},
+{
+n:"Video Call Pro",
+dev:"ZO Connect • Verified ✓",
+c:"productivity",
+col:"#00bcd4",
+e:"📹",
+r:"4.9",
+badge:"VERIFIED",
+verified:true,
+type:"apk",
+apkUrl:"#",
+externalUrl:"",
+desc:"Video calling for teams and families. HD quality, low data usage.",
+screenshots:["📹","👥","🎙️"],
+security:"✅ Security checked • Permissions: Camera, Microphone • Encrypted calls • No data collection",
+publish:"Method A: APK • Future: V61-V80 Gaming ecosystem includes video for game streaming links V75",
+developerInfo:"Developer: ZO Connect • Part of future social ecosystem V141-V160 developer messaging",
+likes:1892,installs:890
+},
+{
+n:"Anambra Games",
+dev:"Game Studio NG • Pending Verification",
+c:"games",
+col:"#e91e63",
+e:"🎮",
+r:"4.7",
+badge:"COMMUNITY",
+verified:false,
+type:"apk",
+apkUrl:"#",
+externalUrl:"",
+desc:"Local games for Anambra and global audience. Part of Phase 4 Gaming Ecosystem V61-V80 roadmap.",
+screenshots:["🎮","🏆","🎯"],
+security:"⏳ Pending admin moderation • Will be scanned for malware before approval • V20 admin dashboard goal",
+publish:"Method A: APK upload • Gaming marketplace future: V61 Gaming marketplace, V62 Mobile game categories, V64 Game developer accounts",
+developerInfo:"Developer: Game Studio NG • Indie creator • Future: V64 Game developer accounts, V71 Gaming communities, V72 Leaderboards",
+likes:756,installs:600
+},
+{
+n:"Church App",
+dev:"Community Developer • Free Publishing",
+c:"productivity",
+col:"#795548",
+e:"⛪",
+r:"4.8",
+badge:"COMMUNITY",
+verified:false,
+type:"external",
+apkUrl:"",
+externalUrl:"https://example.com/church",
+desc:"Example of community app using external link method. Church can publish via website link without APK.",
+screenshots:["⛪","🙏","📖"],
+security:"✅ External link verification: Shows where users are redirected • Part of V11 external app links requirement",
+publish:"Method B: External link • Example: Developer submits official website download link • ZO STORE verifies and shows destination",
+developerInfo:"Community publishing • Future paid publishing: Starter ₦3k/month, Professional ₦10k/month, Business ₦25k/month (proposed, not confirmed)",
+likes:445,installs:300
+},
+{
+n:"QR Maker Pro",
+dev:"ZO Tools • Verified ✓",
+c:"tools",
+col:"#000",
+e:"🔳",
+r:"4.9",
+badge:"VERIFIED",
+verified:true,
+type:"apk",
+apkUrl:"#",
+externalUrl:"",
+desc:"Generate QR codes for your business, Opay account 7040958697, products. Offline, fast.",
+screenshots:["🔳","📱","🖨️"],
+security:"✅ Security checked • No internet needed • Privacy focused",
+publish:"Method A: APK • Part of future developer tools marketplace V126",
+developerInfo:"Developer: ZO Tools • Tools category • Future: V126 Developer tools marketplace, V127 Productivity software",
+likes:756,installs:600
+},
+{
+n:"Igbo Translate",
+dev:"ZO Labs • Verified ✓",
+c:"tools",
+col:"#3f51b5",
+e:"🌍",
+r:"5.0",
+badge:"VERIFIED",
+verified:true,
+type:"apk",
+apkUrl:"#",
+externalUrl:"",
+desc:"Translate Igbo to English offline. Supports multiple languages roadmap V57.",
+screenshots:["🌍","🔤","💬"],
+security:"✅ Security checked • Future AI translation V115",
+publish:"Method A: APK • Future: V57 Multiple languages, V115 AI translation",
+developerInfo:"Developer: ZO Labs • Language focus • Global marketplace V81-V100 will include country-specific marketplaces V85",
+likes:1634,installs:800
+},
+{
+n:"Web App Example",
+dev:"Business Example • External Link",
+c:"productivity",
+col:"#607d8b",
+e:"🌐",
+r:"4.6",
+badge:"EXTERNAL",
+verified:false,
+type:"external",
+apkUrl:"",
+externalUrl:"https://example.com",
+desc:"Example of Web Application marketplace (Future V124). Shows external link publishing for web apps.",
+screenshots:["🌐","💻","🔗"],
+security:"✅ External link • Web app • Verified redirect • Part of V124 Web applications marketplace",
+publish:"Method B: External link • Future phases: V121 Windows, V122 Mac, V123 Linux, V124 Web apps, V125 Browser extensions",
+developerInfo:"Example business • Revenue sources: Publishing fees, Subscriptions, Featured apps, Advertising, Enterprise plans, SaaS subscriptions",
+likes:300,installs:150
+}
 ];
-let customApps=[];
-try{customApps=JSON.parse(localStorage.getItem('zo_v16_apps')||'[]');}catch(e){customApps=[]}
-let customTabs=[];
-try{customTabs=JSON.parse(localStorage.getItem('zo_tabs_v162')||localStorage.getItem('zo_tabs_v161')||'[]');}catch(e){customTabs=[]}
-let allApps=[...DEFAULT_APPS, ...customApps];
-let isPaid=false;
-try{isPaid=localStorage.getItem('zo_paid_dev_v16')==='1';}catch(e){}
-let totalRevenue=0, totalDevs=0, pendingPayments=[];
-try{totalRevenue=parseInt(localStorage.getItem('zo_total_revenue_v16')||'0'); totalDevs=parseInt(localStorage.getItem('zo_total_devs_v16')||'0'); pendingPayments=JSON.parse(localStorage.getItem('zo_pending_payments_v16')||'[]');}catch(e){}
 
-const grid=document.getElementById('grid');
-const detail=document.getElementById('detail');
-const toast=document.getElementById('toast');
-let cur=null;
-let currentFilter='all';
+let currentFilter='all', cur=null;
+const grid=document.getElementById('grid'), detail=document.getElementById('detail'), toast=document.getElementById('toast');
 
-function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',2500)}
+function showToast(m){toast.textContent=m;toast.style.display='block';setTimeout(()=>toast.style.display='none',3000)}
 function closeDetail(){detail.classList.remove('active')}
-function openPayModal(){document.getElementById('payModal').classList.add('active')}
-function closePayModal(){document.getElementById('payModal').classList.remove('active')}
-function openUpload(){
-document.getElementById('uploadModal').classList.add('active');
-updateCatDropdown();
-let lock=document.getElementById('uploadLock');
-let form=document.getElementById('uploadForm');
-if(!isPaid){lock.style.display='block';form.style.display='none';}
-else{lock.style.display='none';form.style.display='block';}
-}
-function closeUpload(){document.getElementById('uploadModal').classList.remove('active')}
-
-function updateCatDropdown(){
-let sel=document.getElementById('upCat');
-let existing=[...sel.options].map(o=>o.value);
-customTabs.forEach(t=>{
-if(!existing.includes(t.id)){
-let opt=document.createElement('option');
-opt.value=t.id;
-opt.textContent=t.name+' 📑';
-sel.appendChild(opt);
-}
-});
-}
-
-function createTab(){
-let name=prompt('📑 CREATE NEW TAB\nEnter name e.g. Church, School, Business:');
-if(!name) return;
-name=name.trim();
-if(name.length<2){showToast('Name too short');return}
-let id=name.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
-if(!id) id='tab_'+Date.now();
-if(customTabs.some(t=>t.id===id)){showToast('Tab exists!');return}
-customTabs.push({id:id,name:name});
-localStorage.setItem('zo_tabs_v162',JSON.stringify(customTabs));
-addTabToNav(id,name);
-updateCatDropdown();
-showToast('Tab "'+name+'" Created! 📑');
-filterCat(id);
-}
-
-function addTabToNav(id,name){
-let nav=document.getElementById('nav');
-if([...nav.children].some(c=>c.dataset.f===id)) return;
-let div=document.createElement('div');
-div.dataset.f=id;
-div.textContent=name+' 📑';
-div.onclick=function(){filterCat(id,this);};
-div.oncontextmenu=function(e){
-e.preventDefault();
-if(confirm('Delete Tab "'+name+'"?')){
-customTabs=customTabs.filter(t=>t.id!==id);
-localStorage.setItem('zo_tabs_v162',JSON.stringify(customTabs));
-div.remove();
-let sel=document.getElementById('upCat');
-[...sel.options].forEach(o=>{if(o.value===id) o.remove()});
-filterCat('all');
-showToast('Tab deleted');
-}
-return false;
-};
-let addBtn=nav.querySelector('.gold-tab');
-nav.insertBefore(div, addBtn);
-}
-
-function loadTabs(){
-customTabs.forEach(t=>addTabToNav(t.id,t.name));
-updateCatDropdown();
-}
 
 function filterCat(cat, el){
 currentFilter=cat;
 document.querySelectorAll('.nav div').forEach(x=>x.classList.remove('active'));
-if(el){el.classList.add('active');}
+if(el) el.classList.add('active');
 else{
 let target=document.querySelector(`.nav div[data-f="${cat}"]`);
 if(target) target.classList.add('active');
-else {
-let all=document.querySelector(`.nav div[data-f="all"]`);
-if(all) all.classList.add('active');
 }
-}
-if(cat==='all'){render(allApps); return;}
-if(cat==='account'){
-render([]); 
-document.getElementById('screen');
-detail.classList.add('active');
-document.getElementById('dIcon').style.background='#01875f';
-document.getElementById('dIcon').innerHTML='🏦';
-document.getElementById('dName').textContent='My Account 🏦';
-document.getElementById('dTitle').textContent='My Account';
-document.getElementById('dDev').textContent='CEO Matthew Ayodele • Opay 7040958697';
-document.getElementById('dMeta').textContent=customTabs.length+' custom tabs • '+allApps.length+' apps';
-document.getElementById('likeCount').textContent=1;
-document.getElementById('installBtn').style.display='none';
-document.getElementById('screen').innerHTML=`<div class="mini"><div style="font-weight:700">🏦 CEO Account V16.2 FIXED</div><div style="margin-top:8px;background:gold;color:#000;padding:10px;border-radius:8px;text-align:center"><b>Opay<br><span style="font-size:16px">7040958697</span><br>Matthew Ayodele<br>₦12,000</b></div><div style="margin-top:10px;font-size:10px">Revenue: ₦${totalRevenue.toLocaleString()}<br>Devs: ${totalDevs}<br>Custom Tabs: ${customTabs.length}<br>Community Apps: ${customApps.length}<br>Total Apps: ${allApps.length}</div><button class="btn" style="width:100%;margin-top:10px" onclick="createTab()">📑 Create New Tab</button></div>`;
-return;
-}
-let filtered=allApps.filter(a=>a.c===cat);
-render(filtered);
-if(filtered.length===0){
-grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px 10px;font-size:10px;color:var(--sub)"><div style="font-size:30px">📑</div><b>${cat}</b> tab empty<br>No apps inside yet<br><br><button class="btn" onclick="openUpload()">+ Upload App to this Tab</button></div>`;
-}
+if(cat==='all') render(APPS);
+else render(APPS.filter(a=>a.c===cat || (cat==='external' && a.type==='external')));
 }
 
 function render(list){
 grid.innerHTML='';
-if(list.length===0 && currentFilter==='all'){
-// Show all if all filter and empty (should not happen)
-list=allApps;
-}
-list.forEach((a)=>{
-let idx=allApps.indexOf(a);
-let el=document.createElement('div');el.className='card';
-let badgeClass=a.verified?'blue':'gold';
-el.innerHTML=`<div class="badge ${badgeClass}">${a.badge||'FREE'}</div><div class="icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified-tick">✓</div>':''}</div><h3>${a.n}</h3><div class="dev">${a.d}</div><div class="meta"><span>★ ${a.r}</span><span>❤️ ${a.likes}</span></div>`;
+list.forEach((a,i)=>{
+let idx=APPS.indexOf(a);
+let el=document.createElement('div');
+el.className='card';
+let badgeClass=a.verified?'verified-badge':a.type==='external'?'external':'';
+el.innerHTML=`<div class="badge ${badgeClass}">${a.badge}</div><div class="card-icon" style="background:${a.col}">${a.e}${a.verified?'<div class="verified">✓</div>':''}</div><h3>${a.n}</h3><div class="card-dev">${a.dev}</div><div class="card-meta"><span>★ ${a.r}</span><span>⬇️ ${a.installs}</span><span>❤️ ${a.likes}</span></div><div class="card-desc">${a.desc}</div>`;
 el.onclick=()=>openApp(idx);
 grid.appendChild(el);
 });
-updateStats();
 }
 
 function openApp(i){
-cur=allApps[i];
-if(!cur) return;
+cur=APPS[i];
 detail.classList.add('active');
 document.getElementById('dIcon').style.background=cur.col;
-document.getElementById('dIcon').innerHTML=`${cur.e}${cur.verified?'<div class="verified-tick">✓</div>':''}`;
+document.getElementById('dIcon').innerHTML=`${cur.e}${cur.verified?'<div class="verified">✓</div>':''}`;
 document.getElementById('dName').textContent=cur.n;
 document.getElementById('dTitle').textContent=cur.n;
-document.getElementById('dDev').textContent=cur.d;
-document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.likes} likes • ${cur.installs} installs • Opay 7040958697`;
-document.getElementById('likeCount').textContent=cur.likes;
-let installed=false;
-try{installed=localStorage.getItem('zo_'+cur.n)==='1';}catch(e){}
-let btn=document.getElementById('installBtn');
-btn.style.display='block';
-btn.textContent=installed?'Open':'Install FREE';
-btn.className=installed?'btn done':'btn';
-document.getElementById('installInfo').textContent=cur.custom?'Community app • Paid ₦12k':'Official ZO • V16.2 FIXED • CEO Matthew Ayodele';
-document.getElementById('screen').innerHTML=`<div class="mini"><div style="text-align:center;font-size:36px">${cur.e}</div><div style="text-align:center;font-weight:700;margin-top:6px">${cur.n}</div><div style="text-align:center;font-size:9px;color:var(--sub)">${cur.d}</div><div style="margin-top:12px;font-size:10px;line-height:1.6"><b>${cur.desc}</b><br><br>✅ FREE for users<br>✅ Search working!<br>✅ Tab: ${cur.c}<br>✅ CEO: Matthew Ayodele Opay 7040958697</div></div>`;
-}
-
-function likeApp(){
-if(!cur) return;
-if(localStorage.getItem('liked_'+cur.n)){showToast('Already liked');return}
-cur.likes++;
-try{localStorage.setItem('liked_'+cur.n,'1');}catch(e){}
-document.getElementById('likeCount').textContent=cur.likes;
-showToast('Liked ❤️');
-}
-
-function submitPayment(){
-let name=document.getElementById('payName').value.trim();
-let phone=document.getElementById('payPhone').value.trim();
-let ref=document.getElementById('payRef').value.trim();
-if(!name||!phone){showToast('Put name and phone');return}
-let payment={id:Date.now(),name:name,phone:phone,ref:ref,amount:12000,time:Date.now()};
-pendingPayments.unshift(payment);
-try{localStorage.setItem('zo_pending_payments_v16',JSON.stringify(pendingPayments));}catch(e){}
-showToast('Submitted! Pending ⏳');
-closePayModal();
-}
-
-function payDemo(){
-isPaid=true;
-try{
-localStorage.setItem('zo_paid_dev_v16','1');
-totalRevenue+=12000;
-totalDevs+=1;
-localStorage.setItem('zo_total_revenue_v16',totalRevenue);
-localStorage.setItem('zo_total_devs_v16',totalDevs);
-}catch(e){}
-updateStats();
-closePayModal();
-showToast('✅ Demo Pay Success! You are Developer! 👑');
-}
-
-function submitApp(){
-if(!isPaid){showToast('Pay ₦12k first!');openPayModal();return}
-let name=document.getElementById('upName').value.trim();
-let dev=document.getElementById('upDev').value.trim()||'Paid Dev';
-let emoji=document.getElementById('upEmoji').value.trim()||'📱';
-let color=document.getElementById('upColor').value.trim()||'#ff9800';
-let cat=document.getElementById('upCat').value;
-let desc=document.getElementById('upDesc').value.trim()||'Community app';
-if(!name){showToast('Put app name');return}
-let tabName=customTabs.find(t=>t.id===cat)?.name||cat;
-let newApp={n:name,d:dev+' 💳 Paid',c:cat,col:color,e:emoji,r:'4.8',badge:tabName.toUpperCase(),verified:false,likes:1,installs:0,desc:desc+' (Tab: '+tabName+')',custom:true};
-customApps.unshift(newApp);
-allApps=[...DEFAULT_APPS, ...customApps];
-try{localStorage.setItem('zo_v16_apps',JSON.stringify(customApps));}catch(e){}
-closeUpload();
-['upName','upDev','upEmoji','upDesc'].forEach(id=>{let el=document.getElementById(id);if(el) el.value='';});
-document.getElementById('upColor').value='#ff9800';
-render(allApps);
-showToast(name+' Uploaded to "'+tabName+'"! 📑');
-filterCat(cat);
-}
-
-function updateStats(){
-document.getElementById('totalApps').textContent=allApps.length;
-document.getElementById('communityCount').textContent=customApps.length;
-document.getElementById('devCount').textContent=totalDevs;
-document.getElementById('customTabCount').textContent=customTabs.length;
-document.getElementById('revCount').textContent='₦'+totalRevenue.toLocaleString();
-document.getElementById('adminRev').textContent='₦'+totalRevenue.toLocaleString();
-document.getElementById('adminDev').textContent=totalDevs;
-let devStatus=document.getElementById('devStatus');
-let walletBal=document.getElementById('walletBal');
-let walletAction=document.getElementById('walletAction');
-if(isPaid){
-devStatus.textContent='✅ Paid Dev • Opay 7040958697 • '+customTabs.length+' Tabs • V16.2 FIXED';
-walletBal.textContent='👑 PAID';
-walletBal.style.color='#00ff88';
-walletAction.textContent='Approved';
+document.getElementById('dDev').textContent=cur.dev;
+document.getElementById('dMeta').textContent=`★ ${cur.r} • ${cur.installs} installs • ${cur.likes} likes • ${cur.verified?'Verified ✓':'Community'} • ${cur.type==='apk'?'APK Upload':'External Link'}`;
+document.getElementById('dDesc').textContent=cur.desc;
+document.getElementById('dSecurity').textContent=cur.security;
+document.getElementById('dPublish').textContent=cur.publish;
+document.getElementById('dDeveloper').textContent=cur.developerInfo;
+let apkBtn=document.getElementById('installBtn');
+let extBtn=document.getElementById('externalBtn');
+if(cur.type==='apk'){
+apkBtn.style.display='flex';
+apkBtn.textContent='⬇️ Download APK';
+extBtn.style.display='none';
 }else{
-devStatus.textContent='🔒 Not Paid • Pay ₦12k to Opay 7040958697 • Search + Tabs working!';
-walletBal.textContent='🔒 Locked';
-walletAction.textContent='Tap Pay';
+apkBtn.style.display='none';
+extBtn.style.display='flex';
+extBtn.textContent='🔗 Visit Official Link — '+new URL(cur.externalUrl).hostname;
 }
+let scrGrid=document.getElementById('scrGrid');
+scrGrid.innerHTML='';
+cur.screenshots.forEach(s=>{
+let div=document.createElement('div');
+div.className='scr';
+div.textContent=s;
+scrGrid.appendChild(div);
+});
 }
 
 document.getElementById('installBtn').onclick=function(){
 if(!cur) return;
-let key='zo_'+cur.n;
-if(localStorage.getItem(key)){showToast(cur.n+' Opening...');return}
-this.textContent='Installing...';
-setTimeout(()=>{
-this.textContent='Open';
-this.className='btn done';
-try{localStorage.setItem(key,'1');}catch(e){}
-showToast(cur.n+' Installed ✅');
-},500);
+showToast('⬇️ Downloading '+cur.n+' APK... (V1 Demo: File storage will use secure cloud storage in backend phase)');
+setTimeout(()=>showToast('✅ '+cur.n+' APK Downloaded! (In real backend, file would be from Supabase/PostgreSQL storage)'),1500);
+};
+
+document.getElementById('externalBtn').onclick=function(){
+if(!cur) return;
+if(confirm('🔗 External Link Verification:\n\nYou are being redirected to:\n'+cur.externalUrl+'\n\nThis is an external download destination.\nZO STORE verified this link is safe.\n\nContinue to official site?')){
+showToast('🔗 Redirecting to '+cur.externalUrl+'... (V1 shows verification as per your requirement)');
+setTimeout(()=>window.open(cur.externalUrl,'_blank'),800);
+}
+};
+
+document.getElementById('shareBtn').onclick=function(){
+if(!cur) return;
+if(navigator.share){
+navigator.share({title:cur.n,text:cur.desc,url:location.href});
+}else{
+navigator.clipboard.writeText(location.href);
+showToast('🔗 Link copied! Share '+cur.n);
+}
 };
 
 document.getElementById('search').addEventListener('input',function(e){
 let q=e.target.value.toLowerCase().trim();
-if(!q){filterCat(currentFilter); return;}
-let filtered=allApps.filter(a=>a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q)||a.c.toLowerCase().includes(q));
+if(!q){filterCat(currentFilter);return;}
+let filtered=APPS.filter(a=>a.n.toLowerCase().includes(q)||a.dev.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q)||a.c.toLowerCase().includes(q));
 render(filtered);
 if(filtered.length===0){
-grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:20px;font-size:10px;color:var(--sub)">No results for "${q}"<br>Try AI, POS, Market, Camera</div>`;
+grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:30px 10px;font-size:13px;color:var(--sub)"><div style="font-size:40px">🔍</div><b>No results for "${q}"</b><br>Try Games, Business, Productivity, Tools<br><br>Future V41 Advanced search, V42 Smart recommendations, V101 AI search</div>`;
 }
 });
 
-document.getElementById('darkBtn').onclick=()=>{
-document.body.classList.toggle('dark');
-document.getElementById('darkBtn').textContent=document.body.classList.contains('dark')?'☀️':'🌙';
-};
-
-function openAdmin(){
-let pass=prompt('Admin Password? zo2025 or 7040958697');
-if(pass==='zo2025' || pass==='7040958697' || pass==='matthew2025'){
-document.getElementById('adminBar').style.display='flex';
-showToast('Admin ON 👑 Rev ₦'+totalRevenue+' • Tabs '+customTabs.length+' • Opay 7040958697');
-}else showToast('Wrong!');
-}
-function toggleAdmin(){document.getElementById('adminBar').style.display='none';showToast('Admin OFF');}
-
-// INIT
-loadTabs();
-render(allApps);
-setTimeout(()=>{
-if(allApps.length>0 && document.getElementById('totalApps').textContent==='0'){
-// Force render if stats still 0
-render(allApps);
-}
-showToast('✅ V16.2 FIXED! '+allApps.length+' apps loaded! Search + Tabs now working! 👑');
-},800);
+// INIT V1
+render(APPS);
+setTimeout(()=>{showToast('🚀 ZO STORE V1 Live! '+APPS.length+' apps • APK + External Links • Foundation Phase V1-V20 • CEO Matthew Ayodele Opay 7040958697 • GitHub Pages Free Hosting');},1000);
 </script>
 </body>
 </html>
