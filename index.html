@@ -171,5 +171,16 @@ if(dev) updateDev();
 var wd=document.getElementById('walletDetail');if(wd) wd.textContent='₦'+wallet;
 var ed=document.getElementById('earnDetail');if(ed) ed.textContent='₦'+earn;setTimeout(function(){toast('🏆 V200 ULTIMATE COMPLETE — We don finish 200 versions! — Clean — No V for front — PWA Ready — You fit download to phone now! — Install to Phone!')},1500);
 </script>
+  },1500);
+  </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(function(reg){ console.log('ZO SW Ready', reg.scope); })
+      .catch(function(err){ console.log('SW Fail', err); });
+  });
+}
+</script>
 </body>
 </html>
